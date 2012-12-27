@@ -68,10 +68,12 @@
 
 <!-- Urgent Alerts - fixed to top - default visibility hidden
     ================================================== -->	
-<div class="alert-fixed-top container-fluid urgent-alert">
-	<div class="alert alert-success span9 pull-right">
-		<button type="button" class="close" data-dismiss="alert">×</button>
-	  	<strong>Well done!</strong> You've shown off another great project.
+<div class="alert-fixed-top container-fluid">
+	<div class="span9 pull-right" id="alert">
+		<div class="alert alert-success">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+		  	<strong>Well done!</strong> You've shown off another great project.
+		</div>
 	</div>
 </div>
 
