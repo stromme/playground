@@ -5,7 +5,7 @@
  * A blank theme used for testing the Toolbox Framework
  *
  * @package Playground
- * @author Lars Kristensen
+ * @author Hatch
  */
 
 /* Make theme Toolbox framework compatible
@@ -15,7 +15,7 @@
 /* Sets the path to the parent theme directory. */
 define( 'TOOLBOX_BASE_DIR', 'toolbox-framework' );
 require_once( trailingslashit( get_template_directory() ) . trailingslashit( TOOLBOX_BASE_DIR ) . 'toolbox.php' );
-$theme = new Toolbox();
+$Toolbox = new TB_Framework();
 
 /* Function to check if we're in the context of the Toolbox control panel */
 function is_toolbox() {
