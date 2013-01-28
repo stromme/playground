@@ -69,10 +69,10 @@
 <!-- Urgent Alerts - fixed to top - default visibility hidden
     ================================================== -->	
 <div class="alert-fixed-top container-fluid">
-	<div class="span9 pull-right" id="alert">
+	<div class="offset2 span8" id="alert">
 		<div class="alert alert-success">
 			<button type="button" class="close" data-dismiss="alert">×</button>
-		  	<strong>Well done!</strong> You've shown off another great project.
+		  	<strong>All done.</strong> We've saved your changes
 		</div>
 	</div>
 </div>
@@ -102,6 +102,8 @@
 					<li class="dropdown">
 						<a id="control-panel" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Manage <b class="caret"></b></a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="control-panel">
+							<li><a tabindex="-1" href="../manage/reviews">Reviews</a></li>
+							<li class="divider"></li>
 							<li><a tabindex="-1" href="../manage/profile">Company Profile</a></li>
 							<li><a tabindex="-1" href="../manage/media">Photos and Videos</a></li>
 							<li><a tabindex="-1" href="../manage/email">Email accounts</a></li>
