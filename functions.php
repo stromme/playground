@@ -7,44 +7,73 @@
  * @package Playground
  * @author Hatch
  */
+ 
+/* Define the environment we're working in. DEV or LIVE. Used for script loading. 
+ * Should add a dynamic check here, maybe based on virtual host settings.
+ * Both the theme and the Toolbox Framework rely on this constant.
+ */
+ 
+define( 'ENVIRONMENT', 'DEV' );
 
-/* Make theme Toolbox framework compatible
-/* ------------------------------------------------------------------------- */
+/* Init the Toolbox Framework
+ * 
+ */
 
-/* Load the core theme framework. */
-/* Sets the path to the parent theme directory. */
 define( 'TOOLBOX_BASE_DIR', 'toolbox-framework' );
 require_once( trailingslashit( get_template_directory() ) . trailingslashit( TOOLBOX_BASE_DIR ) . 'toolbox.php' );
 $Toolbox = new TB_Framework();
 
-/* Function to check if we're in the context of the Toolbox control panel */
-function is_toolbox() {
-	$is_toolbox = ( 'toolbox' == get_post_type() ? true : false );
-	return $is_toolbox;	
-}
-
-/* ------------------------- */
-
-add_action( 'after_setup_theme', 'hs_theme_setup' );
-function hs_theme_setup() {	
-	/* Load JavaScript files on the 'wp_enqueue_scripts' action hook. */
-	$is_toolbox = is_toolbox();
-	if ($is_toolbox != true) {
-		// add_action( 'wp_enqueue_scripts', 'hs_load_scripts' );	
-	}
-}
-
+/* Load the theme JS.
+ * Don't load theme JS in the context of the toolbox.
+ *
+ */
 
 function hs_load_scripts() {
-
-	wp_enqueue_style('theme-styles', get_bloginfo('template_url').'/main.css');  
 	
-	/* Load the comment reply JavaScript. */
-	if ( is_singular() && get_option( 'thread_comments' ) && comments_open() )
-		wp_enqueue_script( 'comment-reply' );
+	if ( get_post_type() != 'toolbox' ) {
+		
+		// Force WP to latest version of JQuery by de-registering the version packaged with WP
+		wp_deregister_script( 'jquery' );
+		
+		if ( ENVIRONMENT == 'LIVE' ) {
+
+			// Load jquery from CDN in production environment
+			
+	 		wp_register_script( 'jquery', 'http://code.jquery.com/jquery-latest.js');
+	 		wp_enqueue_script( 'jquery' );
+	 		
+	 		// Load Typekit for font management
+	 		
+	 		wp_register_script( 'typekit', 'http://use.typekit.net/aii7njo.js');
+	 		wp_enqueue_script( 'typekit' );
+	 		
+	 		// This line needs to be fixed - echoing out is bad practice
+	 		echo '<script type="text/javascript">try{Typekit.load();}catch(e){}</script>';
+	 		
+	 	} else {
+	 		
+	 		// Load jquery from localhost in development environment
+	 		
+			wp_register_script( 'jquery', get_bloginfo('template_url') . '/toolbox/js/jquery-latest.js');
+			wp_enqueue_script( 'jquery' );
+		}
+	}
 } 
+add_action( 'wp_enqueue_scripts', 'hs_load_scripts' );
 
-
+/* Load the theme CSS.
+ * Don't load theme CSS in the context of the toolbox.
+ *
+ */
+ 
+function hs_load_css() {
+	
+	if ( get_post_type() != 'toolbox' ) {
+	
+		wp_enqueue_style('theme-styles', get_bloginfo('template_url').'/main.css');
+	}
+} 
+add_action( 'wp_enqueue_scripts', 'hs_load_scripts' );
 
 
 ?>
