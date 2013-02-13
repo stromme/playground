@@ -35,6 +35,10 @@ function hs_load_scripts() {
 		// Force WP to latest version of JQuery by de-registering the version packaged with WP
 		wp_deregister_script( 'jquery' );
 		
+		// Load Bootstrap Framework
+		wp_register_script( 'theme-bootstrap-js', TOOLBOX_JS . '/bootstrap.min.js', array('jquery'));
+		wp_enqueue_script( 'theme-bootstrap-js' );
+		
 		if ( ENVIRONMENT == 'LIVE' ) {
 
 			// Load jquery from CDN in production environment
@@ -47,7 +51,7 @@ function hs_load_scripts() {
 	 		wp_register_script( 'typekit', 'http://use.typekit.net/aii7njo.js');
 	 		wp_enqueue_script( 'typekit' );
 	 		
-	 		// This line needs to be fixed - echoing out is bad practice
+	 		// Init TypeKit. This line needs to be fixed - echoing out is a hack
 	 		echo '<script type="text/javascript">try{Typekit.load();}catch(e){}</script>';
 	 		
 	 	} else {
@@ -70,7 +74,8 @@ function hs_load_css() {
 	
 	if ( get_post_type() != 'toolbox' ) {
 	
-		wp_enqueue_style('theme-styles', get_bloginfo('template_url').'/main.css');
+		wp_enqueue_style('theme-styles', get_bloginfo('template_url').'/main-min.css');
+		wp_enqueue_style('theme-bootstrap-responsive', get_bloginfo('template_url').'/bootstrap-responsive-min.css');
 	}
 } 
 add_action( 'wp_enqueue_scripts', 'hs_load_scripts' );
