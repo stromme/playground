@@ -8,26 +8,43 @@
  * @author Hatch
  */
  
-/* Define the environment we're working in. DEV or LIVE. Used for script loading. 
- * Should add a dynamic check here, maybe based on virtual host settings.
- * Both the theme and the Toolbox Framework rely on this constant.
- */
- 
-define( 'ENVIRONMENT', 'DEV' );
-
 /* Init the Toolbox Framework
- * 
+ *
+ * @since 0.0.1 
  */
-
-define( 'TOOLBOX_BASE_DIR', 'toolbox-framework' );
-require_once( trailingslashit( get_template_directory() ) . trailingslashit( TOOLBOX_BASE_DIR ) . 'toolbox.php' );
+define( 'TOOLBOX_BASE_DIR', trailingslashit( get_template_directory() ) . 'toolbox-framework' );
+require_once( trailingslashit( TOOLBOX_BASE_DIR ) . 'toolbox.php' );
 $Toolbox = new TB_Framework();
+ 
+/* Theme Constants
+ * 
+ * @since 0.0.1
+ */
+function hs_constants() {
+	
+	/* Sets the path to the images directory. */ 
+	define( 'THEME_IMAGES', get_bloginfo('template_directory').'/images/' );
+	
+	/* Sets the path to the js directory. */ 
+	define( 'THEME_JS', get_bloginfo('template_directory').'/js/' );
+	
+	/* Sets the path to the css directory. */ 
+	define( 'THEME_CSS', get_bloginfo('template_directory').'/css/' );
+	
+	
+	
+	/* Define the environment we're working in. DEV or LIVE. */
+	define( 'ENVIRONMENT', 'DEV' );
+	
+}
+
+add_action('init', 'hs_constants');
+
 
 /* Load the theme JS.
  * Don't load theme JS in the context of the toolbox.
  *
  */
-
 function hs_load_scripts() {
 	
 	if ( get_post_type() != 'toolbox' ) {
@@ -36,7 +53,7 @@ function hs_load_scripts() {
 		wp_deregister_script( 'jquery' );
 		
 		// Load Bootstrap Framework
-		wp_register_script( 'theme-bootstrap-js', TOOLBOX_JS . '/bootstrap.min.js', array('jquery'));
+		wp_register_script( 'theme-bootstrap-js', THEME_JS . '/bootstrap-min.js', array('jquery'));
 		wp_enqueue_script( 'theme-bootstrap-js' );
 		
 		if ( ENVIRONMENT == 'LIVE' ) {
@@ -58,27 +75,29 @@ function hs_load_scripts() {
 	 		
 	 		// Load jquery from localhost in development environment
 	 		
-			wp_register_script( 'jquery', get_bloginfo('template_url') . '/toolbox/js/jquery-latest.js');
+			wp_register_script( 'jquery', get_bloginfo('template_url') . '/toolbox-framework/js/jquery-latest.js');
 			wp_enqueue_script( 'jquery' );
 		}
 	}
 } 
+
 add_action( 'wp_enqueue_scripts', 'hs_load_scripts' );
 
 /* Load the theme CSS.
  * Don't load theme CSS in the context of the toolbox.
  *
  */
- 
 function hs_load_css() {
+	
+	// Prevent theme CSS from loading in the context of the Toolbox
 	
 	if ( get_post_type() != 'toolbox' ) {
 	
-		wp_enqueue_style('theme-styles', get_bloginfo('template_url').'/main-min.css');
-		wp_enqueue_style('theme-bootstrap-responsive', get_bloginfo('template_url').'/bootstrap-responsive-min.css');
+		wp_enqueue_style('theme-styles', get_bloginfo('template_url').'/css/theme-min.css');
+		wp_enqueue_style('theme-bootstrap-responsive', get_bloginfo('template_url').'/css/theme-responsive.css');
 	}
 } 
-add_action( 'wp_enqueue_scripts', 'hs_load_scripts' );
 
+add_action( 'wp_enqueue_scripts', 'hs_load_css' );
 
 ?>
