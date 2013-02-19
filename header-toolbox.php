@@ -87,7 +87,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="brand" href="">Hatch</a>
+      <button class="btn btn-medium btn-success pull-right" type="button" id="new-project">New project</button>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li class="">
