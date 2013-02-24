@@ -56,6 +56,14 @@ function hs_load_scripts() {
 		wp_register_script( 'theme-bootstrap-js', THEME_JS . '/bootstrap-min.js', array('jquery'));
 		wp_enqueue_script( 'theme-bootstrap-js' );
 		
+		// Load Typekit for font management
+		
+		//wp_register_script( 'typekit', 'http://use.typekit.net/aii7njo.js');
+		// wp_enqueue_script( 'typekit' );
+		
+		// Init TypeKit. This line needs to be fixed - echoing out is a hack
+		// echo '<script type="text/javascript">try{Typekit.load();}catch(e){}</script>';
+		
 		if ( ENVIRONMENT == 'LIVE' ) {
 
 			// Load jquery from CDN in production environment
