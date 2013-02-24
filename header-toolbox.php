@@ -102,12 +102,15 @@
 					<li class="dropdown">
 						<a id="control-panel" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Manage <b class="caret"></b></a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="control-panel">
-							<li><a tabindex="-1" href="../manage/reviews">Reviews</a></li>
-							<li class="divider"></li>
+							
+							
 							<li><a tabindex="-1" href="../manage/profile">Company Profile</a></li>
 							<li><a tabindex="-1" href="../manage/media">Photos and Videos</a></li>
 							<li><a tabindex="-1" href="../manage/email">Email accounts</a></li>
 							<li><a tabindex="-1" href="../manage/preferences">Preferences</a></li>
+							<li class="divider"></li>
+							<li><a tabindex="-1" href="../manage/reviews">My profile</a></li>
+							<li><a tabindex="-1" href="../manage/reviews">Billing</a></li>
 						</ul>
 					</li>
 				</ul>
