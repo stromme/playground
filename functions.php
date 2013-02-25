@@ -12,10 +12,13 @@
  *
  * @since 0.0.1 
  */
+/* Define the environment we're working in. DEV or LIVE. */
+define( 'ENVIRONMENT', 'DEV' );
 define( 'TOOLBOX_BASE_DIR', trailingslashit( get_template_directory() ) . 'toolbox-framework' );
 require_once( trailingslashit( TOOLBOX_BASE_DIR ) . 'toolbox.php' );
 $Toolbox = new TB_Framework();
- 
+
+
 /* Theme Constants
  * 
  * @since 0.0.1
@@ -30,12 +33,7 @@ function hs_constants() {
 	
 	/* Sets the path to the css directory. */ 
 	define( 'THEME_CSS', get_bloginfo('template_directory').'/css/' );
-	
-	
-	
-	/* Define the environment we're working in. DEV or LIVE. */
-	define( 'ENVIRONMENT', 'DEV' );
-	
+
 }
 
 add_action('init', 'hs_constants');
