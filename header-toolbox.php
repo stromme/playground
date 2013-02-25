@@ -106,11 +106,11 @@
 							
 							<li><a tabindex="-1" href="../manage/profile">Company Profile</a></li>
 							<li><a tabindex="-1" href="../manage/media">Photos and Videos</a></li>
-							<li><a tabindex="-1" href="../manage/email">Email accounts</a></li>
+							<!--<li><a tabindex="-1" href="../manage/email">Email accounts</a></li>-->
 							<li><a tabindex="-1" href="../manage/preferences">Preferences</a></li>
 							<li class="divider"></li>
-							<li><a tabindex="-1" href="../manage/reviews">My profile</a></li>
-							<li><a tabindex="-1" href="../manage/reviews">Billing</a></li>
+							<li><a tabindex="-1" href="../manage/account">My account</a></li>
+							<!--<li><a tabindex="-1" href="../manage/billing">Billing</a></li>-->
 						</ul>
 					</li>
 				</ul>
