@@ -56,7 +56,7 @@ function hs_load_scripts() {
 		
 		// Load Typekit for font management
 		
-		//wp_register_script( 'typekit', 'http://use.typekit.net/aii7njo.js');
+		wp_register_script( 'typekit', 'http://use.typekit.net/aii7njo.js');
 		// wp_enqueue_script( 'typekit' );
 		
 		// Init TypeKit. This line needs to be fixed - echoing out is a hack

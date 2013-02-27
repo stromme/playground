@@ -5235,10 +5235,7 @@ a.badge:focus {
 .hero-unit li {
   line-height: 30px;
 }
-.shadow-outer {
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
+.gentle-shadow {
   -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
@@ -5308,6 +5305,50 @@ blockquote {
   height: 40px;
   line-height: 40px;
 }
+.green {
+  color: #46a546;
+}
+.blue {
+  color: #0083e0;
+}
+.blueLight {
+  color: #47b3ff;
+}
+.grayLight {
+  color: #999999;
+}
+.white {
+  color: #ffffff;
+}
+.grayDark {
+  color: #333333;
+}
+.pen-stroke {
+  background-image: -webkit-linear-gradient(left, #ffffff, #000000 25%, #000000 75%, #ffffff);
+  background-color: #000;
+  height: 1px;
+  margin-bottom: 30px;
+}
+.pen-stroke-blue {
+  background-image: -webkit-linear-gradient(left, #0083e0, #ffffff 25%, #ffffff 75%, #0083e0);
+  background-color: #fff;
+  height: 1px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+.no-bleed {
+  padding-left: 0;
+  padding-right: 0;
+}
+.center {
+  text-align: center;
+}
+.no-title {
+  margin-top: 60px;
+}
+.no-footer {
+  margin-bottom: 30px;
+}
 .bumper {
   padding: 20px;
 }
@@ -5371,6 +5412,40 @@ blockquote {
 }
 .towers [class*="span"]:last-of-type {
   padding-right: 20px;
+}
+/* Featurettes
+    ------------------------- */
+.featurette-divider {
+  margin: 80px 0;
+  /* Space out the Bootstrap <hr> more */
+
+}
+.featurette {
+  padding-top: 120px;
+  /* Vertically center images part 1: add padding above and below text. */
+
+  overflow: hidden;
+  /* Vertically center images part 2: clear their floats. */
+
+}
+.featurette-image {
+  margin-top: -120px;
+  /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
+
+}
+/* Give some space on the sides of the floated elements so text doesn't run right into it. */
+.featurette-image.pull-left {
+  margin-right: 40px;
+}
+.featurette-image.pull-right {
+  margin-left: 40px;
+}
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-size: 50px;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px;
 }
 .link-grid {
   text-align: left;
@@ -5527,6 +5602,9 @@ blockquote {
   background-color: #ffffff;
   text-align: center;
 }
+.cta-paper-bottom h3 {
+  font-family: "tamarillo";
+}
 .cta-paper-top {
   height: 10px;
   background-color: #ffffff;
@@ -5544,9 +5622,8 @@ blockquote {
   font-size: 14px;
 }
 .cta-get-price {
-  font-family: "tamarillo";
   color: #47b3ff;
-  margin-top: -3px;
+  margin-top: 8px;
 }
 .rich-list {
   margin-left: 0px;
@@ -5562,36 +5639,58 @@ blockquote {
   min-height: 110px;
   padding-left: 130px;
 }
+.review h3,
+.review h4,
+.review p {
+  font-weight: 100;
+}
+.review p {
+  font-family: "tamarillo";
+}
+.review p span {
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+}
+.review-inverse h3,
+.review-inverse h4,
+.review-inverse p {
+  color: #ffffff;
+}
+.review-inverse .author {
+  color: #ffffff;
+}
+.gravatar {
+  width: 100px;
+  height: 100px;
+  border: 2px solid #ffffff;
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+}
+.reviews-carousel {
+  padding-top: 100px;
+}
+.reviews-carousel blockquote {
+  background-color: #333333;
+  border: none;
+  box-shadow: 0 0 3px;
+}
+.reviews-carousel blockquote p {
+  font-size: 20px;
+  line-height: 1.5em;
+  color: #ffffff;
+}
+.reviews-carousel blockquote small {
+  padding-top: 20px;
+  font-size: 1em;
+}
 body {
   background: url(../images/backgrounds/fibre.png) repeat;
 }
 section {
   background-color: #ffffff;
-}
-.no-bleed {
-  padding-left: 0;
-  padding-right: 0;
-}
-.center {
-  text-align: center;
-}
-.green {
-  color: #46a546;
-}
-.blue {
-  color: #0083e0;
-}
-.blueLight {
-  color: #47b3ff;
-}
-.grayLight {
-  color: #999999;
-}
-.white {
-  color: #ffffff;
-}
-.grayDark {
-  color: #333333;
+  padding-left: 60px;
+  padding-right: 60px;
 }
 header .header-logo {
   padding: 20px 20px 20px 0;
@@ -5602,6 +5701,11 @@ header .header-menu {
 }
 header .header-menu li {
   font-size: 20px;
+}
+header .header-menu i {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  padding-right: 8px;
 }
 header .headline {
   border: 1px solid #007ad1;
@@ -5648,32 +5752,6 @@ header .headline img {
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
-.inset {
-  padding: 20px;
-}
-.inset-fixed-bottom {
-  margin-top: 60px;
-  -webkit-border-top-left-radius: 22px;
-  -moz-border-radius-topleft: 22px;
-  border-top-left-radius: 22px;
-  -webkit-border-top-right-radius: 22px;
-  -moz-border-radius-topright: 22px;
-  border-top-right-radius: 22px;
-}
-.inset-fixed-top {
-  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-  -webkit-border-bottom-left-radius: 22px;
-  -moz-border-radius-bottomleft: 22px;
-  border-bottom-left-radius: 22px;
-  -webkit-border-bottom-right-radius: 22px;
-  -moz-border-radius-bottomright: 22px;
-  border-bottom-right-radius: 22px;
-}
-.inset-review {
-  text-align: center;
-}
 .footer {
   padding: 30px 0 30px;
   text-align: center;
@@ -5687,18 +5765,6 @@ header .headline img {
   font-weight: 100;
   font-size: 20px;
   color: #ffffff;
-}
-.no-title {
-  margin-top: 60px;
-}
-.no-footer {
-  margin-bottom: 30px;
-}
-.pen-stroke {
-  background-image: -webkit-linear-gradient(left, #ffffff, #000000 25%, #000000 75%, #ffffff);
-  background-color: #000;
-  height: 1px;
-  margin-bottom: 30px;
 }
 #write-your-review {
   padding: 30px;

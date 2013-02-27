@@ -10,20 +10,13 @@
 get_header(); 
 
 ?>
-<!--<div id="write-your-review">
-	<h3 class="light-weight blueLight">Write your review</h3>
-	<div class="pen-stroke"></div>
-	<div class="input-prepend">
-	    <span class="add-on"><i class="icon-briefcase"></i></span>
-	    <input class="input-block-level" placeholder="Your Name" type="text" value="">
-	</div>
-	<div class="input-prepend">
-	    <span class="add-on"><i class="icon-envelope"></i></span>
-	    <input class="input-block-level" placeholder="Your email" type="text" value="">
-	</div>
-	<textarea></textarea>
-</div>-->
 
+<!-- Call to Action
+===================
+
+A module fixed to the bottom of the page that encourages visitors to write reviews or create a lead.
+
+-->
 <nav class="cta navbar-fixed-bottom">
 	<div class="container cta-top">
 		<div class="row">
@@ -35,18 +28,24 @@ get_header();
 		<div class="container">
 			<div class="row">
 				<div class="offset1 span3 cta-paper-bottom">
-					<h3 class="light-weight">Request a free quote</h3>
+					<h3 class="light-weight">Write your review</h3>
 				</div>
 				<div class="span4 cta-call-us">
 					<a href="#"><em>Give us a call:</em> (888) 123-1234</a>
 				</div>
 				<div class="span4 cta-get-price">
-					<h3>Write your review</h3>
+					<button class="btn btn-success btn">Request a free quote</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </nav>
+<!-- / Call to action -->
+
+
+<!-- Header
+===========
+-->
 
 <header class="container">
 	<nav class="navbar-static-top pull-right">
@@ -57,15 +56,24 @@ get_header();
 		<ul class="nav nav-pills pull-right header-menu">
 			<li><a href="#"><i class="icon-full-picture"></i>Showroom</a></li>
 			<li><a href="#"><i class="icon-full-conversation"></i>Reviews</a></li>
-			<li><a href="#"><i class="icon-full-comment"></i>Services</a></li>
-			<li><a href="#"><i class="icon-full-comment"></i>Locations</a></li>
+			<li><a href="#">Services</a></li>
+			<li><a href="#">Locations</a></li>
 		</ul>
 	</nav>
 	<img class="header-logo" src="<?php echo THEME_IMAGES; ?>temp/window-cleaning-dot-com-logo.png">
 </header>
 
+<!-- / Header -->
+
+<!-- Wrap the page in .container to centre the content and keep it at a max width -->
 <div class="container shadow-outer">
+
+	<!-- Banner
+	===========
 	
+	A module to display a carousel of images and reviews
+	
+	-->
 	<section class="banner no-bleed">
 		<blockquote>
 			<div>
@@ -77,23 +85,36 @@ get_header();
 			<img class="banner-photo" src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">	
 		</div>
 	</section>
-	<section class="clearFix">
+	<section class="clearFix no-bleed">
 		<img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" style="width: 100%;"alt="" />
 	</section>
-		
+	<!-- / Banner -->
 	
+		
+	<!-- Show Off
+	=============
+	
+	A full width headline module with or without a photo
+	
+	-->
 	<section class="showoff">
 		<h2 class="light-weight blue"><img src="<?php echo THEME_IMAGES; ?>temp/angies.png"> 2012 Angie's list superior service award winner.</h2>
 	</section>
-	
 	<!--<section class="showoff">
 		<h2 class="light-weight blue">What we're <span class="green">really</span> good at.</h2>
 	</section>-->
-		
+	<!-- / Showoff -->
+	
 	<section class="bg-slate">
 		<div class="row-fluid">
-			<div class="offset1 span10">
-				<!--<h2 class="light-weight blue">What we're <span class="green">really</span> good at.</h2>-->
+			<div class="span12">
+				
+				<!-- Link Grid
+				==============
+				
+				A grid of links. Each link can have a thumbnail or description.
+				
+				-->
 				<ul class="link-grid">
 					<li>
 						<div class="grid-thumb">
@@ -146,19 +167,25 @@ get_header();
 						<a href="#">Home Window Cleaning</a>
 					</li>
 				</ul>
+				<!--/ Link Grid -->
 			</div>
 		</div>
 	</section>
 	
-	
 	<section>
 		<div class="row-fluid">
-		
-			<div class="offset1 span4">
+			<div class="span5">
 				<h2 class="light-weight title">Don't take any chances, we are fully insured and our work is 100% guaranteed.</h2>
 			</div>
 			
-			<div class="span6">
+			<div class="span7">
+			
+				<!-- Rich List
+				==============
+				
+				A UL or OL with images instead of bullets
+				
+				-->
 				<ul class="rich-list no-title no-footer">
 				
 					<li  class="image-bullet" style="background: url('<?php echo THEME_IMAGES; ?>temp/window-cleaning-guarantee-small.png') no-repeat;">
@@ -173,35 +200,30 @@ get_header();
 					
 				</ul><!-- /rich-list -->
 			</div>
-			
 		</div>		
 	</section>
 	
-	<section class="bg-deep-blue">
-		<div class="row-fluid">
-			<div class="offset1 span10 inset-review">
-				<blockquote>
-					<h3 class="white light-weight" >"We are very pleased with the quality of work as well as the professional and courteous service. Squeeky Clean gets my endorsement and business."</h3>
-					<p class="white"><cite>~George Michael</cite><span class="light-weight">, Cincinatti</span></p>
-				</blockquote>
-			</div>
-		</div>
-	</section>
 	<section class="bg-sky">
-		<img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" style="width: 100%;"alt="" />
+	
+		<!-- Featurettes
+		================
+		
+		Featured photos with a title and a description. Degrade peacefully to block elements on small screen sizes.
+		
+		-->
+		<hr class="featurette-divider">
+		
+		<div class="featurette">
+			<img class="featurette-image pull-right img-polaroid" src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
+			<h2 class="featurette-heading">First featurette headling. <span class="muted">It'll blow your mind.</span></h2>
+			<p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+		</div>
+		<hr class="featurette-divider">
+		<!--/ Featurette -->
+		
 	</section>
 		
 	<section class="bg-sky">
-	
-		<!--<div class="row-fluid">
-			<div class="offset1 span10 bg-deep-blue inset inset-fixed-top inset-review">
-				<!--<h2 class="white light-weight">Loved in Cincinatti...</h2>--*>
-				<blockquote>
-					<h3 class="white light-weight" >"We are very pleased with the quality of work as well as the professional and courteous service. Squeeky Clean gets my endorsement and business."</h3>
-					<p class="white"><cite>~George Michael</cite><span class="light-weight">, Cincinatti</span></p>
-				</blockquote>
-			</div>
-		</div>-->
 		
 		<article>
 			<div class="row-fluid">
@@ -258,6 +280,52 @@ get_header();
 				</p>
 			</div>
 		</div>-->
+	</section>
+	
+	<section class="bg-deep-blue">
+		<div class="center">
+			<h2 class="white light-weight sub-title">Loved in your neighbourhood.</h2>
+		</div>
+		<div class="row-fluid">
+			<div class="offset1 span5">
+				<div class="no-footer">
+					<div class="pen-stroke-blue"></div>
+					<div class="media">
+						<div class="pull-left" href="#">
+							<img class="media-object img-circle gravatar gravatar-inverse" src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
+						</div>
+						<blockquote class="media-body review review-inverse">
+							<h4>"We are very pleased with the quality of work as well as the professional and courteous service. Squeeky Clean gets my endorsement and business."</h4>
+							<p><cite>~George Michael</cite><span>, Cincinatti</span></p>
+						</blockquote>
+					</div>
+					<div class="pen-stroke-blue"></div>
+					<div class="media">
+						<div class="pull-left" href="#">
+							<img class="media-object img-circle gravatar" src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
+						</div>
+						<blockquote class="media-body review review-inverse">
+							<h4>"We are very pleased with the quality of work as well as the professional and courteous service. Squeeky Clean gets my endorsement and business."</h4>
+							<p><cite>~George Michael</cite><span>, Cincinatti</span></p>
+						</blockquote>
+					</div>
+					<div class="pen-stroke-blue"></div>
+					<div class="media">
+						<div class="pull-left" href="#">
+							<img class="media-object img-circle gravatar" src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
+						</div>
+						<blockquote class="media-body review review-inverse">
+							<h4>"We are very pleased with the quality of work as well as the professional and courteous service. Squeeky Clean gets my endorsement and business."</h4>
+							<p><cite>~George Michael</cite><span>, Cincinatti</span></p>
+						</blockquote>
+					</div>
+				</div>
+			</div><!-- / span5 -->
+			
+		</div>
+	</section>
+	<section class="">
+		<img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" style="width: 100%;"alt="" />
 	</section>
 	
 	<section class="bg-slate">
