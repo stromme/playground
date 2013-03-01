@@ -1,5 +1,4 @@
 <?php
-session_start();
 /**
  * Toolbox Header
  *
@@ -8,6 +7,7 @@ session_start();
  * @subpackage Hatch
  * @since Hatch 1.0
  */
+session_start();
 ?><!DOCTYPE html>
 <!--[if IE 6]>
 <html id="ie6" <?php language_attributes(); ?>>
@@ -95,10 +95,10 @@ session_start();
 						<a href="<?=TOOLBOX_URL?>dashboard">Dashboard</a>
 					</li>
 					<li class="">
-						<a href="<?=TOOLBOX_URL?>activity">Activity</a>
+            <a href="<?=TOOLBOX_URL?>promote">Promote</a>
 					</li>
 					<li class="">
-						<a href="<?=TOOLBOX_URL?>promote">Promote</a>
+						<a href="<?=TOOLBOX_URL?>insight">Insight</a>
 					</li>
 					<li class="dropdown">
 						<a id="control-panel" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-cogwheel"></i> <b class="caret"></b></a>
