@@ -1,4 +1,5 @@
 <?php
+session_start();
 /**
  * Toolbox Header
  *
@@ -91,25 +92,23 @@
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li class="">
-						<a href="dashboard">Dashboard</a>
+						<a href="<?=TOOLBOX_URL?>dashboard">Dashboard</a>
 					</li>
 					<li class="">
-						<a href="activity">Activity</a>
+						<a href="<?=TOOLBOX_URL?>activity">Activity</a>
 					</li>
 					<li class="">
-						<a href="promote">Promote</a>
+						<a href="<?=TOOLBOX_URL?>promote">Promote</a>
 					</li>
 					<li class="dropdown">
 						<a id="control-panel" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-cogwheel"></i> <b class="caret"></b></a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="control-panel">
-							
-							
-							<li><a tabindex="-1" href="../manage/profile">Company Profile</a></li>
-							<li><a tabindex="-1" href="../manage/media">Photos and Videos</a></li>
-							<li><a tabindex="-1" href="../manage/preferences">Preferences</a></li>
+							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
+							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
+							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/preferences">Preferences</a></li>
 							<li class="divider"></li>
-							<li><a tabindex="-1" href="../manage/account">My account</a></li>
-							<li><a tabindex="-1" href="../manage/billing">Log out</a></li>
+							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account">My account</a></li>
+							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/logout?nonce=<?=wp_create_nonce('logout-'.date('Ymd'))?>">Log out</a></li>
 						</ul>
 					</li>
 				</ul>
