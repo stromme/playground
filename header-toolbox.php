@@ -94,10 +94,10 @@
 						<a href="dashboard">Dashboard</a>
 					</li>
 					<li class="">
-						<a href="activity">Activity</a>
+						<a href="promote">Promote</a>
 					</li>
 					<li class="">
-						<a href="promote">Promote</a>
+						<a href="insight">Insight</a>
 					</li>
 					<li class="dropdown">
 						<a id="control-panel" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-cogwheel"></i> <b class="caret"></b></a>
