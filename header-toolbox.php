@@ -91,13 +91,13 @@ session_start();
       <a class="brand" href="">Hatch</a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
-					<li class="">
+					<li class="has-nav-icon">
 						<a href="<?=TOOLBOX_URL?>dashboard"><i class="icon-nav-dashboard"></i>Dashboard</a>
 					</li>
-					<li class="">
+					<li class="has-nav-icon">
 					    <a href="<?=TOOLBOX_URL?>promote"><i class="icon-nav-sun"></i>Promote</a>
 					</li>
-					<li class="">
+					<li class="has-nav-icon">
 						<a href="<?=TOOLBOX_URL?>insight"><i class="icon-nav-compass"></i>Insight</a>
 					</li>
 					<li class="dropdown has-nav-icon">
