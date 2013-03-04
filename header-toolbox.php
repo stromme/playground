@@ -92,16 +92,16 @@ session_start();
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li class="">
-						<a href="<?=TOOLBOX_URL?>dashboard">Dashboard</a>
+						<a href="<?=TOOLBOX_URL?>dashboard"><i class="icon-nav-dashboard"></i>Dashboard</a>
 					</li>
 					<li class="">
-            <a href="<?=TOOLBOX_URL?>promote">Promote</a>
+					    <a href="<?=TOOLBOX_URL?>promote"><i class="icon-nav-sun"></i>Promote</a>
 					</li>
 					<li class="">
-						<a href="<?=TOOLBOX_URL?>insight">Insight</a>
+						<a href="<?=TOOLBOX_URL?>insight"><i class="icon-nav-compass"></i>Insight</a>
 					</li>
-					<li class="dropdown">
-						<a id="control-panel" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-cogwheel"></i> <b class="caret"></b></a>
+					<li class="dropdown has-nav-icon">
+						<a id="control-panel" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-nav-cog"></i> <b class="caret"></b></a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="control-panel">
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
@@ -110,6 +110,9 @@ session_start();
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account">My account</a></li>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/logout?nonce=<?=wp_create_nonce('logout-'.date('Ymd'))?>">Log out</a></li>
 						</ul>
+					</li>
+					<li class="">
+						<button class="btn btn btn-primary btn-project-shortcut" type="button" id="new-project"><i class="icon-nav-edit"></i></button>
 					</li>
 				</ul>
 			</div>
