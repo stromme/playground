@@ -90,20 +90,18 @@
       <a class="brand" href="">Hatch</a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
-					<li class="">
-						<a href="dashboard">Dashboard</a>
+					<li class="has-nav-icon">
+						<a href="dashboard"><i class="icon-nav-dashboard"></i>Dashboard</a>
 					</li>
-					<li class="">
-						<a href="promote">Promote</a>
+					<li class="has-nav-icon">
+						<a href="promote"><i class="icon-nav-sun"></i>Promote</a>
 					</li>
-					<li class="">
-						<a href="insight">Insight</a>
+					<li class="has-nav-icon">
+						<a href="insight"><i class="icon-nav-compass"></i>Insight</a>
 					</li>
-					<li class="dropdown">
-						<a id="control-panel" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-cogwheel"></i> <b class="caret"></b></a>
+					<li class="dropdown has-nav-icon">
+						<a id="control-panel" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-nav-cog"></i> <b class="caret"></b></a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="control-panel">
-							
-							
 							<li><a tabindex="-1" href="../manage/profile">Company Profile</a></li>
 							<li><a tabindex="-1" href="../manage/media">Photos and Videos</a></li>
 							<li><a tabindex="-1" href="../manage/preferences">Preferences</a></li>
@@ -111,6 +109,9 @@
 							<li><a tabindex="-1" href="../manage/account">My account</a></li>
 							<li><a tabindex="-1" href="../manage/billing">Log out</a></li>
 						</ul>
+					</li>
+					<li class="">
+						<button class="btn btn btn-primary btn-project-shortcut" type="button" id="new-project"><i class="icon-nav-edit"></i></button>
 					</li>
 				</ul>
 			</div>
