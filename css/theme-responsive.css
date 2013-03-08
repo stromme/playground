@@ -929,25 +929,141 @@
     position: static;
   }
 }
+@media (min-width: 1200px) {
+  .headline {
+    float: right;
+    width: auto;
+  }
+  .brand > img {
+    padding: 6px 6px 6px 0px;
+    max-height: 140px;
+  }
+  .banner-photo img {
+    max-width: 600px;
+    max-height: 450px;
+  }
+  .banner-review blockquote {
+    height: 385px;
+    padding: 0 60px;
+  }
+  .banner-review blockquote p {
+    font-size: 32px;
+    line-height: 40px;
+  }
+  .banner-review blockquote p.banner-customer {
+    font-size: 24px;
+  }
+  .share-it {
+    padding-left: 60px;
+  }
+  .share-it .write-review a {
+    font-size: 20px;
+  }
+  .main-nav {
+    margin-top: 32px;
+  }
+}
+@media (min-width: 768px) and (max-width: 979px) {
+  .brand > img {
+    max-height: 110px;
+  }
+  .main-nav {
+    margin-top: 45px;
+  }
+  .banner {
+    width: 100%;
+    text-align: center;
+    display: block;
+    background-color: #fafafa;
+    background-image: -moz-linear-gradient(top, #fbfbfb, #f8f8f8);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbfbfb), to(#f8f8f8));
+    background-image: -webkit-linear-gradient(top, #fbfbfb, #f8f8f8);
+    background-image: -o-linear-gradient(top, #fbfbfb, #f8f8f8);
+    background-image: linear-gradient(to bottom, #fbfbfb, #f8f8f8);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffbfbfb', endColorstr='#fff8f8f8', GradientType=0);
+  }
+  .banner-photo {
+    display: block;
+    padding: 30px 0;
+  }
+  .banner-photo img {
+    max-width: 600px;
+    max-height: 450px;
+    padding: 4px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+  }
+  .banner-review {
+    margin: 0 auto;
+    max-width: 100%;
+    text-align: center;
+    background: none;
+    display: block;
+  }
+  .banner-review blockquote {
+    height: auto;
+    padding: 0 20px;
+    display: block;
+  }
+  .banner-review blockquote p {
+    font-size: 20px;
+    font-weight: 200;
+    line-height: 25px;
+  }
+}
 @media (max-width: 767px) {
-  .title {
-    padding: 20px 30px;
+  .headline h1,
+  .headline h4,
+  .headline a {
+    font-size: 16px;
   }
-  .no-title,
-  .no-footer {
-    margin: 0;
+  .main-nav > li {
+    font-size: 16px;
   }
-  p,
-  .polaroid,
-  .rich-list {
-    padding-left: 20px;
-    padding-right: 20px;
+  .banner-photo {
+    text-align: center;
+    display: block;
+    padding: 20px 0;
   }
-  section .no-title:first-of-type {
-    margin-top: 20px;
+  .banner-photo img {
+    padding: 4px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    max-height: 450px;
   }
-  section .no-footer:last-of-type {
-    margin-bottom: 20px;
+  .banner-review {
+    display: block;
+    text-align: center;
+  }
+  .banner-review blockquote {
+    height: 298px;
+    color: #0969b2;
+    padding: 0 30px;
+    vertical-align: middle;
+    display: table-cell;
+  }
+  .banner-review blockquote p {
+    font-size: 28px;
+    line-height: 35px;
+  }
+  .banner-review blockquote p.banner-customer {
+    color: #999999;
+    padding-top: 20px;
+    font-size: 20px;
+    font-family: "tamarillo";
   }
 }
 @media (max-width: 979px) {

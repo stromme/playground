@@ -11,83 +11,85 @@ get_header();
 
 ?>
 
-<!-- Call to Action
-===================
-
-A module fixed to the bottom of the page that encourages visitors to write reviews or create a lead.
-
--->
-<nav class="cta navbar-fixed-bottom">
-	<div class="container cta-top">
-		<div class="row">
-			<div class="offset1 span3 cta-paper-top">
-			</div>
-		</div>
-	</div>
-	<div class="cta-bottom">
-		<div class="container">
-			<div class="row">
-				<div class="offset1 span3 cta-paper-bottom">
-					<h3 class="light-weight">Write your review</h3>
-				</div>
-				<div class="span4 cta-call-us">
-					<a href="#"><em>Give us a call:</em> (888) 123-1234</a>
-				</div>
-				<div class="span4 cta-get-price">
-					<button class="btn btn-success btn">Request a free quote</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</nav>
-<!-- / Call to action -->
-
-
 <!-- Header
-===========
+==================================================
 -->
-
 <header class="container">
-	<nav class="navbar-static-top pull-right">
-		<div class="headline">
-			<h1 class="pull-right">Awarded 2013 Best Window Cleaners in Seattle</h1>
-			<img src="<?php echo THEME_IMAGES; ?>temp/window-cleaning-award.png">
-		</div>
-		<ul class="nav nav-pills pull-right header-menu">
-			<li><a href="#"><i class="icon-full-picture"></i>Showroom</a></li>
-			<li><a href="#"><i class="icon-full-conversation"></i>Reviews</a></li>
-			<li><a href="#">Services</a></li>
-			<li><a href="#">Locations</a></li>
+	<nav>
+		<ul class="headline">
+			<li class="headline-title">
+				<h1>Awarded 2013 <b>Best Window Cleaners</b> in <a href="" class="link-inverse link-decorate link-showoff" data-toggle="tooltip" data-placement="bottom" title="Visit another location">Seattle</a></h1>
+			</li>
+			<li class="headline-phone">
+				<h4><a href="">(898) 123-1234</a></h4>
+			</li>
+			<li class="headline-link  hidden-phone hidden-tablet">
+				<h4><a href="">Quick Estimate</a></h4>
+			</li>
+		</ul>
+		<ul class="main-nav nav nav-pills">
+			<li class="dropdown hidden-desktop"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Learn More <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Home Window Cleaning</a></li>
+					<li><a href="#">Commercial Window Cleaning</a></li>
+					<li><a href="#">Power Washing</a></li>
+					<li><a href="#">Seattle</a></li>
+					<li><a href="#">Tacoma</a></li>
+					<li><a href="#">Portland</a></li>
+				</ul>
+			</li>
+			<li class="dropdown visible-desktop"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Locations <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Seattle</a></li>
+					<li><a href="#">Tacoma</a></li>
+					<li><a href="#">Portland</a></li>
+				</ul>
+			</li>
+			<li class="dropdown visible-desktop"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Home Window Cleaning</a></li>
+					<li><a href="#">Commercial Window Cleaning</a></li>
+					<li><a href="#">Power Washing</a></li>
+				</ul>
+			</li>
+			<li class=" visible-desktop"><a href="#">Showroom</a></li>
+			<li class="nav-callout nav-callout-border"><a href="#" class="clear-pills">Reviews</a><b class="nav-callout-border-notch notch"></b><b class="notch"></b></li>
+			<li class="nav-callout nav-callout-border hidden-desktop"><a href="#" class="clear-pills">Quick Estimate</a><b class="nav-callout-border-notch notch"></b><b class="notch"></b></li>
 		</ul>
 	</nav>
-	<img class="header-logo" src="<?php echo THEME_IMAGES; ?>temp/window-cleaning-dot-com-logo.png">
+	<div class="brand">
+		<img src="<?php echo THEME_IMAGES; ?>temp/window-cleaning-dot-com-logo.png">
+	</div>
 </header>
 
-<!-- / Header -->
-
 <!-- Wrap the page in .container to centre the content and keep it at a max width -->
-<div class="container shadow-outer">
+<div class="container gentle-shadow">
 
-	<!-- Banner
-	===========
-	
-	A module to display a carousel of images and reviews
-	
+	<!-- Banner - A module to display a carousel of images and reviews
+	==================================================
 	-->
 	<section class="banner no-bleed">
-		<blockquote>
-			<div>
-				<p>"Couldn't be happier. They showed up on time and did a fantastic job."</p>
-				<p class="banner-customer"><cite class="grayDark">Rene C</cite>, Bethseda</p>
-			</div>
-		</blockquote>
 		<div class="banner-photo">
-			<img class="banner-photo" src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">	
+			<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">	
+		</div>
+		<div class="banner-review">
+			<blockquote>
+				<p>"Couldn't be happier. They showed up on time and did a fantastic job. We'll call again for sure."</p>
+				<p class="banner-customer"><cite class="grayDark">Rene C</cite>, Bethseda</p>
+			</blockquote>
+			<div class="fixed-bottom">
+				<ul class="share-it">
+					<li class="write-review"><a href=""><i class="icon-full-conversation"></i> Write your review</a></li>
+					<!--<li class="social-network"><div class="fb-like" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="verdana" data-action="like"></div></li>
+					<li class="social-network"><a href="https://twitter.com/share" class="twitter-share-button" data-via="streakfreeclean" data-related="streakfreeclean" data-hashtags="WindowCleaning">Tweet</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>-->
+				</ul>
+			</div>
 		</div>
 	</section>
-	<section class="clearFix no-bleed">
-		<img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" style="width: 100%;"alt="" />
-	</section>
+	<div class="curved-shadow">
+		<img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
+	</div>
 	<!-- / Banner -->
 	
 		
@@ -398,7 +400,7 @@ A module fixed to the bottom of the page that encourages visitors to write revie
 			<div class="offset1 span6 no-title">
 				
 				<div class="polaroid pull-left bumper-right">
-					<img src="http://maps.google.com/maps/api/staticmap?center=North+Bethesda,5703+Luxemburg+Street%2C+Apt.100,MD,20852&amp;zoom=9&amp;size=270x210&amp;maptype=roadmap&amp;markers=color:blue%7Clabel:A%7CNorth+Bethesda,5703+Luxemburg+Street%2C+Apt.100,MD,20852&amp;sensor=false" itemprop="image">
+					<!--<img src="http://maps.google.com/maps/api/staticmap?center=North+Bethesda,5703+Luxemburg+Street%2C+Apt.100,MD,20852&amp;zoom=9&amp;size=270x210&amp;maptype=roadmap&amp;markers=color:blue%7Clabel:A%7CNorth+Bethesda,5703+Luxemburg+Street%2C+Apt.100,MD,20852&amp;sensor=false" itemprop="image">-->
 				</div>
 			
 				<h3 class="light-weight">Come say hello...</h3>
