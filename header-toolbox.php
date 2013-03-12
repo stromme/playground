@@ -112,7 +112,7 @@ session_start();
 						</ul>
 					</li>
 					<li class="">
-						<button class="btn btn btn-primary btn-project-shortcut" type="button" id="new-project"><i class="icon-nav-edit"></i></button>
+						<button class="btn btn btn-primary btn-project-shortcut action-new-project" type="button"><i class="icon-nav-edit"></i></button>
 					</li>
 				</ul>
 			</div>
