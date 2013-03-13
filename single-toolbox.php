@@ -9,9 +9,7 @@
  */
 
 get_header('toolbox');
-
 ?>
-
 <!-- Tag edit project Modal -->
 <div class="modal hide fade" id="toolbox-activity">
   <div class="modal-header">
@@ -22,12 +20,10 @@ get_header('toolbox');
   <div class="modal-footer"></div>
 </div>
 <!-- / modal -->
-
 <?
 load_template(TOOLBOX_BASE_DIR.'/toolbox-'.$post->post_name.'.php', false);
 // get_template_part(TOOLBOX_BASE_DIR.'/toolbox',  $post->post_name);
 ?>
-
 <div class="project-template hide">
   <?php
     // Template for new project
@@ -35,5 +31,4 @@ load_template(TOOLBOX_BASE_DIR.'/toolbox-'.$post->post_name.'.php', false);
     load_template(TOOLBOX_TEMPLATES.'/edit-showroom.php', false);
   ?>
 </div>
-
 <?php get_footer(); ?>
