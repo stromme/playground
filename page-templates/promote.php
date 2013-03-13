@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Front Page
+ * Template Name: Promotion
  * Description: 
  *
  * @package WordPress
@@ -25,17 +25,18 @@ get_header();
 				</div>
 				<div class="banner-review">
 					<blockquote>
-						<p>"Couldn't be happier. They showed up on time and did a fantastic job. We'll call again for sure."</p>
-						<p class="banner-author"><cite>Rene C</cite>, Bethseda</p>
+						<p>Our team has over <strong class="green">37 years experience</strong> commercial window cleaning.</p>
+						<p class="banner-author"><cite>Joe Adams </cite>, Owner</p>
 					</blockquote>
 					<div class="fixed-bottom">
-						<ul class="share-it">
+						<a href="">Visit our showroom</a>
+						<!--<ul class="share-it">
 							<li class="write-review"><a href=""><i class="icon-full-conversation"></i> Write your review</a></li>
-							<!-- Commented out for local development -->
+							<!-- Commented out for local development --*>
 							<!--<li class="social-network"><div class="fb-like" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="verdana" data-action="like"></div></li>
 							<li class="social-network"><a href="https://twitter.com/share" class="twitter-share-button" data-via="streakfreeclean" data-related="streakfreeclean" data-hashtags="WindowCleaning">Tweet</a>
-							<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>-->
-						</ul>
+							<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>--*>
+						</ul>-->
 					</div>
 				</div>
 			</div>
@@ -49,135 +50,70 @@ get_header();
 </section>	
 
 <section class="bg-white bumper-top-small">
-	
-	<!-- Accolades Module - Headline Style - Show one or more accolades (Carousel for multiple accolades)
-	===============================================================================================
-	-->
-	
-	<div class="row-middle center-align page-left page-right">
-		<div class="middle-fixed-small bumper-right">		
-			<img src="<?php echo THEME_IMAGES; ?>temp/angies.png" width="150">
-		</div>
-		<div class="middle">
-			<h2> 2012 Angie's list superior service award winner.</h2>
-		</div>
-	</div>
-	<div class="page-left page-right bumper-top-small">
-		<div class="pen-stroke"></div>
-	</div>
-	
-	<!-- / Accolades -->
-	
-</section>
-
-<section class="bg-white bumper-bottom-medium bumper-top-medium">
-	<div class="row-fluid">
-		<div class="span12">
-			<h2 class="blue center">What we're <strong class="green">really</strong> good at.</h2>
-		</div>
-	</div>
-</section>
-
-<section class="bg-slate bumper-bottom">
 	<div class="row-fluid">
 		<div class="span12">
 			
-			<!-- Link Grid - A grid of links. Each link can have a thumbnail or description.
-			================================================================================
-			-->
-			
-			<ul class="link-grid">
-				<li>
-					<div class="grid-thumb">
-						<nav>
-							<a href=""><i class="icon-picture icon-white"></i> Showroom</a>
-							<a href=""><i class="icon-info-sign icon-white"></i> Learn more</a>
-						</nav>
-						<img src="<?php echo THEME_IMAGES; ?>temp/high-rise.jpg" alt="" />
-					</div>
-					<a href="#">High Rise Window Cleaning</a>
-				</li>
-				<li>
-					<div class="grid-thumb">
-						<nav>
-							<a href=""><i class="icon-picture icon-white"></i> Showroom</a>
-							<a href=""><i class="icon-info-sign icon-white"></i> Learn more</a>
-						</nav>
-						<img src="<?php echo THEME_IMAGES; ?>temp/category.png" alt="" />
-					</div>
-					<a href="#">Home Window Cleaning</a>
-				</li>
-				<li>
-					<div class="grid-thumb">
-						<nav>
-							<a href=""><i class="icon-picture icon-white"></i> Showroom</a>
-							<a href=""><i class="icon-info-sign icon-white"></i> Learn more</a>
-						</nav>
-						<img src="<?php echo THEME_IMAGES; ?>temp/category.png" alt="" />
-					</div>
-					<a href="#">Home Window Cleaning</a>
-				</li>
-				<li>
-					<div class="grid-thumb">
-						<nav>
-							<a href=""><i class="icon-picture icon-white"></i> Showroom</a>
-							<a href=""><i class="icon-info-sign icon-white"></i> Learn more</a>
-						</nav>
-						<img src="<?php echo THEME_IMAGES; ?>temp/category.png" alt="" />
-					</div>
-					<a href="#">Home Window Cleaning</a>
-				</li>
-				<li>
-					<div class="grid-thumb">
-						<nav>
-							<a href=""><i class="icon-picture icon-white"></i> Showroom</a>
-							<a href=""><i class="icon-info-sign icon-white"></i> Learn more</a>
-						</nav>
-						<img src="<?php echo THEME_IMAGES; ?>temp/category.png" alt="" />
-					</div>
-					<a href="#">Home Window Cleaning</a>
-				</li>
-			</ul>
-			<!--/ Link Grid -->
-			
-		</div>
-	</div>
-</section>
-
-<section class="bg-white bumper-top-medium bumper-bottom-medium">
-	<div class="row-fluid">
-		<div class="span5">
-			<h2 class="page-left bumper-top">Don't take any chances, we are fully insured and our work is 100% guaranteed.</h2>
-		</div>
-		
-		<div class="span7">
-			
-			<!-- Accolades Module - Show one or more accolades (Carousel for multiple accolades)
+			<!-- Accolades Module - Headline Style - Show one or more accolades (Carousel for multiple accolades)
 			===============================================================================================
 			-->
-			<div class="row-middle ">
-				<div class="middle-fixed-small bumper-right">
-					<img src="<?php echo THEME_IMAGES; ?>temp/window-cleaning-guarantee-small.png" width="200">
+			
+			<div class="showoff page-left page-right center-align">
+				<div class="bumper-right">
+					<img src="<?php echo THEME_IMAGES; ?>temp/angies.png" width="150">
 				</div>
-				<div class="middle">
-					<h4 class="green">Hassle free money back guarantee.</h4>
-					<p>We’re proud to offer Bethesda's only $1000 Streak Free Guarantee. If you don’t love our work, we’ll refund up to $1000.</p>
+				<div>
+					<h2> 2012 Angie's list superior service award winner.</h2>
 				</div>
+			</div>
+			<div class="page-left page-right bumper-top-small">
+				<div class="pen-stroke"></div>
 			</div>
 			
-			<div class="row-middle page-right">
-				<div class="middle-fixed-small bumper-right bumper-top">
-					<img src="<?php echo THEME_IMAGES; ?>temp/insured-window-cleaning.png" width="130">
-				</div>
-				<div class="middle">
-					<h4 class="green">We carry $1,000,000 in liability insurance.</h4>
-					<p>Protect your home and family. Only work with fully insured WindowCleaning.com professionals.</p>
-				</div>
-			</div>
 			<!-- / Accolades -->
 			
 		</div>
-	</div>		
+	</div>
+</section>
+
+<section class="bg-slate bumper-top-medium bumper-bottom-medium">
+	<div class="row-fluid">
+		<div class="span4">
+			<div class="page-left center">
+				<h4>Only one in Cincinatti.</h4>
+				<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+				<p><a class="btn" href="#">View details &raquo;</a></p>
+			</div>
+			
+		</div>
+		<div class="span4">
+		
+			<div class="center">
+				<h4>5 star rating</h4>
+				<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+				<p><a class="btn" href="#">View details &raquo;</a></p>
+			</div>
+			
+		</div>
+		<div class="span4">
+		
+			<div class="page-right center">
+				<h4>Heading</h4>
+				<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+				<p><a class="btn" href="#">View details &raquo;</a></p>
+			</div>
+			
+		</div>
+	</div>
+</section>	
+
+<section class="display-table">
+	<div class="display-cell">
+		<img class="img-polaroid" src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
+	</div>
+	<div class="display-cell">
+		<h2 class="">Why Squeaky Clean was awarded best in Los Angeles, CA.</h2>
+		<p class="blue">Yes, Squeeky Clean Window Washing has undergone a rigorous screening process. They have received our top ranking as the best window cleaners in Bethesda Maryland. We are so confident you will be completely satisfied with their window cleaning services that we offer our $1000 Streak Free Guarantee, only through WindowCleaning.com.</p>
+	</div>
 </section>
 
 <section class="bg-white">
@@ -192,125 +128,108 @@ get_header();
 				<blockquote class="center well well-blue well-has-shadow">
 					<p>"My assistant found Ernie of Quality Window Cleaning on the web. He gave us a quote and did a test clean of our windows. We found him to be quick and efficient and he was even able to get rid of some stubborn water stains. Needless to say, we have been very satisfied with his work and his price and would recommend him to other businesses"
 					</p>
-					<p class="citation"><cite>MC Hammer </cite><span class="author-location">~ Springfield, MA</span></p>
+					<small><cite>MC Hammer </cite><span class="author-location">~ Springfield, MA</span></small>
 					<a href="" class="review-link">Read more reviews</a>
 				</blockquote>
 				<div class="curved-shadow">
 					<img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
 				</div>
 			</div>
+	
+			
+			<!-- Show Off - A full width headline module with or without a photo
+			====================================================================
+			-->
+			<div class="showoff page-right page-left bumper-top-large bumper-bottom-large">
+				<div class="showoff-half bumper-right-large">
+					<img class="img-polaroid" src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
+				</div>
+				<div>
+					<h2 class="">Why Squeaky Clean was awarded best in Los Angeles, CA.</h2>
+					<p class="blue">Yes, Squeeky Clean Window Washing has undergone a rigorous screening process. They have received our top ranking as the best window cleaners in Bethesda Maryland. We are so confident you will be completely satisfied with their window cleaning services that we offer our $1000 Streak Free Guarantee, only through WindowCleaning.com.</p>
+				</div>
+			</div>
+			<!-- / Showoff -->
+
+			<!-- Show Off - A full width headline module with or without a photo
+			====================================================================
+			-->
+			<div class="showoff page-right page-left bumper-bottom-large">
+				<div>
+					<h2 class="">Why Squeaky Clean was awarded best in Los Angeles, CA.</h2>
+					<p class="blue">Yes, Squeeky Clean Window Washing has undergone a rigorous screening process. They have received our top ranking as the best window cleaners in Bethesda Maryland. We are so confident you will be completely satisfied with their window cleaning services that we offer our $1000 Streak Free Guarantee, only through WindowCleaning.com.</p>
+				</div>
+				<div class="showoff-third bumper-left-large">
+					<img class="img-polaroid" src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
+				</div>
+			</div>
+			<!-- / Showoff -->
+			
+			<!-- Show Off - A full width headline module with or without a photo
+			====================================================================
+			-->
+			<div class="showoff page-right page-left bumper-bottom-large">
+				<div>
+					<h3 class="">Why Squeaky Clean was awarded best in Los Angeles, CA.</h3>
+					<p class="blue">Yes, Squeeky Clean Window Washing has undergone a rigorous screening process. They have received our top ranking as the best window cleaners in Bethesda Maryland. We are so confident you will be completely satisfied with their window cleaning services that we offer our $1000 Streak Free Guarantee, only through WindowCleaning.com.</p>
+				</div>
+				<div class="showoff-third bumper-left-large">
+					<img class="img-polaroid" src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
+				</div>
+			</div>
+			<!-- / Showoff -->
+		
+			<div class="page-left page-right bumper-bottom-medium">
+				<div class="well-blue well well-has-shadow">
+					<div class="green-man-75 clearfix">
+						<h2 class="white center ">What does the WindowCleaning.com award actually mean?</h2>
+						<p class="blueLightest page-left bumper-top">
+							WindowCleaning.com is a national network of the <strong>best window cleaners</strong> in each city. In most cities, <strong>only one window cleaner is chosen out of hundreds</strong> of window cleaners! Each window cleaner is interviewed personally by one of our team. We verify their level of experience, if they are properly insured, their reputation in the industry, and how their customers feel about the service they provide. Then we choose the best.
+							
+							You can be sure, that by choosing a WindowCleaning.com awarded member, you are choosing the best. And to back it up, all WindowCleaning.com members offer our no hassle <strong>$1000 Streak Free Guarantee!</strong>
+						</p>
+						<div class="center">
+							<div class="btn-group">
+								<button class="btn btn-primary btn-large hidden-phone">Call us  (233) 123-1234</button>
+								<button class="btn btn-success btn-large">Quick Online Estimate</button>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				<div class="curved-shadow">
+					<img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
+				</div>
+			</div>
+			
 		</div>
 	</div>
 </section>
 
-<section class="bg-sky bumper-top-large bumper-bottom-large">
-
-	<!-- Show Off - A full width headline module with or without a photo
-	====================================================================
-	-->
-	
-	<div class="row-middle">
-		<div class="middle6 page-right page-left bumper-right-large">		
-			<img class="img-polaroid" src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-		</div>
-		<div class="middle">
-			<h2 class="">Why Squeaky Clean was awarded best in Los Angeles, CA.</h2>
-			<p class="blue">Yes, Squeeky Clean Window Washing has undergone a rigorous screening process. They have received our top ranking as the best window cleaners in Bethesda Maryland. We are so confident you will be completely satisfied with their window cleaning services that we offer our $1000 Streak Free Guarantee, only through WindowCleaning.com.</p>
-		</div>
-	</div>
-	
-	<!-- / Showoff -->
-
-	<!-- Show Off - A full width headline module with or without a photo
-	====================================================================
-	-->
-	
-	<div class="row-middle">
-		<div class="middle page-right">
-			<h2 class="">Why Squeaky Clean was awarded best in Los Angeles, CA.</h2>
-			<p class="blue">Yes, Squeeky Clean Window Washing has undergone a rigorous screening process. They have received our top ranking as the best window cleaners in Bethesda Maryland. We are so confident you will be completely satisfied with their window cleaning services that we offer our $1000 Streak Free Guarantee, only through WindowCleaning.com.</p>
-		</div>
-		
-		<div class="middle6 page-right page-left bumper-right-large">		
-			<img class="img-polaroid" src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-		</div>
-	</div>
-	
-	<!-- / Showoff -->
-
-	
-
-	<div class="page-left page-right bumper-bottom-medium bumper-top-medium">
-		<div class="well-blue well well-has-shadow">
-			<div class="green-man-75 clearfix">
-				<h2 class="white center ">What does the WindowCleaning.com award actually mean?</h2>
-				<p class="blueLightest page-left bumper-top">
+<section class="bg-white bumper-top-medium bumper-bottom-medium bg-sky">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="showoff page-left page-right">
+				<div class="bumper-right-large">
+					<h2>Why does <strong class="green">McDonalds</strong> choose Clearview for their professional window cleaning?</h2>
+					<p>
 					WindowCleaning.com is a national network of the <strong>best window cleaners</strong> in each city. In most cities, <strong>only one window cleaner is chosen out of hundreds</strong> of window cleaners! Each window cleaner is interviewed personally by one of our team. We verify their level of experience, if they are properly insured, their reputation in the industry, and how their customers feel about the service they provide. Then we choose the best.
 					
 					You can be sure, that by choosing a WindowCleaning.com awarded member, you are choosing the best. And to back it up, all WindowCleaning.com members offer our no hassle <strong>$1000 Streak Free Guarantee!</strong>
-				</p>
-				<div class="center">
-					<div class="btn-group">
-						<button class="btn btn-primary btn-large hidden-phone">Call us  (233) 123-1234</button>
-						<button class="btn btn-success btn-large">Quick Online Estimate</button>
-					</div>
+					</p>
+				</div>
+				<div class="showoff-third showpeice">
+					<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
+					<blockquote>
+						<h4>McDonalds <small>Beach Drive Vancouver</small></h4>
+						<p>Yes, Squeeky Clean Window Washing has undergone a rigorous screening process. They have received our top ranking as the best window cleaners in Bethesda Maryland. We are so confident you will be completely satisfied with their window cleaning services that we offer our $1000 Streak Free Guarantee, only through WindowCleaning.com.
+						</p>
+						<p class="citation"><cite>John Mckenzie, </cite>Owner</p>
+					</blockquote>
 				</div>
 			</div>
-			
-		</div>
-		<div class="curved-shadow">
-			<img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
-		</div>
-	</div>
-			
-		
-</section>
-
-<section class="bg-white bumper-top-medium bumper-bottom-medium">
-	<div class="row-fluid">
-		<div class="span5">
-			<h2 class="page-left bumper-top">We're proud to be recognized by the best organizations in the window cleaning industry.</h2>
 		</div>
 		
-		<div class="span7">
-			
-			<!-- Accolades Module - ShowOff Style - Show one or more accolades (Carousel for multiple accolades)
-			===============================================================================================
-			-->
-			
-			<div class="showoff page-right">
-				<div class="showoff-fixed-small bumper-right">
-					<img src="<?php echo THEME_IMAGES; ?>temp/window-cleaning-guarantee-small.png" width="200">
-				</div>
-				<div>
-					<h4 class="green">Window Cleaning Resource Association</h4>
-					<p>We’re proud to offer Bethesda's only $1000 Streak Free Guarantee. If you don’t love our work, we’ll refund up to $1000.</p>
-				</div>
-			</div>
-			
-			<div class="showoff page-right">
-				<div class="showoff-fixed-small bumper-right bumper-top">
-					<img src="<?php echo THEME_IMAGES; ?>temp/insured-window-cleaning.png" width="130">
-				</div>
-				<div>
-					<h4 class="green">Internation Window Cleaners Association</h4>
-					<p>Protect your home and family. Only work with fully insured WindowCleaning.com professionals.</p>
-				</div>
-			</div>
-			
-			<div class="showoff page-right">
-				<div class="showoff-fixed-small bumper-right bumper-top">
-					<img src="<?php echo THEME_IMAGES; ?>temp/insured-window-cleaning.png" width="130">
-				</div>
-				<div>
-					<h4 class="green">Better Business Bureau</h4>
-					<p>Protect your home and family. Only work with fully insured WindowCleaning.com professionals.</p>
-				</div>
-			</div>
-			
-			<!-- / Accolades -->
-			
-		</div>
 	</div>		
 
 	<div class="row-fluid">
