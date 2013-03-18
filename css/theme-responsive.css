@@ -991,8 +991,8 @@
   }
 }
 @media (max-width: 979px) {
-  .margin-right,
-  .margin-left {
+  .page-right,
+  .page-left {
     padding-left: 40px;
     padding-right: 40px;
   }
@@ -1057,21 +1057,21 @@
     height: auto;
     padding: 20px;
   }
-  .showoff {
+  .row-middle {
+    padding: 20px;
     margin: 0 auto;
     display: block;
     text-align: center;
   }
-  .showoff div {
-    padding: 0;
+  .row-middle > div {
     width: 100%;
     display: block;
     text-align: center;
   }
 }
 @media (max-width: 767px) {
-  .margin-right,
-  .margin-left {
+  .page-right,
+  .page-left {
     padding-left: 20px;
     padding-right: 20px;
   }
