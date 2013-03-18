@@ -23,7 +23,7 @@ session_start();
 <!--<![endif]-->
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title><?php
 	/*
 	 * Print the <title> tag based on what is being viewed.
@@ -82,25 +82,25 @@ session_start();
     ================================================== -->
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
-    	<div class="container-fluid">
-			<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+    <div class="container-fluid">
+			<!--button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
-			</button>
+			</button!-->
       <a class="brand" href="">Hatch</a>
-			<div class="nav-collapse collapse">
+			<div><!--</div> class="nav-collapse collapse"-->
 				<ul class="nav">
 					<li class="has-nav-icon">
 						<a href="<?=TOOLBOX_URL?>dashboard"><i class="icon-nav-dashboard"></i>Dashboard</a>
 					</li>
 					<li class="has-nav-icon">
-					    <a href="<?=TOOLBOX_URL?>promote"><i class="icon-nav-sun"></i>Promote</a>
+            <a href="<?=TOOLBOX_URL?>promote"><i class="icon-nav-sun"></i>Promote</a>
 					</li>
 					<li class="has-nav-icon">
 						<a href="<?=TOOLBOX_URL?>insight"><i class="icon-nav-compass"></i>Insight</a>
 					</li>
-					<li class="dropdown has-nav-icon">
+					<li class="dropdown has-nav-icon control-panel-expanded">
 						<a id="control-panel" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-nav-cog"></i> <b class="caret"></b></a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="control-panel">
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
@@ -111,11 +111,24 @@ session_start();
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/logout?nonce=<?=wp_create_nonce('logout-'.date('Ymd'))?>">Log out</a></li>
 						</ul>
 					</li>
+          <li class="control-panel-collapsed">
+            <a href="#" role="button" data-toggle="collapse" data-target=".nav-collapse"><i class="icon-nav-cog"></i> <b class="caret"></b></a>
+          </li>
 					<li class="">
-						<button class="btn btn btn-primary btn-project-shortcut action-new-project" type="button"><i class="icon-nav-edit"></i></button>
+						<button class="btn btn btn-primary btn-project-shortcut action-new-project" type="button"><i class="icon-nav-edit"></i><span> New Project</span></button>
 					</li>
 				</ul>
 			</div>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
+          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
+          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/preferences">Preferences</a></li>
+          <li class="divider"></li>
+          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account">My account</a></li>
+          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/logout?nonce=<?=wp_create_nonce('logout-'.date('Ymd'))?>">Log out</a></li>
+        </ul>
+      </div>
 		</div>
 	</div>
 </div>
