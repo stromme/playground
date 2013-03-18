@@ -31,8 +31,8 @@
 }(document, 'script', 'facebook-jssdk'));</script>-->
 
 
-<? get_template_part('menu', 'headline'); ?>
-<? get_template_part('menu', 'main'); ?>
+<? get_template_part('templates/menu', 'headline'); ?>
+<? get_template_part('templates/menu', 'main'); ?>
 
 
 <!-- Wrap the page in .container to centre the content and keep it at a max width -->

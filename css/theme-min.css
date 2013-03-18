@@ -5242,6 +5242,9 @@ a.badge:focus {
 .row-middle {
   display: table;
 }
+.row-middle:nth-of-type(n+2) {
+  padding-top: 20px;
+}
 .middle,
 .middle-fixed-small,
 .middle3,
@@ -5262,6 +5265,9 @@ a.badge:focus {
 .middle-fixed-small,
 .middle-fixed-small > img {
   width: 110px;
+}
+.middle-fixed-small {
+  padding-right: 20px;
 }
 .middle3 {
   width: 25%;
@@ -5378,6 +5384,18 @@ blockquote {
   background: url('../toolbox-framework/bootstrap/img/glyphicons_white/glyphicons_307_life_preserver.png') 0 0 no-repeat;
   height: 18px;
   line-height: 18px;
+  width: 24px;
+}
+.icon-facebook {
+  background: url('../toolbox-framework/bootstrap/img/glyphicons/glyphicons_410_facebook.png') 0 0 no-repeat;
+  height: 24px;
+  line-height: 24px;
+  width: 24px;
+}
+.icon-twitter {
+  background: url('../toolbox-framework/bootstrap/img/glyphicons/glyphicons_411_twitter.png') 0 0 no-repeat;
+  height: 24px;
+  line-height: 24px;
   width: 24px;
 }
 .green {
@@ -5867,10 +5885,8 @@ nav-callout .notch {
 .banner-review blockquote cite {
   color: #333333;
 }
-.share-it {
-  margin: 0px;
+.banner .share-it {
   padding-left: 40px;
-  text-align: center;
   border-top: 1px solid #ffffff;
   border-bottom: 1px solid #DDDDDD;
   background-color: #f5f5f5;
@@ -5883,47 +5899,14 @@ nav-callout .notch {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff5f5f5', endColorstr='#fff5f5f5', GradientType=0);
   *zoom: 1;
 }
-.share-it:before,
-.share-it:after {
+.banner .share-it:before,
+.banner .share-it:after {
   display: table;
   content: "";
   line-height: 0;
 }
-.share-it:after {
+.banner .share-it:after {
   clear: both;
-}
-.share-it li {
-  padding: 14px 25px 14px 0;
-  margin-left: 0px;
-  list-style: none;
-  float: left;
-}
-.share-it .social-network {
-  position: relative;
-  top: 3px;
-}
-.share-it .write-review {
-  position: relative;
-  opacity: 0.8;
-  filter: alpha(opacity=80);
-}
-.share-it .write-review a {
-  position: relative;
-  top: -1px;
-  font-size: 24px;
-  font-family: "tamarillo";
-  text-decoration: none;
-}
-.share-it .write-review a i {
-  position: relative;
-  top: 2px;
-}
-.share-it .write-review:hover {
-  opacity: 1;
-  filter: alpha(opacity=100);
-}
-.share-it .write-review:hover a {
-  color: #0083e0;
 }
 .jumbotron {
   height: 400px;
@@ -6017,7 +6000,7 @@ nav-callout .notch {
 }
 .review blockquote p {
   position: relative;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 100;
 }
 .review-link {
@@ -6038,7 +6021,8 @@ a.review-link:hover {
 }
 .review-invert blockquote p,
 .review-invert blockquote h3,
-.review-invert blockquote h4 {
+.review-invert blockquote h4,
+.review-invert blockquote .citation {
   color: #ffffff;
 }
 .review-invert blockquote small {
@@ -6238,6 +6222,79 @@ body {
   font-size: 32px;
   line-height: 60px;
   font-family: "tamarillo";
+}
+.share-it {
+  margin: 0px;
+  text-align: center;
+}
+.share-it li {
+  padding: 14px 25px 14px 0;
+  margin-left: 0px;
+  list-style: none;
+  float: left;
+}
+.share-it .social-network {
+  position: relative;
+  top: 3px;
+}
+.share-it .write-review {
+  position: relative;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+.share-it .write-review a {
+  position: relative;
+  top: -1px;
+  font-size: 24px;
+  font-family: "tamarillo";
+  text-decoration: none;
+}
+.share-it .write-review a i {
+  position: relative;
+  top: 2px;
+}
+.share-it .write-review:hover {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.share-it .write-review:hover a {
+  color: #0083e0;
+}
+.single-project .thumbnails > li:first-of-type {
+  margin-left: 0px;
+}
+.single-project .thumbnails > li {
+  margin-left: 15px;
+}
+.single-project .thumbnail {
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+}
+.single-project .thumbnail img {
+  min-height: 80px;
+}
+#new-review .icon-facebook,
+#new-review .icon-twitter {
+  position: relative;
+  top: -4px;
+}
+#new-review a {
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+}
+#new-review a:hover {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  text-decoration: none;
+}
+#new-lead input {
+  margin-bottom: 5px;
+  padding: 10px 8px;
+  width: 300px;
+}
+#new-lead .add-on {
+  padding: 10px 8px;
 }
 .footer {
   border-bottom: 1px solid #0083e0;

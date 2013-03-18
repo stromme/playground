@@ -105,7 +105,7 @@ session_start();
 						<ul class="dropdown-menu" role="menu" aria-labelledby="control-panel">
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
-							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/preferences">Preferences</a></li>
+							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing</a></li>
 							<li class="divider"></li>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account">My account</a></li>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/logout?nonce=<?=wp_create_nonce('logout-'.date('Ymd'))?>">Log out</a></li>
