@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Headline
+ * 
  * Description: Fixed to top page headline and call to action
  *
  * @package 
