@@ -109,11 +109,11 @@ get_header();
 	=============================================================================
 	-->
 	
-	<div class="row-middle bumper-top-large">
-		<div class="middle6 page-right page-left bumper-right-large">		
+	<div class="row-middle bumper-top-large page-right page-left">
+		<div class="middle6 bumper-right-large">		
 			<img class="img-polaroid" src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
 		</div>
-		<div class="middle page-right">
+		<div class="middle">
 			<h2 class="">Why Squeaky Clean was awarded best in Los Angeles, CA.</h2>
 			<p class="blue">Yes, Squeeky Clean Window Washing has undergone a rigorous screening process. They have received our top ranking as the best window cleaners in Bethesda Maryland. We are so confident you will be completely satisfied with their window cleaning services that we offer our $1000 Streak Free Guarantee, only through WindowCleaning.com.</p>
 		</div>
@@ -125,13 +125,13 @@ get_header();
 	====================================================================
 	-->
 	
-	<div class="row-middle bumper-top-large">
-		<div class="middle page-left">
+	<div class="row-middle bumper-top-large page-right page-left">
+		<div class="middle">
 			<h2 class="">Why Squeaky Clean was awarded best in Los Angeles, CA.</h2>
 			<p class="blue">Yes, Squeeky Clean Window Washing has undergone a rigorous screening process. They have received our top ranking as the best window cleaners in Bethesda Maryland. We are so confident you will be completely satisfied with their window cleaning services that we offer our $1000 Streak Free Guarantee, only through WindowCleaning.com.</p>
 		</div>
 		
-		<div class="middle6 page-right page-left bumper-right-large">		
+		<div class="middle6 bumper-right-large">		
 			<img class="img-polaroid" src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
 		</div>
 	</div>
@@ -271,19 +271,18 @@ get_header();
 </section>
 
 
-<section class="bg-slate">
+<section class="bg-slate page-left page-right bumper-top-large bumper-bottom-large">
 	<div class="row-fluid">
-		<div class="span7">
+		<div class="span8">
 			
 			<!-- Address Module - Company address and Google map
 			=====================================================
 			-->
 			
-			<div class="page-left bumper-top-medium bumper-bottom-large">
-				<div class="pull-left bumper-right">
-					<img class="img-polaroid" src="http://maps.google.com/maps/api/staticmap?center=North+Bethesda,5703+Luxemburg+Street%2C+Apt.100,MD,20852&amp;zoom=9&amp;size=270x210&amp;maptype=roadmap&amp;markers=color:blue%7Clabel:A%7CNorth+Bethesda,5703+Luxemburg+Street%2C+Apt.100,MD,20852&amp;sensor=false" itemprop="image">
-				</div>
-			
+			<div class="pull-left bumper-right-medium bumper-bottom">
+				<img class="img-polaroid" src="http://maps.google.com/maps/api/staticmap?center=North+Bethesda,5703+Luxemburg+Street%2C+Apt.100,MD,20852&amp;zoom=9&amp;size=270x210&amp;maptype=roadmap&amp;markers=color:blue%7Clabel:A%7CNorth+Bethesda,5703+Luxemburg+Street%2C+Apt.100,MD,20852&amp;sensor=false" itemprop="image">
+			</div>
+			<div class="">
 				<h3 class="light-weight">Come say hello...</h3>
 				<address>
 				  <strong>Streak Free Clean</strong><br>
@@ -297,17 +296,17 @@ get_header();
 				  <a href="mailto:#">first.last@example.com</a>
 				</address>
 			</div>
-			
+				
 			<!-- / Address -->
 				
 		</div>
-		<div class="span5">
+		<div class="span4">
 		
 			<!-- Service area Module - List of locations serviced
 			=====================================================
 			-->
 			
-			<div class="page-right bumper-top-medium">
+			<div>
 				<h3 class="light-weight">Were we work</h3>
 				<ul>
 					<li>Cincinatti</li>
