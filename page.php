@@ -7,11 +7,16 @@
  * and that other 'pages' on your WordPress site will use a
  * different template.
  *
+ * Template Name: Reviews
+ * Description:
  * @package Hatch
  * @subpackage 
  * @since 
  */
 
-get_header(); ?>
+get_header();
+the_post();
+the_content();
+get_footer();
 
-<?php get_footer(); ?>
+?>

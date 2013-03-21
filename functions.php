@@ -17,6 +17,7 @@ define( 'ENVIRONMENT', 'DEV' );
 define( 'TOOLBOX_BASE_DIR', trailingslashit( get_template_directory() ) . 'toolbox-framework' );
 require_once( trailingslashit( TOOLBOX_BASE_DIR ) . 'toolbox.php' );
 $Toolbox = new TB_Framework();
+include_once(trailingslashit(TEMPLATEPATH) . 'carrington-build/carrington-build.php');
 
 
 /* Theme Constants
