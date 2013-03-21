@@ -5452,7 +5452,7 @@ blockquote {
 }
 .curved-shadow img {
   /*position: absolute;*/
-  /*top: 0;*/
+  top: 0;
   width: 100%;
   line-height: 0;
 }

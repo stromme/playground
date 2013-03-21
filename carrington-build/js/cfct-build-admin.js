@@ -1030,6 +1030,7 @@
 		}
 		else {
       _wrapper.fadeIn('fast');
+      $('.cfct-custom-classes', _wrapper).focus();
 		}
 	};
 	
@@ -1548,6 +1549,11 @@
       });
       $('.cfct-row-option-block .close').live('click', function(){
         cfct_builder.rowOptionsSliderShowHide($(this));
+        var button = $(this);
+        var container = button.closest('.cfct-row-option-block');
+        var input = $('.cfct-custom-classes', container);
+        input.val(input.attr('data-old-value'));
+        return false;
       });
 
       $(cfct_builder).bind('custom-row-class-response',function(evt,result) {
@@ -1557,6 +1563,9 @@
           cfct_builder.doError(ret);
           return false;
         }
+        var container = button.closest('.cfct-row-option-block');
+        var input = $('.cfct-custom-classes', container);
+        input.attr('data-old-value', input.val());
         cfct_builder.rowOptionsSliderShowHide(button);
         cfct_messenger.setMessage('Row Class Updated','confirm');
         return true;

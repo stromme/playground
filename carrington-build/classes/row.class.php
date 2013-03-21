@@ -420,7 +420,7 @@ class cfct_build_row {
               <div class="cfct-popup-advanced-actions">
                 <label for="">CSS Classes:</label>
                 <div class="cfct-select-menu-wrapper">
-                  <input type="text" class="no-button cfct-custom-classes" value="{classes}" autocomplete="off">
+                  <input type="text" class="no-button cfct-custom-classes" data-old-value="{classes}" value="{classes}" autocomplete="off">
                 </div>
                 <button type="button" class="button button-primary save">Save</button>
                 <button type="button" class="button close">Cancel</button>
