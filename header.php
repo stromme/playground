@@ -37,4 +37,3 @@
 
 <!-- Wrap the page in .container to centre the content and keep it at a max width -->
 <div class="container gentle-shadow">
-	

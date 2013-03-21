@@ -24,6 +24,8 @@ session_start();
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-title" content="Hatch" />
+<link rel="apple-touch-icon" href="<?=get_theme_root_uri().'/'.get_stylesheet()?>/iphone-icon.png"/>
 <title><?php
 	/*
 	 * Print the <title> tag based on what is being viewed.
@@ -123,7 +125,7 @@ session_start();
         <ul class="nav">
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
-          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/preferences">Preferences</a></li>
+          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing</a></li>
           <li class="divider"></li>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account">My account</a></li>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/logout?nonce=<?=wp_create_nonce('logout-'.date('Ymd'))?>">Log out</a></li>

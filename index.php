@@ -22,7 +22,7 @@ get_header();
 
 	<? get_template_part('templates/module', 'banner'); ?>
 		
-</section>	
+</section>
 
 <section class="bg-white bumper-top-small">
 
