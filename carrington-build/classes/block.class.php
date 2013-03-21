@@ -314,4 +314,103 @@ class cfct_multi_block_c4_1234 extends cfct_multi_block {
 	}
 }
 
+/* Hatch blocks */
+class hatch_block_1_col extends cfct_block {
+	public function __construct($classes = array()) {
+    $this->set_client_template('{modules}');
+		parent::__construct($classes);
+	}
+}
+class hatch_block_2_col_1 extends cfct_block {
+	public function __construct($classes = array()) {
+    $this->set_client_template('<div class="span6">{modules}</div>');
+    $this->add_classes(array('c4-12'));
+		parent::__construct($classes);
+	}
+}
+class hatch_block_2_col_2 extends cfct_block {
+	public function __construct($classes = array()) {
+    $this->set_client_template('<div class="span6">{modules}</div>');
+    $this->add_classes(array('c4-34'));
+		parent::__construct($classes);
+	}
+}
+class hatch_block_3_col_1 extends cfct_block {
+	public function __construct($classes = array()) {
+    $this->set_client_template('<div class="span4">{modules}</div>');
+    $this->add_classes(array('c6-12'));
+		parent::__construct($classes);
+	}
+}
+class hatch_block_3_col_2 extends cfct_block {
+	public function __construct($classes = array()) {
+    $this->set_client_template('<div class="span4">{modules}</div>');
+    $this->add_classes(array('c6-34'));
+		parent::__construct($classes);
+	}
+}
+class hatch_block_3_col_3 extends cfct_block {
+	public function __construct($classes = array()) {
+    $this->set_client_template('<div class="span4">{modules}</div>');
+    $this->add_classes(array('c6-56'));
+		parent::__construct($classes);
+	}
+}
+class hatch_block_40_60_col_1 extends cfct_block {
+	public function __construct($classes = array()) {
+    $this->set_client_template('<div class="span5">{modules}</div>');
+    $this->add_classes(array('c10-0123'));
+		parent::__construct($classes);
+	}
+}
+class hatch_block_40_60_col_2 extends cfct_block {
+	public function __construct($classes = array()) {
+    $this->set_client_template('<div class="span7">{modules}</div>');
+    $this->add_classes(array('c10-456789'));
+		parent::__construct($classes);
+	}
+}
+class hatch_block_60_40_col_1 extends cfct_block {
+	public function __construct($classes = array()) {
+    $this->set_client_template('<div class="span7">{modules}</div>');
+    $this->add_classes(array('c10-012345'));
+		parent::__construct($classes);
+	}
+}
+class hatch_block_60_40_col_2 extends cfct_block {
+	public function __construct($classes = array()) {
+    $this->set_client_template('<div class="span5">{modules}</div>');
+    $this->add_classes(array('c10-6789'));
+		parent::__construct($classes);
+	}
+}
+class hatch_block_left_sidebar_1 extends cfct_block {
+	public function __construct($classes = array()) {
+    $this->set_client_template('<div class="span4">{modules}</div>');
+    $this->add_classes(array('c6-12'));
+		parent::__construct($classes);
+	}
+}
+class hatch_block_left_sidebar_2 extends cfct_block {
+	public function __construct($classes = array()) {
+    $this->set_client_template('<div class="span8">{modules}</div>');
+    $this->add_classes(array('c6-3456'));
+		parent::__construct($classes);
+	}
+}
+class hatch_block_right_sidebar_1 extends cfct_block {
+	public function __construct($classes = array()) {
+    $this->set_client_template('<div class="span8">{modules}</div>');
+    $this->add_classes(array('c6-1234'));
+		parent::__construct($classes);
+	}
+}
+class hatch_block_right_sidebar_2 extends cfct_block {
+	public function __construct($classes = array()) {
+    $this->set_client_template('<div class="span4">{modules}</div>');
+    $this->add_classes(array('c6-56'));
+		parent::__construct($classes);
+	}
+}
+
 ?>

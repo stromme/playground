@@ -26,8 +26,8 @@ class cfct_build extends cfct_build_common {
 		parent::__construct();
 		
 		add_action('init', array($this, 'request_handler'), 11);
-		wp_enqueue_style('cfct-build-css',site_url('/?cfct_action=cfct_css'), array(), CFCT_BUILD_VERSION, 'screen');
-		wp_enqueue_script('cfct-build-js',site_url('/?cfct_action=cfct_js'), array('jquery'), CFCT_BUILD_VERSION);
+		//wp_enqueue_style('cfct-build-css',site_url('/?cfct_action=cfct_css'), array(), CFCT_BUILD_VERSION, 'screen');
+		//wp_enqueue_script('cfct-build-js',site_url('/?cfct_action=cfct_js'), array('jquery'), CFCT_BUILD_VERSION);
 	}
 	
 	public function request_handler() {
@@ -64,6 +64,8 @@ class cfct_build extends cfct_build_common {
 						'.$this->template->html($this->data).'
 					</div>
 					';
+        // Override original carrington build div
+        $this->ret = $this->template->html($this->data);
 				$this->remove_carrington_framework_filters(); // @carrington-framework
 				$this->restore_filters_state();
 			}

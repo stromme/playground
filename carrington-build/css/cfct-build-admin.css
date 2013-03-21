@@ -799,6 +799,14 @@ p.cancel {
 .c4-4 {
 	width: 25%;
 }
+.c10-012345,
+.c10-456789 {
+    width: 60%;
+}
+.c10-6789,
+.c10-0123 {
+    width: 40%;
+}
 
 /* =Modules
 ========================= */
@@ -863,7 +871,10 @@ p.cancel {
 .c6-123 .cfct-block-modules,
 .c6-1234 .cfct-block-modules,
 .c6-12345 .cfct-block-modules,
-.c6-123456 .cfct-block-modules {
+.c6-123456 .cfct-block-modules,
+/* Start custom */
+.c10-012345,
+.c10-0123 {
 	padding-left: 2px;
 }
 /* Extra padding for last column of modules */
@@ -876,7 +887,10 @@ p.cancel {
 .c6-456 .cfct-block-modules,
 .c6-3456 .cfct-block-modules,
 .c6-23456 .cfct-block-modules,
-.c6-123456 .cfct-block-modules {
+.c6-123456 .cfct-block-modules,
+/* Start custom */
+.c10-456789,
+.c10-6789 {
 	padding-right: 2px;
 }
 

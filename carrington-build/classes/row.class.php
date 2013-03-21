@@ -364,7 +364,8 @@ class cfct_build_row {
 		// build row HTML
 		$row_values = array(
 			'{class}' => $this->row_class($generated_row_classes),
-			'{id}' => $opts['guid']
+			'{id}' => $opts['guid'],
+      '{classes}' => ($opts['classes']!='')?' class="'.$opts['classes'].'"':''
 		);
 		
 		$row_values['{class}'] = apply_filters(
@@ -433,8 +434,12 @@ class cfct_build_row {
 			if (!empty($config_html)) {
 				$html = $this->get_config_item('html');
 			}
+			else if($this->get_config_item('multi-column')) {
+				$html = '<section{classes}><div class="row-fluid">{blocks}</div></section>';
+			}
 			else {
-				$html = '<div class="{class}">{blocks}</div>';
+				//$html = '<div class="{class}">{blocks}</div>';
+				$html = '<section{classes}>{blocks}</section>';
 			}
 		}
 		return apply_filters('cfct-row-'.($admin ? 'admin-' : '').'html', 

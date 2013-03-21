@@ -5439,6 +5439,7 @@ blockquote {
   padding-left: 0;
   padding-right: 0;
   *zoom: 1;
+  line-height: 0;
 }
 .curved-shadow:before,
 .curved-shadow:after {
@@ -5450,9 +5451,10 @@ blockquote {
   clear: both;
 }
 .curved-shadow img {
-  position: absolute;
-  top: 0;
+  /*position: absolute;*/
+  /*top: 0;*/
   width: 100%;
+  line-height: 0;
 }
 .callout-bottom {
   position: relative;

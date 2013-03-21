@@ -91,6 +91,8 @@ class cfct_build_module extends cfct_build_module_utility {
 			<div class="'.$module_class.'">
 				'.$module_display.'
 			</div>';
+    // Override original carrington build module div
+    $ret = $module_display;
 		
 		return apply_filters('cfct-module-'.$this->id_base.'-html', $ret, $data);
 	}

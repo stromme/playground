@@ -7,9 +7,7 @@
  * @subpackage
  * @since
  */
+
+get_template_part('templates/module', 'banner');
+
 ?>
-<section>
-
-	<? get_template_part('templates/module', 'banner'); ?>
-
-</section>
