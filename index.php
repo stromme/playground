@@ -24,13 +24,13 @@ get_header();
 		
 </section>
 
-<section class="bg-white bumper-top-small">
+<section class="bg-white">
 
 	<? get_template_part('templates/module', 'accolade-headline'); ?>
 		
 </section>
 
-<section class="bg-white bumper-bottom bumper-top">
+<section class="bg-white bumper-bottom bumper-top page-left page-right">
 	
 	<h2 class="blue center">What we're <strong class="green">really</strong> good at.</h2>
 
@@ -78,7 +78,7 @@ get_header();
 	</div>		
 </section>
 
-<section class="bg-white">
+<section class="bg-white page-left page-right">
 	<div class="row-fluid">
 		<div class="span12">
 		
@@ -86,7 +86,7 @@ get_header();
 			===========================================================================================================
 			-->
 			
-			<div class="review review-invert page-left page-right bumper-top-large bumper-bottom-large ">
+			<div class="review review-invert bumper-top-large bumper-bottom-large ">
 				<blockquote class="center well well-blue well-has-shadow">
 					<p>"My assistant found Ernie of Quality Window Cleaning on the web. He gave us a quote and did a test clean of our windows. We found him to be quick and efficient and he was even able to get rid of some stubborn water stains. Needless to say, we have been very satisfied with his work and his price and would recommend him to other businesses"
 					</p>
@@ -101,7 +101,7 @@ get_header();
 	</div>
 </section>
 
-<section class="bg-sky">
+<section class="bg-sky page-right page-left">
 
 	<!-- Begin content editable region of page -->
 
@@ -109,7 +109,7 @@ get_header();
 	=============================================================================
 	-->
 	
-	<div class="row-middle bumper-top-large page-right page-left">
+	<div class="row-middle bumper-top-large">
 		<div class="middle6 bumper-right-large">		
 			<img class="img-polaroid" src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
 		</div>
@@ -125,7 +125,7 @@ get_header();
 	====================================================================
 	-->
 	
-	<div class="row-middle bumper-top-large page-right page-left">
+	<div class="row-middle bumper-top-large">
 		<div class="middle">
 			<h2 class="">Why Squeaky Clean was awarded best in Los Angeles, CA.</h2>
 			<p class="blue">Yes, Squeeky Clean Window Washing has undergone a rigorous screening process. They have received our top ranking as the best window cleaners in Bethesda Maryland. We are so confident you will be completely satisfied with their window cleaning services that we offer our $1000 Streak Free Guarantee, only through WindowCleaning.com.</p>
@@ -144,7 +144,7 @@ get_header();
 	===========================================
 	-->
 
-	<div class="page-left page-right bumper-bottom-large bumper-top-large">
+	<div class="bumper-bottom-large bumper-top-large">
 		<div class="well-blue well well-has-shadow">
 			<div class="green-man-75 clearfix">
 				<h2 class="white center ">What does the WindowCleaning.com award actually mean?</h2>

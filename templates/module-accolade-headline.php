@@ -8,7 +8,7 @@
  */
 ?>
 
-<div class="row-middle center-align page-left page-right bumper-top bumper-bottom">
+<div class="row-middle center-align bumper-top bumper-bottom">
 	<div class="middle-fixed-small bumper-right">		
 		<img src="<?php echo THEME_IMAGES; ?>temp/angies.png" width="150">
 	</div>
