@@ -86,12 +86,29 @@ class cfct_build_module extends cfct_build_module_utility {
 		$module_display = apply_filters('cfct-module-display', $this->display($data), $this->id_base, $data);
 		// apply more module specific filters to output
 		$module_display = apply_filters('cfct-module-'.$this->id_base.'-display', $module_display, $data);
-		
-		$ret = '
-			<div class="'.$module_class.'">
-				'.$module_display.'
-			</div>';
-		
+
+    // Override original carrington build module div
+    $array_css = array();
+    $custom_classes = '';
+    if($data['cfct-module-options'] && $data['cfct-module-options']['custom-classes']){
+      foreach($data['cfct-module-options']['custom-classes'] as $key=>$css){
+        if($key=='custom-css' && count($css)>0){
+          foreach($css as $custom_css){
+            if($custom_css!='') array_push($array_css, $custom_css);
+          }
+        }
+        else if($css!='') {
+          array_push($array_css, $css);
+        }
+      }
+      if(count($array_css)>0){
+        $custom_classes = ' class="'.implode(' ', $array_css).'"';
+      }
+    }
+    $ret = '
+      <div'.$custom_classes.'>
+        '.$module_display.'
+      </div>';
 		return apply_filters('cfct-module-'.$this->id_base.'-html', $ret, $data);
 	}
 	

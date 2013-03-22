@@ -579,6 +579,13 @@ p.cancel {
 	white-space: nowrap;
 	z-index: 99;
 }
+.cfct-row-option {
+	height:24px;
+	left:-2px;
+	position: absolute;
+	top:20px;
+	width:24px;
+}
 .cfct-row-option ul.cfct-build-options-list {
     right: inherit;
     left: 0;
@@ -593,19 +600,65 @@ p.cancel {
 .cfct-row-option-block {
     display: none;
     background-color: #4E4E4E;
-    position: absolute;
-    left: 24px;
-    top: 0;
-    z-index: 10;
-    right: 0;
-    bottom: 0;
+    padding-bottom: 5px;
 }
-.cfct-row-option-block a.close {
+.cfct-row-option-block .close,
+.cfct-row-option-block .save {
+    float: none;
     cursor: pointer;
+    margin-right: 5px;
+    margin-left: 0;
+}
+.cfct-row-option-block .cfct-popup-advanced-actions {
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: 0 3px 10px #000000;
+}
+.cfct-custom-field-line {
+    padding-bottom: 5px;
+}
+.cfct-custom-field-line.action-buttons {
+    padding-top: 10px;
+    padding-bottom: 0;
+}
+.cfct-custom-main-label {
+    float: left;
+    line-height: 25px;
+    width: 120px;
+    vertical-align: inherit;
+}
+.cfct-custom-main-label.custom-bumper-label {
+    margin-top: 47px;
+}
+.cfct-custom-input-row {
+    margin-left: 130px;
+}
+.cfct-custom-input-row input[type="text"] {
+    width: 100%;
+}
+.cfct-custom-input-row .l-10 {
+    margin-left: 10px;
+}
+.cfct-custom-input-row label {
+    line-height: 25px;
+    margin-right: 5px;
+    vertical-align: inherit;
+}
+.cfct-custom-input-row input[type="checkbox"] {
+    margin-right: 5px;
+}
+.cfct-custom-bumper-table .center-text {
+    text-align: center;
+}
+.cfct-custom-bumper-table .right-text {
+    text-align: right;
 }
 .cfct-build-header-group-secondary .cfct-build-options-list {
 	margin-top: 3px;
 }
+.cfct-row-option .cfct-build-options-header:active,
 .cfct-build-options-active .cfct-build-options-header,
 .cfct-build-options-active .cfct-build-options-list {
 	background:url(../img/1b1b1b.png);
@@ -651,7 +704,7 @@ p.cancel {
 }
 .cfct-row-inner {
 	padding-left:24px;
-    position: relative;
+  position: relative;
 }
 .cfct-multi-module-row .cfct-row-inner {
 	padding-left: 0;
@@ -685,15 +738,6 @@ p.cancel {
 	top:0;
 	width:24px;
 }
-
-.cfct-row-option {
-	height:24px;
-	left:-2px;
-	position: absolute;
-	top:18px;
-	width:24px;
-}
-
 .ui-sortable .cfct-row-handle { /* Sortables activated */
 	cursor:move;
 }
@@ -793,11 +837,13 @@ p.cancel {
 	width: 49.999%;
 }
 /* Custom rows */
-.c4-1,
-.c4-2,
-.c4-3,
-.c4-4 {
-	width: 25%;
+.c10-012345,
+.c10-456789 {
+    width: 60%;
+}
+.c10-6789,
+.c10-0123 {
+    width: 40%;
 }
 
 /* =Modules
@@ -863,7 +909,10 @@ p.cancel {
 .c6-123 .cfct-block-modules,
 .c6-1234 .cfct-block-modules,
 .c6-12345 .cfct-block-modules,
-.c6-123456 .cfct-block-modules {
+.c6-123456 .cfct-block-modules,
+/* Start custom */
+.c10-012345 .cfct-block-modules,
+.c10-0123 .cfct-block-modules {
 	padding-left: 2px;
 }
 /* Extra padding for last column of modules */
@@ -876,7 +925,10 @@ p.cancel {
 .c6-456 .cfct-block-modules,
 .c6-3456 .cfct-block-modules,
 .c6-23456 .cfct-block-modules,
-.c6-123456 .cfct-block-modules {
+.c6-123456 .cfct-block-modules,
+/* Start custom */
+.c10-456789 .cfct-block-modules,
+.c10-6789 .cfct-block-modules {
 	padding-right: 2px;
 }
 

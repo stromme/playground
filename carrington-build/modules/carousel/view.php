@@ -18,12 +18,12 @@ if (!empty($items)) {
 <?php
 	foreach ($items as $key => $item) {
 		$title = !empty($item['link']) ? '<a href="'.$item['link'].'">'.$item['title'].'</a>' : $item['title'];
-
+		
 		$img = '<img alt="" src="'.$item['img_src'][0].'" width="'.$item['img_src'][1].'" height="'.$item['img_src'][2].'" class="car-img" />';
 		if ($car_opts['link_images']) {
 			$img = '<a href="'.$item['link'].'">'.$img.'</a>';
 		}
-
+		
 		echo '
 				<li class="car-entry" id="car-'.$data['module_id'].'-item-'.$key.'"'.(!empty($carousel_items_style) ? ' style="'.$carousel_items_style.'"' : '').'>
 					'.$img.'

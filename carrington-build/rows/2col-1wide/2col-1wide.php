@@ -25,7 +25,7 @@ if (!class_exists('cfct_row_ab_c')) {
 			parent::__construct($config);
 		}
 	}
-	cfct_build_register_row('cfct_row_ab_c');
+	//cfct_build_register_row('cfct_row_ab_c');
 }
 
 ?>

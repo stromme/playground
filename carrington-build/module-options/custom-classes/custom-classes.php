@@ -46,9 +46,59 @@ class cfct_module_option_custom_classes extends cfct_module_option {
 		if (!empty($data['custom-css'])) {
 			$value = implode(' ', array_map('esc_attr', $data['custom-css']));
 		}
-		
+
+    $bumper_left_selections = array(
+      array('value'=>'', 'text'=>'none'),
+      array('value'=>'bumper-left', 'text'=>'Normal'),
+      array('value'=>'bumper-left-medium', 'text'=>'Medium'),
+      array('value'=>'bumper-left-large', 'text'=>'Large'),
+    );
+    $bumper_right_selections = array(
+      array('value'=>'', 'text'=>'none'),
+      array('value'=>'bumper-right', 'text'=>'Normal'),
+      array('value'=>'bumper-right-medium', 'text'=>'Medium'),
+      array('value'=>'bumper-right-large', 'text'=>'Large'),
+    );
+    $bumper_top_selections = array(
+      array('value'=>'', 'text'=>'none'),
+      array('value'=>'bumper-top-small', 'text'=>'Small'),
+      array('value'=>'bumper-top', 'text'=>'Normal'),
+      array('value'=>'bumper-top-medium', 'text'=>'Medium'),
+      array('value'=>'bumper-top-large', 'text'=>'Large'),
+      array('value'=>'bumper-top-Xlarge', 'text'=>'Xlarge')
+    );
+    $bumper_bottom_selections = array(
+      array('value'=>'', 'text'=>'none'),
+      array('value'=>'bumper-bottom-small', 'text'=>'Small'),
+      array('value'=>'bumper-bottom', 'text'=>'Normal'),
+      array('value'=>'bumper-bottom-medium', 'text'=>'Medium'),
+      array('value'=>'bumper-bottom-large', 'text'=>'Large'),
+      array('value'=>'bumper-bottom-Xlarge', 'text'=>'Xlarge')
+    );
+    $bumper_left = ($data['bumper-left']!='')?$data['bumper-left']:'';
+    $bumper_right = ($data['bumper-right']!='')?$data['bumper-right']:'';
+    $bumper_top = ($data['bumper-top']!='')?$data['bumper-top']:'';
+    $bumper_bottom = ($data['bumper-bottom']!='')?$data['bumper-bottom']:'';
+    $bumper_left_options = '';
+    $bumper_right_options = '';
+    $bumper_top_options = '';
+    $bumper_bottom_options = '';
+    foreach($bumper_left_selections as $option){
+      $bumper_left_options .= '<option value="'.$option['value'].'"'.(($option['value']==$bumper_left)?' selected="selected"':'').'>'.$option['text'].'</option>';
+    }
+    foreach($bumper_right_selections as $option){
+      $bumper_right_options .= '<option value="'.$option['value'].'"'.(($option['value']==$bumper_right)?' selected="selected"':'').'>'.$option['text'].'</option>';
+    }
+    foreach($bumper_top_selections as $option){
+      $bumper_top_options .= '<option value="'.$option['value'].'"'.(($option['value']==$bumper_top)?' selected="selected"':'').'>'.$option['text'].'</option>';
+    }
+    foreach($bumper_bottom_selections as $option){
+      $bumper_bottom_options .= '<option value="'.$option['value'].'"'.(($option['value']==$bumper_bottom)?' selected="selected"':'').'>'.$option['text'].'</option>';
+    }
+
 		$html = '
-				<label for="">CSS Classes:</label> 
+		  <div class="cfct-custom-field-line">
+				<label for="" class="cfct-custom-main-label">CSS Classes:</label>
 				<div class="cfct-select-menu-wrapper">
 					<input type="text" class="'.$input_class.'" name="'.$this->get_field_name('custom-css').'" id="'.$this->get_field_id('custom-css').'" value="'.$value.'"  autocomplete="off" />';
 		if (is_array($dropdown_opts) && !empty($dropdown_opts)) {
@@ -66,7 +116,39 @@ class cfct_module_option_custom_classes extends cfct_module_option {
 		}
 		$html .= '
 				</div>
-			';
+			</div>
+    ';
+
+    $html .= '
+      <div class="cfct-custom-field-line">
+        <label for="" class="cfct-custom-main-label custom-bumper-label">Bumper:</label>
+        <table class="cfct-custom-bumper-table">
+          <tr>
+            <td class="right-text">Top</td>
+            <td>
+              <select name="'.$this->get_field_name('bumper-top').'" id="'.$this->get_field_id('bumper-top').'" >'.$bumper_top_options.'</select>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              Left <select name="'.$this->get_field_name('bumper-left').'" id="'.$this->get_field_id('bumper-left').'" >'.$bumper_left_options.'</select>
+            </td>
+            <td class="right-text">Right</td>
+            <td>
+              <select name="'.$this->get_field_name('bumper-right').'" id="'.$this->get_field_id('bumper-right').'" >'.$bumper_right_options.'</select>
+            </td>
+          </tr>
+          <tr>
+            <td class="right-text">Bottom</td>
+            <td>
+              <select name="'.$this->get_field_name('bumper-bottom').'" id="'.$this->get_field_id('bumper-bottom').'" >'.$bumper_bottom_options.'</select>
+            </td>
+            <td></td>
+          </tr>
+        </table>
+			</div>
+    ';
 		return $html;
 	}
 	
