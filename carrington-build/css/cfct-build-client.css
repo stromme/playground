@@ -29,7 +29,6 @@
 .c4-1234 .cfct-module,
 .c6-123456 .cfct-module,
 /* The custom one */
-.c4-1 .cfct-module,
 .c10-012345 .cfct-module,
 .c10-0123 .cfct-module {
 	margin-left: 0;
@@ -42,7 +41,6 @@
 .c4-1234 .cfct-module,
 .c6-123456 .cfct-module,
 /* The custom one */
-.c4-4 .cfct-module,
 .c10-456789 .cfct-module,
 .c10-6789 .cfct-module {
 	margin-right: 0;
@@ -67,12 +65,6 @@
 	width: 100%;
 }
 /* Custom rows */
-.c4-1,
-.c4-2,
-.c4-3,
-.c4-4 {
-	width: 25%;
-}
 .c10-012345,
 .c10-456789 {
     width: 60%;
@@ -117,7 +109,6 @@ Example usage: .grid.hideoverflow. */
 .hideoverflow .c4-23, .hideoverflow .c4-234,
 .hideoverflow .c4-34,
 /* The custom rows */
-.hideoverflow .c4-1, .hideoverflow .c4-2, .hideoverflow .c4-3, .hideoverflow .c4-4,
 .hideoverflow .c10-012345, .hideoverflow .c10-456789, .hideoverflow .c10-6789, .hideoverflow .c10-0123 {
 	overflow: hidden;
 }

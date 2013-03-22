@@ -224,11 +224,44 @@ class cfct_build_row {
 		
 		$html = $this->row_html(true);
 
+    $bumper_top_selections = array(
+      array('value'=>'', 'text'=>'none'),
+      array('value'=>'bumper-top-small', 'text'=>'Small'),
+      array('value'=>'bumper-top', 'text'=>'Normal'),
+      array('value'=>'bumper-top-medium', 'text'=>'Medium'),
+      array('value'=>'bumper-top-large', 'text'=>'Large'),
+      array('value'=>'bumper-top-Xlarge', 'text'=>'Xlarge')
+    );
+    $bumper_bottom_selections = array(
+      array('value'=>'', 'text'=>'none'),
+      array('value'=>'bumper-bottom-small', 'text'=>'Small'),
+      array('value'=>'bumper-bottom', 'text'=>'Normal'),
+      array('value'=>'bumper-bottom-medium', 'text'=>'Medium'),
+      array('value'=>'bumper-bottom-large', 'text'=>'Large'),
+      array('value'=>'bumper-bottom-Xlarge', 'text'=>'Xlarge')
+    );
+    $bumper_top_value = ($opts['bumper-top']!='')?$opts['bumper-top']:'';
+    $bumper_bottom_value = ($opts['bumper-bottom']!='')?$opts['bumper-bottom']:'';
+    $bumper_top_options = '';
+    $bumper_bottom_options = '';
+    foreach($bumper_top_selections as $option){
+      $bumper_top_options .= '<option value="'.$option['value'].'"'.(($option['value']==$bumper_top_value)?' selected="selected"':'').'>'.$option['text'].'</option>';
+    }
+    foreach($bumper_bottom_selections as $option){
+      $bumper_bottom_options .= '<option value="'.$option['value'].'"'.(($option['value']==$bumper_bottom_value)?' selected="selected"':'').'>'.$option['text'].'</option>';
+    }
+    $page_left_check = ($opts['page-left']!='')?' checked="checked"':'';
+    $page_right_check = ($opts['page-right']!='')?' checked="checked"':'';
+
 		$row_values = array(
 			'{class}' => $this->row_class(array(), 'admin'),
 			'{id}' => $opts['guid'],
       '{post-id}' => $_GET['post'],
-      '{classes}' => ($opts['classes']!='')?$opts['classes']:''
+      '{classes}' => ($opts['classes']!='')?$opts['classes']:'',
+      '{page-left-check}' => $page_left_check,
+      '{page-right-check}' => $page_right_check,
+      '{bumper-top-options}' => $bumper_top_options,
+      '{bumper-bottom-options}' => $bumper_bottom_options
 		);
 
 		if ($empty) {
@@ -360,12 +393,23 @@ class cfct_build_row {
 			$module_types,
 			$this
 		);
-		
+
+    $array_classes = array();
+    if($opts['classes']!='') array_push($array_classes, $opts['classes']);
+    if($opts['bumper-top']!='') array_push($array_classes, $opts['bumper-top']);
+    if($opts['bumper-bottom']!='') array_push($array_classes, $opts['bumper-bottom']);
+    if($opts['page-left']!='') array_push($array_classes, 'page-left');
+    if($opts['page-right']!='') array_push($array_classes, 'page-right');
+    $classes = '';
+    if(count($array_classes)>0){
+      $classes = ' class="'.implode(' ', $array_classes).'"';
+    }
+
 		// build row HTML
 		$row_values = array(
 			'{class}' => $this->row_class($generated_row_classes),
 			'{id}' => $opts['guid'],
-      '{classes}' => ($opts['classes']!='')?' class="'.$opts['classes'].'"':''
+      '{classes}' => $classes
 		);
 		
 		$row_values['{class}'] = apply_filters(
@@ -406,6 +450,43 @@ class cfct_build_row {
 			$html = '
 				<div id="{id}" class="{class}" data-row-id="{id}" data-post-id="{post-id}">
 					<div class="cfct-row-inner">
+					  <div class="cfct-row-option-block">
+              <div class="cfct-popup-advanced-actions">
+                <div class="cfct-custom-field-line">
+                  <label class="cfct-custom-main-label">CSS Classes:</label>
+                  <div class="cfct-custom-input-row">
+                    <input type="text" class="no-button cfct-custom-classes" data-old-value="{classes}" value="{classes}" autocomplete="off">
+                  </div>
+                </div>
+                <div class="cfct-custom-field-line">
+                  <label class="cfct-custom-main-label">Horizontal padding:</label>
+                  <div class="cfct-custom-input-row">
+                    <input id="page-left-{id}" type="checkbox" value="1" class="cfct-custom-page-left"{page-left-check}></input><label for="page-left-{id}">page-left</label>
+                    <input id="page-right-{id}" type="checkbox" value="1" class="cfct-custom-page-right l-10"{page-left-check}></input><label for="page-right-{id}">page-right</label>
+                  </div>
+                </div>
+                <div class="cfct-custom-field-line">
+                  <label class="cfct-custom-main-label">Vertical bumper:</label>
+                  <div class="cfct-custom-input-row">
+                    <label for="bumper-top-{id}">Top</label>
+                    <select id="bumper-top-{id}" class="cfct-custom-bumper-top">
+                      {bumper-top-options}
+                    </select>
+                    <label for="bumper-bottom-{id}" class="l-10">Bottom</label>
+                    <select id="bumper-bottom-{id}" class="cfct-custom-bumper-bottom">
+                      {bumper-bottom-options}
+                    </select>
+                  </div>
+                </div>
+                <div class="cfct-custom-field-line action-buttons">
+                  <label class="cfct-custom-main-label">&nbsp;</label>
+                  <div class="cfct-custom-input-row">
+                    <button type="button" class="button button-primary save">Save</button>
+                    <button type="button" class="button close">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 						<div title="'.__('Drag and drop to reorder', 'carrington-build').'" class="'.$this->defaults['row_handle_class'].'">
 							<a class="'.$this->defaults['remove_row_class'].'" href="#">'.__('Remove', 'carrington-build').'</a>
 						</div>
@@ -414,16 +495,6 @@ class cfct_build_row {
               <div class="cfct-build-row-options">
                 <h2 class="cfct-build-options-header"><a class="module-options-button">Advanced Options</a></h2>
                 <ul class="cfct-build-options-list"><a href="#">Set CSS Classes</a></ul>
-              </div>
-            </div>
-            <div class="cfct-row-option-block">
-              <div class="cfct-popup-advanced-actions">
-                <label for="">CSS Classes:</label>
-                <div class="cfct-select-menu-wrapper">
-                  <input type="text" class="no-button cfct-custom-classes" data-old-value="{classes}" value="{classes}" autocomplete="off">
-                </div>
-                <button type="button" class="button button-primary save">Save</button>
-                <button type="button" class="button close">Cancel</button>
               </div>
             </div>
 					</div>

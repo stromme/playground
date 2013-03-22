@@ -274,32 +274,6 @@ class cfct_block_c6_3456 extends cfct_block {
 	}
 }
 
-/* The custom rows 4 columns */
-class cfct_block_c4_1 extends cfct_block {
-	public function __construct($classes = array()) {
-		$this->add_classes(array('c4-1'));
-		parent::__construct($classes);
-	}
-}
-class cfct_block_c4_2 extends cfct_block {
-	public function __construct($classes = array()) {
-		$this->add_classes(array('c4-2'));
-		parent::__construct($classes);
-	}
-}
-class cfct_block_c4_3 extends cfct_block {
-	public function __construct($classes = array()) {
-		$this->add_classes(array('c4-3'));
-		parent::__construct($classes);
-	}
-}
-class cfct_block_c4_4 extends cfct_block {
-	public function __construct($classes = array()) {
-		$this->add_classes(array('c4-4'));
-		parent::__construct($classes);
-	}
-}
-
 /* Multi blocks */
 class cfct_multi_block extends cfct_block {
 	public function __construct($classes) {

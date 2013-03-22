@@ -481,7 +481,6 @@ function cfct_upgrade_postmeta() {
 				'row-abc' => 'cfct_row_abc',
 				'row-ab-c' => 'cfct_row_ab_c',
 				'row-a-bc' => 'cfct_row_a_bc',
-				'row-abc' => 'cfct_row_a_bc',
 				'two-col-float-left' => 'cfct_row_two_col_float_left',
 				'two-col-float-right' => 'cfct_row_two_col_float_right',
 				'cfct-row-stacked-example' => 'cfct_row_stacked_example'

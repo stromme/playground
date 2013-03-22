@@ -885,8 +885,7 @@ class cfct_build_admin extends cfct_build_common {
 			'guid' => $guid,
 			'name' => $name,
 			'description' => $description,
-			'template' => $template,
-      'class' => ''
+			'template' => $template
 		);
 
 		if ($new) {
@@ -995,10 +994,17 @@ class cfct_build_admin extends cfct_build_common {
 		$post_data = $this->get_postmeta($args['post_id']);
 		$row_id = $args['id'];
 		$classes = $args['classes'];
+		$page_left = $args['page-left'];
+		$page_right = $args['page-right'];
+		$bumper_top = $args['bumper-top'];
+		$bumper_bottom = $args['bumper-bottom'];
 		if ($this->template->set_template($post_data['template'])) {
-			$this->template->update_row_class(array('id'=>$row_id));
 			$post_data['template'] = $this->template->get_template();
       $post_data['template']['rows'][$row_id]['classes'] = $classes;
+      $post_data['template']['rows'][$row_id]['page-left'] = $page_left;
+      $post_data['template']['rows'][$row_id]['page-right'] = $page_right;
+      $post_data['template']['rows'][$row_id]['bumper-top'] = $bumper_top;
+      $post_data['template']['rows'][$row_id]['bumper-bottom'] = $bumper_bottom;
 
 			if (!$this->set_postmeta($args['post_id'], $post_data)) {
 				throw new cfct_row_exception(__('Could not save postmeta for post on update row class.','carrington-build').' (post_id: '.$args['post_id'].')');
@@ -1125,6 +1131,11 @@ class cfct_build_admin extends cfct_build_common {
 			parse_str($args['data'], $data);
 			$data = apply_filters('cfct_build_save_module_data', $data, $module_type);
 			$save = $module->_update($data, $old_data);
+
+      $save['cfct-module-options']['custom-classes']['bumper-left'] = $data['cfct-module-options']['custom-classes']['bumper-left'];
+      $save['cfct-module-options']['custom-classes']['bumper-right'] = $data['cfct-module-options']['custom-classes']['bumper-right'];
+      $save['cfct-module-options']['custom-classes']['bumper-top'] = $data['cfct-module-options']['custom-classes']['bumper-top'];
+      $save['cfct-module-options']['custom-classes']['bumper-bottom'] = $data['cfct-module-options']['custom-classes']['bumper-bottom'];
 
 			if ($save !== false) {
 				// make sure that these next two are expected values and weren't munged during save

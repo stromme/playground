@@ -126,13 +126,6 @@ class cfct_build_template implements Iterator {
 		}
 		return $this->template['rows'] = array_merge(array_flip($new_order), $this->template['rows']);
 	}
-
-	public function update_row_class(array $args) {
-		//if (count($new_order) != count($this->template['rows'])) {
-//			throw new cfct_row_exception('Reorder row count does not match current row count.');
-//		}
-		return $this->template['rows'];
-	}
 	
 	public function have_rows() {
 		return (is_array($this->template['rows']) && count($this->template['rows']) > 0);
