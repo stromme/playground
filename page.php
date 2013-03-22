@@ -20,3 +20,5 @@ the_content();
 get_footer();
 
 ?>
+<? get_template_part('templates/modal', 'review'); ?>
+<? get_template_part('templates/modal', 'lead'); ?>

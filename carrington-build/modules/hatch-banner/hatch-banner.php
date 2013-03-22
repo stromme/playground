@@ -2,10 +2,6 @@
 
 if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module')) {
 	class cfct_module_hatch_banner extends cfct_build_module {
-		protected $context_excludes = array(
-			'multi-module'
-		);
-
 		public function __construct() {
 			$opts = array(
 				'description' => __('Display a Banner', 'carrington-build'),
@@ -24,17 +20,249 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
 		 * @return void
 		 */
 		public function display($data) {
-			return $this->load_view($data);
+      $banner_type = isset($data[$this->get_field_id('type')]) ? $data[$this->get_field_id('type')] : '';
+      $id = 'banner-'.$data['module_id'];
+      $type = $data[$this->get_field_id('type')];
+      $title = '';
+      $author = '';
+      $author_location = '';
+      $image = '';
+      $js_init = '';
+      $js_data = array();
+      if($banner_type=='static'){
+        $image_id = ($data[$this->get_field_id('post_image')]!='')?$data[$this->get_field_id('post_image')]:(($data[$this->get_field_id('global_image')])?$data[$this->get_field_id('global_image')]:'');
+        $title = $data[$this->get_field_id('title')];
+        $author = $data[$this->get_field_id('author')];
+        $author_location = $data[$this->get_field_id('author-location')];
+        if (!empty($image_id) && $_img = wp_get_attachment_image_src($image_id, 'large', false)) {
+          $image = $_img[0];
+        }
+        $js_single_data = new stdClass();
+        $js_single_data->title = $title;
+        $js_single_data->author = $author;
+        $js_single_data->author_location = $author_location;
+        $js_single_data->images = array($image);
+        array_push($js_data, $js_single_data);
+      }
+      else {
+        global $post;
+        $post_type = $post->post_type;
+        $args = array(
+          'numberposts' => 3,
+          'post_type'   => 'showroom',
+          'post_status' => 'any',
+          'post_parent' => null,
+          'order'       => 'ASC'
+        );
+        if($post_type=='page'){
+          $posts_args = $args;
+          $posts_args['meta_key'] = 'featured';
+          $posts_args['orderby'] = 'featured';
+          $projects = get_posts($posts_args);
+
+          if(count($projects)<=0){
+            $projects = get_posts($args);
+          }
+        }
+        else {
+          $posts_args = $args;
+          $posts_args['meta_key'] = 'pinned';
+          $posts_args['orderby'] = 'pinned';
+          $projects = get_posts($args);
+          if(count($projects)<=0){
+            $projects = get_posts($args);
+          }
+        }
+
+        if(count($projects)>0){
+          $i = 0;
+          foreach($projects as $project){
+            $cust_id = get_post_meta($project->ID, 'customer_id', true);
+            $favorite = get_post_meta($project->ID, 'favorite', true);
+            $name = '';
+            $city = '';
+            $args = array(
+              'numberposts' => -1,
+              'post_type' => 'attachment',
+              'post_parent' => $project->ID
+            );
+            $attachments = get_posts($args);
+            $args = array(
+              'numberposts' => -1,
+              'post_type' => 'videos',
+              'post_parent' => $project->ID
+            );
+            $videos = get_posts($args);
+            if(count($attachments)>0){
+              $medias = $attachments;
+              if(count($videos)>0)
+                array_merge($medias, $videos);
+            }
+            else {
+              $medias = $videos;
+            }
+            $selected_medias = array();
+            // Add favorite first
+            foreach($medias as $media){
+              if($media->ID==$favorite){
+                array_push($selected_medias, $media);
+                break;
+              }
+            }
+            foreach($medias as $media){
+              if($media->ID!=$favorite){
+                array_push($selected_medias, $media);
+              }
+            }
+            $project_media = array();
+            foreach($selected_medias as $media){
+              if($media->post_type=='videos'){
+                $video_image = get_post_meta($media->ID, 'video_thumbnail', true);
+                array_push($project_media, $video_image);
+              }
+              else {
+                $_img = wp_get_attachment_image_src($media->ID, 'large', false);
+                array_push($project_media, $_img[0]);
+              }
+            }
+            if($cust_id!=''){
+              $contact = get_post($cust_id);
+              $first_name = get_post_meta($contact->ID, 'first_name', true);
+              $last_name = get_post_meta($contact->ID, 'last_name', true);
+              $city = get_post_meta($contact->ID, 'city', true);
+              $company = get_post_meta($contact->ID, 'company', true);
+              $name = ($company!='')?
+                        $company:
+                        (($first_name!='' && $last_name!='')?
+                          $first_name.' '.$last_name:
+                          (($first_name!='')?
+                            $first_name:
+                            (($last_name!='')?$last_name:'')));
+            }
+            if($i==0){
+              $title = $project->post_content;
+              $author = $name;
+              $author_location = $city;
+              $image = $project_media[0];
+            }
+            $i++;
+            $js_single_data = new stdClass();
+            $js_single_data->title = $project->post_content;
+            $js_single_data->author = $name;
+            $js_single_data->author_location = $city;
+            $js_single_data->images = $project_media;
+            array_push($js_data, $js_single_data);
+          }
+        }
+        $js_id = 'data_'.str_replace('-','_',$id);
+        $js_init = '
+        <script type="text/javascript">
+          var '.$js_id.' = '.json_encode($js_data).';
+          $(document).ready(function(){
+            $(".carousel-'.$id.'").carousel();
+            $(".write-review").unbind("click");
+            $(".write-review").click(function(e){
+              e.preventDefault();
+              $("#new-review").modal();
+            });
+          });
+        </script>';
+      }
+			return $this->load_view($data, compact('id','js_data','js_init'));
 		}
 		
 // Admin
 
 		public function text($data) {
-			return 'Hatch Banner';
+      $banner_type = isset($data[$this->get_field_id('type')]) ? $data[$this->get_field_id('type')] : '';
+			return ($banner_type=='smart')?'Smart banner':'Static banner';
 		}
 
 		public function admin_form($data) {
-			return '';
+      $banner_types = apply_filters(
+        'cfct-module-hatch-banner-types',
+        array(
+          'smart' => 'Smart Banner',
+          'static' => 'Static Banner',
+        )
+      );
+      $banner_type = isset($data[$this->get_field_id('type')]) ? $data[$this->get_field_id('type')] : '';
+      $banner_type_selection = '';
+      foreach ($banner_types as $val => $text) {
+        $banner_type_selection .= '
+          <option value="'.esc_attr($val).'" '.selected($val, $banner_type, false).'>'.esc_html($text).'</option>
+        ';
+      }
+			// basic info
+			$html = '
+				<!-- basic info -->
+				<div id="'.$this->id_base.'-content-info">
+
+					<!-- inputs -->
+					<div id="'.$this->id_base.'-content-fields">
+            <div>
+              <label for="'.$this->get_field_id('type').'">'.__('Banner Type').'</label>
+              <select name="'.$this->get_field_name('type').'" id="'.$this->get_field_id('type').'">'.
+              $banner_type_selection.'
+              </select>
+            </div>
+            <div id="'.$this->id_base.'-static-fields" style="'.(($banner_type=='static')?'display:block;':'display:none;').'">
+            <div>
+              <label for="'.$this->get_field_id('title').'">'.__('Title').'</label>
+              <input type="text" name="'.$this->get_field_name('title').'" id="'.$this->get_field_id('title').'" value="'.(!empty($data[$this->get_field_name('title')]) ? esc_html($data[$this->get_field_name('title')]) : '').'" />
+            </div>
+            <div>
+              <label for="'.$this->get_field_id('author').'">'.__('Author').'</label>
+              <input type="text" name="'.$this->get_field_name('author').'" id="'.$this->get_field_id('author').'" value="'.(!empty($data[$this->get_field_name('author')]) ? esc_html($data[$this->get_field_name('author')]) : '').'" />
+            </div>
+            <div>
+              <label for="'.$this->get_field_id('author-location').'">'.__('Author Location').'</label>
+              <input type="text" name="'.$this->get_field_name('author-location').'" id="'.$this->get_field_id('author-location').'" value="'.(!empty($data[$this->get_field_name('author-location')]) ? esc_html($data[$this->get_field_name('author-location')]) : '').'" />
+            </div>
+          </div>
+          <!-- /inputs -->
+        </div>
+        <!-- / basic info -->
+        <div class="clear" />
+      ';
+
+      // tabs
+      $image_selector_tabs = array(
+        $this->id_base.'-post-image-wrap' => __('Post Images', 'carrington-build'),
+        $this->id_base.'-global-image-wrap' => __('All Images', 'carrington-build')
+      );
+
+      // set active tab
+      $active_tab = $this->id_base.'-post-image-wrap';
+      if (!empty($data[$this->get_field_name('global_image')])) {
+        $active_tab = $this->id_base.'-global-image-wrap';
+      }
+
+      $html .= '
+        <!-- image selector tabs -->
+        <div id="'.$this->id_base.'-image-selectors" style="'.(($banner_type=='static')?'display:block;':'display:none;').'">
+          <!-- tabs -->
+          '.$this->cfct_module_tabs($this->id_base.'-image-selector-tabs', $image_selector_tabs, $active_tab).'
+          <!-- /tabs -->
+
+          <div class="cfct-module-tab-contents">
+            <!-- select an image from this post -->
+            <div id="'.$this->id_base.'-post-image-wrap" '.(empty($active_tab) || $active_tab == $this->id_base.'-post-image-wrap' ? ' class="active"' : null).'>
+              '.$this->post_image_selector($data).'
+            </div>
+            <!-- / select an image from this post -->
+
+            <!-- select an image from media gallery -->
+            <div id="'.$this->id_base.'-global-image-wrap" '.($active_tab == $this->id_base.'-global-image-wrap' ? ' class="active"' : null).'>
+              '.$this->global_image_selector($data).'
+            </div>
+            <!-- /select an image from media gallery -->
+          </div>
+        </div>
+        <!-- / image selector tabs -->
+      ';
+
+			return $html;
 		}
 		
 		public function update($new, $old) {
@@ -42,13 +270,20 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
 		}
 		
 		public function css() {
-			return preg_replace('/^(\t){4}/m', '', '
-			');
+			return '';
 		}
 		
 		public function admin_css() {
-			return preg_replace('/^(\t){4}/m', '', '
-			');
+      return '
+        #'.$this->id_base.'-content-fields {
+          width: 440px;
+          margin-right: 20px;
+          float: left;
+        }
+        #'.$this->id_base.'-image-selectors div#'.$this->id_base.'-image-selector-tabs {
+          margin-top: 15px;
+        }
+      ';
 		}
 		
 		/**
@@ -58,16 +293,111 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
 		 * @return string
 		 */
 		public function admin_js() {
-			$js_base = str_replace('-', '_', $this->id_base);
-			$js = preg_replace('/^(\t){4}/m', '', '
-      ');
-			return $js;
+      $js = '
+        cfct_builder.addModuleLoadCallback("'.$this->id_base.'", function() {
+          '.$this->cfct_module_tabs_js().'
+          $("#'.$this->get_field_id('type').'").change(function(){
+            var fields = $("#'.$this->id_base.'-static-fields");
+            var image_field = $("#'.$this->id_base.'-image-selectors");
+
+            if($(this).val()=="static"){
+              fields.slideDown("fast", function(){
+                image_field.slideDown("fast");
+              });
+            }
+            else {
+              fields.slideUp("fast", function(){
+                image_field.slideUp("fast");
+              });
+            }
+          });
+        });
+
+        cfct_builder.addModuleSaveCallback("'.$this->id_base.'", function() {
+          // find the non-active image selector and clear his value
+          $("#'.$this->id_base.'-image-selectors .cfct-module-tab-contents>div:not(.active)").find("input:hidden").val("");
+          return true;
+        });
+      ';
+      $js .= $this->global_image_selector_js('global_image', array('direction' => 'horizontal'));
+      return $js;
 		}
 		
 		public function js() {
 			return '
 			';
 		}
+
+    function post_image_selector($data = false) {
+      if (isset($_POST['args'])) {
+        $ajax_args = cfcf_json_decode(stripslashes($_POST['args']), true);
+      }
+      else {
+        $ajax_args = null;
+      }
+
+      $selected = 0;
+      if (!empty($data[$this->get_field_id('post_image')])) {
+        $selected = $data[$this->get_field_id('post_image')];
+      }
+
+      $args = array(
+        'field_name' => 'post_image',
+        'selected_image' => $selected,
+        'post_id' => isset($ajax_args['post_id']) ? $ajax_args['post_id'] : null,
+        'select_no_image' => true,
+        'suppress_size_selector' => true
+      );
+
+      return $this->image_selector('post', $args);
+    }
+
+    function global_image_selector($data = false) {
+      $selected = 0;
+      if (!empty($data[$this->get_field_id('global_image')])) {
+        $selected = $data[$this->get_field_id('global_image')];
+      }
+
+      $args = array(
+        'field_name' => 'global_image',
+        'selected_image' => $selected,
+        'suppress_size_selector' => true
+      );
+
+      return $this->image_selector('global', $args);
+    }
+
+  // Content Move Helpers
+
+    protected $reference_fields = array('global_image', 'post_image', 'featured_image');
+
+    public function get_referenced_ids($data) {
+      $references = array();
+      foreach ($this->reference_fields as $field) {
+        $id = $this->get_data($field, $data);
+        if (!is_null($id)) {
+          $references[$field] = array(
+            'type' => 'post_type',
+            'type_name' => 'attachment',
+            'value' => $id
+          );
+        }
+      }
+
+      return $references;
+    }
+
+    public function merge_referenced_ids($data, $reference_data) {
+      if (!empty($reference_data) && !empty($data)) {
+        foreach ($this->reference_fields as $field) {
+          if (isset($data[$this->gfn($field)])) {
+            $data[$this->gfn($field)] = $reference_data[$field]['value'];
+          }
+        }
+      }
+
+      return $data;
+    }
 	}
 	cfct_build_register_module('cfct_module_hatch_banner');
 }

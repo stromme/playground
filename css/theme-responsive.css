@@ -942,6 +942,7 @@
   .banner-photo img {
     max-width: 600px;
     max-height: 450px;
+    height: 450px;
   }
   .banner-review blockquote {
     height: 394px;
@@ -1292,6 +1293,12 @@
   .navbar-static .navbar-inner {
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .banner-photo img {
+    height: auto !important;
+  }
+  .banner.carousel .carousel-indicators {
+    display: none;
   }
 }
 @media (min-width: 980px) {

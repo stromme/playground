@@ -5185,12 +5185,12 @@ a.badge:focus {
   height: 10px;
   margin-left: 5px;
   text-indent: -999px;
-  background-color: #ccc;
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: #ddd;
+  /*background-color: rgba(255, 255, 255, 0.25);*/
   border-radius: 5px;
 }
 .carousel-indicators .active {
-  background-color: #fff;
+  background-color: #0088cc;
 }
 .carousel-caption {
   position: absolute;
@@ -5851,13 +5851,26 @@ nav-callout .notch {
   -webkit-border-top-right-radius: 6px;
   -moz-border-radius-topright: 6px;
   border-top-right-radius: 6px;
+  margin-bottom: 0;
+}
+.banner .carousel-indicators {
+  right: 180px;
+  top: 275px;
+}
+.banner .carousel-indicators li {
+  cursor: pointer;
 }
 .banner-photo {
   display: table-cell;
+  background-color: #ffffff;
+  -webkit-border-top-left-radius: 6px;
+  -moz-border-radius-topleft: 6px;
+  border-top-left-radius: 6px;
 }
 .banner-photo img {
   max-width: 480px;
   max-height: 360px;
+  height: 360px;
   -webkit-border-top-left-radius: 6px;
   -moz-border-radius-topleft: 6px;
   border-top-left-radius: 6px;
@@ -5866,6 +5879,7 @@ nav-callout .notch {
   position: relative;
   display: table-cell;
   vertical-align: middle;
+  width: 100%;
   background-color: #fcfcfc;
   background-image: -moz-linear-gradient(top, #ffffff, #f8f8f8);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f8f8f8));

@@ -123,7 +123,7 @@ if (!class_exists('cfct_module_carousel') && class_exists('cfct_build_module')) 
 	
 			return $this->load_view($data, compact('items', 'control_layout_order', 'image_size', 'car_opts', 'js_init'));
 		}
-		
+
 // Admin
 
 		public function text($data) {
