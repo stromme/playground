@@ -1297,7 +1297,7 @@
   .banner-photo img {
     height: auto !important;
   }
-  .banner.carousel .carousel-indicators {
+  .banner.carousel-indicators {
     display: none;
   }
 }
