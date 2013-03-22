@@ -30,7 +30,7 @@ get_header();
 						<div class="favorite-photo">
 							<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
 							<div>
-								<a href="#"><i class="icon-facebook-2x"></i></a>
+								<a href="#" ><i class="icon-facebook-2x"></i></a>
 								<a href="#"><i class="icon-twitter-2x"></i></a>
 							</div>
 						</div>
