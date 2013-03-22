@@ -252,12 +252,13 @@ class cfct_build_row {
     }
     $page_left_check = ($opts['page-left']!='')?' checked="checked"':'';
     $page_right_check = ($opts['page-right']!='')?' checked="checked"':'';
+    $classes = ($opts['classes']!='')?$opts['classes']:'';
 
 		$row_values = array(
 			'{class}' => $this->row_class(array(), 'admin'),
 			'{id}' => $opts['guid'],
       '{post-id}' => $_GET['post'],
-      '{classes}' => ($opts['classes']!='')?$opts['classes']:'',
+      '{classes}' => $classes,
       '{page-left-check}' => $page_left_check,
       '{page-right-check}' => $page_right_check,
       '{bumper-top-options}' => $bumper_top_options,

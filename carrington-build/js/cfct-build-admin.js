@@ -1544,7 +1544,7 @@
 			// actions menu action
 			$('.cfct-build-row-options .cfct-build-options-header a')
       .live('mousedown', function(e){e.preventDefault();return false;})
-      .live('click', function(e) {
+      .live('click', function() {
         cfct_builder.rowOptionsSliderShowHide($(this));
 				return false;
 			});
@@ -1591,13 +1591,13 @@
 				return false;
 			});
 
-// take the link ID as a reference to the ID of the item that needs to be displayed
-$('.cfct-build-row-options .cfct-build-options-list a').live('click', function(e) {
-  e.preventDefault();
-  cfct_builder.toggleRowOptions($(e.target));
-  cfct_builder.rowOptionsSliderShowHide($(e.target));
-  return false;
-});
+      // take the link ID as a reference to the ID of the item that needs to be displayed
+      $('.cfct-build-row-options .cfct-build-options-list a').live('click', function(e) {
+        e.preventDefault();
+        cfct_builder.toggleRowOptions($(e.target));
+        cfct_builder.rowOptionsSliderShowHide($(e.target));
+        return false;
+      });
 			
 			$('div#cfct-popup-advanced-actions a.close').live('click', function() {
 				cfct_builder.moduleOptionsSlideClose();

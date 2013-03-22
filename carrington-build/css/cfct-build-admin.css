@@ -658,7 +658,8 @@ p.cancel {
 .cfct-build-header-group-secondary .cfct-build-options-list {
 	margin-top: 3px;
 }
-.cfct-build-options-header:active,
+.cfct-row-option .cfct-build-options-header:active,
+.cfct-build-options-active .cfct-build-options-header,
 .cfct-build-options-active .cfct-build-options-list {
 	background:url(../img/1b1b1b.png);
 }
@@ -737,7 +738,6 @@ p.cancel {
 	top:0;
 	width:24px;
 }
-
 .ui-sortable .cfct-row-handle { /* Sortables activated */
 	cursor:move;
 }
