@@ -11,23 +11,12 @@
 
 <div id="<?=$id?>" class="<?=(count($js_data)>1)?'carousel-'.$id.' ':''?>banner">
   <?php if(count($js_data)>1){ ?>
-  <ol class="carousel-indicators">
-    <?php
-      $i = 0;
-      foreach($js_data as $d){
-    ?>
-    <li data-target="#<?=$id?>" data-slide-to="<?=$i?>"<?=($i==0)?' class="active"':''?>></li>
-    <?php
-        $i++;
-      }
-    ?>
-  </ol>
   <div class="carousel-inner">
   <?php } ?>
     <?php
       $i = 0;
       foreach($js_data as $d){
-        if(count($js_data)>0){
+        if(count($js_data)>1){
     ?>
     <div class="<?=($i==0)?'active ':''?>item">
       <?php } ?>
@@ -36,7 +25,7 @@
       </div>
       <div class="banner-review">
         <blockquote>
-          <p>"<span id="title-<?=$id?>"><?=$d->title?></span>"</p>
+          <p>"<span id="description-<?=$id?>"><?=$d->description?></span>"</p>
           <?php if($d->author!='' || $d->author_location!=''){ ?>
             <?php if($d->author!=''){ ?>
             <p class="banner-author"><cite id="author-<?=$id?>"><?=$d->author?></cite><?php
@@ -56,6 +45,19 @@
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li-->
           </ul>
         </div>
+        <?php if(count($js_data)>1){ ?>
+        <ol class="carousel-indicators">
+          <?php
+            $ic = 0;
+            foreach($js_data as $d){
+          ?>
+          <li data-target="#<?=$id?>" data-slide-to="<?=$ic?>"<?=($ic==$i)?' class="active"':''?>></li>
+          <?php
+              $ic++;
+            }
+          ?>
+        </ol>
+        <?php } ?>
       </div>
       <?php if(count($js_data)>1){ ?>
     </div>

@@ -1298,7 +1298,7 @@
     height: auto !important;
   }
   .banner .carousel-indicators {
-    display: none;
+    display: none !important;
   }
 }
 @media (min-width: 980px) {

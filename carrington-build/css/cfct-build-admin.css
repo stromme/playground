@@ -413,6 +413,9 @@ input.cfct-button-dark[type=button]:active {
 .cfct-module-form input.cfct-input-short {
 	width: 30%;
 }
+.cfct-module-form input[type="text"].width-small {
+    width: 100px;
+}
 /* MISC */
 p.cancel {
 	margin-top: -12px;

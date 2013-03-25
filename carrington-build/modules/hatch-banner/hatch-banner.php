@@ -21,24 +21,21 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
 		 */
 		public function display($data) {
       $banner_type = isset($data[$this->get_field_id('type')]) ? $data[$this->get_field_id('type')] : '';
+      $interval = isset($data[$this->get_field_id('interval')]) ? intval($data[$this->get_field_id('interval')]) : 2000;
       $id = 'banner-'.$data['module_id'];
-      $type = $data[$this->get_field_id('type')];
-      $title = '';
-      $author = '';
-      $author_location = '';
       $image = '';
       $js_init = '';
       $js_data = array();
       if($banner_type=='static'){
         $image_id = ($data[$this->get_field_id('post_image')]!='')?$data[$this->get_field_id('post_image')]:(($data[$this->get_field_id('global_image')])?$data[$this->get_field_id('global_image')]:'');
-        $title = $data[$this->get_field_id('title')];
+        $description = $data[$this->get_field_id('description')];
         $author = $data[$this->get_field_id('author')];
         $author_location = $data[$this->get_field_id('author-location')];
         if (!empty($image_id) && $_img = wp_get_attachment_image_src($image_id, 'large', false)) {
           $image = $_img[0];
         }
         $js_single_data = new stdClass();
-        $js_single_data->title = $title;
+        $js_single_data->description = $description;
         $js_single_data->author = $author;
         $js_single_data->author_location = $author_location;
         $js_single_data->images = array($image);
@@ -140,18 +137,19 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
                             (($last_name!='')?$last_name:'')));
             }
             if($i==0){
-              $title = $project->post_content;
+              $description = $project->post_content;
               $author = $name;
               $author_location = $city;
               $image = $project_media[0];
             }
-            $i++;
+
             $js_single_data = new stdClass();
-            $js_single_data->title = $project->post_content;
+            $js_single_data->description = $project->post_content;
             $js_single_data->author = $name;
             $js_single_data->author_location = $city;
             $js_single_data->images = $project_media;
             array_push($js_data, $js_single_data);
+            $i++;
           }
         }
         $js_id = 'data_'.str_replace('-','_',$id);
@@ -159,12 +157,74 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
         <script type="text/javascript">
           var '.$js_id.' = '.json_encode($js_data).';
           $(document).ready(function(){
-            $(".carousel-'.$id.'").carousel();
+            var carousel = $(".carousel-'.$id.'");
             $(".write-review").unbind("click");
             $(".write-review").click(function(e){
               e.preventDefault();
               $("#new-review").modal();
             });
+            var current_item_id = 0;
+            var current_image_idx = 0;
+            var timeout = '.$interval.';
+            var interval = setTimeout(function(){
+              cycle_image();
+            }, timeout);
+            $(".carousel-indicators li", carousel).click(function(){
+              current_item_id = parseInt($(this).attr("data-slide-to"));
+              current_image_idx = 0;
+              carousel.carousel(current_item_id);
+              var items = $(".item", carousel);
+              items.removeAttr("style");
+              var active_item = items[current_item_id];
+              active_image = $(".banner-photo img", active_item);
+              active_image.attr("src", '.$js_id.'[current_item_id].images[current_image_idx]);
+              active_indicators = $(".carousel-indicators li", active_item);
+              $(active_indicators[current_item_id]).addClass("active");
+              clearTimeout(interval);
+              interval = setTimeout(function(){
+                cycle_image();
+              }, timeout);
+            });
+            function cycle_image(){
+              clearTimeout(interval);
+              var items = $(".item", carousel);
+              var active_item;
+              var active_image;
+              current_image_idx++;
+              if(current_image_idx>='.$js_id.'[current_item_id].images.length){
+                current_item_id++;
+                current_image_idx = 0;
+                if(current_item_id>='.$js_id.'.length){
+                  current_item_id = 0;
+                }
+                active_item = items[current_item_id];
+                active_image = $(".banner-photo img", active_item);
+                active_image.attr("src", '.$js_id.'[current_item_id].images[current_image_idx]);
+                $(active_item).css({"top":0,"position":"absolute","z-index":1});
+                $(active_item).fadeIn("fast", function(){
+                  $(active_item).removeAttr("style");
+                  carousel.carousel(current_item_id);
+                  active_indicators = $(".carousel-indicators li", active_item);
+                  $(active_indicators[current_item_id]).addClass("active");
+                  interval = setTimeout(function(){
+                    cycle_image();
+                  }, timeout);
+                });
+              }
+              else {
+                active_item = items[current_item_id];
+                active_image = $(".banner-photo img", active_item);
+                active_image.fadeOut("fast", function(){
+                  active_image.attr("src", '.$js_id.'[current_item_id].images[current_image_idx]);
+                  active_image.fadeIn("fast", function(){
+                    var width = $(".banner-review", active_item).outerWidth();
+                    interval = setTimeout(function(){
+                      cycle_image();
+                    }, timeout);
+                  });
+                });
+              }
+            }
           });
         </script>';
       }
@@ -206,24 +266,31 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
               $banner_type_selection.'
               </select>
             </div>
+            <div id="'.$this->id_base.'-carousel-interval" style="'.(($banner_type=='static')?'display:none;':'display:block;').'">
+              <label for="'.$this->get_field_id('interval').'">'.__('Carousel interval (milliseconds)').'</label>
+              <div>
+                <input type="text" name="'.$this->get_field_name('interval').'" id="'.$this->get_field_id('interval').'" value="'.(!empty($data[$this->get_field_name('interval')]) ? esc_html($data[$this->get_field_name('interval')]) : '2000').'" class="width-small" />
+              </div>
+            </div>
             <div id="'.$this->id_base.'-static-fields" style="'.(($banner_type=='static')?'display:block;':'display:none;').'">
-            <div>
-              <label for="'.$this->get_field_id('title').'">'.__('Title').'</label>
-              <input type="text" name="'.$this->get_field_name('title').'" id="'.$this->get_field_id('title').'" value="'.(!empty($data[$this->get_field_name('title')]) ? esc_html($data[$this->get_field_name('title')]) : '').'" />
-            </div>
-            <div>
-              <label for="'.$this->get_field_id('author').'">'.__('Author').'</label>
-              <input type="text" name="'.$this->get_field_name('author').'" id="'.$this->get_field_id('author').'" value="'.(!empty($data[$this->get_field_name('author')]) ? esc_html($data[$this->get_field_name('author')]) : '').'" />
-            </div>
-            <div>
-              <label for="'.$this->get_field_id('author-location').'">'.__('Author Location').'</label>
-              <input type="text" name="'.$this->get_field_name('author-location').'" id="'.$this->get_field_id('author-location').'" value="'.(!empty($data[$this->get_field_name('author-location')]) ? esc_html($data[$this->get_field_name('author-location')]) : '').'" />
+              <div>
+                <label for="'.$this->get_field_id('description').'">'.__('Description').'</label>
+                <textarea name="'.$this->get_field_name('description').'" id="'.$this->get_field_id('description').'">'.(!empty($data[$this->get_field_name('description')]) ? esc_html($data[$this->get_field_name('description')]) : '').'</textarea>
+              </div>
+              <div>
+                <label for="'.$this->get_field_id('author').'">'.__('Author').'</label>
+                <input type="text" name="'.$this->get_field_name('author').'" id="'.$this->get_field_id('author').'" value="'.(!empty($data[$this->get_field_name('author')]) ? esc_html($data[$this->get_field_name('author')]) : '').'" />
+              </div>
+              <div>
+                <label for="'.$this->get_field_id('author-location').'">'.__('Author Location').'</label>
+                <input type="text" name="'.$this->get_field_name('author-location').'" id="'.$this->get_field_id('author-location').'" value="'.(!empty($data[$this->get_field_name('author-location')]) ? esc_html($data[$this->get_field_name('author-location')]) : '').'" />
+              </div>
             </div>
           </div>
           <!-- /inputs -->
         </div>
         <!-- / basic info -->
-        <div class="clear" />
+        <div class="clear"></div>
       ';
 
       // tabs
@@ -299,16 +366,17 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
           $("#'.$this->get_field_id('type').'").change(function(){
             var fields = $("#'.$this->id_base.'-static-fields");
             var image_field = $("#'.$this->id_base.'-image-selectors");
+            var carousel_field = $("#'.$this->id_base.'-carousel-interval");
 
             if($(this).val()=="static"){
-              fields.slideDown("fast", function(){
-                image_field.slideDown("fast");
-              });
+              fields.slideDown("fast");
+              image_field.slideDown("fast");
+              carousel_field.slideUp("fast");
             }
             else {
-              fields.slideUp("fast", function(){
-                image_field.slideUp("fast");
-              });
+              fields.slideUp("fast");
+              image_field.slideUp("fast");
+              carousel_field.slideDown("fast");
             }
           });
         });
