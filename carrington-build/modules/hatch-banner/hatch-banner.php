@@ -21,7 +21,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
 		 */
 		public function display($data) {
       $banner_type = isset($data[$this->get_field_id('type')]) ? $data[$this->get_field_id('type')] : '';
-      $interval = isset($data[$this->get_field_id('interval')]) ? intval($data[$this->get_field_id('interval')]) : 2000;
+      $interval = isset($data[$this->get_field_id('interval')]) ? intval($data[$this->get_field_id('interval')]) : 4000;
       $id = 'banner-'.$data['module_id'];
       $image = '';
       $js_init = '';
@@ -269,7 +269,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
             <div id="'.$this->id_base.'-carousel-interval" style="'.(($banner_type=='static')?'display:none;':'display:block;').'">
               <label for="'.$this->get_field_id('interval').'">'.__('Carousel interval (milliseconds)').'</label>
               <div>
-                <input type="text" name="'.$this->get_field_name('interval').'" id="'.$this->get_field_id('interval').'" value="'.(!empty($data[$this->get_field_name('interval')]) ? esc_html($data[$this->get_field_name('interval')]) : '2000').'" class="width-small" />
+                <input type="text" name="'.$this->get_field_name('interval').'" id="'.$this->get_field_id('interval').'" value="'.(!empty($data[$this->get_field_name('interval')]) ? esc_html($data[$this->get_field_name('interval')]) : '4000').'" class="width-small" />
               </div>
             </div>
             <div id="'.$this->id_base.'-static-fields" style="'.(($banner_type=='static')?'display:block;':'display:none;').'">
