@@ -18,6 +18,8 @@
 	</section>
 
 </div><!-- / .container -->
+<? get_template_part('templates/modal', 'review'); ?>
+<? get_template_part('templates/modal', 'lead'); ?>
 <script type="text/javascript">
 $(document).ready(function(){
   $('.quick-estimate').click(function(e){
