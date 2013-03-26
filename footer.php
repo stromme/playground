@@ -18,7 +18,19 @@
 	</section>
 
 </div><!-- / .container -->
-
+<? get_template_part('templates/modal', 'review'); ?>
+<? get_template_part('templates/modal', 'lead'); ?>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.quick-estimate').click(function(e){
+    e.preventDefault();
+    $('#new-lead').modal();
+  });
+  $('.headline-phone a').click(function(e){
+      e.preventDefault();
+  });
+});
+</script>
 <?php wp_footer(); ?>
 </body>
 </html>
