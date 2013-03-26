@@ -1950,7 +1950,7 @@ table th[class*="span"],
   *margin-right: .3em;
   line-height: 14px;
   vertical-align: text-top;
-  background-image: url("../toolbox-framework/bootstrap/img/glyphicons-halflings.png");
+  background-image: url("../bootstrap/img/glyphicons-halflings.png");
   background-position: 14px 14px;
   background-repeat: no-repeat;
   margin-top: 1px;
@@ -1973,7 +1973,7 @@ table th[class*="span"],
 .dropdown-submenu:focus > a > [class^="icon-"],
 .dropdown-submenu:hover > a > [class*=" icon-"],
 .dropdown-submenu:focus > a > [class*=" icon-"] {
-  background-image: url("../toolbox-framework/bootstrap/img/glyphicons-halflings-white.png");
+  background-image: url("../bootstrap/img/glyphicons-halflings-white.png");
 }
 .icon-glass {
   background-position: 0      0;
@@ -5099,7 +5099,6 @@ a.badge:focus {
 .carousel-inner > .item {
   display: none;
   position: relative;
-  width: 100%;
   -webkit-transition: 0.6s ease-in-out left;
   -moz-transition: 0.6s ease-in-out left;
   -o-transition: 0.6s ease-in-out left;
@@ -5114,6 +5113,9 @@ a.badge:focus {
 .carousel-inner > .next,
 .carousel-inner > .prev {
   display: block;
+}
+.carousel-inner > .active {
+  left: 0;
 }
 .carousel-inner > .next,
 .carousel-inner > .prev {
@@ -5183,12 +5185,12 @@ a.badge:focus {
   height: 10px;
   margin-left: 5px;
   text-indent: -999px;
-  background-color: #ddd;
-  /*background-color: rgba(255, 255, 255, 0.25);*/
+  background-color: #ccc;
+  background-color: rgba(255, 255, 255, 0.25);
   border-radius: 5px;
 }
 .carousel-indicators .active {
-  background-color: #0088cc;
+  background-color: #fff;
 }
 .carousel-caption {
   position: absolute;
@@ -5449,7 +5451,6 @@ blockquote {
   padding-left: 0;
   padding-right: 0;
   *zoom: 1;
-  line-height: 0;
 }
 .curved-shadow:before,
 .curved-shadow:after {
@@ -5461,10 +5462,9 @@ blockquote {
   clear: both;
 }
 .curved-shadow img {
-  /*position: absolute;*/
+  position: absolute;
   top: 0;
   width: 100%;
-  line-height: 0;
 }
 .callout-bottom {
   position: relative;
@@ -5849,27 +5849,13 @@ nav-callout .notch {
   -webkit-border-top-right-radius: 6px;
   -moz-border-radius-topright: 6px;
   border-top-right-radius: 6px;
-  margin-bottom: 0;
-}
-.banner .carousel-indicators {
-  right: 50%;
-  margin-right: -22px;
-  top: 275px;
-}
-.banner .carousel-indicators li {
-  cursor: pointer;
 }
 .banner-photo {
   display: table-cell;
-  background-color: #ffffff;
-  -webkit-border-top-left-radius: 6px;
-  -moz-border-radius-topleft: 6px;
-  border-top-left-radius: 6px;
 }
 .banner-photo img {
   max-width: 480px;
   max-height: 360px;
-  height: 360px;
   -webkit-border-top-left-radius: 6px;
   -moz-border-radius-topleft: 6px;
   border-top-left-radius: 6px;
@@ -5878,7 +5864,6 @@ nav-callout .notch {
   position: relative;
   display: table-cell;
   vertical-align: middle;
-  width: 100%;
   background-color: #fcfcfc;
   background-image: -moz-linear-gradient(top, #ffffff, #f8f8f8);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f8f8f8));
@@ -6074,10 +6059,16 @@ a.review-link:hover {
   -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
 }
+.reviews-list {
+  list-style: none;
+}
+.reviews-list cite {
+  font-size: 20px;
+}
 .author-callout {
   position: relative;
   margin: 18px 0;
-  padding: 0px 20px;
+  padding: 10px 20px;
   background-color: #e0f2ff;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -6108,7 +6099,7 @@ author-callout .notch {
 }
 .author-callout-border {
   border: 1px solid #7ac8ff;
-  padding: 0px 15px;
+  padding: 10px 15px;
 }
 .author-callout-border .author-notch {
   border-top-color: #0086e5;
