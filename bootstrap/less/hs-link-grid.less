@@ -1,0 +1,147 @@
+//
+// Link grid
+// --------------------------------------------------
+
+.link-grid {
+
+	li {
+		padding-left: 40px;
+		padding-right: 40px;
+		padding-bottom: @bumper; 
+		list-style: none;
+		float: left;
+		a {
+			line-height: 1.75em;
+			text-decoration: none;
+		}	
+	}	
+	li:hover {
+		nav {
+			visibility: visible;
+		}
+	}
+}
+
+.grid-thumb {
+	position: relative;
+	img {
+		max-width: 240px;
+	}
+	nav {
+		padding: 0 0 0 3px;
+		visibility: hidden;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 40%;
+		background-color: @gray;
+		.opacity(90);
+		.border-top-right-radius(12px);
+		a {
+			.opacity(100);
+			font-size: @fontSizeSmall;
+			color: @white;
+			display: block;
+		}
+		a:hover {
+			color: lighten(@blue,20%);
+		}
+	}
+}
+
+.small-grid {
+	li {
+		padding: 0;
+	}
+	li:nth-child(even) {
+		padding: 0px 0px 0px 10%;
+	}
+}
+
+.small-grid .grid-thumb {
+	img {
+		max-width: 200px;
+	}
+	nav {
+		padding: 0 0 0 3px;
+		width: 45%;
+		.border-top-right-radius(6px);
+		a {
+			font-size: @fontSizeMini;
+		}
+	}
+}
+
+//
+//.link-grid {
+//	padding: @bumperLarge 0 @bumperLarge 0; 
+//	text-align: center;
+//	margin: 0px;
+//	li {
+//		padding: 0 4% @bumperLarge 4%;
+//		text-align: left;
+//		list-style: none;
+//		float: left;
+//		a {
+//			line-height: 1.75em;
+//			text-decoration: none;
+//		}
+//	}
+//	
+//	li:hover {
+//		nav {
+//			visibility: visible;
+//		}
+//	}
+//}
+//
+//.grid-thumb {
+//	position: relative;
+//	img {
+//		max-width: 240px;
+//	}
+//	nav {
+//		padding: 0 0 0 3px;
+//		visibility: hidden;
+//		position: absolute;
+//		left: 0;
+//		bottom: 0;
+//		width: 40%;
+//		background-color: @gray;
+//		.opacity(90);
+//		.border-top-right-radius(12px);
+//		a {
+//			.opacity(100);
+//			font-size: @fontSizeSmall;
+//			color: @white;
+//			display: block;
+//		}
+//		a:hover {
+//			color: lighten(@blue,20%);
+//		}
+//	}
+//}
+//
+//.small-grid {
+//	li {
+//		padding: 0;
+//	}
+//	li:nth-child(even) {
+//		padding: 0px 0px 0px 10%;
+//	}
+//}
+//
+//.small-grid .grid-thumb {
+//	img {
+//		max-width: 200px;
+//	}
+//	nav {
+//		padding: 0 0 0 3px;
+//		width: 45%;
+//		.border-top-right-radius(6px);
+//		a {
+//			font-size: @fontSizeMini;
+//		}
+//	}
+//}
+

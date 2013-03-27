@@ -1,0 +1,56 @@
+//
+// Responsive: Large desktop and up
+// --------------------------------------------------
+
+
+@media (min-width: 1200px) {
+	
+	.headline ul {
+		float: right;
+		max-width: 900px;
+		width: auto;
+	}
+		
+	.brand > img {
+		padding: 6px 6px 6px 0px;
+		max-height: 140px;
+	}
+		
+	.banner-photo {
+		img {
+			max-width: 600px;
+			max-height: 450px;
+		}
+	}
+	
+	.banner-review {
+		blockquote {
+			height: 394px;
+			padding: 0 @bumperLarge;
+			p {
+				font-size: @baseFontSize * 2;
+				line-height: @baseLineHeight * 2;	
+			}
+			p.banner-customer {
+				font-size: @baseFontSize * 1.5;
+			}
+		}
+	}
+	
+	.banner .share-it {
+		padding-left: @bumperLarge;
+	}
+	
+	.main-nav {
+		margin-top: 75px;
+	}
+	
+	.link-grid {
+		padding-left: @bumperLarge; 
+		padding-right: @bumperLarge;
+		li {
+			padding-left: 70px;
+			padding-right: 70px;	
+		}
+	}
+}

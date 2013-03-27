@@ -1,6 +1,3 @@
 [submodule "toolbox-framework"]
 	path = toolbox-framework
 	url = https://stromme@github.com/stromme/toolbox-framework.git
-[submodule "bootstrap"]
-	path = bootstrap
-	url = git://github.com/twitter/bootstrap.git

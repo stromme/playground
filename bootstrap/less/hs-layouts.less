@@ -1,0 +1,36 @@
+//
+// Layouts
+// --------------------------------------------------
+
+// Vertically Aligned Rows - Vertically aligns the content of a row. Builds the row using table cells.
+// ----------------------------------------------------------------------------------------
+
+.row-middle { 
+	display: table;
+}
+
+// Add padding between rows, but not to the top of the first row.
+.row-middle:nth-of-type(n+2) {
+	.bumper-top;
+}
+
+.middle, .middle-fixed-small, .middle3, .middle4, .middle5, .middle6 {
+	display: table-cell;
+	vertical-align: middle;
+	img {
+		vertical-align: middle;
+	}
+}
+
+// Some helper classes
+
+// Fixed size image - good for logos and icons
+.middle-fixed-small, .middle-fixed-small > img { width: 110px; }
+.middle-fixed-small { .bumper-right; }
+
+// Image takes up a percentage of the column width. We're not as precise as bootstrap with this as it will only ever be two cells. Just define the span of one cell and define the other cell as .middle-span with no number value just to vertically center it's content.
+
+.middle3  { width: 25%; }
+.middle4 { width: 33.33333%; }
+.middle5 { width: 40%; }
+.middle6 { width: 50%; }

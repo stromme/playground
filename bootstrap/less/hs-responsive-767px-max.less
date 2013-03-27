@@ -1,0 +1,39 @@
+//
+// Responsive: Landscape phone to desktop/tablet
+// --------------------------------------------------
+
+
+@media (max-width: 767px) {
+	
+	// Elements with margin-right or margin-left need both margins when converted to a block
+	
+	.page-right, .page-left {
+		padding-left: @bumper;
+		padding-right: @bumper;
+	}
+	
+	// Big vertical spaces need to be reduced for block elements
+	
+	.bumper-top-medium, .bumper-top-large, .bumper-top-Xlarge {
+		padding-top: @bumper;
+	}
+	.bumper-bottom-medium, .bumper-bottom-large, .bumper-bottom-Xlarge {
+		padding-bottom: @bumper;
+	}
+	
+	
+	// Move review link to not cover over author name on small screens
+	.review-link {
+		position: relative;
+		bottom: 0px;
+		right: 0px;
+	}
+	
+	// Should move to center of page, needs work
+	
+	.link-grid {
+		margin: 0 auto;
+		padding-left: @bumperLarge;
+		padding-right: @bumperLarge;
+	}
+}

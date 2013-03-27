@@ -1,0 +1,123 @@
+//
+// Responsive: Tablet and up
+// --------------------------------------------------
+
+@media (min-width: 979px) {
+	.link-grid {
+		li:nth-of-type(3n + 2) {
+			padding-left: 0px;
+			padding-right: 0px; 
+		}
+	}
+}
+
+
+//
+// Responsive: Tablet to desktop
+// --------------------------------------------------
+
+
+@media (min-width: 768px) and (max-width: 979px) {
+	
+	.brand > img {
+		max-height: 110px;
+	}
+	
+	.main-nav {
+		margin-top: 90px;
+	}
+	
+	.link-grid {
+		padding-left: @bumper;
+		padding-right: @bumper;
+		li {
+			padding-right: 30px; 
+		}
+	}
+	
+}
+
+//
+// Responsive: Tablet and smaller
+// --------------------------------------------------
+
+@media (max-width: 979px) {
+
+	// Elements with margin-right or margin-left need both margins when converted to a block
+	
+	.page-right, .page-left {
+		padding-left: @bumperMedium;
+		padding-right: @bumperMedium;
+	}
+	
+	// Big vertical spaces need to be reduced for block elements
+	
+	.bumper-top-medium, .bumper-top-large, .bumper-top-Xlarge {
+		padding-top: @bumperMedium;
+	}
+	.bumper-bottom-medium, .bumper-bottom-large, .bumper-bottom-Xlarge {
+		padding-bottom: @bumperMedium;
+	}
+	
+	// Change fixed-top to absolute position
+	.fixed-top {
+		position: absolute;
+	}
+	
+	// Get rid of padding on logo and nav bar
+	.brand > img {
+		padding-top: 55px;
+	}
+	
+	// Convert Banner to block elements and adjust font size and spacing
+	.banner-photo {
+		display: block;
+		padding: @bumperLarge 0 @bumper;
+		img {
+			max-width: 100%;
+			padding: 4px;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			border: 1px solid rgba(0,0,0,.2);
+			.box-shadow(0 1px 3px rgba(0,0,0,.1));
+			.border-radius(@borderRadiusLarge);
+		}
+	}
+	
+	.banner {
+		width: 100%;
+		text-align: center;
+		display: block;
+		#gradient > .vertical(lighten(@grayLighter, 5%), lighten(@grayLighter, 4%));
+	}
+	
+	.banner-review {
+		margin: 0 auto;
+		max-width: 100%;
+		text-align: center;
+		background: none;
+		display: block;
+		p {
+			font-size: @baseFontSize * 1.75;
+			line-height: @baseLineHeight * 1.75;	
+		}
+		blockquote {
+			height: auto;
+			padding: @bumper;
+		}
+	}
+	
+	// Convert featurettes to block elements
+	.row-middle {
+		// width: 100%;
+		padding: @bumper;
+		margin: 0 auto;
+		display: block;
+		text-align: center;
+	}
+	.row-middle > div {
+		width: 100%;
+		display: block;
+		text-align: center;
+	}
+}

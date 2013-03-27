@@ -1,0 +1,15 @@
+//
+// Tower
+// Center aligned title, paragraph, and optional picture usually uses in a 3 column layout.
+// 
+// --------------------------------------------------
+
+.towers {
+	text-align: center;
+	[class*="span"]:first-of-type {
+		padding-left: @bumper;
+	}
+	[class*="span"]:last-of-type {
+		padding-right: @bumper;
+	}
+}

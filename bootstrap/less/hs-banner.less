@@ -1,0 +1,94 @@
+//
+// Banner Module
+// --------------------------------------------------
+
+.banner {
+	position: relative;
+	display: table;
+	.border-top-left-radius(@borderRadiusLarge);
+	.border-top-right-radius(@borderRadiusLarge);
+}
+
+.banner-photo {
+	img {
+		max-width: 480px;
+		max-height: 360px;
+		.border-top-left-radius(@borderRadiusLarge);
+	}
+	display: table-cell;
+}
+
+.banner-review {
+	position: relative;
+	display: table-cell;
+	vertical-align: middle;
+	#gradient > .vertical(lighten(@grayLighter, 30%), lighten(@grayLighter, 4%));
+	.border-top-right-radius(@borderRadiusLarge);
+	
+	blockquote {
+		// Height of quote - find a better way than hardcoding it?
+		height: 300px;
+		color: @blueDark;
+		padding: 0 @bumperMedium;
+		vertical-align: middle;
+		display: table-cell;
+	
+		p {
+			font-size: @baseFontSize * 1.75;
+			line-height: @baseLineHeight * 1.75;
+			.light-weight;			
+		}
+		
+		p.banner-author {
+			color: @grayLight;
+			padding-top: @bumper ;
+			font-size: @baseFontSize * 2;
+			font-family: @scriptFontFamily;
+		}
+		
+		cite {
+			color: @grayDark;
+		}
+	}
+}
+	
+.banner .share-it {
+	padding-left: @bumperMedium;
+	border-top: 1px solid @white;
+	border-bottom: 1px solid #DDDDDD;
+	#gradient > .vertical(#F5F5F5, #F5F5F5);
+	.clearfix;			
+}	
+
+// Front Page Locations Banner
+// --------------------------------------------------
+
+.jumbotron {
+	height: 400px;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+	p {
+		padding: 0 @bumperLarge;
+		font-size: @baseFontSize * 3;
+		line-height: @baseLineHeight *2.75;
+		.light-weight;
+	}
+	cite {
+		font-size: @baseFontSize * 1.75;
+	}
+}
+
+.location-banner {
+	margin-top: @bumperXlarge;
+	.box-shadow(0 3px 7px rgba(0,0,0,0.3));
+	.border-radius(@borderRadiusLarge);
+	padding: @bumperMedium;
+	height: 400px;
+	text-align: center;
+	h2 {
+		font-size: @baseFontSize * 3;
+		line-height: @baseLineHeight *2.75;
+		padding-top: 140px;
+	}
+}

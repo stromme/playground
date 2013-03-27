@@ -1,0 +1,103 @@
+//
+// Sprites
+// --------------------------------------------------
+
+
+// ICONS
+// -----
+
+// All icons receive the styles of the <i> tag with a base class
+// of .i and are then given a unique class to add width, height,
+// and background-position. Your resulting HTML will look like
+// <i class="icon-inbox"></i>.
+
+// For the white version of the icons, just add the .icon-white class:
+// <i class="icon-inbox icon-white"></i>
+
+[class^="icon-full-"],
+[class*=" icon-full-"] {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  .ie7-restore-right-whitespace();
+  line-height: 28px;
+  vertical-align: text-top;
+  // background-image: url("@{iconSpritePath}");
+  margin-top: 1px;
+}
+
+/* White icons with optional class, or on hover/focus/active states of certain elements */
+//.icon-white,
+//.nav-pills > .active > a > [class^="icon-"],
+//.nav-pills > .active > a > [class*=" icon-"],
+//.nav-list > .active > a > [class^="icon-"],
+//.nav-list > .active > a > [class*=" icon-"],
+//.navbar-inverse .nav > .active > a > [class^="icon-"],
+//.navbar-inverse .nav > .active > a > [class*=" icon-"],
+//.dropdown-menu > li > a:hover > [class^="icon-"],
+//.dropdown-menu > li > a:focus > [class^="icon-"],
+//.dropdown-menu > li > a:hover > [class*=" icon-"],
+//.dropdown-menu > li > a:focus > [class*=" icon-"],
+//.dropdown-menu > .active > a > [class^="icon-"],
+//.dropdown-menu > .active > a > [class*=" icon-"],
+//.dropdown-submenu:hover > a > [class^="icon-"],
+//.dropdown-submenu:focus > a > [class^="icon-"],
+//.dropdown-submenu:hover > a > [class*=" icon-"],
+//.dropdown-submenu:focus > a > [class*=" icon-"] {
+//  background-image: url("@{iconWhiteSpritePath}");
+//}
+    
+.icon-full-conversation  { 
+	background: url("@{iconFullPath}244_conversation.png") 0 0 no-repeat; 
+	width: 25px;
+	height: 18px;
+	line-height: 20px;
+}
+.icon-2x-conversation  { 
+	background: url("@{iconFullPath}244_conversation@2x.png") 0 0 no-repeat; 
+	width: 50px;
+	height: 36px;
+	line-height: 50px;
+}
+.icon-full-picture  { 
+	background: url("@{iconFullPath}138_picture.png") 0 0 no-repeat; 
+	width: 24px;
+	height: 20px;
+	line-height: 20px;
+}
+.icon-2x-picture  { 
+	background: url("@{iconFullPath}138_picture@2x.png") 0 0 no-repeat; 
+	width: 48px;
+	height: 40px;
+	line-height: 40px;
+}
+.icon-life-preserver {
+      background:url('@{iconWhitePath}307_life_preserver.png') 0 0 no-repeat;
+      height: 18px;
+      line-height: 18px;
+      width: 24px;
+}
+.icon-facebook {
+	background:url('@{iconFullPath}410_facebook.png') 0 0 no-repeat;
+	height: 24px;
+	line-height: 24px;
+	width: 24px;
+}
+.icon-twitter {
+	background:url('@{iconFullPath}411_twitter.png') 0 0 no-repeat;
+	height: 24px;
+	line-height: 24px;
+	width: 24px;
+}
+.icon-facebook-2x {
+	background:url('@{iconFullPath}410_facebook@2x.png') 0 0 no-repeat;
+	height: 48px;
+	line-height: 48px;
+	width: 48px;
+}
+.icon-twitter-2x {
+	background:url('@{iconFullPath}411_twitter@2x.png') 0 0 no-repeat;
+	height: 48px;
+	line-height: 48px;
+	width: 48px;
+}

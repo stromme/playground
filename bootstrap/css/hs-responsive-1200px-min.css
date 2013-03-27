@@ -1,0 +1,6 @@
+@media (min-width: 1200px) {
+  .banner .banner-photo img {
+    max-width: 600px;
+    max-height: 450px;
+  }
+}

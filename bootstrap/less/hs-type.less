@@ -1,0 +1,82 @@
+//
+// Typography
+// --------------------------------------------------
+
+
+// Standard link behaviour, underline on hover.
+a.link-decorate:hover, a.link-showoff {
+	text-decoration: none;
+	border-bottom: 1px dotted;
+	border-bottom-color: inherit;
+}
+a.link-inverse {
+	color: @white;
+}
+a.link-inverse:hover, .link-decorate, .link-decorate + .link-showoff {
+	border-bottom-color: @white;
+}
+
+// Titles
+h1,
+h2 { line-height: @baseLineHeight * 2; }
+
+h3 { line-height: @baseLineHeight * 1.5; }
+
+h4 { line-height: @baseLineHeight * 1.25; }
+
+h1, h2, h3 {
+	.light-weight;
+}
+
+h2.jumbo {
+	font-size: 46px;
+	line-height: 46px;
+	letter-spacing: -1px;
+}
+
+.loud {
+	font-weight: 300;
+	line-height: 1;
+	letter-spacing: -1px;
+	color: @gray;
+}
+
+
+// Allow title elements to nicely wrap to the next line
+
+.multi-line {
+	line-height: inherit;
+}
+
+p {
+  margin: 0 0 @baseLineHeight / 1.5;
+  line-height: @baseLineHeight * 1.25;
+  color: @gray;
+  font-weight: 200;
+}
+.lead {
+  margin-bottom: 0;
+  font-size: @baseFontSize * 1.25;
+  font-weight: 200;
+  line-height: @baseLineHeight * 1.5;
+}
+
+
+blockquote {
+	border:0px;
+}
+
+// Font styles
+
+.light-weight {
+	font-weight: 100;
+}
+
+
+
+// Center align text
+
+.center {
+	text-align: center;
+}
+

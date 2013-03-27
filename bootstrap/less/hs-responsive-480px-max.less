@@ -1,0 +1,55 @@
+//
+// Responsive: Phones
+// --------------------------------------------------
+
+
+/*  Phones */
+@media (max-width: 480px) { 
+
+	.brand > img {
+		display: none;
+	}
+	
+	.brand-phone { display: inherit !important; }
+	.brand-phone > h4 {
+		margin-bottom: 0px;
+		font-weight: 200;
+		text-align: center;
+	}
+	
+	.main-nav {
+		//vertically align main nav between banner and headline - find a better way?
+		margin-top: 15px;
+	}
+	.headline {		
+		h1, h4, a {
+			font-size: @baseFontSize;
+		}
+		h1, h4 {
+			padding: 5px 9px 5px 9px;
+		}
+	}
+	
+	
+	.banner-photo {
+		padding: 0;
+		img {
+			.border-bottom-left-radius(0);
+			.border-bottom-right-radius(0);
+			padding: 0px;
+			border: none;
+		}
+	}
+	
+	.footer {
+		.footer-links > a {
+			padding: 3px;
+			margin: 3px;
+			font-size: @baseFontSize *.75;
+		}
+		small a {
+			font-size: @baseFontSize *.75;
+		}
+	}
+
+}

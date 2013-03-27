@@ -1,0 +1,27 @@
+//
+// Wells
+// --------------------------------------------------
+
+
+// Colors
+
+.well-blue {
+  background-color: @blue;
+  border: 1px solid darken(@blue, 7%);
+  blockquote {
+    border-color: lighten(@blue, 30%);
+  }
+  strong {
+  	color: @white;
+  }
+}
+
+.well-sky {
+  .bg-sky;
+  border: 1px solid darken(@blue, 7%);
+}
+
+// Remove bottom margin from well if we want to put a shadow below it
+.well-has-shadow {
+	 margin-bottom: 0;
+}
