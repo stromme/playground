@@ -14,8 +14,6 @@ if (!class_exists('cfct_module_hatch_featurette') && class_exists('cfct_build_mo
 		public function display($data) {
       $title = isset($data[$this->get_field_id('title')]) ? $data[$this->get_field_id('title')] : '';
       $content = isset($data[$this->get_field_id('content')]) ? $data[$this->get_field_id('content')] : '';
-      $url = isset($data[$this->get_field_id('url')]) ? $data[$this->get_field_id('url')] : '';
-      //$image_size = isset($data[$this->get_field_id('featured_image-size')]) ? $data[$this->get_field_id('featured_image-size')] : 'medium';
       $image_id = ($data[$this->get_field_id('post_image')]!='')?$data[$this->get_field_id('post_image')]:(($data[$this->get_field_id('global_image')])?$data[$this->get_field_id('global_image')]:'');
       $image = '';
 
@@ -47,10 +45,6 @@ if (!class_exists('cfct_module_hatch_featurette') && class_exists('cfct_build_mo
 							<textarea name="'.$this->get_field_name('content').'" id="'.$this->get_field_id('content').'">'
 								.(!empty($data[$this->get_field_name('content')]) ? htmlspecialchars($data[$this->get_field_name('content')]) : '').
 							'</textarea>
-						</div>
-						<div>
-							<label for="'.$this->get_field_id('url').'">'.__('URL').'</label>
-							<input type="text" name="'.$this->get_field_name('url').'" id="'.$this->get_field_id('url').'" value="'.(!empty($data[$this->get_field_name('url')]) ? esc_html($data[$this->get_field_name('url')]) : '').'" />
 						</div>
 					</div>
 					<!-- /inputs -->
@@ -105,15 +99,6 @@ if (!class_exists('cfct_module_hatch_featurette') && class_exists('cfct_build_mo
 							</div>
 							<!-- /select an image from media gallery -->
 						</div>';
-
-					/*$selected_size = null;
-					if (!empty($data[$this->get_field_name('featured_image').'-size'])) {
-						$selected_size = $data[$this->get_field_name('featured_image').'-size'];
-					}
-					$html .= $this->_image_selector_size_select(array(
-						'field_name' => 'featured_image',
-						'selected_size' => $selected_size
-					));*/
 
 				$html .= '
 					</div>
