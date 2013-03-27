@@ -396,11 +396,16 @@ class cfct_build_row {
 		);
 
     $array_classes = array();
-    if($opts['classes']!='') array_push($array_classes, $opts['classes']);
-    if($opts['bumper-top']!='') array_push($array_classes, $opts['bumper-top']);
-    if($opts['bumper-bottom']!='') array_push($array_classes, $opts['bumper-bottom']);
-    if($opts['page-left']!='') array_push($array_classes, 'page-left');
-    if($opts['page-right']!='') array_push($array_classes, 'page-right');
+    $opts_classes = (isset($opts['classes'])?$opts['classes']:'');
+    if($opts_classes!='') array_push($array_classes, $opts['classes']);
+    $opts_bumper_top = (isset($opts['bumper-top'])?$opts['bumper-top']:'');
+    if($opts_bumper_top!='') array_push($array_classes, $opts['bumper-top']);
+    $opts_bumper_bottom = (isset($opts['bumper-bottom'])?$opts['bumper-bottom']:'');
+    if($opts_bumper_bottom!='') array_push($array_classes, $opts['bumper-bottom']);
+    $opts_page_left = (isset($opts['page-left'])?$opts['page-left']:'');
+    if($opts_page_left!='') array_push($array_classes, 'page-left');
+    $opts_page_right = (isset($opts['page-right'])?$opts['page-right']:'');
+    if($opts_page_right!='') array_push($array_classes, 'page-right');
     $classes = '';
     if(count($array_classes)>0){
       $classes = ' class="'.implode(' ', $array_classes).'"';

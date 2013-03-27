@@ -7,7 +7,9 @@
  * @subpackage Hatch
  * @since Hatch 1.0
  */
-session_start();
+if(session_id() == '') {
+  session_start();
+}
 ?><!DOCTYPE html>
 <!--[if IE 6]>
 <html id="ie6" <?php language_attributes(); ?>>
