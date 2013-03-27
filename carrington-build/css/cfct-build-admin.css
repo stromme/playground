@@ -1830,3 +1830,43 @@ a:active .cfct-il-icon {
 .wp-core-ui #build-editor-toolbar a.button {
 	margin-top: 5px;
 }
+
+/* Theme Chooser Additions */
+#cfct-custom-theme-style-chooser .cfct-image-select-current-image {
+	display: block;
+	height: 100px;
+	width: auto;
+}
+#cfct-custom-theme-style-chooser .cfct-image-select-current-image p {
+	text-align: left;
+	font-size: 1em;
+}
+#cfct-custom-theme-style-chooser .cfct-image-select-current-image,
+#cfct-custom-theme-style-chooser .cfct-image-select-current-image>div {
+	cursor: pointer;
+}
+#cfct-custom-theme-style-chooser .cfct-image-select-current-image .cfct-image-select-items-list-item,
+#cfct-custom-theme-style-chooser .cfct-image-select-current-image .cfct-image-select-items-list-item>div {
+	height: 55px;
+}
+
+#cfct-custom-theme-style-chooser .cfct-theme-style-chooser-current-image {
+	height: 75px;
+}
+#cfct-custom-theme-style-chooser label {
+	float: left;
+	display: block;
+	width: 120px;
+	margin-top: 25px;
+}
+#cfct-custom-theme-style-chooser #cfct-theme-select-images-wrapper {
+	display: none;
+}
+.cfct-popup-content.cfct-popup-content-fullscreen fieldset.cfct-custom-theme-style {
+	margin: 12px;
+}
+#cfct-theme-select-images-wrapper h4 {
+	color: #666;
+	font-weight: normal;
+	margin: 0 0 5px;
+}

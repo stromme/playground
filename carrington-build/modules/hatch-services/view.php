@@ -12,7 +12,9 @@
   if ( is_multisite() && !is_subdomain_install() && is_main_site() )
     $blog_prefix = '/blog';
 ?>
-
+<div class="bumper-bottom">
+  <h2 class="blue center">What we're <strong class="green">really</strong> good at.</h2>
+</div>
 <ul class="link-grid clearfix">
   <?php
     foreach($services as $service){

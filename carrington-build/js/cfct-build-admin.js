@@ -1822,5 +1822,25 @@
 		cfct_build.show();
 	});
 
+  cfct_set_theme_choice = function(clicked) {
+  	_this = $(clicked);
+  	_this.addClass("active").siblings().removeClass("active");
+  	_wrapper = _this.parents(".cfct-custom-theme-style-chooser");
+  	_val = _this.attr("data-image-id");
+  	_background_pos = (_val == "0" ? "50% 50%" : "0 0");
+
+  	$("input:hidden", _wrapper).val(_val);
+
+  	$(".cfct-image-select-current-image .cfct-image-select-items-list-item > div", _wrapper)
+  		.css({"background-image": _this.children(":first").css("backgroundImage"), "background-position": _background_pos});
+
+  	$("#cfct-theme-select-images-wrapper").slideToggle("fast");
+  	return false;
+  };
+
+  cfct_toggle_theme_chooser = function(clicked) {
+  	$("#cfct-theme-select-images-wrapper").slideToggle("fast");
+  	return false;
+  }
 })(jQuery);	
 

@@ -5784,7 +5784,8 @@ nav-callout .notch {
   list-style: none;
   float: left;
 }
-.link-grid li a {
+.link-grid li a,
+.link-grid li span {
   line-height: 1.75em;
   text-decoration: none;
 }
