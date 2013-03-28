@@ -6497,6 +6497,28 @@ body {
 .carousel-indicators .active {
   background-color: #0088cc;
 }
+/* Accolade carousel */
+.accolade-carousel {
+  position: relative;
+}
+.accolade-carousel .carousel-control {
+  left: 20px;
+  color: #222222;
+  border: none;
+  background: transparent;
+}
+.accolade-carousel .carousel-control.right {
+  left: auto;
+  right: 20px;
+}
+.accolade-carousel .carousel-indicators {
+  left: 50%;
+  margin-left: -20px;
+  top: 125px;
+}
+.accolade-carousel .carousel-indicators li {
+  cursor: pointer;
+}
 /* Image */
 div.img-polaroid {
   display: inline-block;

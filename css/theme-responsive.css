@@ -1057,6 +1057,12 @@
   .banner .carousel-indicators {
     display: none !important;
   }
+  .accolade-carousel {
+    padding-bottom: 0 !important;
+  }
+  .accolade-carousel .carousel-indicators {
+    display: none !important;
+  }
   .banner-review {
     margin: 0 auto;
     max-width: 100%;
