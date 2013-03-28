@@ -5281,6 +5281,9 @@ a.badge:focus {
 .middle6 {
   width: 50%;
 }
+.middle9 {
+  max-width: 90%;
+}
 a.link-decorate:hover,
 a.link-showoff {
   text-decoration: none;
@@ -6493,6 +6496,15 @@ body {
 }
 .carousel-indicators .active {
   background-color: #0088cc;
+}
+/* Image */
+div.img-polaroid {
+  display: inline-block;
+  margin: 0 auto;
+}
+div.img-polaroid div {
+  max-height: 300px;
+  overflow: hidden;
 }
 .pull-right {
   float: right;

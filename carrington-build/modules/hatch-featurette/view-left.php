@@ -5,7 +5,11 @@
 <div class="row-middle bumper-top">
   <?php if($image!=''){ ?>
 	<div class="middle6 bumper-right-large">
-		<img class="img-polaroid" src="<?=$image?>">
+    <div class="img-polaroid">
+      <div>
+        <img src="<?=$image?>">
+      </div>
+    </div>
 	</div>
   <?php } ?>
 	<div class="middle">

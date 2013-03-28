@@ -9,7 +9,11 @@
 	</div>
   <?php if($image!=''){ ?>
 	<div class="middle6">
-		<img class="img-polaroid" src="<?=$image?>">
+    <div class="img-polaroid">
+      <div>
+        <img src="<?=$image?>">
+      </div>
+    </div>
 	</div>
   <?php } ?>
 </div>

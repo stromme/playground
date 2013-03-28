@@ -942,7 +942,6 @@
   .banner-photo img {
     max-width: 600px;
     max-height: 450px;
-    height: 450px;
   }
   .banner-review blockquote {
     height: 394px;
@@ -969,11 +968,19 @@
     padding-left: 70px;
     padding-right: 70px;
   }
+  div.img-polaroid.middle9 div {
+    max-height: 180px;
+  }
 }
 @media (min-width: 979px) {
   .link-grid li:nth-of-type(3n + 2) {
     padding-left: 0px;
     padding-right: 0px;
+  }
+}
+@media (min-width: 979px) and (max-width: 1199px) {
+  div.img-polaroid.middle9 div {
+    max-height: 140px;
   }
 }
 @media (min-width: 768px) and (max-width: 979px) {
@@ -1018,6 +1025,7 @@
     padding: 60px 0 20px;
   }
   .banner-photo img {
+    height: auto !important;
     max-width: 100%;
     padding: 4px;
     background-color: #fff;
@@ -1042,6 +1050,9 @@
     background-image: linear-gradient(to bottom, #fbfbfb, #f8f8f8);
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffbfbfb', endColorstr='#fff8f8f8', GradientType=0);
+  }
+  .banner .carousel-indicators {
+    display: none !important;
   }
   .banner-review {
     margin: 0 auto;
@@ -1068,6 +1079,20 @@
     width: 100%;
     display: block;
     text-align: center;
+  }
+  div.img-polaroid {
+    max-width: 480px;
+  }
+  div.img-polaroid div {
+    max-height: 640px;
+  }
+}
+@media (min-width: 767px) and (max-width: 979px) {
+  div.img-polaroid.middle9 {
+    max-width: 90%;
+  }
+  div.img-polaroid.middle9 div {
+    max-height: 110px;
   }
 }
 @media (max-width: 767px) {
@@ -1293,12 +1318,6 @@
   .navbar-static .navbar-inner {
     padding-left: 10px;
     padding-right: 10px;
-  }
-  .banner-photo img {
-    height: auto !important;
-  }
-  .banner .carousel-indicators {
-    display: none !important;
   }
 }
 @media (min-width: 980px) {
