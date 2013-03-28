@@ -3,18 +3,18 @@
 -->
 
 <div class="row-middle bumper-top">
-	<div class="middle bumper-right-large">
-		<h2 class=""><?=$title?></h2>
+	<div class="middle <?=($image!='')?$image_padding:''?>">
+		<<?=$heading?> class=""><?=parse_shortclass($title)?></<?=$heading?>>
 		<p class="blue"><?=$content?></p>
 	</div>
   <?php if($image!=''){ ?>
-	<div class="middle6">
-    <div class="img-polaroid">
-      <div>
-        <img src="<?=$image?>">
-      </div>
-    </div>
-	</div>
+  <div class="<?=$image_size?>">
+     <div<?=($border_style!='none')?' class="'.$border_style.'"':''?>>
+       <div>
+         <img src="<?=$image?>" />
+       </div>
+     </div>
+  </div>
   <?php } ?>
 </div>
 

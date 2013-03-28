@@ -2,6 +2,29 @@
 
 if (!class_exists('cfct_module_hatch_featurette') && class_exists('cfct_build_module')) {
 	class cfct_module_hatch_featurette extends cfct_build_module {
+    private $heading_styles = array(
+      'h2' => 'H2 (Heading 2)',
+      'h3' => 'H3 (Heading 3)',
+      'h4' => 'H4 (Heading 4)'
+    );
+    private $image_styles = array(
+      'left' => 'Image Left',
+      'right' => 'Image Right',
+      'vertical' => 'Image Top'
+    );
+    private $image_sizes = array(
+      'middle-fixed-small' => 'Fixed',
+      'middle3' => 'Tiny',
+      'middle4' => 'Small',
+      'middle5' => 'Medium',
+      'middle6' => 'Large',
+      'middle9' => 'XLarge'
+    );
+    private $border_style = array(
+      'none' => 'No border',
+      'img-polaroid' => 'Polaroid'
+    );
+
 		public function __construct() {
 			$opts = array(
 				'description' => __('Display a headline, (optional) image and brief text with a link.', 'carrington-build'),
@@ -22,50 +45,94 @@ if (!class_exists('cfct_module_hatch_featurette') && class_exists('cfct_build_mo
       }
       $style = isset($data[$this->get_field_id('style')]) ? $data[$this->get_field_id('style')] : '';
       if($style=='') $style = 'left';
+      $heading = (!empty($data[$this->get_field_name('heading_style')]) ? esc_html($data[$this->get_field_name('heading_style')]) : '');
+      if($heading=='') $heading = 'h2';
+      $image_size = (!empty($data[$this->get_field_name('image_size')]) ? esc_html($data[$this->get_field_name('image_size')]) : '');
+      if($image_size=='') $image_size = 'middle6';
+      $border_style = (!empty($data[$this->get_field_name('border_style')]) ? esc_html($data[$this->get_field_name('border_style')]) : '');
+      if($border_style=='') $border_style = 'img-polaroid';
+
+      switch($image_size){
+        case 'middle-fixed-small':
+        case 'middle3':
+        case 'middle4': $image_padding = 'bumper-right-medium'; break;
+        default: $image_padding = 'bumper-right-large'; break;
+      }
 
       $this->view = 'view-'.$style.'.php';
-			return $this->load_view($data, compact('title', 'content', 'url', 'image'));
+			return $this->load_view($data, compact('title', 'heading', 'content', 'url', 'image', 'image_size', 'image_padding', 'border_style'));
 		}
 
 		public function admin_form($data) {
 			// basic info
+      $heading_style = (!empty($data[$this->get_field_name('heading_style')]) ? esc_html($data[$this->get_field_name('heading_style')]) : '');
+      $heading_style_options = '';
+      foreach($this->heading_styles as $key=>$head_style){
+        $heading_style_options .= '<option value="'.$key.'"'.(($key==$heading_style)?' selected=""':'').'>'.$head_style.'</option>';
+      }
       $style = (!empty($data[$this->get_field_name('style')]) ? esc_html($data[$this->get_field_name('style')]) : '');
+      $image_style_options = '';
+      foreach($this->image_styles as $key=>$img_style){
+        $image_style_options .= '<option value="'.$key.'"'.(($key==$style)?' selected=""':'').'>'.$img_style.'</option>';
+      }
+      $image_size = (!empty($data[$this->get_field_name('image_size')]) ? esc_html($data[$this->get_field_name('image_size')]) : '');
+      if($image_size=='') $image_size = 'middle6';
+      $image_size_options = '';
+      foreach($this->image_sizes as $key=>$size){
+        $image_size_options .= '<option value="'.$key.'"'.(($key==$image_size)?' selected=""':'').'>'.$size.'</option>';
+      }
+      $border_style = (!empty($data[$this->get_field_name('border_style')]) ? esc_html($data[$this->get_field_name('border_style')]) : '');
+      if($border_style=='') $border_style='img-polaroid';
+      $border_style_options = '';
+      foreach($this->border_style as $key=>$img_border){
+        $border_style_options .= '<option value="'.$key.'"'.(($key==$border_style)?' selected=""':'').'>'.$img_border.'</option>';
+      }
 			$html = '
-				<!-- basic info -->
 				<div id="'.$this->id_base.'-content-info">
-					
-					<!-- inputs -->
 					<div id="'.$this->id_base.'-content-fields">
-						<div>
-							<label for="'.$this->get_field_id('title').'">'.__('Title').'</label>
-							<input type="text" name="'.$this->get_field_name('title').'" id="'.$this->get_field_id('title').'" value="'.(!empty($data[$this->get_field_name('title')]) ? esc_html($data[$this->get_field_name('title')]) : '').'" />
-						</div>
-						<div>
+					  <div class="cfct-field">
+              <label for="'.$this->get_field_id('title').'">'.__('Title').'</label>
+              <input type="text" name="'.$this->get_field_name('title').'" id="'.$this->get_field_id('title').'" value="'.(!empty($data[$this->get_field_name('title')]) ? esc_html($data[$this->get_field_name('title')]) : '').'" />
+              <p class="help">Use <em>shortclass</em> to add color. Ex: We are the [green]best[/] window cleaner.</p>
+            </div>
+					</div>
+					<div id="'.$this->id_base.'-styling">
+            <div class="cfct-field">
+              <div>
+                <label for="'.$this->get_field_id('heading_style').'">Heading style</label>
+              </div>
+              <div>
+                <select id="'.$this->get_field_id('heading_style').'" name="'.$this->get_field_name('heading_style').'" class="cfct-style-chooser">'.$heading_style_options.'</select>
+              </div>
+            </div>
+					</div>
+				</div>
+				<div id="'.$this->id_base.'-content-info">
+				  <div id="'.$this->id_base.'-content-fields">
+						<div class="cfct-field">
 							<label for="'.$this->get_field_id('content').'">'.__('Content').'</label>
 							<textarea name="'.$this->get_field_name('content').'" id="'.$this->get_field_id('content').'">'
 								.(!empty($data[$this->get_field_name('content')]) ? htmlspecialchars($data[$this->get_field_name('content')]) : '').
 							'</textarea>
 						</div>
 					</div>
-					<!-- /inputs -->
-					
-					<!-- styling -->
-					<div class="cfct-post-layout-controls '.$this->id_base.'-c6-34">
-						<p class="cfct-style-title-chooser">
-						  <label for="'.$this->get_field_id('style').'">Style</label>
-              <select id="'.$this->get_field_id('style').'" name="'.$this->get_field_name('style').'" class="cfct-style-chooser">
-                <option value="left"'.(($style=='left')?' selected="selected"':'').'>Image left</option>
-                <option value="right"'.(($style=='right')?' selected="selected"':'').'>Image right</option>
-                <option value="vertical"'.(($style=='vertical')?' selected="selected"':'').'>Vertical</option>
-              </select>
-            </p>
-					</div>
-					<!-- /styling -->
-					
+          <div id="'.$this->id_base.'-styling">
+            <div class="cfct-field">&nbsp;</div>
+            <div class="cfct-field">
+              <label for="'.$this->get_field_id('style').'">Style</label>
+              <select id="'.$this->get_field_id('style').'" name="'.$this->get_field_name('style').'" class="cfct-style-chooser">'.$image_style_options.'</select>
+            </div>
+            <div class="cfct-field">
+              <label for="'.$this->get_field_id('image_size').'">Image size</label>
+              <select id="'.$this->get_field_id('image_size').'" name="'.$this->get_field_name('image_size').'">'.$image_size_options.'</select>
+            </div>
+            <div class="cfct-field">
+              <label for="'.$this->get_field_id('border_style').'">Border style</label>
+              <select id="'.$this->get_field_id('border_style').'" name="'.$this->get_field_name('border_style').'">'.$border_style_options.'</select>
+            </div>
+          </div>
 				</div>
-				<!-- / basic info -->
-				<div class="clear" />
-				';
+				<div class="clear"></div>';
 
 				// tabs
 				$image_selector_tabs = array(
@@ -98,7 +165,9 @@ if (!class_exists('cfct_module_hatch_featurette') && class_exists('cfct_build_mo
 								'.$this->global_image_selector($data).'
 							</div>
 							<!-- /select an image from media gallery -->
-						</div>';
+						</div>
+						';
+
 
 				$html .= '
 					</div>
@@ -214,16 +283,28 @@ if (!class_exists('cfct_module_hatch_featurette') && class_exists('cfct_build_mo
 					margin-right: 20px;
 					float: left;
 				}
-				#'.$this->id_base.'-content-styles {
-					width: 280px;
-					float: left;
-					margin-top: 20px;
-				}
 				#'.$this->id_base.'-image-selectors div#'.$this->id_base.'-image-selector-tabs {
-					margin-top: 15px;
+					margin-top: 0;
 				}
 				textarea#'.$this->id_base.'-content {
 					height: 200px;
+				}
+				#'.$this->id_base.'-styling {
+				  float: left;
+				}
+				#'.$this->id_base.'-styling .cfct-field,
+			  #'.$this->id_base.'-content-fields .cfct-field {
+				  margin: 5px 0;
+				}
+				#'.$this->id_base.'-styling .cfct-field label {
+				  display: inline-block;
+				  width: 75px;
+				}
+				#'.$this->id_base.'-content-fields .cfct-field p.help {
+				  font-style: normal;
+				  margin-top: 3px;
+				  margin-bottom: 0;
+				  font-size: 11px;
 				}
 			';
 		}

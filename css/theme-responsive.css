@@ -942,6 +942,7 @@
   .banner-photo img {
     max-width: 600px;
     max-height: 450px;
+    height: 450px;
   }
   .banner-review blockquote {
     height: 394px;
@@ -1023,9 +1024,11 @@
   .banner-photo {
     display: block;
     padding: 60px 0 20px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
   }
   .banner-photo img {
-    height: auto !important;
     max-width: 100%;
     padding: 4px;
     background-color: #fff;
@@ -1089,7 +1092,7 @@
 }
 @media (min-width: 767px) and (max-width: 979px) {
   div.img-polaroid.middle9 {
-    max-width: 90%;
+    width: 90%;
   }
   div.img-polaroid.middle9 div {
     max-height: 110px;
@@ -1159,6 +1162,8 @@
     border-bottom-right-radius: 0;
     padding: 0px;
     border: none;
+    height: auto !important;
+    width: 100%;
   }
   .footer .footer-links > a {
     padding: 3px;

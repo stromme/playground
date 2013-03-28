@@ -5282,7 +5282,7 @@ a.badge:focus {
   width: 50%;
 }
 .middle9 {
-  max-width: 90%;
+  width: 90%;
 }
 a.link-decorate:hover,
 a.link-showoff {
@@ -6503,7 +6503,7 @@ div.img-polaroid {
   margin: 0 auto;
 }
 div.img-polaroid div {
-  max-height: 300px;
+  max-height: 400px;
   overflow: hidden;
 }
 .pull-right {

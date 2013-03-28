@@ -1,9 +1,11 @@
 <div class="center">
-  <div class="img-polaroid middle9">
+  <?php if($image!=''){ ?>
+  <div class="<?=($border_style!='none')?$border_style:''?> <?=$image_size?>">
     <div>
-      <img src="<?=$image?>">
+      <img src="<?=$image?>" />
     </div>
   </div>
-  <h4><?=$title?></h4>
+  <?php } ?>
+  <<?=$heading?>><?=parse_shortclass($title)?></<?=$heading?>>
   <p><?=$content?></p>
 </div>

@@ -4,16 +4,16 @@
 
 <div class="row-middle bumper-top">
   <?php if($image!=''){ ?>
-	<div class="middle6 bumper-right-large">
-    <div class="img-polaroid">
+	<div class="<?=$image_size?> <?=$image_padding?>">
+    <div<?=($border_style!='none')?' class="'.$border_style.'"':''?>>
       <div>
-        <img src="<?=$image?>">
+        <img src="<?=$image?>" />
       </div>
     </div>
 	</div>
   <?php } ?>
 	<div class="middle">
-		<h2 class=""><?=$title?></h2>
+		<<?=$heading?> class=""><?=parse_shortclass($title)?></<?=$heading?>>
 		<p class="blue"><?=$content?></p>
 	</div>
 </div>
