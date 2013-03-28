@@ -1950,7 +1950,7 @@ table th[class*="span"],
   *margin-right: .3em;
   line-height: 14px;
   vertical-align: text-top;
-  background-image: url("../toolbox-framework/bootstrap/img/glyphicons-halflings.png");
+  background-image: url("../bootstrap/img/glyphicons-halflings.png");
   background-position: 14px 14px;
   background-repeat: no-repeat;
   margin-top: 1px;
@@ -1973,7 +1973,7 @@ table th[class*="span"],
 .dropdown-submenu:focus > a > [class^="icon-"],
 .dropdown-submenu:hover > a > [class*=" icon-"],
 .dropdown-submenu:focus > a > [class*=" icon-"] {
-  background-image: url("../toolbox-framework/bootstrap/img/glyphicons-halflings-white.png");
+  background-image: url("../bootstrap/img/glyphicons-halflings-white.png");
 }
 .icon-glass {
   background-position: 0      0;
@@ -5099,7 +5099,6 @@ a.badge:focus {
 .carousel-inner > .item {
   display: none;
   position: relative;
-  width: 100%;
   -webkit-transition: 0.6s ease-in-out left;
   -moz-transition: 0.6s ease-in-out left;
   -o-transition: 0.6s ease-in-out left;
@@ -5114,6 +5113,9 @@ a.badge:focus {
 .carousel-inner > .next,
 .carousel-inner > .prev {
   display: block;
+}
+.carousel-inner > .active {
+  left: 0;
 }
 .carousel-inner > .next,
 .carousel-inner > .prev {
@@ -5183,12 +5185,12 @@ a.badge:focus {
   height: 10px;
   margin-left: 5px;
   text-indent: -999px;
-  background-color: #ddd;
-  /*background-color: rgba(255, 255, 255, 0.25);*/
+  background-color: #ccc;
+  background-color: rgba(255, 255, 255, 0.25);
   border-radius: 5px;
 }
 .carousel-indicators .active {
-  background-color: #0088cc;
+  background-color: #fff;
 }
 .carousel-caption {
   position: absolute;
@@ -5448,8 +5450,8 @@ blockquote {
   position: relative;
   padding-left: 0;
   padding-right: 0;
-  *zoom: 1;
   line-height: 0;
+  *zoom: 1;
 }
 .curved-shadow:before,
 .curved-shadow:after {
@@ -5461,7 +5463,6 @@ blockquote {
   clear: both;
 }
 .curved-shadow img {
-  /*position: absolute;*/
   top: 0;
   width: 100%;
   line-height: 0;
@@ -6479,6 +6480,19 @@ body {
 .green-man-75 {
   background: url("../images/brand/window-cleaning-award-75px.png") 5px 0px no-repeat;
   padding-left: 20px;
+}
+/* Carousel custom */
+.carousel-inner > .item {
+  width: 100%;
+}
+.carousel-inner > .active {
+  left: inherit;
+}
+.carousel-indicators li {
+  background-color: #ddd;
+}
+.carousel-indicators .active {
+  background-color: #0088cc;
 }
 .pull-right {
   float: right;

@@ -74,6 +74,7 @@
 		display: block;
 		padding: @bumperLarge 0 @bumper;
 		img {
+            height: auto !important;
 			max-width: 100%;
 			padding: 4px;
 			background-color: #fff;
@@ -89,8 +90,11 @@
 		text-align: center;
 		display: block;
 		#gradient > .vertical(lighten(@grayLighter, 5%), lighten(@grayLighter, 4%));
+        .carousel-indicators {
+            display: none !important;
+        }
 	}
-	
+
 	.banner-review {
 		margin: 0 auto;
 		max-width: 100%;
@@ -106,7 +110,7 @@
 			padding: @bumper;
 		}
 	}
-	
+
 	// Convert featurettes to block elements
 	.row-middle {
 		// width: 100%;

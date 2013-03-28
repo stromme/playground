@@ -7,21 +7,37 @@
 	display: table;
 	.border-top-left-radius(@borderRadiusLarge);
 	.border-top-right-radius(@borderRadiusLarge);
+
+    .carousel-indicators {
+      right: 50%;
+      margin-right: -22px;
+      top: 275px;
+      li {
+        cursor: pointer;
+      }
+    }
+    margin-bottom: 0;
 }
 
 .banner-photo {
 	img {
 		max-width: 480px;
 		max-height: 360px;
+        height: 360px;
 		.border-top-left-radius(@borderRadiusLarge);
 	}
 	display: table-cell;
+    background-color: #ffffff;
+    -webkit-border-top-left-radius: 6px;
+    -moz-border-radius-topleft: 6px;
+    border-top-left-radius: 6px;
 }
 
 .banner-review {
 	position: relative;
 	display: table-cell;
 	vertical-align: middle;
+    width: 100%;
 	#gradient > .vertical(lighten(@grayLighter, 30%), lighten(@grayLighter, 4%));
 	.border-top-right-radius(@borderRadiusLarge);
 	

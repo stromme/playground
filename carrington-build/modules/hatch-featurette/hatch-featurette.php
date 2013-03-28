@@ -149,15 +149,20 @@ if (!class_exists('cfct_module_hatch_featurette') && class_exists('cfct_build_mo
 		 * @return string
 		 */
 		public function text($data) {
+      $style = isset($data[$this->get_field_id('style')]) ? $data[$this->get_field_id('style')] : '';
+      if($style=='') $style = 'left';
+      $style_name = "";
+      switch($style){
+        case 'left': $style_name = "Image left"; break;
+        case 'right': $style_name = "Image right"; break;
+        case 'vertical': $style_name = "Vertical"; break;
+      }
+      $style_name .= ': ';
 			$title = null;
 			if (!empty($data[$this->get_field_name('title')])) {
 				$title = esc_html($data[$this->get_field_name('title')]);
 			}
-			$content = null;
-			if (!empty($data[$this->get_field_name('content')])) {
-				$content = esc_html($data[$this->get_field_name('content')]);
-			}
-			return $title.PHP_EOL.$content.PHP_EOL;
+			return $style_name.$title.PHP_EOL;
 		}
 
 		/**
