@@ -2,7 +2,7 @@
 =============================================================================
 -->
 
-<div class="row-middle bumper-top">
+<div class="row-middle">
   <?php if($image!=''){ ?>
 	<div class="<?=$image_size?> <?=$image_padding?>">
     <div<?=($border_style!='none')?' class="'.$border_style.'"':''?>>

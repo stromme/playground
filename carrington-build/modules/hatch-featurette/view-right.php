@@ -2,7 +2,7 @@
 =============================================================================
 -->
 
-<div class="row-middle bumper-top">
+<div class="row-middle">
 	<div class="middle <?=($image!='')?$image_padding:''?>">
 		<<?=$heading?> class=""><?=parse_shortclass($title)?></<?=$heading?>>
 		<p class="blue"><?=$content?></p>

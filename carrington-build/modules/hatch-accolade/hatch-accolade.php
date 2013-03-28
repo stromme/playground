@@ -2,17 +2,11 @@
 
 if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_module')) {
 	class cfct_module_hatch_accolade extends cfct_build_module {
-    private $accolade_types = array(
-      'awards' => 'Awards',
-      'news' => 'News',
-      'certifications' => 'Certifications',
-      'insurances' => 'Insurances'
-    );
     private $accolades = array(
-      'awards' => array(),
-      'news' => array(),
-      'certifications' => array(),
-      'insurances' => array()
+      'awards' => array('name' => 'Awards', 'content' => array()),
+      'news' => array('name' => 'News', 'content' => array()),
+      'certifications' => array('name' => 'Certifications', 'content' => array()),
+      'insurances' => array('name' => 'Insurances', 'content' => array())
     );
 
 		public function __construct() {
@@ -38,13 +32,13 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
           if($terms && count($terms)>0)
           if(count($terms)>1){
             foreach($terms as $term){
-              if(isset($this->accolade_types[$term->slug])){
-                array_push($this->accolades[$term->slug],$ac);
+              if(isset($this->accolades[$term->slug])){
+                array_push($this->accolades[$term->slug]['content'],$ac);
               }
             }
           }
           else {
-            array_push($this->accolades[$terms[0]->slug],$ac);
+            array_push($this->accolades[$terms[0]->slug]['content'],$ac);
           }
         }
       }
@@ -54,15 +48,13 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
 		public function display($data) {
       $type = isset($data[$this->get_field_id('type')]) ? $data[$this->get_field_id('type')] : '';
       $style = isset($data[$this->get_field_id('style')]) ? $data[$this->get_field_id('style')] : '';
-      if($style=='') $style = 'left';
+      if($style=='') $style = 'header';
 
       $image_id = ($data[$this->get_field_id('post_image')]!='')?$data[$this->get_field_id('post_image')]:(($data[$this->get_field_id('global_image')])?$data[$this->get_field_id('global_image')]:'');
       $image = '';
-
       if (!empty($image_id) && $_img = wp_get_attachment_image_src($image_id, 'large', false)) {
         $image = $_img[0];
       }
-
 
       $this->view = 'view-'.$style.'.php';
 			return $this->load_view($data);
