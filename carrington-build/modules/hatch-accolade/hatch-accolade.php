@@ -34,56 +34,57 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
       if($accolades_post && count($accolades_post)>0){
         foreach($accolades_post as $ac){
           $terms = wp_get_post_terms($ac->ID, 'accolade-types');
-          if($terms && count($terms)>0)
-          if(count($terms)>1){
-            foreach($terms as $term){
-              if(isset($this->accolades[$term->slug])){
-                $args = array(
-                  'post_type' => 'attachment',
-                  'numberposts' => 1,
-                  'post_status' => 'any',
-                  'post_parent' => $ac->ID
-                );
-                $attachments = get_posts($args);
-                $accolade_image = get_post_meta($ac->ID, 'accolade-logo', true);
-                $desc = get_post_meta($ac->ID, 'description', true);
-                if($attachments) {
-                  $attachment = $attachments[0];
-                  $image = wp_get_attachment_image_src($attachment->ID, 'full');
-                  $accolade_image = $image[0];
+          if($terms && count($terms)>0){
+            if(count($terms)>1){
+              foreach($terms as $term){
+                if(isset($this->accolades[$term->slug])){
+                  $args = array(
+                    'post_type' => 'attachment',
+                    'numberposts' => 1,
+                    'post_status' => 'any',
+                    'post_parent' => $ac->ID
+                  );
+                  $attachments = get_posts($args);
+                  $accolade_image = get_post_meta($ac->ID, 'accolade-logo', true);
+                  $desc = get_post_meta($ac->ID, 'description', true);
+                  if($attachments) {
+                    $attachment = $attachments[0];
+                    $image = wp_get_attachment_image_src($attachment->ID, 'full');
+                    $accolade_image = $image[0];
+                  }
+                  array_push($this->accolades[$term->slug]['content'], array(
+                    'id' => $ac->ID,
+                    'title' => $ac->post_title,
+                    'link' => $ac->post_content,
+                    'description' => $desc,
+                    'image' => $accolade_image
+                  ));
                 }
-                array_push($this->accolades[$term->slug]['content'], array(
-                  'id' => $ac->ID,
-                  'title' => $ac->post_title,
-                  'link' => $ac->post_content,
-                  'description' => $desc,
-                  'image' => $accolade_image
-                ));
               }
             }
-          }
-          else {
-            $args = array(
-              'post_type' => 'attachment',
-              'numberposts' => 1,
-              'post_status' => 'any',
-              'post_parent' => $ac->ID
-            );
-            $attachments = get_posts($args);
-            $accolade_image = get_post_meta($ac->ID, 'accolade-logo', true);
-            $desc = get_post_meta($ac->ID, 'description', true);
-            if($attachments) {
-              $attachment = $attachments[0];
-              $image = wp_get_attachment_image_src($attachment->ID, 'full');
-              $accolade_image = $image[0];
+            else {
+              $args = array(
+                'post_type' => 'attachment',
+                'numberposts' => 1,
+                'post_status' => 'any',
+                'post_parent' => $ac->ID
+              );
+              $attachments = get_posts($args);
+              $accolade_image = get_post_meta($ac->ID, 'accolade-logo', true);
+              $desc = get_post_meta($ac->ID, 'description', true);
+              if($attachments) {
+                $attachment = $attachments[0];
+                $image = wp_get_attachment_image_src($attachment->ID, 'full');
+                $accolade_image = $image[0];
+              }
+              array_push($this->accolades[$terms[0]->slug]['content'], array(
+                'id' => $ac->ID,
+                'title' => $ac->post_title,
+                'link' => $ac->post_content,
+                'description' => $desc,
+                'image' => $accolade_image
+              ));
             }
-            array_push($this->accolades[$terms[0]->slug]['content'], array(
-              'id' => $ac->ID,
-              'title' => $ac->post_title,
-              'link' => $ac->post_content,
-              'description' => $desc,
-              'image' => $accolade_image
-            ));
           }
         }
       }

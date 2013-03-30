@@ -10,8 +10,7 @@
 
 ?>
 
-
-  <div id="<?=$id?>" class="<?=(count($chosen_accolade)>1)?'carousel-'.$id.' bumper-bottom':''?> accolade-carousel slide">
+  <div id="<?=$id?>" class="<?=(count($chosen_accolade)>1)?'carousel-'.$id:''?> accolade-carousel slide">
     <?php if(count($chosen_accolade)>1){ ?>
     <div class="carousel-inner">
     <?php } ?>
@@ -44,17 +43,6 @@
     <?php if(count($chosen_accolade)>1){ ?>
     <a class="carousel-control left" href="#<?=$id?>" data-slide="prev">&lsaquo;</a>
     <a class="carousel-control right" href="#<?=$id?>" data-slide="next">&rsaquo;</a>
-    <ol class="carousel-indicators">
-      <?php
-        $ic = 0;
-        foreach($chosen_accolade as $d){
-      ?>
-      <li data-target="#<?=$id?>" data-slide-to="<?=$ic?>"<?=($ic==0)?' class="active"':''?>></li>
-      <?php
-          $ic++;
-        }
-      ?>
-    </ol>
     <?php } ?>
   </div>
 
