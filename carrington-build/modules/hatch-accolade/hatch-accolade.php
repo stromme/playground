@@ -34,7 +34,7 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
       if($accolades_post && count($accolades_post)>0){
         foreach($accolades_post as $ac){;
           $terms = wp_get_post_terms($ac->ID, 'accolade-types');
-          if((gettype($terms)=='object' && get_class($terms)!='WP_Error') && $terms && count($terms)>0){
+          if(gettype($terms)=='array' && $terms && count($terms)>0){
             if(count($terms)>1){
               foreach($terms as $term){
                 if(isset($this->accolades[$term->slug])){

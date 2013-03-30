@@ -7,17 +7,14 @@
  * @subpackage
  * @since
  */
-
-  $blog_prefix = '';
-  if ( is_multisite() && !is_subdomain_install() && is_main_site() )
-    $blog_prefix = '/blog';
 ?>
 <div class="bumper-bottom">
   <h2 class="blue center">What we're <strong class="green">really</strong> good at.</h2>
 </div>
 <ul class="link-grid clearfix">
   <?php
-    if(defined(TB_Promote)){
+
+    if(class_exists('TB_Promote')){
       foreach($services as $service){
         $args = array('post_type' => 'research', 'taxonomy' => 'services', 'term' => $service->slug);
         $is_service_promoted = TB_Promote::is_promoted($args);
@@ -37,14 +34,14 @@
         <?php if($is_have_post){ ?>
         <a href="<?=get_home_url()."/showroom/".$service->slug?>"><i class="icon-picture icon-white"></i> Showroom</a>
         <?php } if($is_service_promoted){ ?>
-        <a href="<?=get_home_url().$blog_prefix."/services/".$service->slug?>"><i class="icon-info-sign icon-white"></i> Learn more</a>
+        <a href="<?=get_home_url().get_blog_prefix()."services/".$service->slug?>"><i class="icon-info-sign icon-white"></i> Learn more</a>
         <?php } ?>
       </nav>
       <?php } ?>
       <img src="<?=get_home_url()?>/wp-content/themes/playground/images/temp/category.png" alt="" />
     </div>
     <?php if($is_service_promoted){ ?>
-    <a href="<?=get_home_url().$blog_prefix."/services/".$service->slug?>"><?=$service->name?></a>
+    <a href="<?=get_home_url().get_blog_prefix()."services/".$service->slug?>"><?=$service->name?></a>
     <?php } else { ?>
     <span><?=$service->name?></span>
     <?php } ?>

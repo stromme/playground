@@ -7,9 +7,7 @@
  * @subpackage
  * @since
  */
-
 ?>
-
   <div id="<?=$id?>" class="<?=(count($chosen_accolade)>1)?'carousel-'.$id:''?> accolade-carousel slide">
     <?php if(count($chosen_accolade)>1){ ?>
     <div class="carousel-inner">
@@ -26,7 +24,6 @@
           <img src="<?=$d['image']?>" width="150">
         </div>
         <div class="middle">
-          <!--h2>2012 Angie's list superior service award winner.</h2-->
           <h2><?=$d['title']?></h2>
         </div>
         </div>
