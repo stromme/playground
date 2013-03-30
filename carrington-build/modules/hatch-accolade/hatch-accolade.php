@@ -32,7 +32,7 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
       // Do get it
       $accolades_post = get_posts($args);
       if($accolades_post && count($accolades_post)>0){
-        foreach($accolades_post as $ac){
+        foreach($accolades_post as $ac){;
           $terms = wp_get_post_terms($ac->ID, 'accolade-types');
           if($terms && count($terms)>0){
             if(count($terms)>1){
@@ -77,13 +77,13 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
                 $image = wp_get_attachment_image_src($attachment->ID, 'full');
                 $accolade_image = $image[0];
               }
-              /*array_push($this->accolades[$terms[0]->slug]['content'], array(
+              array_push($this->accolades[$terms[0]->slug]['content'], array(
                 'id' => $ac->ID,
                 'title' => $ac->post_title,
                 'link' => $ac->post_content,
                 'description' => $desc,
                 'image' => $accolade_image
-              ));*/
+              ));
             }
           }
         }
