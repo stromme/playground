@@ -17,17 +17,18 @@
 </div>
 <ul class="link-grid clearfix">
   <?php
-    foreach($services as $service){
-      $args = array('post_type' => 'research', 'taxonomy' => 'services', 'term' => $service->slug);
-      $is_service_promoted = TB_Promote::is_promoted($args);
-      $args = array(
-        'post_type'   => 'showroom',
-        'services'    => $service->slug,
-        'order'       => 'ASC',
-        'numberposts' => 1
-      );
-      $service_post_query = new WP_Query( $args );
-      $is_have_post = $service_post_query->have_posts();
+    if(defined(TB_Promote)){
+      foreach($services as $service){
+        $args = array('post_type' => 'research', 'taxonomy' => 'services', 'term' => $service->slug);
+        $is_service_promoted = TB_Promote::is_promoted($args);
+        $args = array(
+          'post_type'   => 'showroom',
+          'services'    => $service->slug,
+          'order'       => 'ASC',
+          'numberposts' => 1
+        );
+        $service_post_query = new WP_Query( $args );
+        $is_have_post = $service_post_query->have_posts();
   ?>
   <li>
     <div class="grid-thumb">
@@ -49,6 +50,7 @@
     <?php } ?>
   </li>
   <?php
+      }
     }
   ?>
 </ul>
