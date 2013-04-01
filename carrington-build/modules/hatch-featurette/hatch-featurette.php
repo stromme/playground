@@ -39,7 +39,6 @@ if (!class_exists('cfct_module_hatch_featurette') && class_exists('cfct_build_mo
       $content = isset($data[$this->get_field_id('content')]) ? $data[$this->get_field_id('content')] : '';
       $image_id = ($data[$this->get_field_id('post_image')]!='')?$data[$this->get_field_id('post_image')]:(($data[$this->get_field_id('global_image')])?$data[$this->get_field_id('global_image')]:'');
       $image = '';
-
       if (!empty($image_id) && $_img = wp_get_attachment_image_src($image_id, 'large', false)) {
         $image = $_img[0];
       }
@@ -166,10 +165,6 @@ if (!class_exists('cfct_module_hatch_featurette') && class_exists('cfct_build_mo
 							</div>
 							<!-- /select an image from media gallery -->
 						</div>
-						';
-
-
-				$html .= '
 					</div>
 					<!-- / image selector tabs -->';
 
