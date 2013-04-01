@@ -9,7 +9,7 @@
  */
 
 get_header(); 
-
+/*
 ?>
 <section>
 
@@ -342,4 +342,7 @@ get_header();
 <!-- / modal -->
 
 
-<?php get_footer(); ?>
+<?php */
+the_post();
+the_content();
+get_footer(); ?>
