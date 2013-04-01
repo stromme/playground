@@ -120,8 +120,11 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
               interval: '.$interval.'
             });
             carousel.bind("slide", function(){
-              $(this).animate({"opacity":0}, "fast", function(){
-                $(this).animate({"opacity":1}, "slow");
+              $(".item", $(this)).animate({"opacity":0}, 200, function(){
+                var items = $(this);
+                setTimeout(function(){
+                  items.animate({"opacity":1}, 200);
+                }, 150);
               });
             });
           });
@@ -391,6 +394,9 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
           moz-border-radius: 3px;
           o-border-radius: 3px;
           webkit-border-radius: 3px;
+        }
+        #'.$this->id_base.'-content-fields .cfct-accolade-thumb img {
+          width: 100%;
         }
         #'.$this->id_base.'-content-fields li label.cfct-accolade-detail {
           display: block;

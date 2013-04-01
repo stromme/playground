@@ -45,8 +45,7 @@ if (!class_exists('cfct_module_heading')) {
 	<label for="'.$this->get_field_id('content').'">'.__('Heading Text', 'carrington-build').'</label>
 	<input type="text" name="'.$this->get_field_name('content').'" id="'.$this->get_field_id('content').'" value="'.(!empty($data[$this->get_field_id('content')]) ? esc_attr($data[$this->get_field_id('content')]) : '').'" />
 </div>
-<p><a href="#cfct-header-adv-options" id="cfct-header-adv-options-toggle">'.__('Advanced Options', 'carrington-build').'</a></p>
-<div id="cfct-header-adv-options" class="cfct-post-layout-controls hidden">
+<div  id="'.$this->id_base.'-header-options" class="cfct-post-layout-controls">
 	<p>
 		<label for="'.$this->get_field_id('h_tag').'">'.__('HTML Tag', 'carrington-build').'</label>
 		<select name="'.$this->get_field_id('h_tag').'" id="'.$this->get_field_id('h_tag').'">
@@ -122,15 +121,7 @@ if (!class_exists('cfct_module_heading')) {
 		 * @return string JavaScript
 		 */
 		public function admin_js() {
-			return '
-// perform an action when the module admin screen loads
-cfct_builder.addModuleLoadCallback("'.$this->id_base.'", function(form) {
-	jQuery("#cfct-header-adv-options-toggle").click(function() {
-		jQuery(jQuery(this).attr("href")).slideToggle("fast");
-		return false;
-	});
-});
-			';
+			return '';
 		}
 		
 		/**
@@ -140,7 +131,15 @@ cfct_builder.addModuleLoadCallback("'.$this->id_base.'", function(form) {
 		 * @return string CSS
 		 */
 		public function admin_css() {
-			return '';
+			return '
+			  #'.$this->id_base.'-header-options.cfct-post-layout-controls {
+			    margin-top: 10px;
+			  }
+			  #'.$this->id_base.'-header-options.cfct-post-layout-controls p>label {
+			    width: auto;
+			    margin-right: 10px;
+			  }
+			';
 		}
 	}
 	// register the module with Carrington Build
