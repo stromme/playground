@@ -5413,6 +5413,9 @@ blockquote {
   line-height: 48px;
   width: 48px;
 }
+.icon-phone-halfling {
+  background-position: -96px -167px;
+}
 .green {
   color: #46a546;
 }
