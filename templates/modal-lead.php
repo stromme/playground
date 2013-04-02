@@ -17,19 +17,19 @@
 		<div>
 			<div class="input-prepend">
 			    <span class="add-on"><i class="icon-user"></i></span>
-			    <input validation="email" placeholder="Your Name" type="text">
+			    <input id="lead-name" validation="not-empty" data-field-name="Name" placeholder="Your Name" type="text" value="" />
 			</div>
 		</div>
 		<div>
 			<div class="input-prepend">
 			    <span class="add-on"><i class="icon-envelope"></i></span>
-			    <input validation="email" placeholder="Email Address" type="text">
+			    <input id="lead-email" validation="not-empty email" placeholder="Email Address" type="text" value="" />
 			</div>
 		</div>
 		<div>
 			<div class="input-prepend">
 			    <span class="add-on"><i class="icon-phone-halfling"></i></span>
-			    <input validation="phone" placeholder="Phone Number" type="text">
+			    <input id="lead-phone" validation="not-empty phone" placeholder="Phone Number" type="text" value="" />
 			</div>
 		</div>
 		<div class="bumper-top-small bumper-bottom">
@@ -41,7 +41,7 @@
 	</div>
 	
 	<div class="modal-footer center">
-		<a href="javascript:void(0);" class="btn btn-large btn-success save">Quick free estimate</a>
+		<a href="" class="btn btn-large btn-success save">Quick free estimate</a>
 	</div>
 </div>
 <!-- / modal -->

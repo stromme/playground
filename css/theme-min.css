@@ -6542,6 +6542,18 @@ div.img-polaroid div {
   max-height: 400px;
   overflow: hidden;
 }
+/* Alerts */
+#alert {
+  display: none;
+}
+.alert-fixed-top {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1130;
+  margin-top: -2px;
+  top: 0;
+}
 .pull-right {
   float: right;
 }

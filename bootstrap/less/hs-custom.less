@@ -443,3 +443,22 @@ div.img-polaroid {
     overflow: hidden;
   }
 }
+
+/* Alerts */
+
+// Hide error alert bar for now
+#alert {
+	display: none;
+}
+
+// Alerts fixed to top pf page
+
+// Shared (top/bottom) styles
+.alert-fixed-top {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: (@zindexFixedNavbar + 100);
+  margin-top: -2px;
+  top: 0;
+}

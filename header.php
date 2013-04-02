@@ -34,6 +34,17 @@
 <? get_template_part('templates/menu', 'headline'); ?>
 <? get_template_part('templates/menu', 'main'); ?>
 
+<!-- Urgent Alerts - fixed to top - default visibility hidden
+    ================================================== -->
+<div class="alert-fixed-top container-fluid">
+	<div class="offset2 span8" id="alert">
+		<div class="alert alert-success">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+		  	<strong>All done.</strong> We've saved your changes
+		</div>
+	</div>
+</div>
+
 
 <!-- Wrap the page in .container to centre the content and keep it at a max width -->
 <div class="container gentle-shadow">
