@@ -32,34 +32,42 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
       // Do get it
       $accolades_post = get_posts($args);
       if($accolades_post && count($accolades_post)>0){
-        foreach($accolades_post as $ac){;
+        foreach($accolades_post as $ac){
           $terms = wp_get_post_terms($ac->ID, 'accolade-types');
+          $accolade_image = '';
           if(gettype($terms)=='array' && $terms && count($terms)>0){
             if(count($terms)>1){
+              $parent_slug = '';
               foreach($terms as $term){
-                if(isset($this->accolades[$term->slug])){
-                  $args = array(
-                    'post_type' => 'attachment',
-                    'numberposts' => 1,
-                    'post_status' => 'any',
-                    'post_parent' => $ac->ID
-                  );
-                  $attachments = get_posts($args);
-                  $accolade_image = get_post_meta($ac->ID, 'accolade-logo', true);
-                  $desc = get_post_meta($ac->ID, 'description', true);
-                  if($attachments) {
-                    $attachment = $attachments[0];
-                    $image = wp_get_attachment_image_src($attachment->ID, 'full');
-                    $accolade_image = $image[0];
-                  }
-                  array_push($this->accolades[$term->slug]['content'], array(
-                    'id' => $ac->ID,
-                    'title' => $ac->post_title,
-                    'link' => $ac->post_content,
-                    'description' => $desc,
-                    'image' => $accolade_image
-                  ));
+                if(isset($this->accolades[$term->slug])) $parent_slug = $term->slug;
+              }
+              if($parent_slug!=''){
+                $acc_term  = "";
+                foreach($terms as $term){
+                  if($term->slug!=$parent_slug) $acc_term = $term->slug;
                 }
+                if($acc_term!='') $accolade_image = TOOLBOX_IMAGES.'/accolades/'.$acc_term.'.png';
+                if(!file_exists(TOOLBOX_BASE_DIR.'/images/accolades/'.$acc_term.'.png')) $accolade_image = '';
+                $args = array(
+                  'post_type' => 'attachment',
+                  'numberposts' => 1,
+                  'post_status' => 'any',
+                  'post_parent' => $ac->ID
+                );
+                $attachments = get_posts($args);
+                $desc = get_post_meta($ac->ID, 'description', true);
+                if($attachments) {
+                  $attachment = $attachments[0];
+                  $image = wp_get_attachment_image_src($attachment->ID, 'full');
+                  $accolade_image = $image[0];
+                }
+                array_push($this->accolades[$parent_slug]['content'], array(
+                  'id' => $ac->ID,
+                  'title' => $ac->post_title,
+                  'link' => $ac->post_content,
+                  'description' => $desc,
+                  'image' => $accolade_image
+                ));
               }
             }
             else {
@@ -70,7 +78,6 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
                 'post_parent' => $ac->ID
               );
               $attachments = get_posts($args);
-              $accolade_image = get_post_meta($ac->ID, 'accolade-logo', true);
               $desc = get_post_meta($ac->ID, 'description', true);
               if($attachments) {
                 $attachment = $attachments[0];
@@ -94,12 +101,20 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
 		public function display($data) {
       $id = 'accolade-'.$data['module_id'];
       $type = isset($data[$this->get_field_id('type')]) ? $data[$this->get_field_id('type')] : '';
-      $accolade_id = isset($data[$this->get_field_id('accolade_id')]) ? $data[$this->get_field_id('accolade_id')] : '';
+      $select_all = isset($data[$this->get_field_id('select_all_'.$type)]) ? $data[$this->get_field_id('select_all_'.$type)] : '';
       $chosen_accolade = array();
-      if(isset($accolade_id[$type]) && count($accolade_id[$type])>0 && count($this->accolades[$type]['content'])>0){
+      if($select_all!='' && $select_all==1){
         foreach($this->accolades[$type]['content'] as $ac){
-          if(in_array($ac['id'], $accolade_id[$type])){
-            array_push($chosen_accolade, $ac);
+          array_push($chosen_accolade, $ac);
+        }
+      }
+      else {
+        $accolade_id = isset($data[$this->get_field_id('accolade_id')]) ? $data[$this->get_field_id('accolade_id')] : '';
+        if(isset($accolade_id[$type]) && count($accolade_id[$type])>0 && count($this->accolades[$type]['content'])>0){
+          foreach($this->accolades[$type]['content'] as $ac){
+            if(in_array($ac['id'], $accolade_id[$type])){
+              array_push($chosen_accolade, $ac);
+            }
           }
         }
       }
@@ -180,22 +195,23 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
             </div>';
             foreach($this->accolades as $key=>$current_accolade){
             $select_all = (!empty($data[$this->get_field_name('select_all_'.$key)]) ? esc_html($data[$this->get_field_name('select_all_'.$key)]) : '');
+            $selected_all = ($select_all==1);
             $html .= '
             <div class="cfct-accolade-container accolade-'.$key.'" style="'.(($key==$type)?'display:block;':'display:none;').'">
               <div class="cfct-field no-space">
-                <input type="checkbox" value="1" class="cfct-check-all" id="'.$this->get_field_id('select_all_'.$key).'" name="'.$this->get_field_name('select_all_'.$key).'" '.(($select_all==1)?'checked="checked"':'').'/> <label for="'.$this->get_field_id('select_all_'.$key).'">Select all '.strtolower($this->accolades[$key]['name']).'</span> accolades</label>
+                <input type="checkbox" value="1" class="cfct-check-all" id="'.$this->get_field_id('select_all_'.$key).'" name="'.$this->get_field_name('select_all_'.$key).'" '.(($selected_all)?'checked="checked"':'').'/> <label for="'.$this->get_field_id('select_all_'.$key).'">Select all '.strtolower($this->accolades[$key]['name']).'</span> accolades</label>
               </div>
               <div class="cfct-field">
                 <ul class="cfct-accolade-list">';
                 foreach($this->accolades[$key]['content'] as $accolade){
                 $selected = false;
                 if(isset($accolade_id[$key]) && count($accolade_id[$key]>0)){
-                  $selected = in_array($accolade['id'], $accolade_id[$key]);
+                  $selected = (in_array($accolade['id'], $accolade_id[$key]) || $selected_all);
                 }
                 $html .= '
                   <li'.(($selected)?' class="selected"':'').'>
                     <div class="cfct-accolade-checkbox"><input type="checkbox" value="'.$accolade['id'].'" id="'.$this->get_field_id('accolade_id').'_'.$key.'_'.$accolade['id'].'" name="'.$this->get_field_id('accolade_id').'['.$key.'][]" '.(($selected)?'checked="checked"':'').'/></div>
-                    <div class="cfct-accolade-thumb">'.(($accolade['image']!='')?'<img src="'.$accolade['image'].'" />':'').'</div>
+                    <div class="cfct-accolade-thumb"><span>no thumb</span>'.(($accolade['image']!='')?'<img src="'.$accolade['image'].'" />':'').'</div>
                     <label for="'.$this->get_field_id('accolade_id').'_'.$key.'_'.$accolade['id'].'" class="cfct-accolade-detail">
                       <div class="cfct-accolade-title">'.$accolade['title'].'</div>
                       <div class="cfct-accolade-description">'.$accolade['description'].'</div>
@@ -379,7 +395,7 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
           float: left;
           width: 50px;
           height: 50px;
-          background-color: #EEEEEE;
+          border: 1px solid #AAAAAA;
           position: relative;
           z-index: 1;
           line-height: 50px;
@@ -389,14 +405,32 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
           overflow: hidden;
           cursor: default;
           color: #CCCCCC;
-          border: 1px solid #CCCCCC;
-          border-radius: 3px;
-          moz-border-radius: 3px;
-          o-border-radius: 3px;
-          webkit-border-radius: 3px;
+          border-radius: 6px;
+          moz-border-radius: 6px;
+          o-border-radius: 6px;
+          webkit-border-radius: 6px;
+        }
+        #'.$this->id_base.'-content-fields li.selected .cfct-accolade-thumb {
+          border-color: #000000;
         }
         #'.$this->id_base.'-content-fields .cfct-accolade-thumb img {
+          width: 50px;
+          height: 50px;
+          position: absolute;
+          z-index: 2;
+          left: 0;
+          top: 0;
+        }
+        #'.$this->id_base.'-content-fields .cfct-accolade-thumb span {
           width: 100%;
+          line-height: 50px;
+          text-align: center;
+          font-size: 10px;
+          whitespace: nowrap;
+          position: absolute;
+          z-index: 0;
+          left: 0;
+          top: 0;
         }
         #'.$this->id_base.'-content-fields li label.cfct-accolade-detail {
           display: block;

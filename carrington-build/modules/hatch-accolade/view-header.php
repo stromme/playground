@@ -20,9 +20,11 @@
       <div class="<?=($i==0)?'active ':''?>item">
         <?php } ?>
         <div class="row-middle center-align bumper-bottom">
+        <?php if($d['image']!=''){ ?>
         <div class="middle-fixed-small bumper-right">
           <img src="<?=$d['image']?>" width="150">
         </div>
+        <?php } ?>
         <div class="middle">
           <h2><?=$d['title']?></h2>
         </div>

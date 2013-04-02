@@ -6496,6 +6496,9 @@ body {
 .carousel-inner > .item {
   width: 100%;
 }
+.carousel-inner > .item .row-middle {
+  min-height: 110px;
+}
 .carousel-inner > .active {
   left: inherit;
 }
