@@ -41,7 +41,7 @@ if (!class_exists('cfct_module_hatch_jumbotron') && class_exists('cfct_build_mod
 
       $image_id = ($data[$this->get_field_id('post_image')]!='')?$data[$this->get_field_id('post_image')]:(($data[$this->get_field_id('global_image')])?$data[$this->get_field_id('global_image')]:'');
       $image = '';
-      if (!empty($image_id) && $_img = wp_get_attachment_image_src($image_id, 'large', false)) {
+      if (!empty($image_id) && $_img = wp_get_attachment_image_src($image_id, 'full', false)) {
         $image = $_img[0];
       }
 
