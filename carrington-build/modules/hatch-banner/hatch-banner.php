@@ -158,11 +158,6 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
           var '.$js_id.' = '.json_encode($js_data).';
           $(document).ready(function(){
             var carousel = $(".carousel-'.$id.'");
-            $(".write-review").unbind("click");
-            $(".write-review").click(function(e){
-              e.preventDefault();
-              $("#new-review").modal();
-            });
             var current_item_id = 0;
             var current_image_idx = 0;
             var interval = '.$interval.';

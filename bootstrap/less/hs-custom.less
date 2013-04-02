@@ -320,11 +320,36 @@ body {
 	}
 	a {
 		.opacity(65);
+
 	}
 	a:hover {
 		.opacity(100);
 		text-decoration: none;
 	}
+    a.disabled {
+        background-color: #ddd;
+    }
+    .review-rating {
+      padding-bottom: 5px;
+      position: relative;
+      height: 22px;
+      > div {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        margin-left: -50px;
+      }
+    }
+    .post-to-my-social-media {
+        input {
+            vertical-align: middle;
+            margin: 0 3px 0 0;
+        }
+        label {
+            line-height: 16px;
+            margin: 0;
+        }
+    }
 }
 
 // New Lead Modal

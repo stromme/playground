@@ -17,23 +17,31 @@
 	<div class="modal-body">
 	
 		<!-- Centre selectable star rating here above text box -->
-		
-		<textarea class="input-block-level" placeholder="Write your review." rows="3"></textarea>
-		<p class="bumper-top-small"> Login with <a href=""><i class="icon-facebook"></i> Facebook</a> or <a href=""><i class="icon-twitter"></i> Twitter</a>, or <a href="">register</a> to add your review.</p>
-		
-		<!-- Show this if the user chooses the register option -->
-		<div class="hide">
+		<div class="review-rating">
+      <div id="comment-rating"></div>
+		</div>
+		<textarea id="comment-content" class="input-block-level" placeholder="Write your review." rows="3"></textarea>
+    <input type="hidden" id="comment-via" value="register" />
+    <input type="hidden" id="social-media-id" value="" />
+    <div class="social-comment">
+      <div class="social-login">
+        <p class="bumper-top-small"> Login with <a href="" class="comment-via-fb"><i class="icon-facebook"></i> Facebook</a> or <a href="" class="comment-via-twitter"><i class="icon-twitter"></i> Twitter</a>, or <a href="" class="comment-via-register">register</a> to add your review.</p>
+      </div>
+      <div class="social-user"></div>
+    </div>
+    <!-- Show this if the user chooses the register option -->
+		<div class="guest-comment hide">
 			<div class="row-fluid bumper-top-small">
 				<div class="span6">
 					<div class="input-prepend">
 					    <span class="add-on"><i class="icon-user"></i></span>
-					    <input class="input-block-level" placeholder="Your Name" type="text">
+					    <input id="comment-name" class="input-block-level" validation="not-empty" placeholder="Your Name" type="text" />
 					</div>
 				</div>
 				<div class="span6">
 					<div class="input-prepend">
 					    <span class="add-on"><i class="icon-user"></i></span>
-					    <input class="input-block-level" placeholder="Company" type="text">
+					    <input id="comment-company" class="input-block-level" placeholder="Company" type="text" />
 					</div>
 				</div>
 			</div>
@@ -41,7 +49,7 @@
 				<div class="span6">
 					<div class="input-prepend">
 					    <span class="add-on"><i class="icon-envelope"></i></span>
-					    <input class="input-block-level" validation="email" placeholder="Email Address" type="text">
+					    <input id="comment-email" class="input-block-level" validation="not-empty email" placeholder="Email Address" type="text" />
 					</div>
 				</div>
 			</div>
@@ -52,9 +60,11 @@
 	<div class="modal-footer">
 		<div class="pull-left">
 			<!-- Only show share on ... option if the user logged in with social network -->
-			<p><small><input type="checkbox" name="" value="" checked="checked" /> <span>Share on Facebook</span></small></p>
+      <div class="post-to-my-social-media form-inline pull-left hidden">
+        <input id="review-social-post" type="checkbox" value="1" name="review-social-post" /> <label for="review-social-post"><small>Share on <span class="social-media-name">Facebook</span></small></label>
+      </div>
 		</div>
-		<a href="javascript:void(0);" class="btn btn-success save">Add Review</a>
+		<a href="javascript:void(0);" class="btn btn-success save disabled">Add Review</a>
 	</div>
 </div>
 <!-- / modal -->
