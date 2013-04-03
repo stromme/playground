@@ -164,7 +164,9 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
             var timeout = setTimeout(function(){
               cycle_image();
             }, interval);
-            $(".carousel-indicators li", carousel).click(function(){
+            $(".carousel-indicators li", carousel).mousedown(function(e){
+              e.preventDefault();
+            }).click(function(){
               clearTimeout(timeout);
               current_item_id = parseInt($(this).attr("data-slide-to"));
               current_image_idx = 0;

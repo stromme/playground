@@ -61,7 +61,7 @@
 		<div class="pull-left">
 			<!-- Only show share on ... option if the user logged in with social network -->
       <div class="post-to-my-social-media form-inline pull-left hidden">
-        <input id="review-social-post" type="checkbox" value="1" name="review-social-post" /> <label for="review-social-post"><small>Share on <span class="social-media-name">Facebook</span></small></label>
+        <input id="review-social-post" type="checkbox" value="1" name="review-social-post" checked="checked" /> <label for="review-social-post"><small>Share on <span class="social-media-name">Facebook</span></small></label>
       </div>
 		</div>
 		<a href="javascript:void(0);" class="btn btn-success save disabled">Add Review</a>
