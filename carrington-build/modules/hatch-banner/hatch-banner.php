@@ -191,7 +191,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
               var active_item;
               var active_image;
               current_image_idx++;
-              if(current_image_idx>='.$js_id.'[current_item_id].images.length){
+              if('.$js_id.'.length>1 && current_image_idx>='.$js_id.'[current_item_id].images.length){
                 current_item_id++;
                 current_image_idx = 0;
                 if(current_item_id>='.$js_id.'.length){
@@ -212,7 +212,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
                   }, interval);
                 });
               }
-              else {
+              else if('.$js_id.'[current_item_id].images.length>1) {
                 active_item = items[current_item_id];
                 active_image = $(".banner-photo img", active_item);
                 active_image.fadeOut("fast", function(){
@@ -224,6 +224,9 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
                     }, interval);
                   });
                 });
+                if('.$js_id.'.length<=1){
+                  if(current_image_idx>'.$js_id.'[current_item_id].images.length-1) current_image_idx = 0;
+                }
               }
             }
           });
