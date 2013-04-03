@@ -6547,13 +6547,23 @@ body {
   left: auto;
   right: 20px;
 }
-.accolade-carousel .carousel-indicators {
-  left: 50%;
-  margin-left: -20px;
-  top: 125px;
+/* Review carousel */
+.review-carousel {
+  position: relative;
 }
-.accolade-carousel .carousel-indicators li {
-  cursor: pointer;
+.review-carousel .review-link {
+  bottom: 0;
+}
+.review-carousel .carousel-control {
+  top: 45%;
+  left: -30px;
+  color: #222222;
+  border: none;
+  background: transparent;
+}
+.review-carousel .carousel-control.right {
+  left: auto;
+  right: -30px;
 }
 /* Image */
 div.img-polaroid {
