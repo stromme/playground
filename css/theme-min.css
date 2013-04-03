@@ -5944,21 +5944,25 @@ nav-callout .notch {
   clear: both;
 }
 .jumbotron {
+  display: table;
+  width: 100%;
+}
+.jumbotron .jumbotron-content {
   height: 400px;
   text-align: center;
   display: table-cell;
   vertical-align: middle;
 }
-.jumbotron p {
+.jumbotron .jumbotron-content p {
   padding: 0 60px;
   font-size: 48px;
   line-height: 55px;
   font-weight: 100;
 }
-.jumbotron cite {
+.jumbotron .jumbotron-content cite {
   font-size: 28px;
 }
-.jumbotron.round-corner {
+.jumbotron .jumbotron-content.round-corner {
   -webkit-border-top-right-radius: 6px;
   -moz-border-radius-topright: 6px;
   border-top-right-radius: 6px;

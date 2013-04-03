@@ -80,22 +80,26 @@
 // --------------------------------------------------
 
 .jumbotron {
-	height: 400px;
-	text-align: center;
-	display: table-cell;
-	vertical-align: middle;
-	p {
-		padding: 0 @bumperLarge;
-		font-size: @baseFontSize * 3;
-		line-height: @baseLineHeight *2.75;
-		.light-weight;
-	}
-	cite {
-		font-size: @baseFontSize * 1.75;
-	}
-}
-.jumbotron.round-corner {
-    .border-top-radius(@borderRadiusLarge);
+    display: table;
+    width: 100%;
+    .jumbotron-content {
+        height: 400px;
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+        p {
+            padding: 0 @bumperLarge;
+            font-size: @baseFontSize * 3;
+            line-height: @baseLineHeight *2.75;
+            .light-weight;
+        }
+        cite {
+            font-size: @baseFontSize * 1.75;
+        }
+    }
+    .jumbotron-content.round-corner {
+        .border-top-radius(@borderRadiusLarge);
+    }
 }
 
 .location-banner {
