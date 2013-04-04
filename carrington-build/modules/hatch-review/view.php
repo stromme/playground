@@ -24,7 +24,13 @@
 
               <p>"<?=$r->content?>"
               </p>
-              <p class="citation"><cite><?=$r->name?> </cite><?php if($type=='manual' || true){ ?><span class="author-location">~ Okay dokey<?=$r->location?></span><?php } ?></p>
+              <p class="citation"><cite><?=$r->name?></cite>
+                <?php if($type=='manual'){ ?>
+                  <span class="author-location">~ <?=$r->location?></span>
+                <?php } else if($r->company!=''){ ?>
+                  <span class="author-location">~ <?=$r->company?></span>
+                <?php } ?>
+              </p>
               <a href="<?=home_url().get_blog_prefix()?>reviews" class="review-link">Read more reviews</a>
 
           <?php if(count($reviews)>1){ ?>
