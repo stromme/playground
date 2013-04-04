@@ -14,6 +14,7 @@ $company = get_option('tb_company');
 $args = array(
   'number'  => 3,
   'post_id' => 0,
+  'status'  => 'approve',
   'meta_query' => array(
     'relation' => 'AND',
     array(
@@ -50,8 +51,9 @@ if(count($reviews)>1){
 $args = array(
   'number'  => 10,
   'post_id' => 0,
-  'orderby'    => 'modified',
-  'order'      => 'DESC'
+  'orderby' => 'modified',
+  'order'   => 'DESC',
+  'status'  => 'approve'
 );
 $comments = get_comments($args);
 $all_reviews = array();
