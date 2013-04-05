@@ -14,6 +14,7 @@ $company = get_option('tb_company');
 $args = array(
   'number'  => 3,
   'post_id' => 0,
+  'status'  => 'approve',
   'meta_query' => array(
     'relation' => 'AND',
     array(
@@ -50,8 +51,9 @@ if(count($reviews)>1){
 $args = array(
   'number'  => 10,
   'post_id' => 0,
-  'orderby'    => 'modified',
-  'order'      => 'DESC'
+  'orderby' => 'modified',
+  'order'   => 'DESC',
+  'status'  => 'approve'
 );
 $comments = get_comments($args);
 $all_reviews = array();
@@ -79,35 +81,16 @@ foreach($comments as $comment){
 	<section class="bg-white page-left page-right bumper-bottom-medium bumper-top-medium">
 		<ul id="reviews-list" class="reviews-list">
       <?php
+        global $review;
         if(count($reviews)>0){
           foreach($reviews as $review){
-      ?>
-			<li class="bumper-bottom">
-				<div class="author-callout author-callout-border">
-					<cite><?=$review->name?></cite> says<b class="author-callout-border-notch notch"></b><b class="notch"></b>
-					<div class="pull-right review-rating" data-score="<?=$review->rating?>"></div>
-				</div>
-				<p class="bumper-bottom">"<?=$review->content?>"
-				</p>
-				<div class="pen-stroke"></div>
-			</li>
-      <?php
+            load_template( dirname(__FILE__).'/../templates/list-review.php', false);
           }
         }
         if(count($all_reviews)>0){
           foreach($all_reviews as $review){
             if(!in_array($review->id, $pinned_keys)){
-      ?>
-			<li class="bumper-bottom">
-				<div class="author-callout author-callout-border">
-					<cite><?=$review->name?></cite> says<b class="author-callout-border-notch notch"></b><b class="notch"></b>
-					<div class="pull-right review-rating" data-score="<?=$review->rating?>"></div>
-				</div>
-				<p class="bumper-bottom">"<?=$review->content?>"
-				</p>
-				<div class="pen-stroke"></div>
-			</li>
-      <?php
+              load_template( dirname(__FILE__).'/../templates/list-review.php', false);
             }
           }
         }

@@ -195,9 +195,19 @@ body {
 // Showroom page
 
 #showroom {
-	overflow: auto;
 	.bumper-left-medium;
 	.bumper-right-medium;
+    .infinite-loader {
+      float: left;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 60px;
+      .spinner {
+        top: 30px !important;
+        left: 50% !important;
+      }
+    }
 }
 
 .project {
@@ -223,6 +233,8 @@ body {
 	
 		//Set relative position so we can absolutley position sharing icons
 		position: relative;
+        text-align: center;
+        min-height: 70px;
 	
 		div:first-of-type {
 			visibility: hidden;
@@ -232,9 +244,25 @@ body {
 			a { .opacity(60); }
 			a:hover { .opacity(100); }
 		}
+
+        a.show-image {
+            width: 48px;
+            height: 48px;
+            display: none;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-top: -24px;
+            margin-left: -24px;
+            .opacity(60);
+        }
+        a.show-image:hover { .opacity(100); }
 	}
 	
 	.favorite-photo:hover div:first-of-type { visibility: visible; }
+    .favorite-photo:hover a.show-image {
+        display: block;
+    }
 	
 	// Thumbnails under the main project photo
 	
@@ -269,8 +297,27 @@ body {
 		#gradient > .vertical(lighten(@grayLighter, 10%), lighten(@grayLighter, 3%));		
 		p {
 			font-size: @baseFontSize;
+            position: relative;
+            .content-preview {
+              margin-right: 40px;
+              display: block;
+            }
+            .content-full {
+              margin-right: 40px;
+              display: none;
+            }
+            .show-more {
+              display: block;
+              position: absolute;
+              right: -5px;
+              top: 4px;
+              font-size: 12px;
+              i {
+                margin-right: 3px;
+              }
+            }
 		}
-		
+
 	}
 	
 	// Company and Service type tags
