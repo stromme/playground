@@ -9,6 +9,49 @@
  */
 
 get_header(); 
+// Get all pinned reviews
+
+$initial_projects = array();
+$args = array(
+  'orderby' => 'pinned',
+  'order'   => 'desc',
+  'post_type'		   => array('showroom'),
+  'post_status'	   => 'publish',
+  'posts_per_page'  => -1,
+  'meta_query' => array(
+    array(
+      'key' => 'pinned',
+      'value' => '',
+      'type' => 'char',
+      'compare' => '!='
+    )
+  )
+);
+$loop = new WP_Query( $args );
+$pinned_projects = $loop->posts;
+$pinned_keys = array();
+foreach($pinned_projects as $prj){
+  array_push($pinned_keys, $prj->ID);
+  $new_project = TB_Frontend::get_project_details($prj);
+  array_push($initial_projects, $new_project);
+}
+
+$args = array(
+  'orderby'		     => 'modified',
+  'order'			     => 'DESC',
+  'post_type'		   => array('showroom'),
+  'post_status'	   => 'publish',
+  'posts_per_page' => 10,
+  'numberposts'    => 10
+);
+$loop = new WP_Query( $args );
+$first_ten_projects = $loop->posts;
+foreach($first_ten_projects as $prj){
+  if(!in_array($prj->ID, $pinned_keys)){
+    $new_project = TB_Frontend::get_project_details($prj);
+    array_push($initial_projects, $new_project);
+  }
+}
 
 ?>
 
@@ -21,259 +64,44 @@ get_header();
 		</div>
 	</section>
 	<section class="bg-white" id="showroom">
-		<div class="row-fluid">
-		
-			<div class="span4">
-				
-				<div class="project">
-					<div>
-						<div class="favorite-photo">
-							<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-							<div>
-								<a href="#" ><i class="icon-facebook-2x"></i></a>
-								<a href="#"><i class="icon-twitter-2x"></i></a>
-							</div>
-						</div>
-						<div class="review">
-							<h3>Customer reviewed</h3>
-							<p>"David, thanks for always showing up when you say you will and being sensitive to work flow here while you are on the job and doing a great job of cleaning our outside windows on the 2nd and 3rd floors!"
-							</p>
-							<div class="author">
-								<p><cite>John Davies</cite></p><!-- Show star rating here -->
-							</div>
-						</div>
-						<blockquote>
-							<p>The Washington Athletic Club demands excellence in all areas of performance. That is exactly why David Gutierrez has been specifically requested to handle our window cleaning needs for over 10 years. David is proactive, flexible, understands our business needs and operations, and 
-							</p>
-						</blockquote>
-						<div class="tags">
-							
-							<p><i class="icon-map-marker"></i> Starbucks <small>- New West Minster</small></p>
-							<p><a href=""><i class="icon-tag"></i> Home Window Cleaning</a></p>		
-						</div>
-					</div>
-					<div class="curved-shadow">
-						<img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
-					</div>
-				</div> <!-- /project -->
-				
-				<div class="project">
-					<div>
-						<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-						<ul class="thumbnails">
-							<li>
-								<a href="" class="thumbnail">
-									<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-								</a>
-							</li>
-							<li>
-								<a href="" class="thumbnail">
-									<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-								</a>
-							</li>
-							<li>
-								<a href="" class="thumbnail">
-									<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-								</a>
-							</li>
-							<li>
-								<a href="" class="thumbnail">
-									<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-								</a>
-							</li>
-							<li>
-								<a href="" class="thumbnail">
-									<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-								</a>
-							</li>
-						</ul>
-						<blockquote>
-							<p>The Washington Athletic Club demands excellence in all areas of performance. That is exactly why David Gutierrez has been specifically requested to handle our window cleaning needs for over 10 years. David is proactive, flexible, understands our business needs and operations, and 
-							</p>
-						</blockquote>
-						<div class="tags">
-							
-							<p><i class="icon-map-marker"></i> Starbucks <small>- New West Minster</small></p>
-							<p><a href=""><i class="icon-tag"></i> Home Window Cleaning</a></p>		
-						</div>
-					</div>
-					<div class="curved-shadow">
-						<img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
-					</div>
-				</div> <!-- /project -->
-				
-			</div> <!-- /span4 -->
-			
-			<div class="span4">
-			
-				<div class="project">
-					<div>
-						<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-						<ul class="thumbnails">
-							<li>
-								<a href="" class="thumbnail">
-									<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-								</a>
-							</li>
-							<li>
-								<a href="" class="thumbnail">
-									<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-								</a>
-							</li>
-							<li>
-								<a href="" class="thumbnail">
-									<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-								</a>
-							</li>
-							<li>
-								<a href="" class="thumbnail">
-									<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-								</a>
-							</li>
-							<li>
-								<a href="" class="thumbnail">
-									<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-								</a>
-							</li>
-						</ul>
-						<div class="review">
-							<h3>Customer reviewed</h3>
-							<p>"David, thanks for always showing up when you say you will and being sensitive to work flow here while you are on the job and doing a great job of cleaning our outside windows on the 2nd and 3rd floors!"
-							</p>
-							<div class="author">
-								<p><cite>John Davies</cite></p><!-- Show star rating here -->
-							</div>
-						</div>
-						<blockquote>
-							<p>Dave, thank you for your on-going exceptional service! Your work is fantastic and you’re a pleasure to work with. I ...
-							</p>
-						</blockquote>
-						<div class="tags">
-							
-							<p><i class="icon-map-marker"></i> Starbucks <small>- New West Minster</small></p>
-							<p><a href=""><i class="icon-tag"></i> Home Window Cleaning</a></p>		
-						</div>
-					</div>
-					<div class="curved-shadow">
-						<img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
-					</div>
-				</div> <!-- /project -->
-				
-				<div class="project">
-					<div>
-						<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-						<ul class="thumbnails">
-							<li>
-								<a href="" class="thumbnail">
-									<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-								</a>
-							</li>
-							<li>
-								<a href="" class="thumbnail">
-									<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-								</a>
-							</li>
-							<li>
-								<a href="" class="thumbnail">
-									<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-								</a>
-							</li>
-							<li>
-								<a href="" class="thumbnail">
-									<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-								</a>
-							</li>
-							<li>
-								<a href="" class="thumbnail">
-									<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-								</a>
-							</li>
-						</ul>
-						<blockquote>
-							<p>The Washington Athletic Club demands excellence in all areas of performance. That is exactly why David Gutierrez has been specifically requested to handle our window cleaning needs for over 10 years. David is proactive, flexible, understands our business needs and operations, and 
-							</p>
-						</blockquote>
-						<div class="tags">
-							
-							<p><i class="icon-map-marker"></i> Starbucks <small>- New West Minster</small></p>
-							<p><a href=""><i class="icon-tag"></i> Home Window Cleaning</a></p>		
-						</div>
-					</div>
-					<div class="curved-shadow">
-						<img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
-					</div>
-				</div> <!-- /project -->
-				
-			</div> <!-- /span4 -->
-			
-			<div class="span4">
-			
-				<div class="project">
-					<div>
-						<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-						<ul class="thumbnails">
-							<li>
-								<a href="" class="thumbnail">
-									<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-								</a>
-							</li>
-							<li>
-								<a href="" class="thumbnail">
-									<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-								</a>
-							</li>
-						</ul>
-						<blockquote>
-							<p>The Washington Athletic Club demands excellence in all areas of performance. That is exactly why David Gutierrez has been specifically requested to handle our window cleaning needs for over 10 years. David is proactive, flexible, understands our business needs and operations, and 
-							</p>
-						</blockquote>
-						<div class="tags">
-							
-							<p><i class="icon-map-marker"></i> Starbucks <small>- New West Minster</small></p>
-							<p><a href=""><i class="icon-tag"></i> Home Window Cleaning</a></p>		
-						</div>
-					</div>
-					<div class="curved-shadow">
-						<img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
-					</div>
-				</div> <!-- /project -->
-				
-				<div class="project">
-					<div>
-						<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-						<ul class="thumbnails">
-							<li>
-								<a href="" class="thumbnail">
-									<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-								</a>
-							</li>
-							<li>
-								<a href="" class="thumbnail">
-									<img src="<?php echo THEME_IMAGES; ?>temp/banner.jpg">
-								</a>
-							</li>
-						</ul>
-						<blockquote>
-							<p>The Washington Athletic Club demands excellence in all areas of performance. That is exactly why David Gutierrez has been specifically requested to handle our window cleaning needs for over 10 years. David is proactive, flexible, understands our business needs and operations, and 
-							</p>
-						</blockquote>
-						<div class="tags">
-							
-							<p><i class="icon-map-marker"></i> Starbucks <small>- New West Minster</small></p>
-							<p><a href=""><i class="icon-tag"></i> Home Window Cleaning</a></p>		
-						</div>
-					</div>
-					<div class="curved-shadow">
-						<img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
-					</div>
-				</div> <!-- /project -->
-				
-			</div> <!-- /span4 -->
-				
-		
-		
-	
+		<div id="projects-list" class="row-fluid">
+      <?php global $prj; ?>
+      <div class="span4 showroom-column" data-column="0">
+      <?php
+        $i=0;
+        foreach($initial_projects as $prj){
+          if($i%3==0){
+            load_template( dirname(__FILE__).'/../templates/list-project.php', false);
+          }
+          $i++;
+        }
+      ?>
+      </div>
+      <div class="span4 showroom-column" data-column="1">
+      <?php
+        $i=0;
+        foreach($initial_projects as $prj){
+          if($i%3==1){
+            load_template( dirname(__FILE__).'/../templates/list-project.php', false);
+          }
+          $i++;
+        }
+      ?>
+      </div>
+      <div class="span4 showroom-column" data-column="2">
+      <?php
+        $i=0;
+        foreach($initial_projects as $prj){
+          if($i%3==2){
+            load_template( dirname(__FILE__).'/../templates/list-project.php', false);
+          }
+          $i++;
+        }
+      ?>
+      </div>
+      <div class="clearfix"></div>
+    </div>
 	</section>
-	
+</div>
 
 <?php get_footer(); ?>
