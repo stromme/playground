@@ -7,7 +7,14 @@
         <a href="#" ><i class="icon-facebook-2x"></i></a>
         <a href="#"><i class="icon-twitter-2x"></i></a>
       </div>
-      <a href="#" class="show-image"><i class="icon-fullscreen-2x"></i></a>
+      <a href="<?=$prj->favorite_media->image_large[0]?>" class="show-image colorbox-element" rel="gallery-<?=$prj->id?>"><i class="icon-fullscreen-2x"></i></a>
+      <?php if($prj->media!='' && count($prj->media)>1){ ?>
+        <div class="colorbox-image-list" style="display:none;">
+          <?php foreach($prj->media as $media){ ?>
+            <a href="<?=$media->image_large[0]?>" class="colorbox-element" <?=($prj->favorite_media->image[0]!=$media->image[0])?'rel="gallery-'.($prj->id).'"':''?>></a>
+          <?php } ?>
+        </div>
+      <?php } ?>
     </div>
     <ul class="thumbnails">
       <li>
@@ -20,7 +27,7 @@
           foreach($prj->media as $media){
             if($media->id!=$prj->favorite_media->id){ ?>
               <li>
-                <a href="" class="thumbnail" data-image="<?=$media->image[0]?>">
+                <a href="" class="thumbnail" data-image="<?=$media->image[0]?>" data-image-large="<?=$media->image_large[0]?>">
                   <img src="" data-src="<?=$media->thumbnail?>" />
                 </a>
               </li>

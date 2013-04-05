@@ -6354,6 +6354,14 @@ body {
   top: 30px !important;
   left: 50% !important;
 }
+.showroom-selector.dropdown .dropdown-menu {
+  width: 95%;
+}
+.showroom-selector.dropdown .dropdown-menu a {
+  font-size: 14px;
+  line-height: 14px;
+  text-align: left;
+}
 .project {
   padding-top: 40px;
 }
