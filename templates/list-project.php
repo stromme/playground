@@ -2,7 +2,7 @@
 <div class="project">
   <div>
     <div class="favorite-photo">
-      <img src="" data-src="<?=$prj->favorite_media->image[0]?>" />
+      <img src="<?=TOOLBOX_IMAGES.'/spacer.gif'?>" data-src="<?=$prj->favorite_media->image[0]?>" />
       <div>
         <a href="#" ><i class="icon-facebook-2x"></i></a>
         <a href="#"><i class="icon-twitter-2x"></i></a>
@@ -19,7 +19,7 @@
     <ul class="thumbnails">
       <li>
         <a href="" class="thumbnail" data-image="<?=$prj->favorite_media->image[0]?>">
-          <img src="" data-src="<?=$prj->favorite_media->thumbnail?>" />
+          <img src="<?=TOOLBOX_IMAGES.'/spacer.gif'?>" data-src="<?=$prj->favorite_media->thumbnail?>" />
         </a>
       </li>
       <?php
@@ -28,7 +28,7 @@
             if($media->id!=$prj->favorite_media->id){ ?>
               <li>
                 <a href="" class="thumbnail" data-image="<?=$media->image[0]?>" data-image-large="<?=$media->image_large[0]?>">
-                  <img src="" data-src="<?=$media->thumbnail?>" />
+                  <img src="<?=TOOLBOX_IMAGES.'/spacer.gif'?>" data-src="<?=$media->thumbnail?>" />
                 </a>
               </li>
             <?php
