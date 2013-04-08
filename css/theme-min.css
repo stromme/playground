@@ -5663,6 +5663,16 @@ nav-callout .notch {
 .bg-blue {
   background-color: #0083e0;
 }
+.bg-warning {
+  background-color: #ffe761;
+  background-image: -moz-linear-gradient(top, #fff5a2, #ffd200);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fff5a2), to(#ffd200));
+  background-image: -webkit-linear-gradient(top, #fff5a2, #ffd200);
+  background-image: -o-linear-gradient(top, #fff5a2, #ffd200);
+  background-image: linear-gradient(to bottom, #fff5a2, #ffd200);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffff5a2', endColorstr='#ffffd200', GradientType=0);
+}
 .bg-blue-diagnal {
   background: url("../images/backgrounds/blue-diagnal.png") repeat;
 }
