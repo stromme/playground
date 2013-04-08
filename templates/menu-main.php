@@ -82,7 +82,7 @@ $comments = get_comments($args);
 	
 	<!-- Brand -->
 	<div class="brand">
-		<img src="<?php echo THEME_IMAGES; ?>temp/window-cleaning-dot-com-logo.png">
+		<img src="<?php echo get_header_image(); ?>">
 	</div>
 	<!-- /Brand -->
 	
