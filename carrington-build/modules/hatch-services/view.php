@@ -38,7 +38,7 @@
         <?php } ?>
       </nav>
       <?php } ?>
-      <img src="<?=get_home_url()?>/wp-content/themes/playground/images/temp/category.png" alt="" />
+      <img src="<?=TOOLBOX_IMAGES?>/services/<?=$service->slug?>.jpg" alt="" />
     </div>
     <?php if($is_service_promoted){ ?>
     <a href="<?=get_home_url().get_blog_prefix()."services/".$service->slug?>"><?=$service->name?></a>
