@@ -1,13 +1,14 @@
 <?php global $prj ?>
 <div class="project">
-  <div>
+  <div class="project-container">
     <div class="favorite-photo">
       <img src="<?=TOOLBOX_IMAGES.'/spacer.gif'?>" data-src="<?=$prj->favorite_media->image[0]?>" />
       <div>
+      	<a href="<?=$prj->favorite_media->image_large[0]?>" class="colorbox-element" rel="gallery-<?=$prj->id?>"><i class="icon-fullscreen-2x"></i></a>
         <a href="#" ><i class="icon-facebook-2x"></i></a>
         <a href="#"><i class="icon-twitter-2x"></i></a>
       </div>
-      <a href="<?=$prj->favorite_media->image_large[0]?>" class="show-image colorbox-element" rel="gallery-<?=$prj->id?>"><i class="icon-fullscreen-2x"></i></a>
+      
       <?php if($prj->media!='' && count($prj->media)>1){ ?>
         <div class="colorbox-image-list" style="display:none;">
           <?php foreach($prj->media as $media){ ?>

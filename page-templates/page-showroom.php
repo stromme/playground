@@ -73,7 +73,7 @@ foreach($first_ten_projects as $prj){
 <div class="container gentle-shadow">
 	
 	<section class="bg-sea margin-left margin-right page-title">
-		<div class="bumper-top-medium bumper-bottom-medium center">
+		<div class="bumper-top bumper-bottom center">
 			<h2 class="white">See some of our recent <span class="dropdown showroom-selector"><a href="" class="dropdown-toggle link-inverse link-decorate link-showoff" data-toggle="dropdown"><?=$current_service?></a>
         <ul class="dropdown-menu">
           <?php if($service!=''){ ?>
