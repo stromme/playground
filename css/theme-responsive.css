@@ -1096,6 +1096,10 @@
   div.img-polaroid div {
     max-height: 640px;
   }
+  .grid-thumb nav {
+    display: block;
+    visibility: visible;
+  }
 }
 @media (min-width: 767px) and (max-width: 979px) {
   div.img-polaroid.middle9 {
