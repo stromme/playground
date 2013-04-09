@@ -14,7 +14,7 @@
   <?php } ?>
 	<div class="middle">
 		<<?=$heading?> class=""><?=parse_shortclass($title)?></<?=$heading?>>
-		<p class="blue"><?=parse_shortclass($content)?></p>
+		<p><?=parse_shortclass($content)?></p>
 	</div>
 </div>
 

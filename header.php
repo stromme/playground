@@ -21,7 +21,7 @@
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
 
-<body class="roadworks-scheme">
+<body>
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
