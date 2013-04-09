@@ -10,7 +10,7 @@
 ?>
   <div id="<?=$id?>" class="<?=(count($reviews)>1)?'carousel-'.$id:''?> review-carousel slide">
     <div class="review review-invert bumper-top-large bumper-bottom-large ">
-      <blockquote class="center well well-blue well-has-shadow">
+      <blockquote class="center well well-has-shadow">
         <?php if(count($reviews)>1){ ?>
         <div class="carousel-inner">
         <?php } ?>

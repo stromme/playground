@@ -72,10 +72,9 @@ foreach($comments as $comment){
 <!-- Wrap the page in .container to centre the content and keep it at a max width -->
 <div class="container gentle-shadow">
 	
-	<section class="bg-sea margin-left margin-right page-title">
-		<div class="bumper-top-medium bumper-bottom-medium bumper-left-large bumper-right-large center">
-			<h2 class="white"><?=$company['name']?>, loved in your neighborhood.</h2>
-			<div class="pen-stroke-blue"></div>
+	<section class="banner-title margin-left margin-right page-title">
+		<div class="bumper-top bumper-bottom bumper-left-large bumper-right-large center">
+			<h2><?php echo ( get_the_title() != 'Reviews' ? get_the_title() : $company['name'] . ', loved in your neighborhood.'); ?></h2>
 		</div>
 	</section>
 	<section class="bg-white page-left page-right bumper-bottom-medium bumper-top-medium">
@@ -84,13 +83,13 @@ foreach($comments as $comment){
         global $review;
         if(count($reviews)>0){
           foreach($reviews as $review){
-            load_template( dirname(__FILE__).'/../templates/list-review.php', false);
+            get_template_part('templates/list', 'review');
           }
         }
         if(count($all_reviews)>0){
           foreach($all_reviews as $review){
             if(!in_array($review->id, $pinned_keys)){
-              load_template( dirname(__FILE__).'/../templates/list-review.php', false);
+              get_template_part('templates/list', 'review');
             }
           }
         }

@@ -5324,6 +5324,28 @@ h2.jumbo {
   letter-spacing: -1px;
   color: #555555;
 }
+.banner-title {
+  background-color: #0c93f3;
+  background-image: -moz-linear-gradient(top, #149dff, #0083e0);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#149dff), to(#0083e0));
+  background-image: -webkit-linear-gradient(top, #149dff, #0083e0);
+  background-image: -o-linear-gradient(top, #149dff, #0083e0);
+  background-image: linear-gradient(to bottom, #149dff, #0083e0);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff149dff', endColorstr='#ff0083e0', GradientType=0);
+}
+.banner-title h2 {
+  color: #ffffff;
+}
+.banner-title h2:after {
+  content: " ";
+  display: block;
+  background-image: -webkit-linear-gradient(left, #0083e0, #ffffff 25%, #ffffff 75%, #0083e0);
+  background-color: #fff;
+  height: 1px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
 .multi-line {
   line-height: inherit;
 }
@@ -6651,6 +6673,27 @@ div.img-polaroid div {
   margin-top: -2px;
   top: 0;
 }
+.roadworks-scheme .banner-title {
+  background-color: #fdfdfd;
+  background-image: -moz-linear-gradient(top, #ffffff, #fbfbfb);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#fbfbfb));
+  background-image: -webkit-linear-gradient(top, #ffffff, #fbfbfb);
+  background-image: -o-linear-gradient(top, #ffffff, #fbfbfb);
+  background-image: linear-gradient(to bottom, #ffffff, #fbfbfb);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fffbfbfb', GradientType=0);
+  border-bottom: 1px solid #d5d5d5;
+}
+.roadworks-scheme .banner-title h2 {
+  color: #333333;
+}
+.roadworks-scheme .banner-title h2:after {
+  display: none;
+}
+.roadworks-scheme .link-showoff {
+  color: #000000;
+  font-weight: 400;
+}
 .roadworks-scheme .headline ul {
   border: 1px solid #f0c500;
   background-color: #ffe55f;
@@ -6696,24 +6739,24 @@ div.img-polaroid div {
   border-top-color: #000000 !important;
   border-bottom-color: #000000 !important;
 }
-.roadworks-scheme .main-nav > li > a {
+.roadworks-scheme .main-nav a {
   color: #222222;
 }
 .roadworks-scheme .nav-callout {
-  background-color: #ffd200;
+  background-color: #333333;
 }
 .roadworks-scheme .nav-callout a {
   padding: 0px;
-  color: #222222;
+  color: #ffffff;
 }
 .roadworks-scheme .nav-callout:hover {
-  background-color: #ffd50f;
+  background-color: #3b3b3b;
 }
 .roadworks-scheme .nav-callout:hover .notch {
-  border-top: 10px solid #ffd50f;
+  border-top: 10px solid #3b3b3b;
 }
 .roadworks-scheme .nav-callout .notch {
-  border-top: 10px solid #ffd200;
+  border-top: 10px solid #333333;
 }
 .roadworks-scheme .nav-callout-border {
   border: 1px solid #ffffff;
@@ -6744,6 +6787,27 @@ div.img-polaroid div {
 }
 .roadworks-scheme .footer-links a:hover {
   background-color: #ffd200;
+}
+.roadworks-scheme .author-callout {
+  background-color: #fbfbfb;
+}
+.roadworks-scheme .author-callout .notch,
+.roadworks-scheme author-callout .notch {
+  border-top: 10px solid #fbfbfb;
+}
+.roadworks-scheme .author-callout-border {
+  border: 1px solid #4d4d4d;
+}
+.roadworks-scheme .author-callout-border .author-notch {
+  border-top-color: #363636;
+}
+.roadworks-scheme .footer:before {
+  content: ' ';
+  display: block;
+  height: 20px;
+  background-color: #ffd200;
+  width: 100%;
+  margin: 0px 0px 20px 0px;
 }
 .pull-right {
   float: right;
