@@ -9,7 +9,7 @@
  */
 ?>
 <div class="bumper-bottom">
-  <h2 class="center">What we're <strong>really</strong> good at.</h2>
+  <h2 class="center"><?=parse_shortclass($title)?></h2>
 </div>
 <ul class="link-grid clearfix">
   <?php

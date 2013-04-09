@@ -3,6 +3,7 @@
 if (!class_exists('cfct_module_hatch_address') && class_exists('cfct_build_module')) {
 	class cfct_module_hatch_address extends cfct_build_module {
     private $default_title = 'Come say hello...';
+
 		public function __construct() {
 			$opts = array(
 				'description' => __('Display company address.', 'carrington-build'),
