@@ -994,6 +994,11 @@
   .link-grid li {
     padding-right: 30px;
   }
+  .review-link {
+    position: relative;
+    bottom: 0px;
+    right: 0px;
+  }
 }
 @media (max-width: 979px) {
   .page-right,

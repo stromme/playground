@@ -57,8 +57,8 @@ function hs_load_scripts() {
 		
 		// Load Typekit for font management
 		
-		wp_register_script( 'typekit', 'http://use.typekit.net/aii7njo.js');
-		wp_enqueue_script( 'typekit' );
+//		wp_register_script( 'typekit', 'http://use.typekit.net/aii7njo.js');
+//		wp_enqueue_script( 'typekit' );
 		
 		// Init TypeKit. This line needs to be fixed - echoing out is a hack
 		// echo '<script type="text/javascript">try{Typekit.load();}catch(e){}</script>';
@@ -72,11 +72,11 @@ function hs_load_scripts() {
 	 		
 	 		// Load Typekit for font management
 	 		
-	 		wp_register_script( 'typekit', 'http://use.typekit.net/cdw0wlx.js');
-	 		wp_enqueue_script( 'typekit' );
+//	 		wp_register_script( 'typekit', 'http://use.typekit.net/cdw0wlx.js');
+//	 		wp_enqueue_script( 'typekit' );
 	 		
 	 		// Init TypeKit. This line needs to be fixed - echoing out is a hack
-	 		echo '<script type="text/javascript">try{Typekit.load();}catch(e){}</script>';
+//	 		echo '<script type="text/javascript">try{Typekit.load();}catch(e){}</script>';
 	 		
 	 	} else {
 	 		

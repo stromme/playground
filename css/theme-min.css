@@ -6635,11 +6635,11 @@ body {
   right: 20px;
 }
 /* Review carousel */
+.review-link {
+  bottom: 20px;
+}
 .review-carousel {
   position: relative;
-}
-.review-carousel .review-link {
-  bottom: 0;
 }
 .review-carousel .carousel-control {
   top: 45%;

@@ -48,7 +48,7 @@ if($owner_id!='' && $owner_id>0){
 ?>
 
 <div>
-	<h3 class="light-weight"><?=$title?></h3>
+	<h3 class="light-weight"><?=parse_shortclass($title)?></h3>
 	<ul>
     <?php
       $locations = get_terms('locations', array('hide_empty' => 0));

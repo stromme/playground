@@ -7,5 +7,5 @@
   </div>
   <?php } ?>
   <<?=$heading?>><?=parse_shortclass($title)?></<?=$heading?>>
-  <p><?=$content?></p>
+  <p><?=parse_shortclass($content)?></p>
 </div>

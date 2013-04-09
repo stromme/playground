@@ -22,13 +22,13 @@
           <div class="<?=($i==0)?'active ':''?>item">
           <?php } ?>
 
-              <p>"<?=$r->content?>"
+              <p>"<?=parse_shortclass($r->content)?>"
               </p>
-              <p class="citation"><cite><?=$r->name?></cite>
+              <p class="citation"><cite><?=parse_shortclass($r->name)?></cite>
                 <?php if($type=='manual'){ ?>
-                  <span class="author-location">~ <?=$r->location?></span>
+                  <span class="author-location">~ <?=parse_shortclass($r->location)?></span>
                 <?php } else if($r->company!=''){ ?>
-                  <span class="author-location">~ <?=$r->company?></span>
+                  <span class="author-location">~ <?=parse_shortclass($r->company)?></span>
                 <?php } ?>
               </p>
               <a href="<?=home_url().get_blog_prefix()?>reviews" class="review-link">Read more reviews</a>

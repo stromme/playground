@@ -31,7 +31,7 @@ if(count($users)>0){
 	<img class="img-polaroid" src="http://maps.google.com/maps/api/staticmap?center=<?=urlencode($company_street).'+'.urlencode($company_city.', '.$company_state).'+'.urlencode($company_zip)?>&amp;zoom=11&amp;size=270x210&amp;maptype=roadmap&amp;markers=color:blue%7Clabel:A%7C<?=urlencode($company_street).'+'.urlencode($company_city.', '.$company_state).'+'.urlencode($company_zip)?>&amp;sensor=false" itemprop="image">
 </div>
 <div class="">
-	<h3 class="light-weight"><?=$title?></h3>
+	<h3 class="light-weight"><?=parse_shortclass($title)?></h3>
 	<address>
 	  <strong><?=$company_name?></strong><br>
     <?=$company_street?><br>

@@ -9,7 +9,7 @@
  */
 ?>
 <div class="bumper-bottom">
-  <h2 class="center">What we're <strong>really</strong> good at.</h2>
+  <h2 class="center"><?=parse_shortclass($title)?></h2>
 </div>
 <ul class="link-grid clearfix">
   <?php
@@ -38,7 +38,15 @@
         <?php } ?>
       </nav>
       <?php } ?>
-      <img src="<?=TOOLBOX_IMAGES?>/services/<?=$service->slug?>.jpg" alt="" />
+      <?php
+        $service_image = TOOLBOX_BASE_DIR.'/images/services/'.$service->slug.'.jpg';
+        if(file_exists($service_image)){
+          $service_image = '<img src="'.TOOLBOX_IMAGES.'/services/'.$service->slug.'.jpg" />';
+        } else {
+          $service_image = '<img src="'.TOOLBOX_IMAGES.'/spacer.gif" style="width:240px;height:80px;background-color:#F6F6F6;" />';
+        }
+      ?>
+      <?=$service_image?>
     </div>
     <?php if($is_service_promoted){ ?>
     <a href="<?=get_home_url().get_blog_prefix()."services/".$service->slug?>"><?=$service->name?></a>
