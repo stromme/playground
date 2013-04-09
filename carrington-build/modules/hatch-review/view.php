@@ -53,6 +53,4 @@
       </div>
     </div>
   </div>
-
-<div class="pen-stroke"></div>
 <?=$js_init?>
