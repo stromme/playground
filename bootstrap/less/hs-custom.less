@@ -215,9 +215,33 @@ body {
 
 .showroom-selector.dropdown {
   .dropdown-menu {
+    margin-top: 12px;
+    li.show-text {
+      font-family: inherit;
+      font-size: 20px;
+      line-height: 32px;
+      color: #666666;
+      text-align: left;
+      padding: 3px 20px;
+      font-weight: normal;
+    }
+    li.triangle {
+      position: absolute;
+      width: 0;
+      height: 0;
+      left: 50%;
+      top: -15px;
+      margin-left: -10px;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-bottom: 15px solid #FFFFFF;
+    }
+    li:last-child {
+      margin-bottom: 5px;
+    }
     a {
-      font-size: 14px;
-      line-height: 14px;
+      font-size: 16px;
+      line-height: 24px;
       text-align: left;
     }
   }
