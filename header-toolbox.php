@@ -8,6 +8,7 @@
  * @since Hatch 1.0
  */
 if(session_id() == '') {
+  session_write_close();
   session_start();
 }
 ?><!DOCTYPE html>

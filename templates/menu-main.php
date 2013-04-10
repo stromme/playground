@@ -12,8 +12,33 @@ $blog_prefix = '';
 if ( is_multisite() && !is_subdomain_install() && is_main_site() )
   $blog_prefix = '/blog';
 
-$promoted_services = get_terms('services', array('hide_empty' => 1, 'orderby' => 'post_date', 'order' => 'DESC'));
-$promoted_locations = get_terms('locations', array('hide_empty' => 1, 'orderby' => 'post_date', 'order' => 'DESC'));
+$services_terms = get_terms('services', array('hide_empty' => 1, 'orderby' => 'post_date', 'order' => 'DESC'));
+$locations_terms = get_terms('locations', array('hide_empty' => 1, 'orderby' => 'post_date', 'order' => 'DESC'));
+
+$promoted_services = array();
+foreach($services_terms as $term){
+  $args = array(
+    'post_type' => 'cftl-tax-landing',
+    'services' => $term->slug,
+    'numberposts' => 1
+  );
+  $promoted_posts = get_posts($args);
+  if(count($promoted_posts)>0){
+    array_push($promoted_services, $term);
+  }
+}
+$promoted_locations = array();
+foreach($locations_terms as $term){
+  $args = array(
+    'post_type' => 'cftl-tax-landing',
+    'locations' => $term->slug,
+    'numberposts' => 1
+  );
+  $promoted_posts = get_posts($args);
+  if(count($promoted_posts)>0){
+    array_push($promoted_locations, $term);
+  }
+}
 $args = array(
   'orderby'		  => 'modified',
   'order'			  => 'DESC',
