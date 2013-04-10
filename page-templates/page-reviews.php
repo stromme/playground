@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Reviews Page
+ * Template Name: Reviews
  * Description: 
  *
  * @package WordPress

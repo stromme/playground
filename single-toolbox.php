@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Toolbox
+ * Template_Name: Toolbox Single
  * Description: 
  *
  * @package 

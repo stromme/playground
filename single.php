@@ -38,7 +38,7 @@ get_header(); ?>
 			
 		</div>
 		<div class="span6 page-right">
-			<p class="lead">Yes, Squeeky Clean Window Washing has undergone a rigorous screening process. They have received our top ranking as the best window cleaners in Bethesda Maryland. We are so confident you will be completely satisfied with their window cleaning services that we offer our $1000 Streak Free Guarantee, only through WindowCleaning.com.</p>
+			<p class="lead"><?=$post->post_content?></p>
 			<h3 class="bumper-top" ><cite>MC Hammer </cite><small>- Springfield, MA</small></h3>
 			
 			<div class="bumper-top bumper-bottom">
