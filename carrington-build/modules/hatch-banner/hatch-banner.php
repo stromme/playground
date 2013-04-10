@@ -31,13 +31,13 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
         $description = $data[$this->get_field_id('description')];
         $author = $data[$this->get_field_id('author')];
         $author_location = $data[$this->get_field_id('author-location')];
-        if (!empty($image_id) && $_img = wp_get_attachment_image_src($image_id, 'large', false)) {
+        if (!empty($image_id) && $_img = wp_get_attachment_image_src($image_id, 'showoff', false)) {
           $image = $_img[0];
         }
         $js_single_data = new stdClass();
-        $js_single_data->description = $description;
-        $js_single_data->author = $author;
-        $js_single_data->author_location = $author_location;
+        $js_single_data->description = parse_embed_video_link(parse_shortclass($description));
+        $js_single_data->author = parse_shortclass($author);
+        $js_single_data->author_location = parse_shortclass($author_location);
         $js_single_data->images = array($image);
         array_push($js_data, $js_single_data);
       }
@@ -118,7 +118,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
                 array_push($project_media, $video_image);
               }
               else {
-                $_img = wp_get_attachment_image_src($media->ID, 'large', false);
+                $_img = wp_get_attachment_image_src($media->ID, 'showoff', false);
                 array_push($project_media, $_img[0]);
               }
             }
@@ -144,9 +144,9 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
             }
 
             $js_single_data = new stdClass();
-            $js_single_data->description = $project->post_content;
-            $js_single_data->author = $name;
-            $js_single_data->author_location = $city;
+            $js_single_data->description = parse_shortclass($project->post_content);
+            $js_single_data->author = parse_shortclass($name);
+            $js_single_data->author_location = parse_shortclass($city);
             $js_single_data->images = $project_media;
             array_push($js_data, $js_single_data);
             $i++;

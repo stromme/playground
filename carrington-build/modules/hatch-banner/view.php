@@ -25,14 +25,14 @@
       </div>
       <div class="banner-review">
         <blockquote>
-          <p>"<span id="description-<?=$id?>"><?=parse_shortclass($d->description)?></span>"</p>
+          <p>"<span id="description-<?=$id?>"><?=$d->description?></span>"</p>
           <?php if($d->author!='' || $d->author_location!=''){ ?>
             <?php if($d->author!=''){ ?>
-            <p class="banner-author"><cite id="author-<?=$id?>"><?=parse_shortclass($d->author)?></cite><?php
+            <p class="banner-author"><cite id="author-<?=$id?>"><?=$d->author?></cite><?php
               }
               if($d->author_location!=''){
             ?>,
-              <span id="author-location-<?=$id?>"><?=parse_shortclass($d->author_location)?></span></p>
+              <span id="author-location-<?=$id?>"><?=$d->author_location?></span></p>
             <?php } ?>
           <?php } ?>
         </blockquote>

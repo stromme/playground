@@ -76,6 +76,8 @@ foreach($first_ten_projects as $prj){
 		<div class="bumper-top bumper-bottom center">
 			<h2>See some of our recent <span class="dropdown showroom-selector"><a href="" class="dropdown-toggle link-inverse link-decorate link-showoff" data-toggle="dropdown"><?=$current_service?></a>
         <ul class="dropdown-menu">
+          <li class="triangle"></li>
+          <li class="show-text">Show...</li>
           <?php if($service!=''){ ?>
           <li><a href="<?=home_url().'/showroom'?>">all <?=$industry_name?></a></li>
           <?php } ?>

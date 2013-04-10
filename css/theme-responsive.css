@@ -935,8 +935,11 @@
     padding: 6px 6px 6px 0px;
     max-height: 140px;
   }
-  .banner-photo img {
+  div.banner-photo {
     max-width: 600px;
+  }
+  div.banner-photo img {
+    max-width: 1200px;
     max-height: 450px;
     height: 450px;
   }
@@ -970,6 +973,12 @@
   }
 }
 @media (min-width: 979px) {
+  .banner-photo {
+    max-width: 460px;
+  }
+  .banner-photo img {
+    max-width: 900px;
+  }
   .link-grid li:nth-of-type(3n + 2) {
     padding-left: 0px;
     padding-right: 0px;
@@ -1096,6 +1105,10 @@
   div.img-polaroid div {
     max-height: 640px;
   }
+  .grid-thumb nav {
+    display: block;
+    visibility: visible;
+  }
 }
 @media (min-width: 767px) and (max-width: 979px) {
   div.img-polaroid.middle9 {
@@ -1131,12 +1144,13 @@
     padding-left: 60px;
     padding-right: 60px;
   }
+  .banner-photo img {
+    height: auto;
+    max-width: 95%;
+  }
 }
 /*  Phones */
 @media (max-width: 480px) {
-  .brand > img {
-    display: none;
-  }
   .brand-phone {
     display: inherit !important;
   }
@@ -1144,9 +1158,6 @@
     margin-bottom: 0px;
     font-weight: 200;
     text-align: center;
-  }
-  .main-nav {
-    margin-top: 15px;
   }
   .headline h1,
   .headline h4,
@@ -1171,6 +1182,7 @@
     border: none;
     height: auto !important;
     width: 100%;
+    max-width: 100%;
   }
   .footer .footer-links > a {
     padding: 3px;
@@ -1179,6 +1191,11 @@
   }
   .footer small a {
     font-size: 12px;
+  }
+}
+@media (max-width: 600px) {
+  .brand > img {
+    display: none;
   }
 }
 @media (max-width: 979px) {

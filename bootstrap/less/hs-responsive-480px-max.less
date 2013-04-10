@@ -4,12 +4,7 @@
 
 
 /*  Phones */
-@media (max-width: 480px) { 
-
-	.brand > img {
-		display: none;
-	}
-	
+@media (max-width: 480px) {
 	.brand-phone { display: inherit !important; }
 	.brand-phone > h4 {
 		margin-bottom: 0px;
@@ -19,7 +14,7 @@
 	
 	.main-nav {
 		//vertically align main nav between banner and headline - find a better way?
-		margin-top: 15px;
+		//margin-top: 15px;
 	}
 	.headline {		
 		h1, h4, a {
@@ -29,19 +24,19 @@
 			padding: 5px 9px 5px 9px;
 		}
 	}
-	
-	
-	.banner-photo {
-		padding: 0;
-		img {
-			.border-bottom-left-radius(0);
-			.border-bottom-right-radius(0);
-			padding: 0px;
-			border: none;
+
+    .banner-photo {
+        padding: 0;
+        img {
+            .border-bottom-left-radius(0);
+            .border-bottom-right-radius(0);
+            padding: 0px;
+            border: none;
             height: auto !important;
             width: 100%;
-		}
-	}
+            max-width: 100%;
+        }
+    }
 	
 	.footer {
 		.footer-links > a {
@@ -54,4 +49,10 @@
 		}
 	}
 
+}
+
+@media (max-width: 600px) {
+    .brand > img {
+        display: none;
+    }
 }
