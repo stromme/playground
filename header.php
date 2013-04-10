@@ -18,7 +18,6 @@
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 	<?php wp_head(); ?>
 	<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
-	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
 
 <body>

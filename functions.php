@@ -57,11 +57,10 @@ function hs_load_scripts() {
 		
 		// Load Typekit for font management
 		
-//		wp_register_script( 'typekit', 'http://use.typekit.net/aii7njo.js');
-//		wp_enqueue_script( 'typekit' );
+		wp_register_script( 'typekit', 'http://use.typekit.net/aii7njo.js');
+		wp_enqueue_script( 'typekit' );
 		
-		// Init TypeKit. This line needs to be fixed - echoing out is a hack
-		// echo '<script type="text/javascript">try{Typekit.load();}catch(e){}</script>';
+		add_action('wp_head', 'try_typekit');
 		
 		if ( ENVIRONMENT == 'LIVE' ) {
 
@@ -72,11 +71,10 @@ function hs_load_scripts() {
 	 		
 	 		// Load Typekit for font management
 	 		
-//	 		wp_register_script( 'typekit', 'http://use.typekit.net/cdw0wlx.js');
-//	 		wp_enqueue_script( 'typekit' );
+	 		wp_register_script( 'typekit', 'http://use.typekit.net/cdw0wlx.js');
+	 		wp_enqueue_script( 'typekit' );
 	 		
-	 		// Init TypeKit. This line needs to be fixed - echoing out is a hack
-//	 		echo '<script type="text/javascript">try{Typekit.load();}catch(e){}</script>';
+	 		add_action('wp_head', 'try_typekit');
 	 		
 	 	} else {
 	 		
@@ -89,6 +87,14 @@ function hs_load_scripts() {
 } 
 
 add_action( 'wp_enqueue_scripts', 'hs_load_scripts' );
+
+/* Load Typekit
+ *
+ */
+function try_typekit(){
+	echo '<script type="text/javascript">try{Typekit.load();}catch(e){}</script>';
+}
+
 
 /* Load the theme CSS.
  * Don't load theme CSS in the context of the toolbox.
