@@ -13,8 +13,8 @@
 	</div>
   <?php } ?>
 	<div class="middle">
-		<<?=$heading?> class=""><?=parse_shortclass($title)?></<?=$heading?>>
-		<p><?=parse_shortclass($content)?></p>
+		<<?=$heading?>><?=$title?></<?=$heading?>>
+		<p><?=$content?></p>
 	</div>
 </div>
 

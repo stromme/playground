@@ -4,8 +4,8 @@
 
 <div class="row-middle">
 	<div class="middle <?=($image!='')?$image_padding:''?>">
-		<<?=$heading?> class=""><?=parse_shortclass($title)?></<?=$heading?>>
-		<p><?=parse_shortclass($content)?></p>
+		<<?=$heading?>><?=$title?></<?=$heading?>>
+		<p><?=$content?></p>
 	</div>
   <?php if($image!=''){ ?>
   <div class="<?=$image_size?>">

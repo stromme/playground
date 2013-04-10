@@ -36,7 +36,10 @@ if (!class_exists('cfct_module_hatch_featurette') && class_exists('cfct_build_mo
 // Display
 		public function display($data) {
       $title = isset($data[$this->get_field_id('title')]) ? $data[$this->get_field_id('title')] : '';
+      $title = parse_shortclass($title);
       $content = isset($data[$this->get_field_id('content')]) ? $data[$this->get_field_id('content')] : '';
+      $content = str_replace("\n", "<br />", $content);
+      $content = parse_embed_video_link(parse_shortclass($content));
       $image_id = ($data[$this->get_field_id('post_image')]!='')?$data[$this->get_field_id('post_image')]:(($data[$this->get_field_id('global_image')])?$data[$this->get_field_id('global_image')]:'');
       $image = '';
       if (!empty($image_id) && $_img = wp_get_attachment_image_src($image_id, 'large', false)) {
