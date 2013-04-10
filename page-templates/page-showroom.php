@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: project
+ * Template Name: Showroom
  * Description: 
  *
  * @package WordPress
