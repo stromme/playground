@@ -69,6 +69,7 @@ $comments = get_comments($args);
 		
 		<!-- Main Navigation Menu Bar -->
 		<ul class="main-nav nav nav-pills">
+			<li class="hidden-phone"><a href="<?=get_home_url().$blog_prefix."/"?>">Home</a>
       <?php if(count($promoted_services)>0){ ?>
 			<li class="dropdown hidden-desktop"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
 				<ul class="dropdown-menu">
@@ -107,7 +108,7 @@ $comments = get_comments($args);
 	
 	<!-- Brand -->
 	<div class="brand">
-		<img src="<?php echo get_header_image(); ?>">
+		<a href="<?=get_home_url().$blog_prefix."/"?>"><img src="<?php echo get_header_image(); ?>"></a>
 	</div>
 	<!-- /Brand -->
 	
