@@ -931,9 +931,9 @@
     max-width: 900px;
     width: auto;
   }
-  .brand > img {
+  .brand img {
     padding: 6px 6px 6px 0px;
-    max-height: 140px;
+    max-height: 150px;
   }
   div.banner-photo {
     max-width: 600px;
@@ -966,7 +966,7 @@
     padding-left: 60px;
   }
   .main-nav {
-    margin-top: 75px;
+    margin-top: 80px;
   }
   .link-grid {
     padding-left: 60px;
@@ -1037,8 +1037,8 @@
   }
 }
 @media (min-width: 768px) and (max-width: 979px) {
-  .brand > img {
-    max-height: 110px;
+  .brand img {
+    max-height: 120px;
   }
   .main-nav {
     margin-top: 90px;
@@ -1095,7 +1095,7 @@
   .fixed-top {
     position: absolute;
   }
-  .brand > img {
+  .brand img {
     padding-top: 55px;
   }
   .banner-photo {
@@ -1293,7 +1293,7 @@
   }
 }
 @media (max-width: 600px) {
-  .brand > img {
+  .brand img {
     display: none;
   }
 }

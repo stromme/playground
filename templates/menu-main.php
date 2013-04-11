@@ -63,7 +63,8 @@ $comments = get_comments($args);
 		
 		<!-- Text version of company name replaces logo on Phones -->
 		<div class="brand-phone clearfix">
-			<h4>Company Name</h4>
+			<?php $tb_company = get_option('tb_company'); ?>
+			<h4><?=esc_html( stripslashes($tb_company['name']))?></h4>
 		</div>
 		<!-- /Text version  -->
 		
