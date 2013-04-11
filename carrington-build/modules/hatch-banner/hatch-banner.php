@@ -225,6 +225,12 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
                       cycle_image();
                     }, interval);
                   });
+                }).error(function() {
+                  banner_photo.removeAttr("style");
+                  new_image.remove();
+                  timeout = setTimeout(function(){
+                    cycle_image();
+                  }, interval);
                 });
               }
               else if('.$js_id.'[current_item_id].images.length>1) {
@@ -247,7 +253,13 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
                       if(current_image_idx>='.$js_id.'[current_item_id].images.length-1) current_image_idx = -1;
                     }
                   });
-                });
+                }).error(function() {
+                  banner_photo.removeAttr("style");
+                  new_image.remove();
+                  timeout = setTimeout(function(){
+                    cycle_image();
+                  }, interval);
+                });;
               }
             }
           });
