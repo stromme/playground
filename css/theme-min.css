@@ -6396,6 +6396,13 @@ body {
 .single-project .thumbnail img {
   min-height: 80px;
 }
+.thumbnail .thumbnail-placeholder {
+  max-height: 250px;
+  overflow: hidden;
+}
+.thumbnail .thumbnail-placeholder img {
+  width: 100%;
+}
 #showroom {
   padding-left: 40px;
   padding-right: 40px;
@@ -6444,6 +6451,26 @@ body {
 }
 .project {
   padding-top: 40px;
+}
+.project .img-polaroid {
+  display: block;
+  position: relative;
+  text-align: center;
+}
+.project .img-polaroid > a {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -24px;
+  margin-top: -24px;
+  opacity: .6;
+  display: none;
+}
+.project .img-polaroid > a:hover {
+  opacity: 1;
+}
+.project .img-polaroid:hover > a {
+  display: block;
 }
 .project .project-container {
   background-color: #ffffff;
