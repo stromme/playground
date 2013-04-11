@@ -4,12 +4,12 @@
 
 <div class="row-middle featurette-horizontal">
   <?php if($video!=''){?>
-    <div class="<?=$image_size?>">
+    <div class="<?=$image_size?> <?=$image_padding?>">
       <?=parse_embed_video_link($video)?>
     </div>
   <?php } else { ?>
     <?php if($image!=''){ ?>
-      <div class="<?=$image_size?>">
+      <div class="<?=$image_size?> <?=$image_padding?>">
         <div<?=($border_style!='none')?' class="'.$border_style.'"':''?>>
           <div>
             <img src="<?=$image?>" />
@@ -18,7 +18,7 @@
       </div>
     <?php } ?>
   <?php } ?>
-	<div class="middle <?=$image_padding?>">
+	<div class="middle">
 		<<?=$heading?>><?=$title?></<?=$heading?>>
 		<p><?=$content?></p>
 	</div>

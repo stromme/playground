@@ -55,7 +55,7 @@ if (!class_exists('cfct_module_hatch_featurette') && class_exists('cfct_build_mo
       $border_style = (!empty($data[$this->get_field_name('border_style')]) ? esc_html($data[$this->get_field_name('border_style')]) : '');
       if($border_style=='') $border_style = 'img-polaroid';
 
-      if($style=='left'){
+      if($style=='right'){
         switch($image_size){
           case 'middle-fixed-small':
           case 'middle3':
@@ -63,7 +63,7 @@ if (!class_exists('cfct_module_hatch_featurette') && class_exists('cfct_build_mo
           default: $image_padding = 'bumper-left-large'; break;
         }
       }
-      if($style=='right'){
+      if($style=='left'){
         switch($image_size){
           case 'middle-fixed-small':
           case 'middle3':
