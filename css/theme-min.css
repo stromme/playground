@@ -5284,6 +5284,15 @@ a.badge:focus {
 .middle9 {
   width: 90%;
 }
+/* Youtube video */
+.featurette-horizontal .embed-youtube,
+.featurette-vertical .embed-youtube {
+  margin-bottom: -4px;
+}
+.featurette-horizontal iframe,
+.featurette-vertical iframe {
+  width: 100%;
+}
 a.link-decorate:hover,
 a.link-showoff {
   text-decoration: none;
@@ -5936,6 +5945,12 @@ nav-callout .notch {
   -webkit-border-top-left-radius: 6px;
   -moz-border-radius-topleft: 6px;
   border-top-left-radius: 6px;
+}
+.banner-photo .embed-youtube {
+  margin-bottom: -4px;
+}
+.banner-photo .embed-youtube iframe {
+  max-width: 460px;
 }
 .banner-review {
   position: relative;

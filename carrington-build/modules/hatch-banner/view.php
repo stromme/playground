@@ -6,7 +6,7 @@
  * @package
  * @subpackage
  * @since
- */
+ */;
 ?>
 
 <div id="<?=$id?>" class="<?=(count($js_data)>1)?'carousel-'.$id.' ':''?>banner">
@@ -21,7 +21,11 @@
     <div class="<?=($i==0)?'active ':''?>item">
       <?php } ?>
       <div class="banner-photo">
-        <img id="image-<?=$id?>" src="<?=$d->images[0]?>" />
+        <?php if($d->video!=''){?>
+          <?=parse_embed_video_link($d->video)?>
+        <?php } else { ?>
+          <img id="image-<?=$id?>" src="<?=$d->images[0]?>" />
+        <?php } ?>
       </div>
       <div class="banner-review">
         <blockquote>

@@ -57,8 +57,8 @@ function hs_load_scripts() {
 		
 		// Load Typekit for font management
 		
-		wp_register_script( 'typekit', 'http://use.typekit.net/aii7njo.js');
-		wp_enqueue_script( 'typekit' );
+//		wp_register_script( 'typekit', 'http://use.typekit.net/aii7njo.js');
+//		wp_enqueue_script( 'typekit' );
 		
 		add_action('wp_head', 'try_typekit');
 		

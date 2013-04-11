@@ -22,6 +22,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
 		public function display($data) {
       $banner_type = isset($data[$this->get_field_id('type')]) ? $data[$this->get_field_id('type')] : '';
       $interval = isset($data[$this->get_field_id('interval')]) ? intval($data[$this->get_field_id('interval')]) : 4000;
+      $video = isset($data[$this->get_field_name('video')]) ? esc_html($data[$this->get_field_name('video')]) : '';
       $id = 'banner-'.$data['module_id'];
       $image = '';
       $js_init = '';
@@ -39,6 +40,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
         $js_single_data->author = parse_shortclass($author);
         $js_single_data->author_location = parse_shortclass($author_location);
         $js_single_data->images = array($image);
+        $js_single_data->video = $video;
         array_push($js_data, $js_single_data);
       }
       else {
@@ -148,6 +150,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
             $js_single_data->author = parse_shortclass($name);
             $js_single_data->author_location = parse_shortclass($city);
             $js_single_data->images = $project_media;
+            $js_single_data->video = '';
             array_push($js_data, $js_single_data);
             $i++;
           }
@@ -288,6 +291,10 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
               <div>
                 <label for="'.$this->get_field_id('author-location').'">'.__('Author Location').'</label>
                 <input type="text" name="'.$this->get_field_name('author-location').'" id="'.$this->get_field_id('author-location').'" value="'.(!empty($data[$this->get_field_name('author-location')]) ? esc_html($data[$this->get_field_name('author-location')]) : '').'" />
+              </div>
+              <div>
+                <label for="'.$this->get_field_id('video').'">'.__('Video').'</label>
+                <input type="text" name="'.$this->get_field_name('video').'" id="'.$this->get_field_id('video').'" value="'.(!empty($data[$this->get_field_name('video')]) ? esc_html($data[$this->get_field_name('video')]) : '').'" />
               </div>
             </div>
           </div>
