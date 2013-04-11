@@ -195,6 +195,16 @@ body {
 	}
 }
 
+.thumbnail {
+    .thumbnail-placeholder {
+        max-height: 250px;
+        overflow: hidden;
+        img {
+            width: 100%;
+        }
+    }
+}
+
 // Showroom page
 
 #showroom {
@@ -248,6 +258,29 @@ body {
 }
 
 .project {
+
+    .img-polaroid {
+        display: block;
+        position: relative;
+        text-align: center;
+        >a {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -24px;
+            margin-top: -24px;
+            opacity: .6;
+            display: none;
+        }
+        >a:hover {
+            opacity: 1;
+        }
+    }
+    .img-polaroid:hover {
+        >a {
+          display: block;
+        }
+    }
 
 	.bumper-top-medium;
 	

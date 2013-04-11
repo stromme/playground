@@ -1,6 +1,5 @@
 <?php
 /**
- * Template Name: project temp file
  * Description: 
  *
  * @package WordPress

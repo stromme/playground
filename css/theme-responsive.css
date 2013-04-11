@@ -1105,9 +1105,21 @@
   div.img-polaroid div {
     max-height: 640px;
   }
+  .project .curved-shadow {
+    max-width: 490px;
+    margin: 0 auto;
+  }
   .grid-thumb nav {
     display: block;
     visibility: visible;
+  }
+  .thumbnail .thumbnail-placeholder {
+    max-height: inherit;
+    overflow: visible;
+    text-align: center;
+  }
+  .thumbnail .thumbnail-placeholder img {
+    width: auto;
   }
 }
 @media (min-width: 767px) and (max-width: 979px) {
