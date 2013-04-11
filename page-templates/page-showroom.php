@@ -14,11 +14,25 @@ get_header();
 $terms = get_terms('services', array('hide_empty', true));
 $service = get_query_var('service');
 $service_name = '';
+$new_terms = array();
 if(count($terms)>0){
   foreach($terms as $term){
-    if($service==$term->slug) $service_name = $term->name;
+    $args = array(
+      'post_type'		=> array('showroom'),
+      'post_status'	=> 'publish',
+      'numberposts' => 1,
+      'posts_per_page'  => 1,
+      'services'    => $term->slug
+    );
+    $loop = new WP_Query( $args );
+    $term_posts = $loop->posts;
+    if(count($term_posts)>0){
+      array_push($new_terms, $term);
+      if($service==$term->slug) $service_name = $term->name;
+    }
   }
 }
+$terms = $new_terms;
 $current_industry = get_option('tb_industry');
 $industry_name = str_replace('-', ' ', $current_industry['industry']);
 $current_service = ($service!='' && $service_name!='')?strtolower($service_name):$industry_name;
