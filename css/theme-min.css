@@ -6224,7 +6224,7 @@ author-callout .notch {
 body {
   background: url(../images/backgrounds/fibre.png) repeat;
 }
-.brand > img {
+.brand img {
   padding: 55px 6px 10px 0px;
   max-height: 120px;
 }
