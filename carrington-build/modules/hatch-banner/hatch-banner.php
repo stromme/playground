@@ -193,6 +193,10 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
               var items = $(".item", carousel);
               var active_item;
               var active_image;
+              var banner_photo;
+              var new_image;
+              var max_width;
+              var new_width;
               current_image_idx++;
               if('.$js_id.'.length>1 && current_image_idx>='.$js_id.'[current_item_id].images.length){
                 current_item_id++;
@@ -201,11 +205,15 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
                   current_item_id = 0;
                 }
                 active_item = items[current_item_id];
-                $(".banner-photo", active_item).append("<img src=\'"+'.$js_id.'[current_item_id].images[current_image_idx]+"\' style=\'display:none;\' />");
-                $(".banner-photo img", active_item).last().load(function(){
-                  active_image = $(".banner-photo img", active_item);
-                  active_image.attr("src", '.$js_id.'[current_item_id].images[current_image_idx]);
-                  $(".banner-photo img", active_item).last().remove();
+                banner_photo = $(".banner-photo", active_item);
+                active_image = $("img", banner_photo);
+                banner_photo.append("<img src=\'"+'.$js_id.'[current_item_id].images[current_image_idx]+"\' style=\'position:absolute;left:0;top:0;display:none;\' />");
+                new_image = $("img", banner_photo).last();
+                new_image.load(function(){
+                  active_image.remove();
+                  banner_photo.removeAttr("style");
+                  new_image.removeAttr("style");
+                  active_image.remove();
                   $(active_item).css({"top":0,"position":"absolute","z-index":1});
                   $(active_item).fadeIn("fast", function(){
                     $(active_item).removeAttr("style");
@@ -221,21 +229,23 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
               }
               else if('.$js_id.'[current_item_id].images.length>1) {
                 active_item = items[current_item_id];
-                active_image = $(".banner-photo img", active_item);
-                $(".banner-photo", active_item).append("<img src=\'"+'.$js_id.'[current_item_id].images[current_image_idx]+"\' style=\'display:none;\' />");
-                $(".banner-photo img", active_item).last().load(function(){
-                  active_image.fadeOut("fast", function(){
-                    active_image.attr("src", '.$js_id.'[current_item_id].images[current_image_idx]);
-                    $(".banner-photo img", active_item).last().remove();
-                    active_image.fadeIn("fast", function(){
-                      var width = $(".banner-review", active_item).outerWidth();
-                      timeout = setTimeout(function(){
-                        cycle_image();
-                      }, interval);
-                      if('.$js_id.'.length<=1){
-                        if(current_image_idx>='.$js_id.'[current_item_id].images.length-1) current_image_idx = -1;
-                      }
-                    });
+                banner_photo = $(".banner-photo", active_item);
+                active_image = $("img", banner_photo);
+                banner_photo.append("<img src=\'"+'.$js_id.'[current_item_id].images[current_image_idx]+"\' style=\'position:absolute;left:0;top:0;display:none;\' />");
+                new_image = $("img", banner_photo).last();
+                new_image.load(function(){
+                  active_image.fadeOut("fast");
+                  new_image.fadeIn("fast", function(){
+                    banner_photo.removeAttr("style");
+                    new_image.removeAttr("style");
+                    active_image.remove();
+                    var width = $(".banner-review", active_item).outerWidth();
+                    timeout = setTimeout(function(){
+                      cycle_image();
+                    }, interval);
+                    if('.$js_id.'.length<=1){
+                      if(current_image_idx>='.$js_id.'[current_item_id].images.length-1) current_image_idx = -1;
+                    }
                   });
                 });
               }
