@@ -10,6 +10,7 @@
         }
         width: 90%;
     }
+
 }
 
 @media (max-width: 767px) {
@@ -50,6 +51,27 @@
         img {
           height: auto;
           max-width: 95%;
+        }
+        .embed-youtube {
+            iframe {
+                max-width: 95%;
+                height: 320px;
+            }
+        }
+    }
+
+    .featurette-horizontal {
+        iframe {
+            height: 360px;
+        }
+    }
+
+
+    .featurette-vertical {
+        .embed-youtube {
+            text-align: center;
+            width: 90%;
+            display: inline-block !important;
         }
     }
 }

@@ -40,6 +40,7 @@ if (!class_exists('cfct_module_hatch_featurette') && class_exists('cfct_build_mo
       $content = isset($data[$this->get_field_id('content')]) ? $data[$this->get_field_id('content')] : '';
       $content = str_replace("\n", "<br />", $content);
       $content = parse_embed_video_link(parse_shortclass($content));
+      $video = isset($data[$this->get_field_name('video')]) ? esc_html($data[$this->get_field_name('video')]) : '';
       $image_id = ($data[$this->get_field_id('post_image')]!='')?$data[$this->get_field_id('post_image')]:(($data[$this->get_field_id('global_image')])?$data[$this->get_field_id('global_image')]:'');
       $image = '';
       if (!empty($image_id) && $_img = wp_get_attachment_image_src($image_id, 'large', false)) {
@@ -54,15 +55,25 @@ if (!class_exists('cfct_module_hatch_featurette') && class_exists('cfct_build_mo
       $border_style = (!empty($data[$this->get_field_name('border_style')]) ? esc_html($data[$this->get_field_name('border_style')]) : '');
       if($border_style=='') $border_style = 'img-polaroid';
 
-      switch($image_size){
-        case 'middle-fixed-small':
-        case 'middle3':
-        case 'middle4': $image_padding = 'bumper-right-medium'; break;
-        default: $image_padding = 'bumper-right-large'; break;
+      if($style=='right'){
+        switch($image_size){
+          case 'middle-fixed-small':
+          case 'middle3':
+          case 'middle4': $image_padding = 'bumper-left-medium'; break;
+          default: $image_padding = 'bumper-left-large'; break;
+        }
+      }
+      if($style=='left'){
+        switch($image_size){
+          case 'middle-fixed-small':
+          case 'middle3':
+          case 'middle4': $image_padding = 'bumper-right-medium'; break;
+          default: $image_padding = 'bumper-right-large'; break;
+        }
       }
 
       $this->view = 'view-'.$style.'.php';
-			return $this->load_view($data, compact('title', 'heading', 'content', 'url', 'image', 'image_size', 'image_padding', 'border_style'));
+			return $this->load_view($data, compact('title', 'heading', 'content', 'video', 'url', 'image', 'image_size', 'image_padding', 'border_style'));
 		}
 
 		public function admin_form($data) {
@@ -117,6 +128,10 @@ if (!class_exists('cfct_module_hatch_featurette') && class_exists('cfct_build_mo
 								.(!empty($data[$this->get_field_name('content')]) ? htmlspecialchars($data[$this->get_field_name('content')]) : '').
 							'</textarea>
 						</div>
+            <div class="cfct-field">
+              <label for="'.$this->get_field_id('video').'">'.__('Video').'</label>
+              <input type="text" name="'.$this->get_field_name('video').'" id="'.$this->get_field_id('video').'" value="'.(!empty($data[$this->get_field_name('video')]) ? esc_html($data[$this->get_field_name('video')]) : '').'" />
+            </div>
 					</div>
           <div id="'.$this->id_base.'-styling">
             <div class="cfct-field">&nbsp;</div>
