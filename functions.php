@@ -52,7 +52,7 @@ function hs_load_scripts() {
 		wp_deregister_script( 'jquery' );
 		
 		// Load Bootstrap Framework
-		wp_register_script( 'theme-bootstrap-js', THEME_JS . '/bootstrap-min.js', array('jquery'));
+		wp_register_script( 'theme-bootstrap-js', THEME_JS . 'bootstrap-min.js', array('jquery'));
 		wp_enqueue_script( 'theme-bootstrap-js' );
 		
 		// Load Typekit for font management
@@ -61,6 +61,10 @@ function hs_load_scripts() {
 		wp_enqueue_script( 'typekit' );
 		
 		add_action('wp_head', 'try_typekit');
+		
+		// Load Facebook
+		
+		add_action('wp_footer', 'hs_facebook');
 		
 		if ( ENVIRONMENT == 'LIVE' ) {
 
@@ -76,6 +80,10 @@ function hs_load_scripts() {
 	 		
 	 		add_action('wp_head', 'try_typekit');
 	 		
+	 		// Load Facebook
+	 		
+	 		add_action('wp_footer', 'hs_facebook');
+	 		
 	 	} else {
 	 		
 	 		// Load jquery from localhost in development environment
@@ -90,9 +98,28 @@ add_action( 'wp_enqueue_scripts', 'hs_load_scripts' );
 
 /* Load Typekit
  *
+ *
  */
+ 
 function try_typekit(){
 	echo '<script type="text/javascript">try{Typekit.load();}catch(e){}</script>';
+}
+
+/* Load Facebook Like Button
+ *
+ *
+ */
+ 
+function hs_facebook(){
+	echo '
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.async=true; js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=270342336310368";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, \'script\', \'facebook-jssdk\'));</script>';
 }
 
 
@@ -100,6 +127,7 @@ function try_typekit(){
  * Don't load theme CSS in the context of the toolbox.
  *
  */
+ 
 function hs_load_css() {
 
 	// Prevent theme CSS from loading in the context of the Toolbox
@@ -110,7 +138,6 @@ function hs_load_css() {
 		wp_enqueue_style('theme-bootstrap-responsive', get_bloginfo('template_url').'/css/theme-responsive.css');
 	}
 }
-
 add_action( 'wp_enqueue_scripts', 'hs_load_css' );
 
 ?>
