@@ -6,7 +6,7 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
       'awards' => array('name' => 'Awards', 'content' => array()),
       'news' => array('name' => 'News', 'content' => array()),
       'certifications' => array('name' => 'Certifications', 'content' => array()),
-      'insurances' => array('name' => 'Insurances', 'content' => array())
+      'guarantees' => array('name' => 'Guarantees', 'content' => array())
     );
     private $styles = array(
       'header' => 'Header',
@@ -104,8 +104,10 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
       $select_all = isset($data[$this->get_field_id('select_all_'.$type)]) ? $data[$this->get_field_id('select_all_'.$type)] : '';
       $chosen_accolade = array();
       if($select_all!='' && $select_all==1){
-        foreach($this->accolades[$type]['content'] as $ac){
-          array_push($chosen_accolade, $ac);
+        if(isset($this->accolades[$type]['content'])){
+          foreach($this->accolades[$type]['content'] as $ac){
+            array_push($chosen_accolade, $ac);
+          }
         }
       }
       else {
