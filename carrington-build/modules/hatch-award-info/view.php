@@ -19,7 +19,7 @@
 		</p>
 		<div class="center">
 			<div class="btn-group">
-				<button class="btn btn-primary btn-large hidden-phone">Call us  (233) 123-1234</button>
+				<a href="tel:<?=get_phone_number()?>" class="btn btn-primary btn-large hidden-phone">Call us <?=get_phone_number()?></a>
 				<button class="btn btn-success btn-large quick-estimate">Quick Online Estimate</button>
 			</div>
 		</div>

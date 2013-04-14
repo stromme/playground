@@ -155,8 +155,8 @@ get_header();
 				</p>
 				<div class="center">
 					<div class="btn-group">
-						<button class="btn btn-primary btn-large hidden-phone">Call us  (233) 123-1234</button>
-						<button class="btn btn-success btn-large">Quick Online Estimate</button>
+						<a href="tel:<?=get_phone_number()?>" class="btn btn-primary btn-large hidden-phone">Call us <?=get_phone_number()?></a>
+						<button class="btn btn-success btn-large quick-estimate">Quick Online Estimate</button>
 					</div>
 				</div>
 			</div>
@@ -242,7 +242,7 @@ get_header();
 					<p>"My assistant found Ernie of Quality Window Cleaning on the web. He gave us a quote and did a test clean of our windows. We found him to be quick and efficient and he was even able to get rid of some stubborn water stains. Needless to say, we have been very satisfied with his work and his price and would recommend him to other businesses"
 					</p>
 					<p class="citation"><cite>MC Hammer </cite><span class="author-location">~ Springfield, MA</span></p>
-					<a href="" class="review-link">Read more reviews</a>
+					<a href="<?=home_url().get_blog_prefix()?>reviews" class="review-link">Read more reviews</a>
 				</blockquote>
 				<div class="curved-shadow">
 					<img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
