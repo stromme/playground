@@ -60,11 +60,11 @@ function hs_load_scripts() {
 		wp_register_script( 'typekit', 'http://use.typekit.net/aii7njo.js');
 		wp_enqueue_script( 'typekit' );
 		
-		add_action('wp_head', 'try_typekit');
+		// add_action('wp_head', 'try_typekit');
 		
 		// Load Facebook
 		
-		add_action('wp_footer', 'hs_facebook');
+		// add_action('wp_footer', 'hs_facebook');
 		
 		if ( ENVIRONMENT == 'LIVE' ) {
 

@@ -5297,7 +5297,6 @@ a.link-decorate:hover,
 a.link-showoff {
   text-decoration: none;
   border-bottom: 1px dotted;
-  border-bottom-color: inherit;
 }
 a.link-inverse {
   color: #ffffff;
@@ -6162,10 +6161,11 @@ a.review-link:hover {
   font-family: "tamarillo";
 }
 .review-invert blockquote .author-location {
-  color: #7ac8ff;
+  color: #f1f1f1;
 }
 .review-invert blockquote a.review-link {
   background-color: #48a948;
+  line-height: 20px;
 }
 .gravatar {
   width: 100px;
@@ -6283,7 +6283,6 @@ body {
   border-right: none;
 }
 .headline ul h1,
-.headline ul h4,
 .headline ul a {
   color: #ffffff;
   font-size: 20px;

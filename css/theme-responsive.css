@@ -1258,6 +1258,10 @@
 }
 /*  Phones */
 @media (max-width: 480px) {
+  h2 {
+    font-size: 24px;
+    line-height: 30px;
+  }
   .brand-phone {
     display: inherit !important;
   }
@@ -1266,14 +1270,37 @@
     font-weight: 200;
     text-align: center;
   }
+  .main-nav button,
+  .main-nav a {
+    font-size: 16px !important;
+  }
+  .main-nav .btn {
+    padding: 6px 6px;
+  }
+  .main-nav .nav-callout-border {
+    padding: 8px 6px;
+  }
+  .main-nav .nav-callout {
+    margin-left: 4px;
+  }
+  .main-nav .dropdown {
+    top: -5px;
+  }
+  .headline ul li {
+    display: block;
+  }
   .headline h1,
   .headline h4,
   .headline a {
     font-size: 16px;
+    line-height: 16px;
   }
-  .headline h1,
-  .headline h4 {
-    padding: 5px 9px 5px 9px;
+  .headline-title:after {
+    content: " ";
+    display: block;
+    background-image: -webkit-linear-gradient(left, #0083e0, #ffffff 25%, #ffffff 75%, #0083e0);
+    background-color: #fff;
+    height: 1px;
   }
   .banner-photo {
     padding: 0;
@@ -1295,6 +1322,11 @@
     max-width: 100%;
     height: 280px;
   }
+  .banner-review blockquote p,
+  .banner-review blockquote p.banner-author {
+    font-size: 24px;
+    line-height: 30px;
+  }
   .footer .footer-links > a {
     padding: 3px;
     margin: 3px;
@@ -1306,6 +1338,12 @@
   .featurette-horizontal iframe,
   .featurette-vertical iframe {
     height: 240px;
+  }
+  .link-grid {
+    padding: 0px;
+  }
+  blockquote cite {
+    font-size: 24px !important;
   }
 }
 @media (max-width: 600px) {

@@ -5,6 +5,11 @@
 
 /*  Phones */
 @media (max-width: 480px) {
+
+	 // Reduce some font sizes
+	  
+	h2 { font-size: @baseFontSize*1.5; line-height: @baseLineHeight*1.5; }
+ 
 	.brand-phone { display: inherit !important; }
 	.brand-phone > h4 {
 		margin-bottom: 0px;
@@ -13,15 +18,46 @@
 	}
 	
 	.main-nav {
-		//vertically align main nav between banner and headline - find a better way?
-		//margin-top: 15px;
+		button, a {
+			font-size: @baseFontSize !important;
+		}
+		
+		.btn {
+			padding: 6px 6px;
+		}
+		
+		.nav-callout-border {
+			padding: 8px 6px;
+		}
+		
+		.nav-callout {
+			margin-left: 4px;
+		}
+		.dropdown {
+			top: -5px;
+		}
 	}
-	.headline {		
+	
+	// Headline
+	.headline {
+		ul li {
+			// Push phone number below tag line
+			display: block;
+		}
 		h1, h4, a {
 			font-size: @baseFontSize;
+			line-height: (@baseFontSize);
 		}
-		h1, h4 {
-			padding: 5px 9px 5px 9px;
+	}
+	
+	// Add a pen stroke after the title
+	.headline-title {
+		&:after {
+			content: " ";
+			display: block;
+			background-image: -webkit-linear-gradient(left,@blue,#fff 25%,#fff 75%,@blue);
+			background-color: #fff;
+			height: 1px;
 		}
 	}
 
@@ -43,6 +79,14 @@
             }
         }
     }
+    
+    // Banner
+    .banner-review blockquote { 
+    	p, p.banner-author {
+    		font-size: @baseFontSize*1.5; 
+    		line-height: @baseLineHeight*1.5;
+    	} 
+    }
 	
 	.footer {
 		.footer-links > a {
@@ -60,6 +104,17 @@
         iframe {
             height: 240px;
         }
+    }
+    
+    // Link Grid
+    .link-grid {
+    	padding: 0px;
+    }
+    
+    // Reviews
+    
+    blockquote cite {
+    	font-size: @baseFontSize * 1.5 !important;
     }
 }
 
