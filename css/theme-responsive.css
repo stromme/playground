@@ -1272,7 +1272,7 @@
   }
   .btn-large {
     padding: 6px 6px;
-    font-size: 16px !important;
+    font-size: 16px;
   }
   .modal-footer {
     padding-top: 8px;
@@ -1292,7 +1292,11 @@
     padding-bottom: 6px;
   }
   .main-nav a {
-    font-size: 16px !important;
+    font-size: 16px;
+  }
+  .main-nav .btn-large {
+    padding: 6px 6px;
+    font-size: 16px;
   }
   .main-nav .nav-callout-border {
     padding: 8px 6px;
