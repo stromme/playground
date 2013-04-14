@@ -6270,6 +6270,7 @@ body {
 .headline ul li {
   text-align: center;
   display: table-cell;
+  vertical-align: middle;
   margin-left: 0px;
   list-style: none;
   border-right: 1px solid #47b3ff;
@@ -6286,6 +6287,7 @@ body {
 .headline ul a {
   color: #ffffff;
   font-size: 20px;
+  line-height: 25px;
 }
 .headline ul h1,
 .headline ul h4 {

@@ -18,10 +18,10 @@ $seo = get_location_seo();
 	<div class="container headline">
 		<ul>
 			<li class="headline-title green-man-45">
-				<h1 class="multi-line">Awarded <?=date('Y')?> <b>Best Window Cleaners</b> in <a href="<?=get_home_url().get_blog_prefix()."/locations/"?>" class="link-inverse link-decorate link-showoff" data-toggle="tooltip" data-placement="bottom" title="Visit another location"><?=$seo['city']?><?=($seo['state']!='')?', '.$seo['state']:''?></a></h1>
+				<h1>Awarded <?=date('Y')?> <b>Best Window Cleaners</b> in <a href="<?=get_home_url().get_blog_prefix()."/locations/"?>" class="link-inverse link-decorate link-showoff" data-toggle="tooltip" data-placement="bottom" title="Visit another location"><?=$seo['city']?><?=($seo['state']!='')?', '.$seo['state']:''?></a></h1>
 			</li>
 			<li class="headline-phone">
-				<h4><a href=""><?=get_phone_number()?></a></h4>
+				<h4><a href="#" class="link-inverse link-decorate link-showoff"><?=get_phone_number()?></a></h4>
 			</li>
 			<li class="headline-link hidden-phone hidden-tablet">
 				<h4><a href="" class="quick-estimate">Quick Estimate</a></h4>
