@@ -1266,6 +1266,18 @@
     font-size: 24px;
     line-height: 30px;
   }
+  h3 {
+    font-size: 20px;
+    line-height: 25px;
+  }
+  .btn-large {
+    padding: 6px 6px;
+    font-size: 16px !important;
+  }
+  .modal-footer {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
   .brand-phone {
     display: inherit !important;
   }
@@ -1274,12 +1286,13 @@
     font-weight: 200;
     text-align: center;
   }
-  .main-nav button,
+  #new-lead input,
+  #new-lead .add-on {
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
   .main-nav a {
     font-size: 16px !important;
-  }
-  .main-nav .btn {
-    padding: 6px 6px;
   }
   .main-nav .nav-callout-border {
     padding: 8px 6px;
@@ -1332,6 +1345,7 @@
     line-height: 30px;
   }
   .banner .share-it {
+    padding-left: 20px;
     text-align: center;
     min-width: 0px;
   }

@@ -14,7 +14,23 @@
 	// Reduce some font sizes
 	  
 	h2 { font-size: @baseFontSize*1.5; line-height: @baseLineHeight*1.5; }
+	h3 { font-size: @baseFontSize*1.25; line-height: @baseLineHeight*1.25; }
  
+ 	// Reduce large button size
+ 	
+ 	.btn-large {
+ 		padding: 6px 6px;
+ 		font-size: @baseFontSize !important;
+ 	}
+ 	
+ 	// Reduce Modal Footer
+ 	
+ 	.modal-footer {
+ 		padding-top: 8px;
+ 		padding-bottom: 8px;
+ 	}
+ 	
+	// Fix brand elements 
 	.brand-phone { display: inherit !important; }
 	.brand-phone > h4 {
 		margin-bottom: 0px;
@@ -22,13 +38,16 @@
 		text-align: center;
 	}
 	
+	// Reduce size of lead inputs
+	
+	#new-lead input, #new-lead .add-on  {
+		padding-top: 6px;
+		padding-bottom: 6px;
+	}
+	
 	.main-nav {
-		button, a {
+		a {
 			font-size: @baseFontSize !important;
-		}
-		
-		.btn {
-			padding: 6px 6px;
 		}
 		
 		.nav-callout-border {
@@ -95,6 +114,7 @@
     }
     
     .banner .share-it {
+    	padding-left: 20px;
     	text-align: center;
     	min-width: 0px;
     }
