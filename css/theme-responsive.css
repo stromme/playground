@@ -1331,6 +1331,10 @@
     font-size: 24px;
     line-height: 30px;
   }
+  .banner .share-it {
+    text-align: center;
+    min-width: 0px;
+  }
   .footer .footer-links > a {
     padding: 3px;
     margin: 3px;
