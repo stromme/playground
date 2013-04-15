@@ -98,6 +98,22 @@ global $post;
 			</div>
       <div class="nav-collapse collapse">
         <ul class="nav">
+          <?php
+            if(!is_super_admin(get_current_user_id())){
+              $blogs = get_blogs_of_user(get_current_user_id());
+              if(count($blogs)>1){
+                usort($blogs, "blogsort");
+                foreach($blogs as $blog){
+                  if($blog->userblog_id!=get_current_blog_id()){
+          ?>
+          <li><a tabindex="-1" href="<?=$blog->siteurl.((get_blog_prefix($blog->userblog_id))?get_blog_prefix($blog->userblog_id):'/').'toolbox/dashboard/'?>"><?=$blog->blogname?></a></li>
+          <?php
+                  }
+                }
+                echo '<li class="divider"></li>';
+              }
+            }
+          ?>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing</a></li>
