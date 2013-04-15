@@ -63,7 +63,7 @@ global $post;
 						<ul class="dropdown-menu" role="menu" aria-labelledby="control-panel">
               <?php
                 $blogs = get_blogs_of_user(get_current_user_id());
-                if(is_super_admin(get_current_user_id()) && count($blogs)>1){
+                if(!is_super_admin(get_current_user_id()) && count($blogs)>1){
                   function blogsort($a,$b) {
                     return strcmp($a->blogname, $b->blogname)>0;
                   }
