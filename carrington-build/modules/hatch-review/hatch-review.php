@@ -101,6 +101,7 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
       $content = (!empty($data[$this->get_field_name('content')]) ? esc_html($data[$this->get_field_name('content')]) : '');
       $name = (!empty($data[$this->get_field_name('name')]) ? esc_html($data[$this->get_field_name('name')]) : '');
       $location = (!empty($data[$this->get_field_name('location')]) ? esc_html($data[$this->get_field_name('location')]) : '');
+      $company = (!empty($data[$this->get_field_name('company')]) ? esc_html($data[$this->get_field_name('company')]) : '');
 
       $review_id = isset($data[$this->get_field_name('review_id')]) ? $data[$this->get_field_name('review_id')] : '';
       if($review_id=='') $review_id = array();
@@ -115,6 +116,7 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
         $manual_review->content = $content;
         $manual_review->location = $location;
         $manual_review->rating = $content;
+        $manual_review->company = $company;
         $reviews = array(
           $manual_review
         );
@@ -212,7 +214,7 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
                   <li'.(($selected)?' class="selected"':'').'>
                     <div class="cfct-review-checkbox"><input type="checkbox" value="'.$review->id.'" id="'.$this->get_field_id('review_id').'_'.$review->id.'" name="'.$this->get_field_id('review_id').'[]" '.(($selected)?'checked="checked"':'').'/></div>
                     <label for="'.$this->get_field_id('review_id').'_'.$review->id.'" class="cfct-review-detail">
-                      <div class="cfct-review-title">'.$review->name.'</div>
+                      <div class="cfct-review-title">'.$review->name.(($review->company!='')?' ('.$review->company.')':'').'</div>
                       <div class="cfct-review-description">'.substr($review->content, 0, 120).'</div>
                     </label>
                   </li>';
@@ -227,7 +229,7 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
                     <li'.(($selected)?' class="selected"':'').'>
                       <div class="cfct-review-checkbox"><input type="checkbox" value="'.$review->id.'" id="'.$this->get_field_id('review_id').'_'.$review->id.'" name="'.$this->get_field_id('review_id').'[]" '.(($selected)?'checked="checked"':'').'/></div>
                       <label for="'.$this->get_field_id('review_id').'_'.$review->id.'" class="cfct-review-detail">
-                        <div class="cfct-review-title">'.$review->name.'</div>
+                        <div class="cfct-review-title">'.$review->name.(($review->company!='')?' ('.$review->company.')':'').'</div>
                         <div class="cfct-review-description">'.substr($review->content, 0, 120).'</div>
                       </label>
                     </li>';
@@ -253,6 +255,10 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
               <div class="cfct-field">
                 <label for="'.$this->get_field_id('name').'">'.__('Customer name').'</label>
                 <input type="text" name="'.$this->get_field_name('name').'" id="'.$this->get_field_id('name').'" value="'.(!empty($data[$this->get_field_name('name')]) ? esc_html($data[$this->get_field_name('name')]) : '').'" />
+              </div>
+              <div class="cfct-field">
+                <label for="'.$this->get_field_id('company').'">'.__('Company').'</label>
+                <input type="text" name="'.$this->get_field_name('company').'" id="'.$this->get_field_id('company').'" value="'.(!empty($data[$this->get_field_name('company')]) ? esc_html($data[$this->get_field_name('company')]) : '').'" />
               </div>
               <div class="cfct-field">
                 <label for="'.$this->get_field_id('location').'">'.__('Location').'</label>

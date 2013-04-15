@@ -34,24 +34,30 @@
 			<div class="row-fluid bumper-top-small">
 				<div class="span6">
 					<div class="input-prepend">
-					    <span class="add-on"><i class="icon-user"></i></span>
-					    <input id="comment-name" class="input-block-level" validation="not-empty" placeholder="Your Name" type="text" />
+            <span class="add-on"><i class="icon-user"></i></span>
+            <input id="comment-name" class="input-block-level" validation="not-empty" placeholder="Your Name" type="text" />
 					</div>
 				</div>
 				<div class="span6">
 					<div class="input-prepend">
-					    <span class="add-on"><i class="icon-user"></i></span>
-					    <input id="comment-company" class="input-block-level" placeholder="Company" type="text" />
+            <span class="add-on"><i class="icon-user"></i></span>
+            <input id="comment-company" class="input-block-level" placeholder="Company" type="text" />
 					</div>
 				</div>
-			</div>
-			<div class="row-fluid">
-				<div class="span6">
-					<div class="input-prepend">
-					    <span class="add-on"><i class="icon-envelope"></i></span>
-					    <input id="comment-email" class="input-block-level" validation="not-empty email" placeholder="Email Address" type="text" />
-					</div>
-				</div>
+      </div>
+      <div class="row-fluid">
+        <div class="span6">
+          <div class="input-prepend">
+            <span class="add-on"><i class="icon-envelope"></i></span>
+            <input id="comment-email" class="input-block-level" validation="not-empty email" placeholder="Email Address" type="text" />
+          </div>
+        </div>
+        <div class="span6">
+          <div class="input-prepend">
+            <span class="add-on"><i class="icon-map-marker"></i></span>
+            <input id="comment-location" class="input-block-level" validation="not-empty" placeholder="Location" type="text" />
+          </div>
+        </div>
 			</div>
 		</div>
 		
