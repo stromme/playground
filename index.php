@@ -90,7 +90,7 @@ get_header();
 				<blockquote class="center well well-blue well-has-shadow">
 					<p>"My assistant found Ernie of Quality Window Cleaning on the web. He gave us a quote and did a test clean of our windows. We found him to be quick and efficient and he was even able to get rid of some stubborn water stains. Needless to say, we have been very satisfied with his work and his price and would recommend him to other businesses"
 					</p>
-					<p class="citation"><cite>MC Hammer </cite><span class="author-location">~ Springfield, MA</span></p>
+					<p class="citation"><cite>MC Hammer </cite><span class="author-location">- Springfield, MA</span></p>
 					<a href="" class="review-link">Read more reviews</a>
 				</blockquote>
 				<div class="curved-shadow">
@@ -241,7 +241,7 @@ get_header();
 				<blockquote class="center well well-blue well-has-shadow">
 					<p>"My assistant found Ernie of Quality Window Cleaning on the web. He gave us a quote and did a test clean of our windows. We found him to be quick and efficient and he was even able to get rid of some stubborn water stains. Needless to say, we have been very satisfied with his work and his price and would recommend him to other businesses"
 					</p>
-					<p class="citation"><cite>MC Hammer </cite><span class="author-location">~ Springfield, MA</span></p>
+					<p class="citation"><cite>MC Hammer </cite><span class="author-location">, Springfield, MA</span></p>
 					<a href="<?=home_url().get_blog_prefix()?>reviews" class="review-link">Read more reviews</a>
 				</blockquote>
 				<div class="curved-shadow">
@@ -279,10 +279,10 @@ get_header();
 			=====================================================
 			-->
 			
-			<div class="pull-left bumper-right-medium bumper-bottom">
+			<div class="pull-left bumper-right-medium bumper-bottom center">
 				<img class="img-polaroid" src="http://maps.google.com/maps/api/staticmap?center=North+Bethesda,5703+Luxemburg+Street%2C+Apt.100,MD,20852&amp;zoom=9&amp;size=270x210&amp;maptype=roadmap&amp;markers=color:blue%7Clabel:A%7CNorth+Bethesda,5703+Luxemburg+Street%2C+Apt.100,MD,20852&amp;sensor=false" itemprop="image">
 			</div>
-			<div class="">
+			<div class="center">
 				<h3 class="light-weight">Come say hello...</h3>
 				<address>
 				  <strong>Streak Free Clean</strong><br>

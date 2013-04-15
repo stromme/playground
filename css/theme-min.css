@@ -5989,6 +5989,7 @@ nav-callout .notch {
   padding-top: 20px;
   font-size: 32px;
   font-family: "tamarillo";
+  text-align: right;
 }
 .banner-review blockquote cite {
   color: #333333;
@@ -6131,7 +6132,7 @@ nav-callout .notch {
   font-size: 24px;
   font-family: "tamarillo";
   color: #ffffff;
-  padding: 5px 8px;
+  padding: 7px 9px;
   background-color: #999999;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;

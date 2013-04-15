@@ -1171,6 +1171,9 @@
     height: auto;
     padding: 20px;
   }
+  .banner-review blockquote p.banner-author {
+    text-align: center;
+  }
   .row-middle {
     padding: 20px;
     margin: 0 auto;

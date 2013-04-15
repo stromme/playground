@@ -16,7 +16,7 @@
 	<div class="banner-review">
 		<blockquote>
 			<p>"Couldn't be happier. They showed up on time and did a fantastic job. We'll call again for sure."</p>
-			<p class="banner-author"><cite>Rene C</cite>, Bethseda</p>
+			<p class="banner-author"><cite>Rene C.</cite> - Bethseda, CA</p>
 		</blockquote>
 		<div class="fixed-bottom">
 			<ul class="share-it">
