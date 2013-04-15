@@ -5650,6 +5650,9 @@ nav-callout .notch {
   z-index: 1030;
   margin-bottom: 0;
 }
+.visible-phone-portrait {
+  display: none;
+}
 .bg-white {
   background-color: #ffffff;
 }
@@ -6229,9 +6232,6 @@ body {
   padding: 55px 6px 10px 0px;
   max-height: 120px;
 }
-.brand-phone {
-  display: none;
-}
 .page-title {
   -webkit-border-top-left-radius: 6px;
   -moz-border-radius-topleft: 6px;
@@ -6284,18 +6284,18 @@ body {
   border-right: none;
 }
 .headline ul h1,
+.headline ul h2,
 .headline ul a {
   color: #ffffff;
   font-size: 20px;
   line-height: 25px;
 }
 .headline ul h1,
-.headline ul h4 {
-  font-weight: 100;
+.headline ul h2 {
   padding: 9px 13px 10px 13px;
   margin: 0px;
 }
-.headline ul h4 > a,
+.headline ul h2 > a,
 .headline ul b {
   font-weight: 400;
   text-decoration: none;

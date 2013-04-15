@@ -11,6 +11,14 @@
 	  padding-right: 5px;
 	}
 	
+	//Utility Classes
+	.visible-phone-portrait {
+	    display: inline;
+	}
+	.hidden-phone-portrait {
+	    display: none;
+	}
+	
 	// Reduce some font sizes
 	  
 	h2 { font-size: @baseFontSize*1.5; line-height: @baseLineHeight*1.5; }
@@ -31,8 +39,8 @@
  	}
  	
 	// Fix brand elements 
-	.brand-phone { display: inherit !important; }
 	.brand-phone > h4 {
+		margin-top: 100px;
 		margin-bottom: 0px;
 		font-weight: 200;
 		text-align: center;
@@ -75,10 +83,10 @@
 		ul li {
 			// Push phone number below tag line
 			display: block;
-		}
-		h1, h4, a {
-			font-size: @baseFontSize;
-			line-height: (@baseFontSize);
+			h1, h2, a {
+				font-size: @baseFontSize;
+				line-height: (@baseFontSize);
+			}
 		}
 	}
 	
@@ -164,4 +172,5 @@
     .brand img {
         display: none;
     }
+   
 }

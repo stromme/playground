@@ -62,15 +62,15 @@ $comments = get_comments($args);
 	<nav>
 		
 		<!-- Text version of company name replaces logo on Phones -->
-		<div class="brand-phone clearfix">
+		<!--<div class="brand-phone clearfix">
 			<?php $tb_company = get_option('tb_company'); ?>
 			<h4><?=esc_html( stripslashes($tb_company['name']))?></h4>
-		</div>
+		</div>-->
 		<!-- /Text version  -->
 		
 		<!-- Main Navigation Menu Bar -->
 		<ul class="main-nav nav nav-pills">
-			<li class="hidden-phone"><a href="<?=get_home_url().$blog_prefix."/"?>">Home</a>
+			<li class="visible-desktop"><a href="<?=get_home_url().$blog_prefix."/"?>">Home</a>
       <?php if(count($promoted_services)>0){ ?>
 			<li class="dropdown hidden-desktop"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
 				<ul class="dropdown-menu">

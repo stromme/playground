@@ -1262,6 +1262,12 @@
     padding-left: 5px;
     padding-right: 5px;
   }
+  .visible-phone-portrait {
+    display: inline;
+  }
+  .hidden-phone-portrait {
+    display: none;
+  }
   h2 {
     font-size: 24px;
     line-height: 30px;
@@ -1278,10 +1284,8 @@
     padding-top: 8px;
     padding-bottom: 8px;
   }
-  .brand-phone {
-    display: inherit !important;
-  }
   .brand-phone > h4 {
+    margin-top: 100px;
     margin-bottom: 0px;
     font-weight: 200;
     text-align: center;
@@ -1313,9 +1317,9 @@
   .headline ul li {
     display: block;
   }
-  .headline h1,
-  .headline h4,
-  .headline a {
+  .headline ul li h1,
+  .headline ul li h2,
+  .headline ul li a {
     font-size: 16px;
     line-height: 16px;
   }
