@@ -982,7 +982,7 @@
     padding-left: 60px;
   }
   .main-nav {
-    margin-top: 80px;
+    margin-top: 79px;
   }
   .link-grid {
     padding-left: 60px;
@@ -1295,7 +1295,7 @@
     font-size: 16px;
   }
   .main-nav .btn-large {
-    padding: 6px 6px;
+    padding: 7px 6px;
     font-size: 16px;
   }
   .main-nav .nav-callout-border {
@@ -1304,8 +1304,11 @@
   .main-nav .nav-callout {
     margin-left: 4px;
   }
-  .main-nav .dropdown {
-    top: -5px;
+  .main-nav li.dropdown > a {
+    position: relative;
+    top: -1px;
+    margin-right: 10px;
+    padding: 10px 8px;
   }
   .headline ul li {
     display: block;
@@ -1352,6 +1355,9 @@
     padding-left: 20px;
     text-align: center;
     min-width: 0px;
+  }
+  .banner .share-it .write-review span {
+    display: none;
   }
   .footer .footer-links > a {
     padding: 3px;

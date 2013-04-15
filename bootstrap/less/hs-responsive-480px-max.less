@@ -50,7 +50,7 @@
 			font-size: @baseFontSize;
 		}
 		.btn-large {
-			padding: 6px 6px;
+			padding: 7px 6px;
 			font-size: @baseFontSize;
 		}
 		
@@ -61,8 +61,12 @@
 		.nav-callout {
 			margin-left: 4px;
 		}
-		.dropdown {
-			top: -5px;
+		
+		li.dropdown > a {
+			position: relative;
+			top: -1px;
+			margin-right: 10px;
+			padding: 10px 8px;
 		}
 	}
 	
@@ -121,6 +125,9 @@
     	padding-left: 20px;
     	text-align: center;
     	min-width: 0px;
+    	.write-review span {
+    		display: none;
+    	}
     }
 	
 	.footer {

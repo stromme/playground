@@ -97,7 +97,7 @@ $comments = get_comments($args);
         </ul>
 			</li>
       <? } if(count($showroom)>0) { ?>
-			<li class=" visible-desktop"><a href="<?=get_home_url().$blog_prefix."/showroom"?>">Showroom</a></li>
+			<li class="hidden-phone"><a href="<?=get_home_url().$blog_prefix."/showroom"?>">Showroom</a></li>
       <? } if(count($comments)>0) { ?>
 			<li class="nav-callout nav-callout-border"><a href="<?=get_home_url().$blog_prefix."/reviews"?>" class="clear-pills">Reviews</a><b class="nav-callout-border-notch notch"></b><b class="notch"></b></li>
       <? } ?>

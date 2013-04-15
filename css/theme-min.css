@@ -5718,7 +5718,7 @@ nav-callout .notch {
   background: url("../images/backgrounds/blue-diagnal.png") repeat;
 }
 .main-nav {
-  margin-top: 95px;
+  margin-top: 90px;
   margin-left: 0;
   float: right;
 }
@@ -5736,6 +5736,7 @@ nav-callout .notch {
 }
 .main-nav > li > a {
   border: 1px solid transparent;
+  padding: 14px 12px;
 }
 .main-nav .open .dropdown-toggle,
 .main-nav > li.dropdown.open.active > a:hover,
@@ -5756,7 +5757,7 @@ nav-callout .notch {
   margin-left: 15px;
   padding: 10px 8px;
   position: relative;
-  top: -4px;
+  top: 1px;
 }
 .nav-callout {
   -webkit-border-radius: 6px;
@@ -5766,7 +5767,7 @@ nav-callout .notch {
   padding: 18px 20px;
   background-color: #0083e0;
   position: relative;
-  top: -5px;
+  top: 1px;
 }
 .nav-callout a {
   padding: 0px;
