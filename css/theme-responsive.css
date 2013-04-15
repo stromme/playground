@@ -1208,6 +1208,11 @@
     width: auto;
   }
 }
+@media (min-width: 767px) {
+  .big-modal > .modal {
+    top: 10% !important;
+  }
+}
 @media (min-width: 767px) and (max-width: 979px) {
   div.img-polaroid.middle9 {
     width: 90%;
@@ -1257,6 +1262,28 @@
     text-align: center;
     width: 90%;
     display: inline-block !important;
+  }
+  .big-modal.shown {
+    z-index: 1050;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .big-modal > .modal {
+    position: static;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    border-radius: 0;
+  }
+  .big-modal > .modal .modal-body {
+    max-height: none;
   }
 }
 /*  Phones */
