@@ -31,7 +31,7 @@
                   <span class="author-location"> - <?=parse_shortclass($r->company)?></span>
                 <?php } ?>
               </p>
-              <a href="<?=home_url().get_blog_prefix()?>reviews" class="review-link">Read more reviews</a>
+              <a href="<?=home_url().((get_blog_prefix()!='')?get_blog_prefix():'/')?>reviews" class="review-link">Read more reviews</a>
 
           <?php if(count($reviews)>1){ ?>
           </div>
