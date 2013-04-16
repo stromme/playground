@@ -35,8 +35,8 @@
             <p class="banner-author"><cite id="author-<?=$id?>"><?=$d->author?></cite><?php
               }
               if($d->author_location!=''){
-            ?> - 
-              <span id="author-location-<?=$id?>"><?=$d->author_location?></span></p>
+            ?>  
+              <span class="author-location" id="author-location-<?=$id?>"> - <?=$d->author_location?></span></p>
             <?php } ?>
           <?php } ?>
         </blockquote>

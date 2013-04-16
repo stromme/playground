@@ -134,7 +134,7 @@ $prj = TB_Frontend::get_project_details($post);
 <section class="bg-slate">
 	<div class="row-fluid  bumper-top-medium bumper-bottom-medium">
 		<div class="span12">
-			<h2 class="blue center">View more of our recent <strong class="green"><?=$term_name?></strong> projects</h2>
+			<h2 class="blue center">Our recent <strong class="green"><?=$term_name?></strong> projects</h2>
 		</div>
 	</div>
 	<div class="row-fluid">
@@ -148,7 +148,7 @@ $prj = TB_Frontend::get_project_details($post);
 					<div class="caption">
 						<p><?=(strlen($rel_prj->content)>120)?(substr($rel_prj->content, 0, 120).'...'):($rel_prj->content)?></p>
 						<p>
-							<a class="btn btn-primary btn-small" href="<?=$showroom_link?>">Visit Showroom</a> <a class="btn btn-success btn-small" href="<?=home_url().((get_blog_prefix()!='')?get_blog_prefix():'/')?>projects/<?=$rel_prj->slug?>">View project</a>
+							<a class="btn btn-primary btn-small" href="<?=$showroom_link?>">Visit Showroom</a><!-- <a class="btn btn-success btn-small" href="<?=home_url().((get_blog_prefix()!='')?get_blog_prefix():'/')?>projects/<?=$rel_prj->slug?>">View project</a>-->
 						</p>
 					</div>
 				</div>

@@ -5991,6 +5991,11 @@ nav-callout .notch {
   font-family: "tamarillo";
   text-align: right;
 }
+.banner-review blockquote p.banner-author .author-location {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #999999;
+  font-size: 20px;
+}
 .banner-review blockquote cite {
   color: #333333;
 }
@@ -6007,7 +6012,7 @@ nav-callout .notch {
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff5f5f5', endColorstr='#fff5f5f5', GradientType=0);
   *zoom: 1;
-  min-width: 440px;
+  min-width: 340px;
 }
 .banner .share-it:before,
 .banner .share-it:after {

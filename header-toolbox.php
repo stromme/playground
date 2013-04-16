@@ -43,10 +43,10 @@ global $post;
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
     <div class="container-fluid">
-    	<a class="brand hidden-phone" href="<?=TOOLBOX_URL?>dashboard">
+    	<div class="brand hidden-phone">
     		<?php
     		$industry = get_option('tb_industry'); 
-    		if ( $industry['industry'] == 'window-cleaning' ) echo '<img src="'. TOOLBOX_IMAGES . '/wc-logo.png">'; else echo '<h2>Hatch</h2>';?></a>
+    		if ( $industry['industry'] == 'window-cleaning' ) echo '<a href="http://www.windowcleaning.com"><img src="'. TOOLBOX_IMAGES . '/wc-logo.png"></a>'; else echo '<h2>Hatch</h2>';?></div>
 			<div><!--</div> class="nav-collapse collapse"-->
 				<ul class="nav">
 					<li class="has-nav-icon">
@@ -82,7 +82,7 @@ global $post;
               ?>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
-							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing</a></li>
+							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing and Tracking</a></li>
 							<li class="divider"></li>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account">My account</a></li>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/logout?nonce=<?=wp_create_nonce('logout-'.date('Ymd'))?>">Log out</a></li>

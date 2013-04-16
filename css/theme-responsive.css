@@ -952,7 +952,7 @@
     max-height: 150px;
   }
   div.banner-photo {
-    max-width: 600px;
+    max-width: 650px;
   }
   div.banner-photo img {
     max-width: 1200px;
@@ -1116,7 +1116,7 @@
   }
   .banner-photo {
     display: block;
-    padding: 60px 0 20px;
+    padding: 20px 0 20px;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     border-radius: 6px;

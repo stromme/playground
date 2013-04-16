@@ -35,7 +35,7 @@ if(count($terms)>0){
 $terms = $new_terms;
 $current_industry = get_option('tb_industry');
 $industry_name = str_replace('-', ' ', $current_industry['industry']);
-$current_service = ($service!='' && $service_name!='')?strtolower($service_name):$industry_name;
+$current_service = ($service!='' && $service_name!='')?strtolower($service_name):'projects';
 
 $initial_projects = array();
 $args = array(
@@ -93,13 +93,13 @@ foreach($first_ten_projects as $prj){
           <li class="triangle"></li>
           <li class="show-text">Show...</li>
           <?php if($service!=''){ ?>
-          <li><a href="<?=home_url().'/showroom'?>">all <?=$industry_name?></a></li>
+          <li><a href="<?=home_url().'/showroom'?>">All projects</a></li>
           <?php } ?>
           <?php foreach($terms as $term){ ?>
-          <li><a href="<?=home_url().'/showroom/'.$term->slug?>"><?=strtolower($term->name)?></a></li>
+          <li><a href="<?=home_url().'/showroom/'.$term->slug?>"><?=$term->name?></a></li>
           <?php } ?>
         </ul></span>
-        projects</h2>
+        <?php if ($current_service != 'projects') echo 'projects'; ?></h2>
 		</div>
 	</section>
 	<section class="bg-white" id="showroom">
@@ -138,7 +138,7 @@ foreach($first_ten_projects as $prj){
         }
       ?>
       </div>
-      <div class="clearfix"></div>
+      <div class="clearfix bumper-bottom-medium"></div>
     </div>
 	</section>
 </div>
