@@ -61,6 +61,25 @@ global $post;
 					<li class="dropdown has-nav-icon control-panel-expanded">
 						<a id="control-panel" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-nav-cog"></i> <b class="caret"></b></a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="control-panel">
+              <?php
+                if(!is_super_admin(get_current_user_id())){
+                  $blogs = get_blogs_of_user(get_current_user_id());
+                  if(count($blogs)>1){
+                    function blogsort($a,$b) {
+                      return strcmp($a->blogname, $b->blogname)>0;
+                    }
+                    usort($blogs, "blogsort");
+                    foreach($blogs as $blog){
+                      if($blog->userblog_id!=get_current_blog_id()){
+              ?>
+              <li><a tabindex="-1" href="<?=$blog->siteurl.((get_blog_prefix($blog->userblog_id))?get_blog_prefix($blog->userblog_id):'/').'toolbox/dashboard/'?>"><?=$blog->blogname?></a></li>
+              <?php
+                      }
+                    }
+                    echo '<li class="divider"></li>';
+                  }
+                }
+              ?>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing</a></li>
@@ -79,6 +98,22 @@ global $post;
 			</div>
       <div class="nav-collapse collapse">
         <ul class="nav">
+          <?php
+            if(!is_super_admin(get_current_user_id())){
+              $blogs = get_blogs_of_user(get_current_user_id());
+              if(count($blogs)>1){
+                usort($blogs, "blogsort");
+                foreach($blogs as $blog){
+                  if($blog->userblog_id!=get_current_blog_id()){
+          ?>
+          <li><a tabindex="-1" href="<?=$blog->siteurl.((get_blog_prefix($blog->userblog_id))?get_blog_prefix($blog->userblog_id):'/').'toolbox/dashboard/'?>"><?=$blog->blogname?></a></li>
+          <?php
+                  }
+                }
+                echo '<li class="divider"></li>';
+              }
+            }
+          ?>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing</a></li>
