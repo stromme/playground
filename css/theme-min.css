@@ -5985,9 +5985,11 @@ nav-callout .notch {
   font-weight: 100;
 }
 .banner-review blockquote p.banner-author {
+  margin-top: 10px;
   color: #999999;
   padding-top: 20px;
   font-size: 32px;
+  line-height: 20px;
   font-family: "tamarillo";
   text-align: right;
 }

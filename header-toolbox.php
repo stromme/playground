@@ -17,7 +17,7 @@ global $post;
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta name="apple-mobile-web-app-title" content="Hatch" />
-	<link rel="apple-touch-icon" href="<?=get_theme_root_uri().'/'.get_stylesheet()?>/iphone-icon.png"/>
+	<link rel="apple-touch-icon" href="<?=TOOLBOX_IMAGES?>/apple-touch-icon.png"/>
 	<title>Toolbox | <?=ucwords($post->post_name)?></title>
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
 	<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
@@ -46,7 +46,7 @@ global $post;
     	<div class="brand hidden-phone">
     		<?php
     		$industry = get_option('tb_industry'); 
-    		if ( $industry['industry'] == 'window-cleaning' ) echo '<a href="http://www.windowcleaning.com"><img src="'. TOOLBOX_IMAGES . '/wc-logo.png"></a>'; else echo '<h2>Hatch</h2>';?></div>
+    		if ( $industry['industry'] == 'window-cleaning' ) echo '<h2>'. get_bloginfo( 'name' ) . '</h2>'; else echo '<h2>Hatch</h2>';?></div>
 			<div><!--</div> class="nav-collapse collapse"-->
 				<ul class="nav">
 					<li class="has-nav-icon">
@@ -72,7 +72,7 @@ global $post;
                     foreach($blogs as $blog){
                       if($blog->userblog_id!=get_current_blog_id()){
               ?>
-              <li><a tabindex="-1" href="<?=$blog->siteurl.((get_blog_prefix($blog->userblog_id))?get_blog_prefix($blog->userblog_id):'/').'toolbox/dashboard/'?>"><?=$blog->blogname?></a></li>
+              <li><a tabindex="-1" href="<?=$blog->siteurl.((get_blog_prefix($blog->userblog_id))?get_blog_prefix($blog->userblog_id):'/').'toolbox/dashboard/'?>"><?=$blog->blogname?> <small class="muted"> - Switch site</small></a></li>
               <?php
                       }
                     }

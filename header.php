@@ -39,4 +39,4 @@
 
 <!-- Wrap the page in .container to centre the content and keep it at a max width -->
 <div class="container gentle-shadow">
-<?php do_action('tb_output'); ?>
+<?php do_action('output'); ?>
