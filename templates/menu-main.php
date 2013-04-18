@@ -72,8 +72,9 @@ $comments = get_comments($args);
 		<ul class="main-nav nav nav-pills">
 			<li class="visible-desktop"><a href="<?=get_home_url().$blog_prefix."/"?>">Home</a>
       <?php if(count($promoted_services)>0){ ?>
-			<li class="dropdown hidden-desktop" itemscope="http://schema.org/Offer"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
-				<ul class="dropdown-menu">
+			<li class="dropdown hidden-desktop">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
+				<ul class="dropdown-menu" itemscope="http://schema.org/Offer">
           <?php foreach($promoted_services as $service){ ?>
 					<li itemscope="name"><a href="<?=get_home_url().$blog_prefix."/services/".$service->slug?>" itemscope="url"><?=$service->name?></a></li>
           <?php } ?>
@@ -89,8 +90,9 @@ $comments = get_comments($args);
 			</li>
       <? } ?>
       <?php if(count($promoted_services)>0){ ?>
-			<li class="dropdown visible-desktop" itemscope="http://schema.org/Offer"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
-        <ul class="dropdown-menu">
+			<li class="dropdown visible-desktop">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
+        <ul class="dropdown-menu" itemscope="http://schema.org/Offer">
           <?php foreach($promoted_services as $service){ ?>
           <li itemscope="name"><a href="<?=get_home_url().$blog_prefix."/services/".$service->slug?>" itemscope="url"><?=$service->name?></a></li>
           <?php } ?>
