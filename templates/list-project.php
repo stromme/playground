@@ -1,5 +1,5 @@
 <?php global $prj ?>
-<div class="project" itemscope="http://schema.org/Review">
+<div class="project" itemprop="review" itemscope="http://schema.org/Review">
   <div class="project-container">
     <div class="favorite-photo">
       <img src="<?=TOOLBOX_IMAGES.'/spacer.gif'?>" data-src="<?=$prj->favorite_media->image[0]?>" itemprop="image" />
