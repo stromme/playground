@@ -19,6 +19,10 @@ get_header();
 		<div class="span8">
 			
 			<!-- Service page post content goes here -->
+      <?php
+      the_post();
+      the_content();
+      ?>
 			
 		</div>
 		<div class="span4">
@@ -42,21 +46,22 @@ get_header();
     'posts_per_page' => 4,
     'numberposts'    => 4
   );
-  if($prj->term!=''){
-    $term_name = strtolower($prj->term->name);
-    $showroom_link .= '/'.$prj->term->slug;
+
+  $terms = wp_get_post_terms($post->ID, "services");
+  $term = $terms[0];
+  if(isset($term)){
+    $term_name = strtolower($term->name);
+    $showroom_link .= '/'.$term->slug;
     $post_args = $args;
-    $post_args['services'] = $prj->term->slug;
+    $post_args['services'] = $term->slug;
   }
   $loop = new WP_Query( $post_args );
   $all_related_projects = $loop->posts;
   $related_projects = array();
   foreach($all_related_projects as $rel_prj){
     if(count($related_projects)<3){
-      if($rel_prj->ID!=$prj->id){
-        $new_project = TB_Frontend::get_project_details($rel_prj);
-        array_push($related_projects, $new_project);
-      }
+      $new_project = TB_Frontend::get_project_details($rel_prj);
+      array_push($related_projects, $new_project);
     }
   }
 
@@ -69,10 +74,8 @@ get_header();
     $related_projects = array();
     foreach($all_related_projects as $rel_prj){
       if(count($related_projects)<3){
-        if($rel_prj->ID!=$prj->id){
-          $new_project = TB_Frontend::get_project_details($rel_prj);
-          array_push($related_projects, $new_project);
-        }
+        $new_project = TB_Frontend::get_project_details($rel_prj);
+        array_push($related_projects, $new_project);
       }
     }
   }
