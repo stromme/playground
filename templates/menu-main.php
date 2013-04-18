@@ -74,17 +74,17 @@ $comments = get_comments($args);
       <?php if(count($promoted_services)>0){ ?>
 			<li class="dropdown hidden-desktop">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
-				<ul class="dropdown-menu" itemscope="http://schema.org/Offer">
+				<ul class="dropdown-menu" itemprop="makesOffer" itemscope="http://schema.org/Offer">
           <?php foreach($promoted_services as $service){ ?>
-					<li itemscope="name"><a href="<?=get_home_url().$blog_prefix."/services/".$service->slug?>" itemscope="url"><?=$service->name?></a></li>
+					<li itemscope="name"><a href="<?=get_home_url().$blog_prefix."/services/".$service->slug?>"><?=$service->name?></a></li>
           <?php } ?>
 				</ul>
 			</li>
       <? } if(count($promoted_locations)>0){ ?>
-			<li class="dropdown visible-desktop" itemscope="http://schema.org/Place"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Locations <b class="caret"></b></a>
-				<ul class="dropdown-menu">
+			<li class="dropdown visible-desktop"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Locations <b class="caret"></b></a>
+				<ul class="dropdown-menu" itemprop="location" itemscope="http://schema.org/Place">
           <?php foreach($promoted_locations as $location){ ?>
-					<li itemprop="name"><a href="<?=get_home_url().$blog_prefix."/locations/".$location->slug?>" itemprop="url"><?=$location->name?></a></li>
+					<li itemprop="name"><a href="<?=get_home_url().$blog_prefix."/locations/".$location->slug?>"><?=$location->name?></a></li>
           <?php } ?>
 				</ul>
 			</li>
@@ -92,9 +92,9 @@ $comments = get_comments($args);
       <?php if(count($promoted_services)>0){ ?>
 			<li class="dropdown visible-desktop">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
-        <ul class="dropdown-menu" itemscope="http://schema.org/Offer">
+        <ul class="dropdown-menu" itemprop="makesOffer" itemscope="http://schema.org/Offer">
           <?php foreach($promoted_services as $service){ ?>
-          <li itemscope="name"><a href="<?=get_home_url().$blog_prefix."/services/".$service->slug?>" itemscope="url"><?=$service->name?></a></li>
+          <li itemscope="name"><a href="<?=get_home_url().$blog_prefix."/services/".$service->slug?>"><?=$service->name?></a></li>
           <?php } ?>
         </ul>
 			</li>
@@ -110,7 +110,7 @@ $comments = get_comments($args);
 	</nav>
 	
 	<!-- Brand -->
-	<div class="brand" itemscope="http://schema.org/Brand">
+	<div class="brand" itemprop="brand" itemscope="http://schema.org/Brand">
 		<a href="<?=get_home_url().$blog_prefix."/"?>" itemprop="logo"><img src="<?php echo get_header_image(); ?>"></a>
 	</div>
 	<!-- /Brand -->

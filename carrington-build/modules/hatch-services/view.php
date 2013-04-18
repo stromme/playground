@@ -28,20 +28,20 @@
         $is_have_post = $service_post_query->have_posts();
   ?>
   <li>
-    <div class="grid-thumb">
+    <div class="grid-thumb" itemprop="makesOffer" itemscope="http://schema.org/Offer">
       <?php if($is_have_post || $is_service_promoted){ ?>
       <nav>
         <?php if($is_have_post){ ?>
-        <a href="<?=get_home_url()."/showroom/".$service->slug?>"><i class="icon-picture icon-white"></i> Showroom</a>
+        <a href="<?=get_home_url()."/showroom/".$service->slug?>"><i class="icon-picture icon-white" itemprop="url"></i> Showroom</a>
         <?php } if($is_service_promoted){ ?>
-        <a href="<?=get_home_url().get_blog_prefix()."services/".$service->slug?>"><i class="icon-info-sign icon-white"></i> Learn more</a>
+        <a href="<?=get_home_url().get_blog_prefix()."services/".$service->slug?>"><i class="icon-info-sign icon-white" itemprop="url"></i> Learn more</a>
         <?php } ?>
       </nav>
       <?php } ?>
       <?php
         $service_image = TOOLBOX_BASE_DIR.'/images/services/'.$service->slug.'.jpg';
         if(file_exists($service_image)){
-          $service_image = '<img src="'.TOOLBOX_IMAGES.'/services/'.$service->slug.'.jpg" />';
+          $service_image = '<img src="'.TOOLBOX_IMAGES.'/services/'.$service->slug.'.jpg" itemprop="image"/>';
         } else {
           $service_image = '<img src="'.TOOLBOX_IMAGES.'/spacer.gif" style="width:240px;height:80px;background-color:#F6F6F6;" />';
         }
@@ -49,9 +49,9 @@
       <?=$service_image?>
     </div>
     <?php if($is_service_promoted){ ?>
-    <a href="<?=get_home_url().get_blog_prefix()."services/".$service->slug?>"><?=$service->name?></a>
+    <a href="<?=get_home_url().get_blog_prefix()."services/".$service->slug?>" itemprop="name"><?=$service->name?></a>
     <?php } else { ?>
-    <span><?=$service->name?></span>
+    <span itemprop="name"><?=$service->name?></span>
     <?php } ?>
   </li>
   <?php

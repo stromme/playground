@@ -32,16 +32,16 @@ if(count($users)>0){
 </div>
 <div class="">
 	<h3 class="light-weight"><?=parse_shortclass($title)?></h3>
-	<address>
+	<address itemprop="location" itemscope="http://schema.org/PostalAddress">
 	  <strong><?=$company_name?></strong><br>
-    <?=$company_street?><br>
-    <?=$company_city?>, <?=$company_state?> <?=$company_zip?><br>
-	  <abbr title="Phone">P:</abbr> <?=$company_phone?>
+    <span itemprop="streetAddress"><?=$company_street?></span><br>
+    <span itemprop="addressLocality"><?=$company_city?></span>, <?=$company_state?> <?=$company_zip?><br>
+	  <abbr title="Phone">P:</abbr> <span itemprop="telephone"><?=$company_phone?></span>
 	</address>
 
-	<address>
-	  <strong><?=$owner_name?></strong><span class="grayLight">, <?=$owner_role?></span><br>
-	  <a href="mailto:<?=$owner_email?>"><?=$owner_email?></a>
+	<address itemprop="founder" itemscope="http://schema.org/Person">
+	  <strong itemprop="name"><?=$owner_name?></strong><span class="grayLight">, <span itemprop="jobTitle"><?=$owner_role?></span></span><br>
+	  <a href="mailto:<?=$owner_email?>" itemprop="email"><?=$owner_email?></a>
 	</address>
 </div>
 
