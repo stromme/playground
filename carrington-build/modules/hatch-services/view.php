@@ -27,8 +27,8 @@
         $service_post_query = new WP_Query( $args );
         $is_have_post = $service_post_query->have_posts();
   ?>
-  <li>
-    <div class="grid-thumb" itemprop="makesOffer" itemscope="http://schema.org/Offer">
+  <li itemprop="makesOffer" itemscope="http://schema.org/Offer">
+    <div class="grid-thumb">
       <?php if($is_have_post || $is_service_promoted){ ?>
       <nav>
         <?php if($is_have_post){ ?>
