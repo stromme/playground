@@ -8,7 +8,7 @@
  * @since
  */
 ?>
-  <div id="<?=$id?>" class="<?=(count($reviews)>1)?'carousel-'.$id:''?> review-carousel slide">
+  <div id="<?=$id?>" class="<?=(count($reviews)>1)?'carousel-'.$id:''?> review-carousel slide" itemscope="http://schema.org/Review" itemprop="review">
     <div class="review review-invert">
       <blockquote class="center well well-has-shadow">
         <?php if(count($reviews)>1){ ?>
@@ -21,9 +21,9 @@
           ?>
           <div class="<?=($i==0)?'active ':''?>item">
           <?php } ?>
-            <p>"<?=parse_shortclass($r->content)?>"</p>
+            <p itemprop="comment">"<?=parse_shortclass($r->content)?>"</p>
             <p class="citation">
-              <cite><?=parse_shortclass($r->name)?></cite>
+              <cite itemprop="author"><?=parse_shortclass($r->name)?></cite>
               <?php $seo = get_location_seo(); ?>
               <?php if($r->company!=''){ ?>
                 <span class="author-location"> - <?=parse_shortclass($r->company)?></span>

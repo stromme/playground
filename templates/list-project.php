@@ -1,8 +1,8 @@
 <?php global $prj ?>
-<div class="project">
+<div class="project" itemscope="http://schema.org/Review">
   <div class="project-container">
     <div class="favorite-photo">
-      <img src="<?=TOOLBOX_IMAGES.'/spacer.gif'?>" data-src="<?=$prj->favorite_media->image[0]?>" />
+      <img src="<?=TOOLBOX_IMAGES.'/spacer.gif'?>" data-src="<?=$prj->favorite_media->image[0]?>" itemprop="image" />
       <div>
       	<a href="<?=$prj->favorite_media->image_large[0]?>" class="colorbox-element" rel="gallery-<?=$prj->id?>"><i class="icon-fullscreen-2x"></i></a>
         <a href="#" ><i class="icon-facebook-2x"></i></a>
@@ -45,7 +45,7 @@
           <?=$prj->content?>
         <?php } else { ?>
           <span class="content-preview"><?=substr($prj->content, 0, 110).'...'?></span>
-          <span class="content-full"><?=$prj->content?></span>
+          <span class="content-full" itemprop="description"><?=$prj->content?></span>
           <a href="" class="show-more"><i class="icon-expand-halfling"></i><span>More</span></a>
         <?php } ?>
       </p>
@@ -57,7 +57,7 @@
         <?php
           if($prj->contact->company!=''){ echo $prj->contact->company; }
           else if($prj->contact->first_name!=''){
-            echo $prj->contact->first_name.' ';
+            echo '<itemprop="author">'.$prj->contact->first_name.'</itemprop> ';
             if($prj->contact->last_name!=''){
               echo $prj->contact->last_name;
             }
@@ -69,7 +69,7 @@
       </p>
       <?php } ?>
       <?php if($prj->term!=''){ ?>
-      <p><a href="<?=$prj->term->slug?>"><i class="icon-tag"></i> <?=$prj->term->name?></a></p>
+      <p itemprop="itemReviewed"><a href="<?=$prj->term->slug?>"><i class="icon-tag"></i> <?=$prj->term->name?></a></p>
       <?php } ?>
     </div>
   </div>
