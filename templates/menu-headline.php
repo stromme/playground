@@ -25,8 +25,8 @@ $seo = get_location_seo();
 			
 				<h2 class="white" ><span class="visible-phone-portrait" itemprop="name"><?=esc_html( stripslashes($tb_company['name']))?></span> <a href="tel:<?=tb_format_phone_plain(get_phone_number())?>" class="link-inverse link-decorate link-showoff" itemprop="telephone"><?=get_phone_number()?></a></h2>
 			</li>
-			<li class="headline-link hidden-phone hidden-tablet" itemscope="http://schema.org/ContactPoint">
-				<h2 itemprop="description"><a href="" class="quick-estimate" itemprop="url">Quick Estimate</a></h2>
+			<li class="headline-link hidden-phone hidden-tablet">
+				<h2><a href="" class="quick-estimate">Quick Estimate</a></h2>
 			</li>
 		</ul>
 	</div>
