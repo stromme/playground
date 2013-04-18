@@ -12,12 +12,13 @@ if(session_id() == '') {
   session_start();
 }
 global $post;
+$industry = get_option('tb_industry');
 ?><!DOCTYPE html>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<meta name="apple-mobile-web-app-title" content="Hatch" />
-	<link rel="apple-touch-icon" href="<?=TOOLBOX_IMAGES?>/apple-touch-icon.png"/>
+	<meta name="apple-mobile-web-app-title" content="Toolbox" />
+	<link rel="apple-touch-icon-precomposed" href="<?=TOOLBOX_IMAGES?>/apple-touch-icon.png"/>
 	<title>Toolbox | <?=ucwords($post->post_name)?></title>
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
 	<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
@@ -44,8 +45,7 @@ global $post;
 	<div class="navbar-inner">
     <div class="container-fluid">
     	<div class="brand hidden-phone">
-    		<?php
-    		$industry = get_option('tb_industry'); 
+    		<?php 
     		if ( $industry['industry'] == 'window-cleaning' ) echo '<h2>'. get_bloginfo( 'name' ) . '</h2>'; else echo '<h2>Hatch</h2>';?></div>
 			<div><!--</div> class="nav-collapse collapse"-->
 				<ul class="nav">

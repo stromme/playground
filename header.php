@@ -20,7 +20,7 @@
 	<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 </head>
 
-<body>
+<body itemscope itemtype="http://schema.org/ProfessionalService/">
 
 <? get_template_part('templates/menu', 'headline'); ?>
 <? get_template_part('templates/menu', 'main'); ?>
