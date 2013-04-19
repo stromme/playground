@@ -49,9 +49,13 @@
       <?=$service_image?>
     </div>
     <?php if($is_service_promoted){ ?>
+    <div class="center">
     <a href="<?=get_home_url().get_blog_prefix()."services/".$service->slug?>" itemprop="name"><?=$service->name?></a>
+    </div>
     <?php } else { ?>
+    <div class="center">
     <span itemprop="name"><?=$service->name?></span>
+    </div>
     <?php } ?>
   </li>
   <?php

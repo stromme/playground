@@ -84,7 +84,7 @@ $industry = get_option('tb_industry');
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing and Tracking</a></li>
 							<li class="divider"></li>
-							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account">My account</a></li>
+							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account">Personal Profile</a></li>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/logout?nonce=<?=wp_create_nonce('logout-'.date('Ymd'))?>">Log out</a></li>
 						</ul>
 					</li>
@@ -116,9 +116,9 @@ $industry = get_option('tb_industry');
           ?>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
-          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing</a></li>
+          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing and Tracking</a></li>
           <li class="divider"></li>
-          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account">My account</a></li>
+          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account">Personal Profile</a></li>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/logout?nonce=<?=wp_create_nonce('logout-'.date('Ymd'))?>">Log out</a></li>
         </ul>
       </div>
