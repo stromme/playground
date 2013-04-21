@@ -1221,6 +1221,12 @@
   div.img-polaroid.middle9 div {
     max-height: 110px;
   }
+  .span6 h2,
+  .span5 h2,
+  .span4 h2 {
+    font-size: 28px;
+    line-height: 40px;
+  }
 }
 @media (max-width: 767px) {
   .page-right,
