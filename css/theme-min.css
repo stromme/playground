@@ -5321,6 +5321,10 @@ h2,
 h3 {
   font-weight: 100;
 }
+h2.large {
+  font-size: 40px;
+  line-height: 50px;
+}
 h2.jumbo {
   font-size: 46px;
   line-height: 46px;
@@ -6133,9 +6137,8 @@ nav-callout .notch {
   font-weight: 100;
 }
 .review-link {
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
+  margin-left: 20px;
+  white-space: nowrap;
   font-size: 24px;
   font-family: "tamarillo";
   color: #ffffff;
@@ -6696,6 +6699,8 @@ body {
   top: -2px;
 }
 .footer-links > a {
+  white-space: nowrap;
+  line-height: 35px;
   padding: 6px;
   margin: 6px;
   border: 1px solid #ffffff;

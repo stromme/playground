@@ -17,12 +17,19 @@
         }
         width: 90%;
     }
+    
+    //When an h2 font size is used in a span6, span5 or span4 it needs to be shrunk for these smaller screens
+    
+    .span6 h2, .span5 h2, .span4 h2 {
+    	font-size: @baseFontSize*1.75;
+    	line-height: @baseLineHeight*2;
+    }
+    
 
 }
 
 @media (max-width: 767px) {
-
-
+	
 	// Elements with margin-right or margin-left need both margins when converted to a block
 	
 	.page-right, .page-left {

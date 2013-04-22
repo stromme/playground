@@ -30,10 +30,13 @@
               <?php } else if($r->location!=''){ ?>
                 <span class="author-location"> - <?=parse_shortclass($r->location)?></span>
               <?php } else if(isset($seo['city']) && $seo['city']!='') { ?>
-                <span class="author-location"> - <?=$seo['city'].", ".$seo['state']?></span>
+                <span class="author-location"> - <?=$seo['city'].", ".$seo['state']?> </span>
               <?php } ?>
+              <a href="<?=home_url().((get_blog_prefix()!='')?get_blog_prefix():'/')?>reviews" class="review-link">Read more reviews</a>
             </p>
-            <a href="<?=home_url().((get_blog_prefix()!='')?get_blog_prefix():'/')?>reviews" class="review-link">Read more reviews</a>
+           
+            	
+           
           <?php if(count($reviews)>1){ ?>
           </div>
           <?php
