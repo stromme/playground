@@ -11,6 +11,10 @@
 	#gradient > .vertical(lighten(@blue, 10%), @blue);
 }
 
+.bg-seafoam {
+	background-color: #FAFDF7;
+}
+
 .border-sea {
 	// height: 1;
 	// padding-top: 1px;
@@ -19,21 +23,25 @@
 	border-bottom: 1px solid (darken(@blue, 2%));
 }
 
+.bg-night {
+	#gradient > .radial(lighten(@black, 5%), lighten(@black, 25%));
+}
+
 .bg-slate {
-	#gradient > .vertical(lighten(@grayLighter, 80%), lighten(@grayLighter, 5%));
+	#gradient > .vertical(lighten(@grayLighter, 80%), lighten(@grayLighter, 1%));
 	border-bottom: 1px solid darken(@grayLighter, 10%);
 }
 
 .bg-slate-invert {
-	#gradient > .vertical(lighten(@grayLighter, 5%), lighten(@grayLighter, 80%));
+	#gradient > .vertical(lighten(@grayLighter, 1%), lighten(@grayLighter, 80%));
 	border-top: 1px solid darken(@grayLighter, 10%);
 }
 
 .bg-sky {
 	border-top: 1px solid darken(#EAF5F9,2%);
 	border-bottom: 1px solid darken(#EAF5F9,2%);
-	// background-color: (lighten(@blue, 53%));
-	#gradient > .vertical(lighten(@blue, 54%), lighten(@blue, 54%));
+	background-color: #EAF5FA;
+	//#gradient > .vertical(lighten(@blue, 54%), lighten(@blue, 54%));
 	// background-color: #EAF5F9;
 }
 
