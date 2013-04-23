@@ -24,11 +24,11 @@ $prj = TB_Frontend::get_project_details($post);
 		<div class="span6 page-left">
 			<div class="img-polaroid favorite-photo">
         <img src="<?=$prj->favorite_media->image[0]?>" />
-        <a href="<?=$prj->favorite_media->image_large[0]?>" class="colorbox-element" rel="gallery-<?=$prj->id?>"><i class="icon-fullscreen-2x"></i></a>
+        <a href="<?=$prj->favorite_media->image_large[0]?>" <?=($prj->favorite_media->media_type=="video")?"data-video=\"1\"":""?> class="colorbox-element show-image" rel="gallery-<?=$prj->id?>"><i class="icon-fullscreen-2x"></i></a>
         <?php if($prj->media!='' && count($prj->media)>1){ ?>
           <div class="colorbox-image-list" style="display:none;">
             <?php foreach($prj->media as $media){ ?>
-              <a href="<?=$media->image_large[0]?>" class="colorbox-element" <?=($prj->favorite_media->image[0]!=$media->image[0])?'rel="gallery-'.($prj->id).'"':''?>></a>
+              <a href="<?=$media->image_large[0]?>" class="colorbox-element" <?=($media->media_type=="video")?"data-video=\"1\"":""?> <?=($prj->favorite_media->image[0]!=$media->image[0])?'rel="gallery-'.($prj->id).'"':''?>></a>
             <?php } ?>
           </div>
         <?php } ?>
@@ -38,7 +38,7 @@ $prj = TB_Frontend::get_project_details($post);
 			</div>
 			<ul class="thumbnails align-center bumper-top">
         <li>
-          <a href="" class="thumbnail" data-image="<?=$prj->favorite_media->image[0]?>">
+          <a href="" class="thumbnail" <?=($prj->favorite_media->media_type=="video")?"data-video=\"1\"":""?> data-image="<?=$prj->favorite_media->image[0]?>" data-image-large="<?=$prj->favorite_media->image_large[0]?>">
             <img src="<?=$prj->favorite_media->thumbnail?>" />
           </a>
         </li>
@@ -47,7 +47,7 @@ $prj = TB_Frontend::get_project_details($post);
             foreach($prj->media as $media){
               if($media->id!=$prj->favorite_media->id){ ?>
                 <li>
-                  <a href="" class="thumbnail" data-image="<?=$media->image[0]?>" data-image-large="<?=$media->image_large[0]?>">
+                  <a href="" class="thumbnail" <?=($media->media_type=="video")?"data-video=\"1\"":""?> data-image="<?=$media->image[0]?>" data-image-large="<?=$media->image_large[0]?>">
                     <img src="<?=$media->thumbnail?>" />
                   </a>
                 </li>

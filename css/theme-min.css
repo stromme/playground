@@ -6553,9 +6553,6 @@ body {
 .project .favorite-photo:hover div:first-of-type {
   visibility: visible;
 }
-.project .favorite-photo:hover a.show-image {
-  display: block;
-}
 .project .thumbnails {
   margin: 0px;
   padding: 15px 0px 0px;
