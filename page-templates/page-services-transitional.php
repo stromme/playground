@@ -10,6 +10,7 @@
  */
 
 get_header();
+$service_name = get_the_title();
 
 $company = get_option('tb_company');
 // Get all pinned reviews
@@ -71,16 +72,19 @@ foreach($comments as $comment){
 
 ?>
 
-<section class="bg-slate page-left page-right bumper-top-medium bumper-bottom-medium top-radius migrate-service">
+<section class="bg-slate page-left page-right bumper-top-medium bumper-bottom-medium top-radius migrate">
 	<div class="row-fluid">
 	
-		<div class="span8 has-right-sidebar">
+		<div class="span8">
+			<div class="has-right-sidebar">
 			
 			<!-- Service page post content goes here -->
-      <?php
-      the_post();
-      the_content();
-      ?>
+			      <?php
+			      the_post();
+			      the_content();
+			      ?>
+			</div>
+			<div class="clearfix"></div>
 			
 		</div>
 		<div class="span4">
@@ -157,7 +161,7 @@ foreach($comments as $comment){
 <section class="bg-white">
 	<div class="row-fluid  bumper-top-medium bumper-bottom-medium">
 		<div class="span12">
-			<h2 class="blue center">Our recent <strong class="green"><?=$term_name?></strong> projects</h2>
+			<h2 class="blue center">Our recent <strong class="green"><?=strtolower($service_name)?></strong> projects</h2>
 		</div>
 	</div>
 	<div class="row-fluid">

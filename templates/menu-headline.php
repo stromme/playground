@@ -8,7 +8,30 @@
  * @since 
  */
 
+// Location SEO keywords
+
 $seo = get_location_seo();
+$state = ( ( $seo['state'] != '' ) ? ', ' . $seo['state'] : '' );
+$location = '<a href="'.get_site_url(1).'/locations/" class="link-inverse link-decorate link-showoff" data-toggle="tooltip" data-placement="bottom" title="Visit another location">'.$seo['city'].'<span class="hidden-phone-portrait" >'.$state.'</span></a>';
+
+// Service SEO keywords
+
+$keyword = 'Window Cleaners';
+
+if (!is_front_page())
+	$keyword = ucwords(get_the_title());
+	
+// Award
+
+$award = '<span class="hidden-phone-portrait">Awarded '.date('Y').'</span> ';
+	
+// Build the header title
+
+$title = $award . '<b>Best ' . $keyword . '</b> in ' . $location;
+
+if (strlen($keyword) > 16)
+	$title = '<b>Best ' . $keyword . '</b><span class="hidden-phone-portrait"> in ' . $location . '</span>';
+
 ?>
 
 <!-- Headline - Fixed to top of page
@@ -18,7 +41,7 @@ $seo = get_location_seo();
 	<div class="container headline">
 		<ul>
 			<li class="headline-title green-man-45">
-				<h1 itemprop="description"><span class="hidden-phone-portrait">Awarded <?=date('Y')?></span> <b>Best Window Cleaners</b> in <a href="<?=get_site_url(1)."/locations/"?>" class="link-inverse link-decorate link-showoff" data-toggle="tooltip" data-placement="bottom" title="Visit another location"><?=$seo['city']?><span class="hidden-phone-portrait" ><?=($seo['state']!='')?', '.$seo['state']:''?></span></a></h1>
+				<h1 itemprop="description"><?=$title?></h1>
 			</li>
 			<li class="headline-phone">
 				<?php $tb_company = get_option('tb_company'); ?>
