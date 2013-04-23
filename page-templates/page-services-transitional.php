@@ -11,12 +11,70 @@
 
 get_header();
 
+$company = get_option('tb_company');
+// Get all pinned reviews
+$args = array(
+  'number'  => 3,
+  'post_id' => 0,
+  'status'  => 'approve',
+  'meta_query' => array(
+    'relation' => 'AND',
+    array(
+      'key' => 'pinned',
+      'value' => '',
+      'type' => 'char',
+      'compare' => '!='
+    )
+  )
+);
+$comments = get_comments($args);
+$reviews = array();
+$pinned_keys = array();
+foreach($comments as $comment){
+  $listed_comment = new stdClass();
+  $listed_comment->id = $comment->comment_ID;
+  $listed_comment->name = $comment->comment_author;
+  $listed_comment->content = $comment->comment_content;
+  $listed_comment->pinned = get_comment_meta($comment->comment_ID, 'pinned', true);
+  $listed_comment->rating = get_comment_meta($comment->comment_ID, 'rating', true);
+  array_push($reviews, $listed_comment);
+  array_push($pinned_keys, $comment->comment_ID);
+}
+// Sort by pinned
+if(count($reviews)>1){
+  if(!function_exists('pinsort')){
+    function pinsort($a,$b) {
+      return $a->pinned>$b->pinned;
+    }
+  }
+  uasort($reviews, "pinsort");
+}
+
+$args = array(
+  'number'  => 3,
+  'post_id' => 0,
+  'orderby' => 'modified',
+  'order'   => 'DESC',
+  'status'  => 'approve'
+);
+$comments = get_comments($args);
+$all_reviews = array();
+foreach($comments as $comment){
+  $listed_comment = new stdClass();
+  $listed_comment->id = $comment->comment_ID;
+  $listed_comment->name = $comment->comment_author;
+  $listed_comment->content = $comment->comment_content;
+  $listed_comment->rating = get_comment_meta($comment->comment_ID, 'rating', true);
+  if($listed_comment->rating=='') $listed_comment->rating = 0;
+  array_push($all_reviews, $listed_comment);
+}
+
 ?>
 
-<section class="bg-slate page-left page-right">
+<section class="bg-slate page-left page-right bumper-top-medium bumper-bottom-medium top-radius migrate-service">
 	<div class="row-fluid">
 	
-		<div class="span8">
+		<div class="span8 has-right-sidebar">
 			
 			<!-- Service page post content goes here -->
       <?php
@@ -26,9 +84,23 @@ get_header();
 			
 		</div>
 		<div class="span4">
-		
-			<!-- Side bar content - We will add this after, will probably be a services list and maybe some accolades -->	
-			
+			<h3 class="blue">Customer Reviews</h3>
+			<ul id="reviews-list" class="reviews-list">
+			<?php
+			  global $review;
+			  if(count($reviews)>0){
+			    foreach($reviews as $review){
+			      get_template_part('templates/list', 'review');
+			    }
+			  } elseif (count($all_reviews)>0){
+			    foreach($all_reviews as $review){
+			      if(!in_array($review->id, $pinned_keys)){
+			        get_template_part('templates/list', 'review');
+			      }
+			    }
+			  }
+			?>
+			</ul>
 		</div>
 	</div>
 </section>
@@ -82,7 +154,7 @@ get_header();
 ?>
 
 <?php if(count($related_projects)>0){ ?>
-<section class="bg-slate">
+<section class="bg-white">
 	<div class="row-fluid  bumper-top-medium bumper-bottom-medium">
 		<div class="span12">
 			<h2 class="blue center">Our recent <strong class="green"><?=$term_name?></strong> projects</h2>
@@ -109,27 +181,5 @@ get_header();
 	</div>
 </section>
 <?php } ?>
-
-<section class="bg-white">
-
-	<!-- Accolades - Headline Style - Show one or more accolades (Carousel for multiple accolades)
-	===============================================================================================
-	-->
-	
-	<div class="row-middle center-align page-left page-right bumper-top bumper-bottom">
-		<div class="middle-fixed-small bumper-right">		
-			<img src="<?php echo THEME_IMAGES; ?>temp/angies.png" width="150">
-		</div>
-		<div class="middle">
-			<h2> 2012 Angie's list superior service award winner.</h2>
-		</div>
-	</div>
-	<div class="page-left page-right">
-		<div class="pen-stroke"></div>
-	</div>
-	
-	<!-- / Accolades -->
-	
-</section>
 	
 <?php get_footer(); ?>

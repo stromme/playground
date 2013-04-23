@@ -5483,6 +5483,22 @@ blockquote {
 .grayDark {
   color: #333333;
 }
+.top-radius {
+  -webkit-border-top-right-radius: 6px;
+  -moz-border-radius-topright: 6px;
+  border-top-right-radius: 6px;
+  -webkit-border-top-left-radius: 6px;
+  -moz-border-radius-topleft: 6px;
+  border-top-left-radius: 6px;
+}
+.bottom-radius {
+  -webkit-border-bottom-right-radius: 6px;
+  -moz-border-radius-bottomright: 6px;
+  border-bottom-right-radius: 6px;
+  -webkit-border-bottom-left-radius: 6px;
+  -moz-border-radius-bottomleft: 6px;
+  border-bottom-left-radius: 6px;
+}
 .pen-stroke {
   background-image: -webkit-linear-gradient(left, #ffffff, #000000 25%, #000000 75%, #ffffff);
   background-color: #000;
@@ -6189,6 +6205,7 @@ a.review-link:hover {
 }
 .reviews-list {
   list-style: none;
+  margin-left: 0;
 }
 .reviews-list cite {
   font-size: 20px;
@@ -6786,6 +6803,10 @@ div.img-polaroid div {
   z-index: 1130;
   margin-top: -2px;
   top: 0;
+}
+.has-right-sidebar {
+  padding-left: 20px;
+  border-right: 1px solid #cccccc;
 }
 .pull-right {
   float: right;
