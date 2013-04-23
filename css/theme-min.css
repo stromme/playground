@@ -6808,6 +6808,32 @@ div.img-polaroid div {
   padding-left: 20px;
   border-right: 1px solid #cccccc;
 }
+/* For the transitional services page */
+.migrate-service h1 {
+  margin: 0;
+}
+.migrate-service .subtitle {
+  margin-bottom: 30px;
+}
+.migrate-service .service_item_wrap {
+  padding-top: 10px;
+  margin-right: 20px;
+}
+.migrate-service .youtube {
+  margin-top: 20px;
+  text-align: center;
+}
+.migrate-service .textarea {
+  margin-top: 20px;
+}
+.migrate-service .service-image img {
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+.migrate-service .service-image span {
+  display: block;
+  margin-bottom: 20px;
+}
 .pull-right {
   float: right;
 }
