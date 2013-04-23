@@ -69,7 +69,7 @@
       </p>
       <?php } ?>
       <?php if($prj->term!=''){ ?>
-      <p itemprop="itemReviewed"><a href="<?=$prj->term->slug?>"><i class="icon-tag"></i> <?=$prj->term->name?></a></p>
+      <p itemprop="itemReviewed"><a href="<?=home_url().'/showroom/'.$prj->term->slug?>"><i class="icon-tag"></i> <?=$prj->term->name?></a></p>
       <?php } ?>
     </div>
   </div>
