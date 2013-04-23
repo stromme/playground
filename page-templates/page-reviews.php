@@ -70,10 +70,10 @@ foreach($comments as $comment){
 ?>
 
 <!-- Wrap the page in .container to centre the content and keep it at a max width -->
-<div class="container gentle-shadow">
+<div class="container gentle-shadow top-radius">
 	
-	<section class="banner-title margin-left margin-right page-title">
-		<div class="bumper-top bumper-bottom bumper-left-large bumper-right-large center">
+	<section class="banner-title page-left page-right top-radius">
+		<div class="bumper-top bumper-bottom center">
 			<h2><?php echo ( get_the_title() != 'Reviews' ? get_the_title() : $company['name'] . ', loved in your neighborhood.'); ?></h2>
 		</div>
 	</section>

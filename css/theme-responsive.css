@@ -1207,6 +1207,10 @@
   .thumbnail .thumbnail-placeholder img {
     width: auto;
   }
+  .banner-title h2:after {
+    content: "";
+    display: none;
+  }
 }
 @media (min-width: 767px) {
   .big-modal > .modal {

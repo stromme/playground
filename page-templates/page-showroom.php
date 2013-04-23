@@ -84,9 +84,9 @@ foreach($first_ten_projects as $prj){
 ?>
 
 <!-- Wrap the page in .container to centre the content and keep it at a max width -->
-<div class="container gentle-shadow">
+<div class="container gentle-shadow top-radius">
 	
-	<section class="banner-title margin-left margin-right page-title">
+	<section class="banner-title page-left page-right top-radius">
 		<div class="bumper-top bumper-bottom center">
 			<h2>See some of our recent <span class="dropdown showroom-selector"><a href="" class="dropdown-toggle link-inverse link-decorate link-showoff" data-toggle="dropdown"><?=$current_service?></a>
         <ul class="dropdown-menu">
