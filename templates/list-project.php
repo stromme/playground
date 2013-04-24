@@ -1,25 +1,25 @@
 <?php global $prj ?>
 <div class="project" itemprop="review" itemscope="http://schema.org/Review">
   <div class="project-container">
+    <?php if(count($prj->media)>0){ ?>
     <div class="favorite-photo">
       <img src="<?=TOOLBOX_IMAGES.'/spacer.gif'?>" data-src="<?=$prj->favorite_media->image[0]?>" itemprop="image" />
       <div>
-      	<a href="<?=$prj->favorite_media->image_large[0]?>" class="colorbox-element" rel="gallery-<?=$prj->id?>"><i class="icon-fullscreen-2x"></i></a>
-        <a href="#" ><i class="icon-facebook-2x"></i></a>
-        <a href="#"><i class="icon-twitter-2x"></i></a>
+      	<a href="<?=$prj->favorite_media->image_large[0]?>" class="show-image colorbox-element" <?=($prj->favorite_media->media_type=="video")?"data-video=\"1\"":""?> rel="gallery-<?=$prj->id?>"><i class="icon-fullscreen-2x"></i></a>
+        <a href="<?=home_url().((get_blog_prefix()!='')?get_blog_prefix():'/').'projects/'.$prj->slug?>" ><i class="icon-facebook-2x"></i></a>
+        <a href="<?=home_url().((get_blog_prefix()!='')?get_blog_prefix():'/').'projects/'.$prj->slug?>"><i class="icon-twitter-2x"></i></a>
       </div>
-      
       <?php if($prj->media!='' && count($prj->media)>1){ ?>
-        <div class="colorbox-image-list" style="display:none;">
+        <div class="colorbox-image-list">
           <?php foreach($prj->media as $media){ ?>
-            <a href="<?=$media->image_large[0]?>" class="colorbox-element" <?=($prj->favorite_media->image[0]!=$media->image[0])?'rel="gallery-'.($prj->id).'"':''?>></a>
+            <a href="<?=$media->image_large[0]?>" class="colorbox-element" <?=($media->media_type=="video")?"data-video=\"1\"":""?> <?=($prj->favorite_media->image[0]!=$media->image[0])?'rel="gallery-'.($prj->id).'"':''?>></a>
           <?php } ?>
         </div>
       <?php } ?>
     </div>
     <ul class="thumbnails">
       <li>
-        <a href="" class="thumbnail" data-image="<?=$prj->favorite_media->image[0]?>">
+        <a href="" class="thumbnail" <?=($prj->favorite_media->media_type=="video")?"data-video=\"1\"":""?> data-image="<?=$prj->favorite_media->image[0]?>" data-image-large="<?=$prj->favorite_media->image_large[0]?>">
           <img src="<?=TOOLBOX_IMAGES.'/spacer.gif'?>" data-src="<?=$prj->favorite_media->thumbnail?>" />
         </a>
       </li>
@@ -28,7 +28,7 @@
           foreach($prj->media as $media){
             if($media->id!=$prj->favorite_media->id){ ?>
               <li>
-                <a href="" class="thumbnail" data-image="<?=$media->image[0]?>" data-image-large="<?=$media->image_large[0]?>">
+                <a href="" class="thumbnail" <?=($media->media_type=="video")?"data-video=\"1\"":""?> data-image="<?=$media->image[0]?>" data-image-large="<?=$media->image_large[0]?>">
                   <img src="<?=TOOLBOX_IMAGES.'/spacer.gif'?>" data-src="<?=$media->thumbnail?>" />
                 </a>
               </li>
@@ -38,6 +38,7 @@
         }
       ?>
     </ul>
+    <?php } ?>
     <?php if($prj->content!=''){ ?>
     <blockquote>
       <p>
