@@ -801,7 +801,7 @@ foreach($comments as $comment){
             foreach($users as $user){
               $roles = $user->roles;
               if(count($roles)>0){
-                if(($roles[0]=='manager' && $owner_role=='') || $roles[0]=='owner'){
+                if((in_array('manager', $roles) && $owner_role=='') || in_array('owner', $roles)){
                   $owner_name = ucfirst($user->display_name);
                   $owner_role = ucfirst($roles[0]);
                   $owner_email = $user->user_email;
