@@ -542,7 +542,7 @@ foreach($comments as $comment){
             if(file_exists($service_image)){
               $service_image = '<img src="'.TOOLBOX_IMAGES.'/services/'.$service->slug.'.jpg" itemprop="image"/>';
             } else {
-              $service_image = '<img src="'.TOOLBOX_IMAGES.'/spacer.gif" style="width:240px;height:80px;background-color:#F6F6F6;" />';
+              $service_image = '<img src="'.TOOLBOX_IMAGES.'/spacer.gif" style="width:240px;height:75px;background-color:#F6F6F6;" />';
             }
           ?>
           <?=$service_image?>
