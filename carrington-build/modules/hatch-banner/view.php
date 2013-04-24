@@ -9,7 +9,7 @@
  */;
 ?>
 
-<div id="<?=$id?>" class="<?=(count($js_data)>1)?'carousel-'.$id.' ':''?>banner">
+<div id="<?=$id?>" class="<?=(count($js_data)>1)?'carousel-'.$id.' ':''?>banner" class="top-radius">
   <?php if(count($js_data)>1){ ?>
   <div class="carousel-inner">
   <?php } ?>

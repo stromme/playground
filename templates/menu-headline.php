@@ -59,7 +59,7 @@ if ( is_page( 'reviews' ) ) {
 <!-- Headline - Fixed to top of page
 ==================================================
 -->
-<section class="fixed-top">
+<div class="fixed-top">
 	<div class="container headline">
 		<ul>
 			<li class="headline-title green-man-45">
@@ -75,5 +75,5 @@ if ( is_page( 'reviews' ) ) {
 			</li>
 		</ul>
 	</div>
-</section>
+</div>
 <!-- / Headline -->
