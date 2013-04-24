@@ -18,7 +18,7 @@
 		<img src="<?=$accolade['image']?>" width="130">
 	</div>
 	<div class="middle">
-		<h4 class="green"><?=$accolade['title']?></h4>
+		<h4><?=$accolade['title']?></h4>
 		<p><?=$accolade['description']?></p>
 	</div>
 </div>

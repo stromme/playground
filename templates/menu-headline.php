@@ -8,6 +8,10 @@
  * @since 
  */
 
+// Company name to include in titles
+
+$company = get_option('tb_company');
+
 // Location SEO keywords
 
 $seo = get_location_seo();
@@ -15,6 +19,9 @@ $state = ( ( $seo['state'] != '' ) ? ', ' . $seo['state'] : '' );
 $location = '<a href="'.get_site_url(1).'/locations/" class="link-inverse link-decorate link-showoff" data-toggle="tooltip" data-placement="bottom" title="Visit another location">'.$seo['city'].'<span class="hidden-phone-portrait" >'.$state.'</span></a>';
 
 // Service SEO keywords
+
+$tb_industry = get_option('tb_industry');
+$industry = ucwords( str_replace('-', ' ', $tb_industry['industry'] ) );
 
 $keyword = 'Window Cleaners';
 
@@ -25,12 +32,27 @@ if (!is_front_page())
 
 $award = '<span class="hidden-phone-portrait">Awarded '.date('Y').'</span> ';
 	
-// Build the header title
+// Default title
 
-$title = $award . '<b>Best ' . $keyword . '</b> in ' . $location;
+$title = $award . '<b>Best ' . $industry . '</b> in ' . $location;
 
-if (strlen($keyword) > 16)
-	$title = '<b>Best ' . $keyword . '</b><span class="hidden-phone-portrait"> in ' . $location . '</span>';
+// Titles for main pages
+
+if ( ( 'cftl-tax-landing' == get_post_type() ) && ( $taxonomy == 'services' ) ) {
+	$title = $award . '<b>Best ' . $keyword . '</b> in ' . $location;
+	if (strlen($keyword) > 16)
+		$title = '<b>Best ' . $keyword . '</b><span class="hidden-phone-portrait"> in ' . $location . '</span>';
+}
+
+if ( ( 'cftl-tax-landing' == get_post_type() ) && ( $taxonomy == 'locations' ) ) {
+	$title = $award . '<b>Best ' . $industry . '</b> in <a href="'.get_site_url(1).'/locations/" class="link-inverse link-decorate link-showoff" data-toggle="tooltip" data-placement="bottom" title="Visit another location">'.$keyword.'</a>';
+	if (strlen($keyword) > 16)
+		$title = '<b>Best ' . $industry . '</b> in <a href="'.get_site_url(1).'/locations/" class="link-inverse link-decorate link-showoff" data-toggle="tooltip" data-placement="bottom" title="Visit another location">'.$keyword.'</a>';	
+}
+
+if ( is_page( 'reviews' ) ) {
+	$title = esc_html( stripslashes($company['name'])) . ' <b>Customer Reviews</b>';
+}
 
 ?>
 
