@@ -297,18 +297,24 @@ section:first-of-type {
 		position: relative;
         text-align: center;
         min-height: 70px;
-	
-		div:first-of-type {
+        
+		div.media-controls {
 			visibility: hidden;
 			position: absolute;
-			top: 10px;
-			right: 10px;
 			a { .opacity(60); }
 			a:hover { .opacity(100); }
+			top: 10px;
+		}
+		div.media-controls:first-of-type {
+			left: 10px;
+		}
+		div.media-controls:nth-of-type(2) {
+			right: 10px;
 		}
 	}
 	
-	.favorite-photo:hover div:first-of-type { visibility: visible; }
+	.favorite-photo:hover div.media-controls { visibility: visible; }
+	.favorite-photo div.show-video-play { visibility:visible; }
 	
 	// Thumbnails under the main project photo
 	
