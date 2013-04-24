@@ -60,6 +60,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
           $projects = get_posts($posts_args);
 
           if(count($projects)<=0){
+            $args['order'] = 'DESC';
             $projects = get_posts($args);
           }
         }
@@ -67,8 +68,9 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
           $posts_args = $args;
           $posts_args['meta_key'] = 'pinned';
           $posts_args['orderby'] = 'pinned';
-          $projects = get_posts($args);
+          $projects = get_posts($posts_args);
           if(count($projects)<=0){
+            $args['order'] = 'DESC';
             $projects = get_posts($args);
           }
         }
