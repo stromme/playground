@@ -199,7 +199,7 @@ foreach($comments as $comment){
           </div>
           <div class="banner-review">
             <blockquote>
-              <?php $description = substr($d->description, 0, 120); ?>
+              <?php $description = substr($d->description, 0, 120)."..."; ?>
               <p>"<span><?=(strlen($d->description)<=130)?$d->description:$description?></span>"</p>
               <?php if($d->author!='' || $d->author_location!=''){ ?>
                 <?php if($d->author!=''){ ?>
