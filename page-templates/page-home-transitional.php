@@ -798,7 +798,6 @@ foreach($comments as $comment){
           $owner_email = '';
           if(count($users)>0){
             foreach($users as $user){
-              var_dump($user);
               $roles = $user->roles;
               if(count($roles)>0){
                 if(($roles[0]=='manager' && $owner_role=='') || $roles[0]=='owner'){
