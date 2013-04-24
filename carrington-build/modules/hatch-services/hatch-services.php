@@ -2,7 +2,7 @@
 
 if (!class_exists('cfct_module_hatch_services') && class_exists('cfct_build_module')) {
 	class cfct_module_hatch_services extends cfct_build_module {
-    private $default_title = 'What we\'re [strong]really[/] good at.';
+    private $default_title = 'What we\'re [strong green]really[/] good at.';
 
 		public function __construct() {
 			$opts = array(

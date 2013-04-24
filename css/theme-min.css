@@ -618,7 +618,7 @@ h5,
 h6 {
   margin: 10px 0;
   font-family: inherit;
-  font-weight: bold;
+  font-weight: 100;
   line-height: 20px;
   color: inherit;
   text-rendering: optimizelegibility;
@@ -5306,6 +5306,10 @@ a.link-inverse:hover,
 .link-decorate + .link-showoff {
   border-bottom-color: #ffffff;
 }
+b,
+strong {
+  font-weight: 500;
+}
 h1,
 h2 {
   line-height: 40px;
@@ -5315,11 +5319,7 @@ h3 {
 }
 h4 {
   line-height: 25px;
-}
-h1,
-h2,
-h3 {
-  font-weight: 100;
+  font-weight: 400;
 }
 h2.large {
   font-size: 40px;
