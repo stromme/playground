@@ -645,7 +645,7 @@ foreach($comments as $comment){
         'post_id' => 0,
       );
       $comments = get_comments($args);
-      $this->featured_reviews = array();
+      $featured_reviews = array();
       foreach($comments as $comment){
         $listed_comment = new stdClass();
         $listed_comment->id = $comment->comment_ID;
