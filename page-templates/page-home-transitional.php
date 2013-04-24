@@ -90,7 +90,7 @@ foreach($comments as $comment){
     $posts_args = $args;
     $posts_args['meta_key'] = 'featured';
     $posts_args['orderby'] = 'featured';
-    $projects = get_posts($args);
+    $projects = get_posts($post_args);
     if(count($projects)<=0){
       $projects = get_posts($args);
     }
