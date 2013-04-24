@@ -73,61 +73,141 @@ foreach($comments as $comment){
 
 ?>
 
-<?php /*
-<section class="bg-slate page-left page-right bumper-top-medium bumper-bottom-medium top-radius migrate">
-	<div class="row-fluid">
-		<div class="span8">
-			<div class="has-right-sidebar">
-
-			<!-- Service page post content goes here -->
-			      <?php
-			      the_post();
-			      the_content();
-			      ?>
-			</div>
-			<div class="clearfix"></div>
-
-		</div>
-		<div class="span4">
-			<h3 class="blue">Customer Reviews</h3>
-			<ul id="reviews-list" class="reviews-list">
-			<?php
-			  global $review;
-			  if(count($reviews)>0){
-			    foreach($reviews as $review){
-			      get_template_part('templates/list', 'review');
-			    }
-			  } elseif (count($all_reviews)>0){
-			    foreach($all_reviews as $review){
-			      if(!in_array($review->id, $pinned_keys)){
-			        get_template_part('templates/list', 'review');
-			      }
-			    }
-			  }
-			?>
-			</ul>
-		</div>
-	</div>
-</section>
-
-*/?>
-
 <!-- Wrap the page in .container to centre the content and keep it at a max width -->
 <div class="container gentle-shadow">
 
   <!-- Banner -->
   <section class="bg-white">
-    <div id="banner-cfct-module-9b3ef605612ed3f66ea07aa769c74699" class="carousel-banner-cfct-module-9b3ef605612ed3f66ea07aa769c74699 banner" class="top-radius">
+    <?php
+    $id = "banner-cfct-module-migrate-home";
+    $args = array(
+      'numberposts' => 3,
+      'post_type'   => 'showroom',
+      'post_status' => 'any',
+      'post_parent' => null,
+      'order'       => 'ASC'
+    );
+    $posts_args = $args;
+    $posts_args['meta_key'] = 'pinned';
+    $posts_args['orderby'] = 'pinned';
+    $projects = get_posts($args);
+    if(count($projects)<=0){
+      $projects = get_posts($args);
+    }
+    $js_data = array();
+    if(count($projects)>0){
+      $i = 0;
+      foreach($projects as $project){
+        $cust_id = get_post_meta($project->ID, 'customer_id', true);
+        $favorite = get_post_meta($project->ID, 'favorite', true);
+        $name = '';
+        $city = '';
+        $args = array(
+          'numberposts' => -1,
+          'post_type' => 'attachment',
+          'post_parent' => $project->ID
+        );
+        $attachments = get_posts($args);
+        $args = array(
+          'numberposts' => -1,
+          'post_type' => 'videos',
+          'post_parent' => $project->ID
+        );
+        $videos = get_posts($args);
+        if(count($attachments)>0){
+          $medias = $attachments;
+          if(count($videos)>0)
+            array_merge($medias, $videos);
+        }
+        else {
+          $medias = $videos;
+        }
+        $selected_medias = array();
+        // Add favorite first
+        foreach($medias as $media){
+          if($media->ID==$favorite){
+            array_push($selected_medias, $media);
+            break;
+          }
+        }
+        foreach($medias as $media){
+          if($media->ID!=$favorite){
+            array_push($selected_medias, $media);
+          }
+        }
+        $project_media = array();
+        foreach($selected_medias as $media){
+          if($media->post_type=='videos'){
+            $video_image = get_post_meta($media->ID, 'video_thumbnail', true);
+            array_push($project_media, $video_image);
+          }
+          else {
+            $_img = wp_get_attachment_image_src($media->ID, 'banner', false);
+            array_push($project_media, $_img[0]);
+          }
+        }
+        if($cust_id!=''){
+          $contact = get_post($cust_id);
+          $first_name = get_post_meta($contact->ID, 'first_name', true);
+          $last_name = get_post_meta($contact->ID, 'last_name', true);
+          $city = get_post_meta($contact->ID, 'city', true);
+          $company = get_post_meta($contact->ID, 'company', true);
+          $name = ($company!='')?
+                    $company:
+                    (($first_name!='' && $last_name!='')?
+                      $first_name.' '.$last_name:
+                      (($first_name!='')?
+                        $first_name:
+                        (($last_name!='')?$last_name:'')));
+        }
+        if($i==0){
+          $description = $project->post_content;
+          $author = $name;
+          $author_location = $city;
+          $image = $project_media[0];
+        }
+
+        $js_single_data = new stdClass();
+        $js_single_data->description = parse_shortclass($project->post_content);
+        $js_single_data->author = parse_shortclass($name);
+        $js_single_data->author_location = parse_shortclass($city);
+        $js_single_data->images = $project_media;
+        $js_single_data->video = '';
+        array_push($js_data, $js_single_data);
+        $i++;
+      }
+    }
+    ?>
+    <div id="<?=$id?>" class="carousel-<?=$id?> banner" class="top-radius">
+      <?php if(count($js_data)>1){ ?>
       <div class="carousel-inner">
-        <div class="active item">
+      <?php } ?>
+        <?php
+          $i = 0;
+          foreach($js_data as $d){
+            if(count($js_data)>1){
+        ?>
+        <div class="<?=($i==0)?'active ':''?>item">
+          <?php } ?>
           <div class="banner-photo">
-            <img src="http://lars.uzbuz.com/wp-content/uploads/sites/6/2013/04/com-test-oct-cleaner.jpg" />
+            <?php if($d->video!=''){?>
+              <?=parse_embed_video_link($d->video)?>
+            <?php } else { ?>
+              <img src="<?=$d->images[0]?>" />
+            <?php } ?>
           </div>
           <div class="banner-review">
             <blockquote>
-              <p>"<span id="description-banner-cfct-module-9b3ef605612ed3f66ea07aa769c74699">Couldn't be happier. They showed up on time and did a fantastic job. We'll call again for sure.</span>"</p>
-              <p class="banner-author"><cite>Crystal Clear Window Cleaning</cite>
-              <span class="author-location"> - Honolulu</span></p>
+              <p>"<span><?=$d->description?></span>"</p>
+              <?php if($d->author!='' || $d->author_location!=''){ ?>
+                <?php if($d->author!=''){ ?>
+                <p class="banner-author"><cite><?=$d->author?></cite><?php
+                  }
+                  if($d->author_location!=''){
+                ?>
+                  <span class="author-location"> - <?=$d->author_location?></span></p>
+                <?php } ?>
+              <?php } ?>
             </blockquote>
             <div class="fixed-bottom">
               <ul class="share-it">
@@ -138,77 +218,41 @@ foreach($comments as $comment){
                 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
               </ul>
             </div>
+            <?php if(count($js_data)>1){ ?>
             <ol class="carousel-indicators">
-              <li data-target="#banner-cfct-module-9b3ef605612ed3f66ea07aa769c74699" data-slide-to="0" class="active"></li>
-              <li data-target="#banner-cfct-module-9b3ef605612ed3f66ea07aa769c74699" data-slide-to="1"></li>
-              <li data-target="#banner-cfct-module-9b3ef605612ed3f66ea07aa769c74699" data-slide-to="2"></li>
+              <?php
+                $ic = 0;
+                foreach($js_data as $d){
+              ?>
+              <li data-target="#<?=$id?>" data-slide-to="<?=$ic?>"<?=($ic==$i)?' class="active"':''?>></li>
+              <?php
+                  $ic++;
+                }
+              ?>
             </ol>
+            <?php } ?>
           </div>
+          <?php if(count($js_data)>1){ ?>
         </div>
-        <div class="item">
-          <div class="banner-photo">
-            <img src="" />
-          </div>
-          <div class="banner-review">
-            <blockquote>
-              <p>"<span>Couldn't be happier. They showed up on time and did a fantastic job. We'll call again for sure.</span>"</p>
-              <p class="banner-author"><cite>Ernest Nales</cite>
-            </blockquote>
-            <div class="fixed-bottom">
-              <ul class="share-it">
-                <li class="write-review"><a href=""><i class="icon-full-conversation"></i><span> Write your review</span></a></li>
-                <!-- Commented out for local development -->
-                <li class="social-network"><div class="fb-like" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="verdana" data-action="like"></div></li>
-                <li class="social-network"><a href="https://twitter.com/share" class="twitter-share-button" data-via="streakfreeclean" data-related="streakfreeclean" data-hashtags="WindowCleaning">Tweet</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
-              </ul>
-            </div>
-            <ol class="carousel-indicators">
-              <li data-target="#banner-cfct-module-9b3ef605612ed3f66ea07aa769c74699" data-slide-to="0"></li>
-              <li data-target="#banner-cfct-module-9b3ef605612ed3f66ea07aa769c74699" data-slide-to="1" class="active"></li>
-              <li data-target="#banner-cfct-module-9b3ef605612ed3f66ea07aa769c74699" data-slide-to="2"></li>
-            </ol>
-          </div>
-        </div>
-        <div class="item">
-          <div class="banner-photo">
-            <img src="http://lars.uzbuz.com/wp-content/uploads/sites/6/2013/04/com-testimonial-credit-union2.jpg" />
-          </div>
-          <div class="banner-review">
-            <blockquote>
-              <p>"<span>Couldn't be happier. They showed up on time and did a fantastic job. We'll call again for sure.</span>"</p>
-              <p class="banner-author"><cite>Ernest Nales</cite> <span class="author-location"> - Los Angeles</span></p>
-            </blockquote>
-            <div class="fixed-bottom">
-              <ul class="share-it">
-                <li class="write-review"><a href=""><i class="icon-full-conversation"></i><span> Write your review</span></a></li>
-                <!-- Commented out for local development -->
-                <li class="social-network"><div class="fb-like" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="verdana" data-action="like"></div></li>
-                <li class="social-network"><a href="https://twitter.com/share" class="twitter-share-button" data-via="streakfreeclean" data-related="streakfreeclean" data-hashtags="WindowCleaning">Tweet</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
-              </ul>
-            </div>
-            <ol class="carousel-indicators">
-              <li data-target="#banner-cfct-module-9b3ef605612ed3f66ea07aa769c74699" data-slide-to="0"></li>
-              <li data-target="#banner-cfct-module-9b3ef605612ed3f66ea07aa769c74699" data-slide-to="1"></li>
-              <li data-target="#banner-cfct-module-9b3ef605612ed3f66ea07aa769c74699" data-slide-to="2" class="active"></li>
-            </ol>
-          </div>
-        </div>
+        <?php
+            }
+            $i++;
+          }
+        ?>
+      <?php if(count($js_data)>1){ ?>
       </div>
+      <?php } ?>
+
+
     </div>
     <div class="curved-shadow">
       <img src="http://lars.uzbuz.com/wp-content/themes/playground/images/backgrounds/bottom-shadow.png" />
     </div>
 
     <script type="text/javascript">
-        var data_banner_cfct_module_9b3ef605612ed3f66ea07aa769c74699 = [
-            {"images":["http:\/\/lars.uzbuz.com\/wp-content\/uploads\/sites\/6\/2013\/04\/com-test-oct-cleaner.jpg"], "video":""},
-            {"images":[], "video":""},
-            {"images":["http:\/\/lars.uzbuz.com\/wp-content\/uploads\/sites\/6\/2013\/04\/com-testimonial-credit-union2.jpg"], "video":""}
-        ];
+      var data_<?=str_replace("-", "_", $id)?> = <?=json_encode($js_data);?>;
       $(document).ready(function(){
-        var carousel = $(".carousel-banner-cfct-module-9b3ef605612ed3f66ea07aa769c74699");
+        var carousel = $(".carousel-<?=$id?>");
         var current_item_id = 0;
         var current_image_idx = 0;
         var interval = 4000;
@@ -229,7 +273,7 @@ foreach($comments as $comment){
           items.removeAttr("style");
           var active_item = items[current_item_id];
           active_image = $(".banner-photo img", active_item);
-          active_image.attr("src", data_banner_cfct_module_9b3ef605612ed3f66ea07aa769c74699[current_item_id].images[current_image_idx]);
+          active_image.attr("src", data_<?=str_replace("-", "_", $id)?>[current_item_id].images[current_image_idx]);
           active_indicators = $(".carousel-indicators li", active_item);
           $(active_indicators[current_item_id]).addClass("active");
           timeout = setTimeout(function(){
@@ -246,16 +290,16 @@ foreach($comments as $comment){
           var max_width;
           var new_width;
           current_image_idx++;
-          if(data_banner_cfct_module_9b3ef605612ed3f66ea07aa769c74699.length>1 && current_image_idx>=data_banner_cfct_module_9b3ef605612ed3f66ea07aa769c74699[current_item_id].images.length){
+          if(data_<?=str_replace("-", "_", $id)?>.length>1 && current_image_idx>=data_<?=str_replace("-", "_", $id)?>[current_item_id].images.length){
             current_item_id++;
             current_image_idx = 0;
-            if(current_item_id>=data_banner_cfct_module_9b3ef605612ed3f66ea07aa769c74699.length){
+            if(current_item_id>=data_<?=str_replace("-", "_", $id)?>.length){
               current_item_id = 0;
             }
             active_item = items[current_item_id];
             banner_photo = $(".banner-photo", active_item);
             active_image = $("img", banner_photo);
-            banner_photo.append("<img src='"+data_banner_cfct_module_9b3ef605612ed3f66ea07aa769c74699[current_item_id].images[current_image_idx]+"' style='position:absolute;left:0;top:0;display:none;' />");
+            banner_photo.append("<img src='"+data_<?=str_replace("-", "_", $id)?>[current_item_id].images[current_image_idx]+"' style='position:absolute;left:0;top:0;display:none;' />");
             new_image = $("img", banner_photo).last();
             new_image.load(function(){
               active_image.remove();
@@ -281,11 +325,11 @@ foreach($comments as $comment){
               }, interval);
             });
           }
-          else if(data_banner_cfct_module_9b3ef605612ed3f66ea07aa769c74699[current_item_id].images.length>1) {
+          else if(data_<?=str_replace("-", "_", $id)?>[current_item_id].images.length>1) {
             active_item = items[current_item_id];
             banner_photo = $(".banner-photo", active_item);
             active_image = $("img", banner_photo);
-            banner_photo.append("<img src='"+data_banner_cfct_module_9b3ef605612ed3f66ea07aa769c74699[current_item_id].images[current_image_idx]+"' style='position:absolute;left:0;top:0;display:none;' />");
+            banner_photo.append("<img src='"+data_<?=str_replace("-", "_", $id)?>[current_item_id].images[current_image_idx]+"' style='position:absolute;left:0;top:0;display:none;' />");
             new_image = $("img", banner_photo).last();
             new_image.load(function(){
               active_image.fadeOut("fast");
@@ -297,8 +341,8 @@ foreach($comments as $comment){
                 timeout = setTimeout(function(){
                   cycle_image();
                 }, interval);
-                if(data_banner_cfct_module_9b3ef605612ed3f66ea07aa769c74699.length<=1){
-                  if(current_image_idx>=data_banner_cfct_module_9b3ef605612ed3f66ea07aa769c74699[current_item_id].images.length-1) current_image_idx = -1;
+                if(data_<?=str_replace("-", "_", $id)?>.length<=1){
+                  if(current_image_idx>=data_<?=str_replace("-", "_", $id)?>[current_item_id].images.length-1) current_image_idx = -1;
                 }
               });
             }).error(function() {
@@ -566,21 +610,99 @@ foreach($comments as $comment){
     </div>
   </section>
 
-  <!-- Featured review -->
+  <!-- Featured review - Done -->
   <section class="bg-white bumper-top-small page-left page-right">
+    <?php
+    $args = array(
+      'number'  => 1,
+      'post_id' => 0,
+      'meta_query' => array(
+        'relation' => 'AND',
+        array(
+          'key' => 'featured',
+          'value' => '',
+          'type' => 'char',
+          'compare' => '!='
+        )
+      )
+    );
+    $comments = get_comments($args);
+    $featured_reviews = array();
+    foreach($comments as $comment){
+      $listed_comment = new stdClass();
+      $listed_comment->id = $comment->comment_ID;
+      $listed_comment->name = $comment->comment_author;
+      $listed_comment->content = $comment->comment_content;
+      $listed_comment->content = str_replace("\n", "<br />", $comment->comment_content);
+      $listed_comment->company = get_comment_meta($comment->comment_ID, 'company', true);
+      $listed_comment->featured = get_comment_meta($comment->comment_ID, 'featured', true);
+      $listed_comment->rating = get_comment_meta($comment->comment_ID, 'rating', true);
+      array_push($featured_reviews, $listed_comment);
+    }
+    if(count($featured_reviews)<=0){
+      $args = array(
+        'number'  => 1,
+        'post_id' => 0,
+      );
+      $comments = get_comments($args);
+      $this->featured_reviews = array();
+      foreach($comments as $comment){
+        $listed_comment = new stdClass();
+        $listed_comment->id = $comment->comment_ID;
+        $listed_comment->name = $comment->comment_author;
+        $listed_comment->content = $comment->comment_content;
+        $listed_comment->content = str_replace("\n", "<br />", $comment->comment_content);
+        $listed_comment->company = get_comment_meta($comment->comment_ID, 'company', true);
+        $listed_comment->featured = get_comment_meta($comment->comment_ID, 'featured', true);
+        $listed_comment->rating = get_comment_meta($comment->comment_ID, 'rating', true);
+        array_push($featured_reviews, $listed_comment);
+      }
+    }
+    ?>
     <div>
       <div id="review-cfct-module-ef98435c77ff230a91465476732d61e5" class=" review-carousel slide" itemscope="http://schema.org/Review" itemprop="review">
         <div class="review review-invert">
           <blockquote class="center well well-has-shadow">
-            <p itemprop="comment">"Larry and Eddie did an awesome job on the windows! They are very professional and courteous. I'm glad I chose Gleam Team! Will definitely recommend them to others."</p>
-            <p class="citation">
-              <cite itemprop="author">Ruth Jacobsen</cite>
-              <span class="author-location"> - Broken Arrow, OK </span>
-              <a href="http://lars.uzbuz.com/reviews" class="review-link">Read more reviews</a>
-            </p>
+            <?php if(count($featured_reviews)>1){ ?>
+            <div class="carousel-inner">
+            <?php } ?>
+              <?php
+                $i = 0;
+                foreach($featured_reviews as $r){
+                  if(count($featured_reviews)>1){
+              ?>
+              <div class="<?=($i==0)?'active ':''?>item">
+              <?php } ?>
+                <p itemprop="comment">"<?=parse_shortclass($r->content)?>"</p>
+                <p class="citation">
+                  <cite itemprop="author"><?=parse_shortclass($r->name)?></cite>
+                  <?php $seo = get_location_seo(); ?>
+                  <?php if($r->company!=''){ ?>
+                    <span class="author-location"> - <?=parse_shortclass($r->company)?></span>
+                  <?php } else if($r->location!=''){ ?>
+                    <span class="author-location"> - <?=parse_shortclass($r->location)?></span>
+                  <?php } else if(isset($seo['city']) && $seo['city']!='') { ?>
+                    <span class="author-location"> - <?=$seo['city'].", ".$seo['state']?> </span>
+                  <?php } ?>
+                  <a href="<?=home_url()?>/reviews" class="review-link">Read more reviews</a>
+                </p>
+              <?php if(count($featured_reviews)>1){ ?>
+              </div>
+              <?php
+                  }
+                  $i++;
+                }
+              ?>
+            <?php if(count($featured_reviews)>1){ ?>
+            </div>
+            <?php } ?>
+            <?php if(count($featured_reviews)>1){ ?>
+            <a class="carousel-control left" href="#<?=$id?>" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#<?=$id?>" data-slide="next">&rsaquo;</a>
+            <?php } ?>
           </blockquote>
           <div class="curved-shadow">
-            <img src="http://lars.uzbuz.com/wp-content/themes/playground/images/backgrounds/bottom-shadow.png" />
+            <img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
           </div>
         </div>
       </div>

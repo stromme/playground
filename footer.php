@@ -9,6 +9,7 @@
  * @subpackage 
  * @since 
  */
+restore_current_blog();
 ?>
 	<section class="footer">
 		<img src="<?php echo get_header_image(); ?>">
