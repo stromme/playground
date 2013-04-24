@@ -88,8 +88,8 @@ foreach($comments as $comment){
       'order'       => 'ASC'
     );
     $posts_args = $args;
-    $posts_args['meta_key'] = 'pinned';
-    $posts_args['orderby'] = 'pinned';
+    $posts_args['meta_key'] = 'featured';
+    $posts_args['orderby'] = 'featured';
     $projects = get_posts($args);
     if(count($projects)<=0){
       $projects = get_posts($args);
@@ -198,7 +198,8 @@ foreach($comments as $comment){
           </div>
           <div class="banner-review">
             <blockquote>
-              <p>"<span><?=$d->description?></span>"</p>
+              <?php $description = substr($d->description, 0, 120); ?>
+              <p>"<span><?=(strlen($d->description)<=130)?$d->description:$description?></span>"</p>
               <?php if($d->author!='' || $d->author_location!=''){ ?>
                 <?php if($d->author!=''){ ?>
                 <p class="banner-author"><cite><?=$d->author?></cite><?php
@@ -797,6 +798,7 @@ foreach($comments as $comment){
           $owner_email = '';
           if(count($users)>0){
             foreach($users as $user){
+              var_dump($user);
               $roles = $user->roles;
               if(count($roles)>0){
                 if(($roles[0]=='manager' && $owner_role=='') || $roles[0]=='owner'){
