@@ -39,7 +39,7 @@ class cfct_build_common {
 		}
 
 		$this->set_post_id($post_id);
-		$this->postmeta_key = apply_filters('cfct-build-postmeta-key', $this->postmeta_key);		
+		$this->postmeta_key = apply_filters('cfct-build-postmeta-key', $this->postmeta_key);
 
 		if ($postmeta = $this->get_postmeta()) {
 			$this->data = !is_array($postmeta['data']) ? array() : $postmeta['data'];
