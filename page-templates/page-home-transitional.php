@@ -92,6 +92,7 @@ foreach($comments as $comment){
     $posts_args['orderby'] = 'featured';
     $projects = get_posts($post_args);
     if(count($projects)<=0){
+      $args['order'] = 'DESC';
       $projects = get_posts($args);
     }
     $js_data = array();
