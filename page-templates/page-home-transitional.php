@@ -12,7 +12,7 @@
 get_header();
 $service_name = get_the_title();
 
-$company = get_option('tb_company');
+$tb_company = get_option('tb_company');
 $seo = get_location_seo();
 // Get all pinned reviews
 $args = array(
@@ -717,7 +717,7 @@ foreach($comments as $comment){
       <div class="span7">
         <div>
           <div class="cfct-mod-content">
-            <h2>Why <?=$company['name']?> was awarded Best in <?=$seo['city']?>, <?=$seo['state']?>.</h2>
+            <h2>Why <?=$tb_company['name']?> was awarded Best in <?=$seo['city']?>, <?=$seo['state']?>.</h2>
             <?php
               the_post();
               the_content();
@@ -786,12 +786,11 @@ foreach($comments as $comment){
       <div class="span8">
         <!-- Address Module - Company address and Google map ===================================================== -->
         <?php
-          $company = get_option('tb_company');
-          $company_name = isset($company['name'])?$company['name']:'';
-          $company_street = isset($company['street'])?$company['street']:'';
-          $company_city = isset($company['city'])?$company['city']:'';
-          $company_state = isset($company['state'])?$company['state']:'';
-          $company_zip = isset($company['zip'])?$company['zip']:'';
+          $company_name = isset($tb_company['name'])?$tb_company['name']:'';
+          $company_street = isset($tb_company['street'])?$tb_company['street']:'';
+          $company_city = isset($tb_company['city'])?$tb_company['city']:'';
+          $company_state = isset($tb_company['state'])?$tb_company['state']:'';
+          $company_zip = isset($tb_company['zip'])?$tb_company['zip']:'';
           $company_phone = get_phone_number();
           $users = get_users();
           $owner_name = '';
@@ -833,7 +832,6 @@ foreach($comments as $comment){
         <div>
           <!-- Service area Module - List of locations serviced ===================================================== -->
           <?php
-            $company = get_option('tb_company');
             $users = get_users();
             $owner_id = '';
             $owner_name = '';
@@ -849,27 +847,31 @@ foreach($comments as $comment){
               }
             }
             $other_blog_locations = array();
+            $other_blogs_link = array();
             if($owner_id!='' && $owner_id>0){
               $blogs = get_blogs_of_user($owner_id);
               if(count($blogs)>1){
                 foreach($blogs as $user_blog){
-                  if($user_blog->userblog_id!=get_current_blog_id()){
+                  if($user_blog->userblog_id!=get_current_blog_id())
                     switch_to_blog($user_blog->userblog_id);
-                    $blog_seo = get_option('tb_seo');
-                    if(isset($blog_seo)){
-                      if(isset($blog_seo['seo_target_city']) && isset($blog_seo['seo_target_state'])){
-                        $blog_seo_slug = strtolower(preg_replace("/[^A-Za-z0-9\_\-]/", '', $blog_seo['seo_target_city'])).'-'.strtolower($blog_seo['seo_target_state']);
-                        $args = array('post_type' => 'research', 'taxonomy' => 'locations', 'term' => $blog_seo_slug);
-                        $is_location_promoted = TB_Promote::is_promoted($args);
-                        $blog_seo_promoted_url = '';
-                        if($is_location_promoted) $blog_seo_promoted_url = home_url().get_blog_prefix().'locations/'.$blog_seo_slug;
-                        array_push($other_blog_locations, array(
-                          'name' => $blog_seo['seo_target_city'].', '.$blog_seo['seo_target_state'],
-                          'slug' => $blog_seo_slug,
-                          'promoted' => $is_location_promoted,
-                          'promoted_url' => $blog_seo_promoted_url
-                        ));
-                      }
+                  $blog_seo = get_option('tb_seo');
+                  if(isset($blog_seo)){
+                    if(isset($blog_seo['seo_target_city']) && isset($blog_seo['seo_target_state'])){
+                      $blog_seo_slug = strtolower(preg_replace("/[^A-Za-z0-9\_\-]/", '', $blog_seo['seo_target_city'])).'-'.strtolower($blog_seo['seo_target_state']);
+                      $args = array('post_type' => 'research', 'taxonomy' => 'locations', 'term' => $blog_seo_slug);
+                      $is_location_promoted = TB_Promote::is_promoted($args);
+                      $blog_seo_promoted_url = '';
+                      if($is_location_promoted) $blog_seo_promoted_url = home_url().get_blog_prefix().'locations/'.$blog_seo_slug;
+                      array_push($other_blog_locations, array(
+                        'name' => $blog_seo['seo_target_city'].', '.$blog_seo['seo_target_state'],
+                        'slug' => $blog_seo_slug,
+                        'promoted' => $is_location_promoted,
+                        'promoted_url' => $blog_seo_promoted_url
+                      ));
+                      array_push($other_blogs_link, array(
+                        'slug' => $blog_seo_slug,
+                        'blog_id' => $user_blog->userblog_id
+                      ));
                     }
                   }
                 }
@@ -889,7 +891,17 @@ foreach($comments as $comment){
                     $args = array('post_type' => 'research', 'taxonomy' => 'locations', 'term' => $location->slug);
                     $is_location_promoted = TB_Promote::is_promoted($args);
                     if($is_location_promoted){
-                      $name = '<a href="'.home_url().get_blog_prefix().'locations/'.($location->slug).'">'.$name.'</a>';
+                      $name = '<a href="'.home_url().((get_blog_prefix()!='')?get_blog_prefix():'/').'locations/'.($location->slug).'">'.$name.'</a>';
+                    }
+                    else{
+                      foreach($other_blogs_link as $blog_link){
+                        if($blog_link['slug']==$location->slug){
+                          switch_to_blog($blog_link['blog_id']);
+                          $name = '<a href="'.home_url().'">'.$name.'</a>';
+                          restore_current_blog();
+                          break;
+                        }
+                      }
                     }
                     echo '<li>'.$name.'</li>';
                     if(count($other_blog_locations)>0){
@@ -907,6 +919,16 @@ foreach($comments as $comment){
                       $name = $loc['name'];
                       if($loc['promoted']){
                         $name = '<a href="'.$loc['promoted_url'].'">'.$name.'</a>';
+                      }
+                      else {
+                        foreach($other_blogs_link as $blog_link){
+                          if($blog_link['slug']==$loc['slug']){
+                            switch_to_blog($blog_link['blog_id']);
+                            $name = '<a href="'.home_url().'">'.$name.'</a>';
+                            restore_current_blog();
+                            break;
+                          }
+                        }
                       }
                       echo '<li>'.$name.'</li>';
                     }
