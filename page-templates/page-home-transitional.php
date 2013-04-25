@@ -662,7 +662,7 @@ foreach($comments as $comment){
     }
     ?>
     <div>
-      <div id="review-cfct-module-ef98435c77ff230a91465476732d61e5" class=" review-carousel slide" itemscope="http://schema.org/Review" itemprop="review">
+      <div id="review-cfct-module-home-migrate" class=" review-carousel slide" itemscope="http://schema.org/Review" itemprop="review">
         <div class="review review-invert">
           <blockquote class="center well well-has-shadow">
             <?php if(count($featured_reviews)>1){ ?>
