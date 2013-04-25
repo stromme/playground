@@ -581,8 +581,8 @@ foreach($comments as $comment){
               <img src="<?=TOOLBOX_IMAGES?>/accolades/window-cleaning-award.png" width="130">
             </div>
             <div class="middle">
-              <h4>North America's Best Window Cleaners</h4>
-              <p>We hand pick each WindowCleaning.com technician from the best window cleaners in North America.</p>
+              <h4>Awarded best in <?=$seo['city']?>, <?=$seo['state']?></h4>
+              <p>WindowCleaning.com hand picks our technicians from the best window cleaners in North America. <?=$tb_company['name']?> is the only WindowCleaning.com member in <?=$seo['city']?>, <?=$seo['state']?>.</p>
             </div>
           </div>
           <!-- / Accolades -->
@@ -594,7 +594,7 @@ foreach($comments as $comment){
             </div>
             <div class="middle">
               <h4>Hassle free money back guarantee.</h4>
-              <p>We’re proud to offer the only $1000 Streak Free Guarantee in . If you don’t love our work, we’ll refund up to $1000</p>
+              <p>We’re proud to offer the only $1000 Streak Free Guarantee in <?=$seo['city']?>, <?=$seo['state']?> . If you don’t love our work, we’ll refund up to $1000</p>
             </div>
           </div>
           <div class="row-middle page-right">
@@ -603,7 +603,7 @@ foreach($comments as $comment){
             </div>
             <div class="middle">
               <h4>We carry $1 million in liability insurance.</h4>
-              <p>Protect your home and family. Only work with fully insured WindowCleaning.com professionals.</p>
+              <p>Protect your home and family. <?=$tb_company['name']?> is fully insured.</p>
             </div>
           </div>
           <!-- / Accolades -->
@@ -717,7 +717,7 @@ foreach($comments as $comment){
       <div class="span7">
         <div>
           <div class="cfct-mod-content">
-            <h2>Why <?=$tb_company['name']?> was awarded Best in <?=$seo['city']?>, <?=$seo['state']?>.</h2>
+            <h2>Why <?=$tb_company['name']?> was awarded <strong class="green">Best in <?=$seo['city']?>, <?=$seo['state']?>.</strong></h2>
             <?php
               the_post();
               the_content();
