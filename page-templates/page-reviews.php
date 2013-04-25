@@ -49,7 +49,7 @@ if(count($reviews)>1){
 }
 
 $args = array(
-  'number'  => 10,
+  'number'  => 15,
   'post_id' => 0,
   'orderby' => 'modified',
   'order'   => 'DESC',
