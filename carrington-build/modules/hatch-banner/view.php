@@ -29,7 +29,8 @@
       </div>
       <div class="banner-review">
         <blockquote>
-          <p>"<span id="description-<?=$id?>"><?=$d->description?></span>"</p>
+          <?php $description = substr($d->description, 0, 180)."..."; ?>
+          <p>"<span><?=(strlen($d->description)<=185)?$d->description:$description?></span>"</p>
           <?php if($d->author!='' || $d->author_location!=''){ ?>
             <?php if($d->author!=''){ ?>
             <p class="banner-author"><cite id="author-<?=$id?>"><?=$d->author?></cite><?php
