@@ -248,7 +248,7 @@ foreach($comments as $comment){
 
     </div>
     <div class="curved-shadow">
-      <img src="http://lars.uzbuz.com/wp-content/themes/playground/images/backgrounds/bottom-shadow.png" />
+      <img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
     </div>
 
     <script type="text/javascript">
@@ -578,7 +578,7 @@ foreach($comments as $comment){
         <div class="bumper-bottom">
           <div class="row-middle page-right">
             <div class="middle-fixed-small">
-              <img src="http://lars.uzbuz.com/wp-content/themes/playground/toolbox-framework/images/accolades/window-cleaning-award.png" width="130">
+              <img src="<?=TOOLBOX_IMAGES?>/accolades/window-cleaning-award.png" width="130">
             </div>
             <div class="middle">
               <h4>North America's Best Window Cleaners</h4>
@@ -590,7 +590,7 @@ foreach($comments as $comment){
         <div>
           <div class="row-middle page-right">
             <div class="middle-fixed-small">
-              <img src="http://lars.uzbuz.com/wp-content/themes/playground/toolbox-framework/images/accolades/streak-free-guarantee.png" width="130">
+              <img src="<?=TOOLBOX_IMAGES?>/accolades/streak-free-guarantee.png" width="130">
             </div>
             <div class="middle">
               <h4>Hassle free money back guarantee.</h4>
@@ -599,7 +599,7 @@ foreach($comments as $comment){
           </div>
           <div class="row-middle page-right">
             <div class="middle-fixed-small">
-              <img src="http://lars.uzbuz.com/wp-content/themes/playground/toolbox-framework/images/accolades/insured.png" width="130">
+              <img src="<?=TOOLBOX_IMAGES?>/accolades/insured.png" width="130">
             </div>
             <div class="middle">
               <h4>We carry $1 million in liability insurance.</h4>
@@ -776,7 +776,7 @@ foreach($comments as $comment){
 
     </div>
     <div class="curved-shadow">
-      <img src="http://lars.uzbuz.com/wp-content/themes/playground/images/backgrounds/bottom-shadow.png"/>
+      <img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
     </div>
   </section>
 
