@@ -517,7 +517,7 @@ foreach($comments as $comment){
       <?php
         if(class_exists('TB_Promote')){
           foreach($services as $service){
-            $args = array('post_type' => 'research', 'taxonomy' => 'services', 'term' => $service->slug);
+            $args = array('post_type' => 'cftl-tax-landing', 'taxonomy' => 'services', 'term' => $service->slug);
             $is_service_promoted = TB_Promote::is_promoted($args);
             $args = array(
               'post_type'   => 'showroom',
