@@ -83,7 +83,7 @@ foreach($comments as $comment){
     $args = array(
       'numberposts' => 3,
       'post_type'   => 'showroom',
-      'post_status' => 'any',
+      'post_status' => 'publish',
       'post_parent' => null,
       'order'       => 'ASC'
     );
@@ -801,7 +801,7 @@ foreach($comments as $comment){
               $roles = $user->roles;
               if(count($roles)>0){
                 if((in_array('manager', $roles) && $owner_role=='') || in_array('owner', $roles)){
-                  $owner_name = ucfirst($user->display_name);
+                  $owner_name = $user->first_name.' '.$user->last_name;
                   $owner_role = ucfirst($roles[0]);
                   $owner_email = $user->user_email;
                 }
