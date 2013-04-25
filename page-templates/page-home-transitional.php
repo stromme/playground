@@ -768,7 +768,7 @@ foreach($comments as $comment){
 
         <div class="center">
           <div class="btn-group">
-            <a href="tel:(123) 123-1233" class="btn btn-primary btn-large hidden-phone">Call us (123) 123-1233</a>
+            <a href="tel:<?=tb_format_phone_plain(get_phone_number())?>" class="btn btn-primary btn-large hidden-phone" itemprop="telephone"><?=get_phone_number()?></a>
             <button class="btn btn-success btn-large quick-estimate">Quick Online Estimate</button>
           </div>
         </div>
