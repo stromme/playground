@@ -8,8 +8,8 @@
       	<a href="<?=$prj->favorite_media->image_large[0]?>" class="show-image colorbox-element" <?=($prj->favorite_media->media_type=="video")?"data-video=\"1\"":""?> rel="gallery-<?=$prj->id?>"><i class="<?=($prj->favorite_media->media_type=="video")?"icon-media-play":"icon-media-expand"?>"></i></a>
       </div>
       <div class="media-controls">
-        <a href="<?=home_url().((get_blog_prefix()!='')?get_blog_prefix():'/').'projects/'.$prj->slug?>" ><i class="icon-media-twitter"></i></a>
-        <a href="<?=home_url().((get_blog_prefix()!='')?get_blog_prefix():'/').'projects/'.$prj->slug?>"><i class="icon-media-facebook"></i></a>
+        <a onclick="share_project('twitter', '<?=home_url().((get_blog_prefix()!='')?get_blog_prefix():'/').'projects/'.$prj->slug?>', '<?=$prj->title?>');" href="javascript:void(0);" ><i class="icon-media-twitter"></i></a>
+        <a onclick="share_project('facebook', '<?=home_url().((get_blog_prefix()!='')?get_blog_prefix():'/').'projects/'.$prj->slug?>', '<?=$prj->title?>');" href="javascript:void(0);"><i class="icon-media-facebook"></i></a>
       </div>
       <?php if($prj->media!='' && count($prj->media)>1){ ?>
         <div class="colorbox-image-list">
