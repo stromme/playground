@@ -103,11 +103,13 @@ $prj = TB_Frontend::get_project_details($post);
   $loop = new WP_Query( $post_args );
   $all_related_projects = $loop->posts;
   $related_projects = array();
-  foreach($all_related_projects as $rel_prj){
-    if(count($related_projects)<3){
-      if($rel_prj->ID!=$prj->id){
-        $new_project = TB_Frontend::get_project_details($rel_prj);
-        array_push($related_projects, $new_project);
+  if(count($all_related_projects)>0){
+    foreach($all_related_projects as $rel_prj){
+      if(count($related_projects)<3){
+        if($rel_prj->ID!=$prj->id){
+          $new_project = TB_Frontend::get_project_details($rel_prj);
+          array_push($related_projects, $new_project);
+        }
       }
     }
   }
@@ -119,11 +121,13 @@ $prj = TB_Frontend::get_project_details($post);
     $loop = new WP_Query( $args );
     $all_related_projects = $loop->posts;
     $related_projects = array();
-    foreach($all_related_projects as $rel_prj){
-      if(count($related_projects)<3){
-        if($rel_prj->ID!=$prj->id){
-          $new_project = TB_Frontend::get_project_details($rel_prj);
-          array_push($related_projects, $new_project);
+    if(count($all_related_projects)>0){
+      foreach($all_related_projects as $rel_prj){
+        if(count($related_projects)<3){
+          if($rel_prj->ID!=$prj->id){
+            $new_project = TB_Frontend::get_project_details($rel_prj);
+            array_push($related_projects, $new_project);
+          }
         }
       }
     }
