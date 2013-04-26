@@ -25,6 +25,7 @@ if($owner_id!='' && $owner_id>0){
       if($user_blog->userblog_id!=get_current_blog_id()){
         switch_to_blog($user_blog->userblog_id);
         $blog_seo = get_option('tb_seo');
+        restore_current_blog();
         if(isset($blog_seo)){
           if(isset($blog_seo['seo_target_city']) && isset($blog_seo['seo_target_state'])){
             $blog_seo_slug = strtolower(preg_replace("/[^A-Za-z0-9\_\-]/", '', $blog_seo['seo_target_city'])).'-'.strtolower($blog_seo['seo_target_state']);
@@ -42,7 +43,6 @@ if($owner_id!='' && $owner_id>0){
         }
       }
     }
-    restore_current_blog();
   }
 }
 ?>

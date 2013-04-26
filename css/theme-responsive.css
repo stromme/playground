@@ -950,6 +950,7 @@
   .brand img {
     padding: 6px 6px 6px 0px;
     max-height: 150px;
+    max-width: 285px;
   }
   div.banner-photo {
     max-width: 650px;
@@ -1113,6 +1114,7 @@
   }
   .brand img {
     padding-top: 55px;
+    max-width: 200px;
   }
   .banner-photo {
     display: block;
