@@ -274,7 +274,8 @@ foreach($comments as $comment){
           items.removeAttr("style");
           var active_item = items[current_item_id];
           active_image = $(".banner-photo img", active_item);
-          active_image.attr("src", data_<?=str_replace("-", "_", $id)?>[current_item_id].images[current_image_idx]);
+          if(data_<?=str_replace("-", "_", $id)?>[current_item_id].images)
+            active_image.attr("src", data_<?=str_replace("-", "_", $id)?>[current_item_id].images[current_image_idx]);
           active_indicators = $(".carousel-indicators li", active_item);
           $(active_indicators[current_item_id]).addClass("active");
           timeout = setTimeout(function(){
@@ -291,7 +292,7 @@ foreach($comments as $comment){
           var max_width;
           var new_width;
           current_image_idx++;
-          if(data_<?=str_replace("-", "_", $id)?>.length>1 && current_image_idx>=data_<?=str_replace("-", "_", $id)?>[current_item_id].images.length){
+          if(data_<?=str_replace("-", "_", $id)?>.length>1 && data_<?=str_replace("-", "_", $id)?>[current_item_id].images && current_image_idx>=data_<?=str_replace("-", "_", $id)?>[current_item_id].images.length){
             current_item_id++;
             current_image_idx = 0;
             if(current_item_id>=data_<?=str_replace("-", "_", $id)?>.length){
@@ -326,7 +327,7 @@ foreach($comments as $comment){
               }, interval);
             });
           }
-          else if(data_<?=str_replace("-", "_", $id)?>[current_item_id].images.length>1) {
+          else if(data_<?=str_replace("-", "_", $id)?>[current_item_id].images && data_<?=str_replace("-", "_", $id)?>[current_item_id].images.length>1) {
             active_item = items[current_item_id];
             banner_photo = $(".banner-photo", active_item);
             active_image = $("img", banner_photo);

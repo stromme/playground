@@ -227,7 +227,8 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
                 items.removeAttr("style");
                 var active_item = items[current_item_id];
                 active_image = $(".banner-photo img", active_item);
-                active_image.attr("src", '.$js_id.'[current_item_id].images[current_image_idx]);
+                if('.$js_id.'[current_item_id].images)
+                  active_image.attr("src", '.$js_id.'[current_item_id].images[current_image_idx]);
                 active_indicators = $(".carousel-indicators li", active_item);
                 $(active_indicators[current_item_id]).addClass("active");
                 timeout = setTimeout(function(){
@@ -245,7 +246,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
               var max_width;
               var new_width;
               current_image_idx++;
-              if('.$js_id.'.length>1 && current_image_idx>='.$js_id.'[current_item_id].images.length){
+              if('.$js_id.'.length>1 && '.$js_id.'[current_item_id].images && current_image_idx>='.$js_id.'[current_item_id].images.length){
                 current_item_id++;
                 current_image_idx = 0;
                 if(current_item_id>='.$js_id.'.length){
@@ -280,7 +281,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
                   }, interval);
                 });
               }
-              else if('.$js_id.'[current_item_id].images.length>1) {
+              else if('.$js_id.'[current_item_id].images && '.$js_id.'[current_item_id].images.length>1) {
                 active_item = items[current_item_id];
                 banner_photo = $(".banner-photo", active_item);
                 active_image = $("img", banner_photo);
