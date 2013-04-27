@@ -713,10 +713,10 @@ foreach($comments as $comment){
   </section>
 
   <!-- Featurette and pinned reviews - Done -->
-  <section class="bg-white bumper-top-medium bumper-bottom-medium page-left page-right migrate">
+  <section class="bg-white bumper-top-medium bumper-bottom-medium page-left page-right">
     <div class="row-fluid">
       <div class="span7">
-        <div class="has-right-sidebar">
+        <div class="has-right-sidebar migrate">
           <div class="cfct-mod-content">
             <h2>Why <?=$tb_company['name']?> was awarded <strong class="green">Best in <?=$seo['city']?>, <?=$seo['state']?>.</strong></h2>
             <?php
