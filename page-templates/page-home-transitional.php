@@ -178,6 +178,7 @@ foreach($comments as $comment){
         $i++;
       }
     }
+    if(count($js_data)>0){
     ?>
     <div id="<?=$id?>" class="carousel-<?=$id?> banner" class="top-radius">
       <?php if(count($js_data)>1){ ?>
@@ -244,11 +245,9 @@ foreach($comments as $comment){
       <?php if(count($js_data)>1){ ?>
       </div>
       <?php } ?>
-
-
     </div>
     <div class="curved-shadow">
-      <img src="http://lars.uzbuz.com/wp-content/themes/playground/images/backgrounds/bottom-shadow.png" />
+      <img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
     </div>
 
     <script type="text/javascript">
@@ -259,7 +258,7 @@ foreach($comments as $comment){
         var current_image_idx = 0;
         var interval = 4000;
         var timeout = setTimeout(function(){
-          cycle_image();
+          cycle_image_banner_home_migrate();
         }, interval);
         $(".carousel-indicators li", carousel).mousedown(function(e){
           e.preventDefault();
@@ -275,14 +274,15 @@ foreach($comments as $comment){
           items.removeAttr("style");
           var active_item = items[current_item_id];
           active_image = $(".banner-photo img", active_item);
-          active_image.attr("src", data_<?=str_replace("-", "_", $id)?>[current_item_id].images[current_image_idx]);
+          if(data_<?=str_replace("-", "_", $id)?>[current_item_id].images)
+            active_image.attr("src", data_<?=str_replace("-", "_", $id)?>[current_item_id].images[current_image_idx]);
           active_indicators = $(".carousel-indicators li", active_item);
           $(active_indicators[current_item_id]).addClass("active");
           timeout = setTimeout(function(){
-            cycle_image();
+            cycle_image_banner_home_migrate();
           }, interval);
         });
-        function cycle_image(){
+        function cycle_image_banner_home_migrate(){
           clearTimeout(timeout);
           var items = $(".item", carousel);
           var active_item;
@@ -292,7 +292,7 @@ foreach($comments as $comment){
           var max_width;
           var new_width;
           current_image_idx++;
-          if(data_<?=str_replace("-", "_", $id)?>.length>1 && current_image_idx>=data_<?=str_replace("-", "_", $id)?>[current_item_id].images.length){
+          if(data_<?=str_replace("-", "_", $id)?>.length>1 && data_<?=str_replace("-", "_", $id)?>[current_item_id].images && current_image_idx>=data_<?=str_replace("-", "_", $id)?>[current_item_id].images.length){
             current_item_id++;
             current_image_idx = 0;
             if(current_item_id>=data_<?=str_replace("-", "_", $id)?>.length){
@@ -316,18 +316,18 @@ foreach($comments as $comment){
                 active_indicators = $(".carousel-indicators li", active_item);
                 $(active_indicators[current_item_id]).addClass("active");
                 timeout = setTimeout(function(){
-                  cycle_image();
+                  cycle_image_banner_home_migrate();
                 }, interval);
               });
             }).error(function() {
               banner_photo.removeAttr("style");
               new_image.remove();
               timeout = setTimeout(function(){
-                cycle_image();
+                cycle_image_banner_home_migrate();
               }, interval);
             });
           }
-          else if(data_<?=str_replace("-", "_", $id)?>[current_item_id].images.length>1) {
+          else if(data_<?=str_replace("-", "_", $id)?>[current_item_id].images && data_<?=str_replace("-", "_", $id)?>[current_item_id].images.length>1) {
             active_item = items[current_item_id];
             banner_photo = $(".banner-photo", active_item);
             active_image = $("img", banner_photo);
@@ -341,7 +341,7 @@ foreach($comments as $comment){
                 active_image.remove();
                 var width = $(".banner-review", active_item).outerWidth();
                 timeout = setTimeout(function(){
-                  cycle_image();
+                  cycle_image_banner_home_migrate();
                 }, interval);
                 if(data_<?=str_replace("-", "_", $id)?>.length<=1){
                   if(current_image_idx>=data_<?=str_replace("-", "_", $id)?>[current_item_id].images.length-1) current_image_idx = -1;
@@ -351,13 +351,14 @@ foreach($comments as $comment){
               banner_photo.removeAttr("style");
               new_image.remove();
               timeout = setTimeout(function(){
-                cycle_image();
+                cycle_image_banner_home_migrate();
               }, interval);
             });;
           }
         }
       });
     </script>
+    <?php } ?>
   </section>
 
   <!-- Awards accolades - Done -->
@@ -578,7 +579,7 @@ foreach($comments as $comment){
         <div class="bumper-bottom">
           <div class="row-middle page-right">
             <div class="middle-fixed-small">
-              <img src="http://lars.uzbuz.com/wp-content/themes/playground/toolbox-framework/images/accolades/window-cleaning-award.png" width="130">
+              <img src="<?=TOOLBOX_IMAGES?>/accolades/window-cleaning-award.png" width="130">
             </div>
             <div class="middle">
               <h4>Awarded best in <?=$seo['city']?>, <?=$seo['state']?></h4>
@@ -590,7 +591,7 @@ foreach($comments as $comment){
         <div>
           <div class="row-middle page-right">
             <div class="middle-fixed-small">
-              <img src="http://lars.uzbuz.com/wp-content/themes/playground/toolbox-framework/images/accolades/streak-free-guarantee.png" width="130">
+              <img src="<?=TOOLBOX_IMAGES?>/accolades/streak-free-guarantee.png" width="130">
             </div>
             <div class="middle">
               <h4>Hassle free money back guarantee.</h4>
@@ -599,7 +600,7 @@ foreach($comments as $comment){
           </div>
           <div class="row-middle page-right">
             <div class="middle-fixed-small">
-              <img src="http://lars.uzbuz.com/wp-content/themes/playground/toolbox-framework/images/accolades/insured.png" width="130">
+              <img src="<?=TOOLBOX_IMAGES?>/accolades/insured.png" width="130">
             </div>
             <div class="middle">
               <h4>We carry $1 million in liability insurance.</h4>
@@ -662,7 +663,7 @@ foreach($comments as $comment){
     }
     ?>
     <div>
-      <div id="review-cfct-module-ef98435c77ff230a91465476732d61e5" class=" review-carousel slide" itemscope="http://schema.org/Review" itemprop="review">
+      <div id="review-cfct-module-home-migrate" class=" review-carousel slide" itemscope="http://schema.org/Review" itemprop="review">
         <div class="review review-invert">
           <blockquote class="center well well-has-shadow">
             <?php if(count($featured_reviews)>1){ ?>
@@ -776,7 +777,7 @@ foreach($comments as $comment){
 
     </div>
     <div class="curved-shadow">
-      <img src="http://lars.uzbuz.com/wp-content/themes/playground/images/backgrounds/bottom-shadow.png"/>
+      <img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
     </div>
   </section>
 
@@ -832,52 +833,52 @@ foreach($comments as $comment){
         <div>
           <!-- Service area Module - List of locations serviced ===================================================== -->
           <?php
-            $users = get_users();
-            $owner_id = '';
-            $owner_name = '';
-            if(count($users)>0){
-              foreach($users as $user){
-                $roles = $user->roles;
-                if(count($roles)>0){
-                  if($roles[0]=='owner'){
-                    $owner_id = $user->id;
-                    $owner_name = $user->display_name;
-                  }
+          $users = get_users();
+          $owner_id = '';
+          if(count($users)>0){
+            foreach($users as $user){
+              $roles = $user->roles;
+              if(count($roles)>0){
+                if($roles[0]=='owner'){
+                  $owner_id = $user->id;
                 }
               }
             }
-            $other_blog_locations = array();
-            $other_blogs_link = array();
-            if($owner_id!='' && $owner_id>0){
-              $blogs = get_blogs_of_user($owner_id);
-              if(count($blogs)>1){
-                foreach($blogs as $user_blog){
-                  if($user_blog->userblog_id!=get_current_blog_id())
-                    switch_to_blog($user_blog->userblog_id);
+          }
+          $other_blog_locations = array();
+          $other_blogs_link = array();
+          if($owner_id!='' && $owner_id>0){
+            $blogs = get_blogs_of_user($owner_id);
+            if(count($blogs)>1){
+              foreach($blogs as $user_blog){
+                $current_blog_id = get_current_blog_id();
+                if($user_blog->userblog_id!=$current_blog_id){
+                  switch_to_blog($user_blog->userblog_id);
                   $blog_seo = get_option('tb_seo');
-                  if(isset($blog_seo)){
-                    if(isset($blog_seo['seo_target_city']) && isset($blog_seo['seo_target_state'])){
-                      $blog_seo_slug = strtolower(preg_replace("/[^A-Za-z0-9\_\-]/", '', $blog_seo['seo_target_city'])).'-'.strtolower($blog_seo['seo_target_state']);
-                      $args = array('post_type' => 'research', 'taxonomy' => 'locations', 'term' => $blog_seo_slug);
-                      $is_location_promoted = TB_Promote::is_promoted($args);
-                      $blog_seo_promoted_url = '';
-                      if($is_location_promoted) $blog_seo_promoted_url = home_url().get_blog_prefix().'locations/'.$blog_seo_slug;
-                      array_push($other_blog_locations, array(
-                        'name' => $blog_seo['seo_target_city'].', '.$blog_seo['seo_target_state'],
-                        'slug' => $blog_seo_slug,
-                        'promoted' => $is_location_promoted,
-                        'promoted_url' => $blog_seo_promoted_url
-                      ));
-                      array_push($other_blogs_link, array(
-                        'slug' => $blog_seo_slug,
-                        'blog_id' => $user_blog->userblog_id
-                      ));
-                    }
+                  restore_current_blog();
+                }
+                if(isset($blog_seo)){
+                  if(isset($blog_seo['seo_target_city']) && isset($blog_seo['seo_target_state'])){
+                    $blog_seo_slug = strtolower(preg_replace("/[^A-Za-z0-9\_\-]/", '', $blog_seo['seo_target_city'])).'-'.strtolower($blog_seo['seo_target_state']);
+                    $args = array('post_type' => 'cftl-tax-landing', 'taxonomy' => 'locations', 'term' => $blog_seo_slug);
+                    $is_location_promoted = TB_Promote::is_promoted($args);
+                    $blog_seo_promoted_url = '';
+                    if($is_location_promoted) $blog_seo_promoted_url = home_url().get_blog_prefix().'locations/'.$blog_seo_slug;
+                    array_push($other_blog_locations, array(
+                      'name' => $blog_seo['seo_target_city'].(($blog_seo['seo_target_state']!='')?', '.$blog_seo['seo_target_state']:''),
+                      'slug' => $blog_seo_slug,
+                      'promoted' => $is_location_promoted,
+                      'promoted_url' => $blog_seo_promoted_url
+                    ));
+                    array_push($other_blogs_link, array(
+                      'slug' => $blog_seo_slug,
+                      'blog_id' => $user_blog->userblog_id
+                    ));
                   }
                 }
-                restore_current_blog();
               }
             }
+          }
           ?>
           <div>
             <h3 class="light-weight"><?=parse_shortclass("Where we work")?></h3>
@@ -888,7 +889,7 @@ foreach($comments as $comment){
                 if(count($locations)>0){
                   foreach ($locations as $location) {
                     $name = $location->name;
-                    $args = array('post_type' => 'research', 'taxonomy' => 'locations', 'term' => $location->slug);
+                    $args = array('post_type' => 'cftl-tax-landing', 'taxonomy' => 'locations', 'term' => $location->slug);
                     $is_location_promoted = TB_Promote::is_promoted($args);
                     if($is_location_promoted){
                       $name = '<a href="'.home_url().((get_blog_prefix()!='')?get_blog_prefix():'/').'locations/'.($location->slug).'">'.$name.'</a>';
