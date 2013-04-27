@@ -1450,6 +1450,8 @@
     border-radius: 0;
   }
   .banner-title h2 {
+    font-size: 20px;
+    line-height: 25px;
     padding: 10px;
   }
 }
