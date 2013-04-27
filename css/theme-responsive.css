@@ -1298,6 +1298,10 @@
   .big-modal > .modal .modal-body {
     max-height: none;
   }
+  .has-right-sidebar {
+    border: none;
+    padding-right: 0px;
+  }
 }
 /*  Phones */
 @media (max-width: 480px) {
@@ -1428,6 +1432,22 @@
 @media (max-width: 600px) {
   .brand img {
     display: none;
+  }
+  #showroom {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .project:first-of-type {
+    padding-top: 0px;
+  }
+  .project {
+    padding-top: 20px;
+  }
+  .project .project-container,
+  .project .project-container img {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
   }
 }
 @media (max-width: 979px) {
