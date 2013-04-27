@@ -716,7 +716,7 @@ foreach($comments as $comment){
   <section class="bg-white bumper-top-medium bumper-bottom-medium page-left page-right migrate">
     <div class="row-fluid">
       <div class="span7">
-        <div>
+        <div class="has-right-sidebar">
           <div class="cfct-mod-content">
             <h2>Why <?=$tb_company['name']?> was awarded <strong class="green">Best in <?=$seo['city']?>, <?=$seo['state']?>.</strong></h2>
             <?php
