@@ -178,6 +178,7 @@ foreach($comments as $comment){
         $i++;
       }
     }
+    if(count($js_data)>0){
     ?>
     <div id="<?=$id?>" class="carousel-<?=$id?> banner" class="top-radius">
       <?php if(count($js_data)>1){ ?>
@@ -244,8 +245,6 @@ foreach($comments as $comment){
       <?php if(count($js_data)>1){ ?>
       </div>
       <?php } ?>
-
-
     </div>
     <div class="curved-shadow">
       <img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
@@ -259,7 +258,7 @@ foreach($comments as $comment){
         var current_image_idx = 0;
         var interval = 4000;
         var timeout = setTimeout(function(){
-          cycle_image();
+          cycle_image_banner_home_migrate();
         }, interval);
         $(".carousel-indicators li", carousel).mousedown(function(e){
           e.preventDefault();
@@ -279,10 +278,10 @@ foreach($comments as $comment){
           active_indicators = $(".carousel-indicators li", active_item);
           $(active_indicators[current_item_id]).addClass("active");
           timeout = setTimeout(function(){
-            cycle_image();
+            cycle_image_banner_home_migrate();
           }, interval);
         });
-        function cycle_image(){
+        function cycle_image_banner_home_migrate(){
           clearTimeout(timeout);
           var items = $(".item", carousel);
           var active_item;
@@ -316,14 +315,14 @@ foreach($comments as $comment){
                 active_indicators = $(".carousel-indicators li", active_item);
                 $(active_indicators[current_item_id]).addClass("active");
                 timeout = setTimeout(function(){
-                  cycle_image();
+                  cycle_image_banner_home_migrate();
                 }, interval);
               });
             }).error(function() {
               banner_photo.removeAttr("style");
               new_image.remove();
               timeout = setTimeout(function(){
-                cycle_image();
+                cycle_image_banner_home_migrate();
               }, interval);
             });
           }
@@ -341,7 +340,7 @@ foreach($comments as $comment){
                 active_image.remove();
                 var width = $(".banner-review", active_item).outerWidth();
                 timeout = setTimeout(function(){
-                  cycle_image();
+                  cycle_image_banner_home_migrate();
                 }, interval);
                 if(data_<?=str_replace("-", "_", $id)?>.length<=1){
                   if(current_image_idx>=data_<?=str_replace("-", "_", $id)?>[current_item_id].images.length-1) current_image_idx = -1;
@@ -351,13 +350,14 @@ foreach($comments as $comment){
               banner_photo.removeAttr("style");
               new_image.remove();
               timeout = setTimeout(function(){
-                cycle_image();
+                cycle_image_banner_home_migrate();
               }, interval);
             });;
           }
         }
       });
     </script>
+    <?php } ?>
   </section>
 
   <!-- Awards accolades - Done -->

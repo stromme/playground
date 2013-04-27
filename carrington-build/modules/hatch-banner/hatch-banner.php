@@ -205,35 +205,37 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
         <script type="text/javascript">
           var '.$js_id.' = '.json_encode($js_data).';
           $(document).ready(function(){
-            var carousel = $(".carousel-'.$id.'");
-            var current_item_id = 0;
-            var current_image_idx = 0;
-            var interval = '.$interval.';
-            var timeout = setTimeout(function(){
-              cycle_image();
-            }, interval);
-            $(".carousel-indicators li", carousel).mousedown(function(e){
-              e.preventDefault();
-            }).click(function(){
-              clearTimeout(timeout);
-              current_item_id = parseInt($(this).attr("data-slide-to"));
-              current_image_idx = 0;
-              carousel.carousel(current_item_id);
-              setTimeout(function(){
-                carousel.carousel("pause");
-              });
-              var items = $(".item", carousel);
-              items.removeAttr("style");
-              var active_item = items[current_item_id];
-              active_image = $(".banner-photo img", active_item);
-              active_image.attr("src", '.$js_id.'[current_item_id].images[current_image_idx]);
-              active_indicators = $(".carousel-indicators li", active_item);
-              $(active_indicators[current_item_id]).addClass("active");
-              timeout = setTimeout(function(){
-                cycle_image();
+            if('.$js_id.'.length>0){
+              var carousel = $(".carousel-'.$id.'");
+              var current_item_id = 0;
+              var current_image_idx = 0;
+              var interval = '.$interval.';
+              var timeout = setTimeout(function(){
+                cycle_image_'.$js_id.'();
               }, interval);
-            });
-            function cycle_image(){
+              $(".carousel-indicators li", carousel).mousedown(function(e){
+                e.preventDefault();
+              }).click(function(){
+                clearTimeout(timeout);
+                current_item_id = parseInt($(this).attr("data-slide-to"));
+                current_image_idx = 0;
+                carousel.carousel(current_item_id);
+                setTimeout(function(){
+                  carousel.carousel("pause");
+                });
+                var items = $(".item", carousel);
+                items.removeAttr("style");
+                var active_item = items[current_item_id];
+                active_image = $(".banner-photo img", active_item);
+                active_image.attr("src", '.$js_id.'[current_item_id].images[current_image_idx]);
+                active_indicators = $(".carousel-indicators li", active_item);
+                $(active_indicators[current_item_id]).addClass("active");
+                timeout = setTimeout(function(){
+                  cycle_image_'.$js_id.'();
+                }, interval);
+              });
+            }
+            function cycle_image_'.$js_id.'(){
               clearTimeout(timeout);
               var items = $(".item", carousel);
               var active_item;
@@ -267,14 +269,14 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
                     active_indicators = $(".carousel-indicators li", active_item);
                     $(active_indicators[current_item_id]).addClass("active");
                     timeout = setTimeout(function(){
-                      cycle_image();
+                      cycle_image_'.$js_id.'();
                     }, interval);
                   });
                 }).error(function() {
                   banner_photo.removeAttr("style");
                   new_image.remove();
                   timeout = setTimeout(function(){
-                    cycle_image();
+                    cycle_image_'.$js_id.'();
                   }, interval);
                 });
               }
@@ -292,7 +294,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
                     active_image.remove();
                     var width = $(".banner-review", active_item).outerWidth();
                     timeout = setTimeout(function(){
-                      cycle_image();
+                      cycle_image_'.$js_id.'();
                     }, interval);
                     if('.$js_id.'.length<=1){
                       if(current_image_idx>='.$js_id.'[current_item_id].images.length-1) current_image_idx = -1;
@@ -302,7 +304,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
                   banner_photo.removeAttr("style");
                   new_image.remove();
                   timeout = setTimeout(function(){
-                    cycle_image();
+                    cycle_image_'.$js_id.'();
                   }, interval);
                 });;
               }
