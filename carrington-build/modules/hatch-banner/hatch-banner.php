@@ -41,6 +41,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
         $js_single_data->author_location = parse_shortclass($author_location);
         $js_single_data->images = array($image);
         $js_single_data->video = $video;
+        $js_single_data->term = '';
         array_push($js_data, $js_single_data);
       }
       else {
@@ -53,6 +54,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
           'post_parent' => null,
           'order'       => 'ASC'
         );
+        $page_term = '';
         if($post_type=='page'){
           $posts_args = $args;
           $posts_args['meta_key'] = 'featured';
@@ -68,6 +70,19 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
           $posts_args = $args;
           $posts_args['meta_key'] = 'pinned';
           $posts_args['orderby'] = 'pinned';
+          if($post_type=='cftl-tax-landing'){
+            $posts_args['numberposts'] = -1;
+            $services_terms = wp_get_post_terms($post->ID, 'services', array('hide_empty'=>0));
+            if($services_terms){
+              $page_term = $services_terms[0]->slug;
+            }
+            else {
+              $locations_terms = wp_get_post_terms($post->ID, 'services', array('hide_empty'=>0));
+              if($locations_terms){
+                $page_term = $locations_terms[0]->slug;
+              }
+            }
+          }
           $projects = get_posts($posts_args);
           if(count($projects)<=0){
             $args['order'] = 'DESC';
@@ -80,6 +95,17 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
           foreach($projects as $project){
             $cust_id = get_post_meta($project->ID, 'customer_id', true);
             $favorite = get_post_meta($project->ID, 'favorite', true);
+            $services_terms = wp_get_post_terms($project->ID, 'services', array('hide_empty'=>0));
+            $term = '';
+            if($services_terms){
+              $term = $services_terms[0]->slug;
+            }
+            else {
+              $locations_terms = wp_get_post_terms($project->ID, 'services', array('hide_empty'=>0));
+              if($locations_terms){
+                $term = $locations_terms[0]->slug;
+              }
+            }
             $name = '';
             $city = '';
             $args = array(
@@ -153,10 +179,27 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
             $js_single_data->author_location = parse_shortclass($city);
             $js_single_data->images = $project_media;
             $js_single_data->video = '';
+            $js_single_data->term = $term;
             array_push($js_data, $js_single_data);
             $i++;
           }
         }
+
+        if($post_type=='cftl-tax-landing'){
+          $new_js_data = array();
+          if(count($js_data)>0){
+            $counter = 0;
+            foreach($js_data as $js_single_data){
+              if($js_single_data->term==$page_term){
+                array_push($new_js_data, $js_single_data);
+                $counter++;
+                if($counter>=3) break;
+              }
+            }
+          }
+          $js_data = $new_js_data;
+        }
+
         $js_id = 'data_'.str_replace('-','_',$id);
         $js_init = '
         <script type="text/javascript">
