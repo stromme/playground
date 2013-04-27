@@ -5346,6 +5346,10 @@ h2.jumbo {
 }
 .banner-title h2 {
   color: #ffffff;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: 0;
 }
 .banner-title h2:after {
   content: " ";

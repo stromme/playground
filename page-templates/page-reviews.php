@@ -73,9 +73,7 @@ foreach($comments as $comment){
 <div class="container gentle-shadow top-radius">
 	
 	<section class="banner-title page-left page-right top-radius">
-		<div class="bumper-top bumper-bottom center">
-			<h2><?php echo ( get_the_title() != 'Reviews' ? get_the_title() : $company['name'] . ', loved in your neighborhood.'); ?></h2>
-		</div>
+		<h2><?php echo ( get_the_title() != 'Reviews' ? get_the_title() : $company['name'] . ', loved in your neighborhood.'); ?></h2>
 	</section>
 	<section class="bg-white page-left page-right bumper-bottom-medium bumper-top-medium">
 		<ul id="reviews-list" class="reviews-list">
