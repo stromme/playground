@@ -6621,22 +6621,45 @@ section:first-of-type {
   position: relative;
 }
 .project blockquote p .content-preview {
-  margin-right: 40px;
+  margin-right: 10px;
   display: block;
 }
 .project blockquote p .content-full {
-  margin-right: 40px;
+  margin-right: 10px;
   display: none;
 }
 .project blockquote p .show-more {
   display: block;
   position: absolute;
-  right: -5px;
-  top: 4px;
+  right: -10px;
+  top: 2px;
   font-size: 12px;
 }
 .project blockquote p .show-more i {
-  margin-right: 3px;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+  margin-right: 2px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.project blockquote p .show-more i.icon-collapse-halfling.expanded {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.project blockquote:hover p .show-more i {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 .project .tags {
   padding: 15px;

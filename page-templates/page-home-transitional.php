@@ -169,6 +169,7 @@ foreach($comments as $comment){
         }
 
         $js_single_data = new stdClass();
+        $js_single_data->id = $project->ID;
         $js_single_data->description = parse_shortclass($project->post_content);
         $js_single_data->author = parse_shortclass($name);
         $js_single_data->author_location = parse_shortclass($city);
@@ -214,7 +215,7 @@ foreach($comments as $comment){
             </blockquote>
             <div class="fixed-bottom">
               <ul class="share-it">
-                <li class="write-review"><a href=""><i class="icon-full-conversation"></i><span> Write your review</span></a></li>
+                <li class="write-review" data-project="<?=$d->id?>"><a href=""><i class="icon-full-conversation"></i><span> Write your review</span></a></li>
                 <!-- Commented out for local development -->
                 <li class="social-network"><div class="fb-like" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="verdana" data-action="like"></div></li>
                 <li class="social-network"><a href="https://twitter.com/share" class="twitter-share-button" data-via="streakfreeclean" data-related="streakfreeclean" data-hashtags="WindowCleaning">Tweet</a>
