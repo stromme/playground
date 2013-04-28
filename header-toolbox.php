@@ -21,7 +21,7 @@ $industry = get_option('tb_industry');
 	<link rel="apple-touch-icon-precomposed" href="<?=TOOLBOX_IMAGES?>/apple-touch-icon.png"/>
 	<title>Toolbox | <?=ucwords($post->post_name)?></title>
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
-	<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
+	<!--link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" /-->
 	<?php wp_head(); ?>
 </head>
 
