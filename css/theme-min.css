@@ -5346,6 +5346,10 @@ h2.jumbo {
 }
 .banner-title h2 {
   color: #ffffff;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: 0;
 }
 .banner-title h2:after {
   content: " ";
@@ -6367,7 +6371,7 @@ section:first-of-type {
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff378137', endColorstr='#ff46a546', GradientType=0);
 }
-.headline ul .headline-phone {
+.headline ul .headline-phone a {
   white-space: nowrap;
 }
 .showpeice {
@@ -6764,7 +6768,6 @@ section:first-of-type {
   top: -2px;
 }
 .footer-links > a {
-  white-space: nowrap;
   line-height: 35px;
   padding: 6px;
   margin: 6px;

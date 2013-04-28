@@ -172,5 +172,22 @@
     .brand img {
         display: none;
     }
-   
+    #showroom {
+    	padding-left: 0px;
+    	padding-right: 0px;
+    }
+    .project:first-of-type {
+    	padding-top: 0px;
+    }
+    .project {
+    	padding-top: @bumper;
+    	.project-container, .project-container img {
+    		.border-radius(0);
+    	}
+    }
+    .banner-title h2 { 
+    	font-size: @baseFontSize *1.25;
+    	line-height: @baseLineHeight * 1.25;
+    	padding: @bumper/2;  
+    }
 }

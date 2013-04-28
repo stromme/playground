@@ -87,20 +87,23 @@ foreach($first_ten_projects as $prj){
 <div class="container gentle-shadow top-radius">
 	
 	<section class="banner-title page-left page-right top-radius">
-		<div class="bumper-top bumper-bottom center">
-			<h2>See some of our recent <span class="dropdown showroom-selector"><a href="" class="dropdown-toggle link-inverse link-decorate link-showoff" data-toggle="dropdown"><?=$current_service?></a>
-        <ul class="dropdown-menu">
-          <li class="triangle"></li>
-          <li class="show-text">Show...</li>
-          <?php if($service!=''){ ?>
-          <li><a href="<?=home_url().'/showroom'?>">All projects</a></li>
-          <?php } ?>
-          <?php foreach($terms as $term){ ?>
-          <li><a href="<?=home_url().'/showroom/'.$term->slug?>"><?=$term->name?></a></li>
-          <?php } ?>
-        </ul></span>
-        <?php if ($current_service != 'projects') echo 'projects'; ?></h2>
-		</div>
+		<h2>
+			See some of our recent 
+			<span class="dropdown showroom-selector">
+				<a href="" class="dropdown-toggle link-inverse link-decorate link-showoff" data-toggle="dropdown"><?=$current_service?></a>
+		        <ul class="dropdown-menu">
+		          <li class="triangle"></li>
+		          <li class="show-text">Show...</li>
+		          <?php if($service!=''){ ?>
+		          <li><a href="<?=home_url().'/showroom'?>">All projects</a></li>
+		          <?php } ?>
+		          <?php foreach($terms as $term){ ?>
+		          <li><a href="<?=home_url().'/showroom/'.$term->slug?>"><?=$term->name?></a></li>
+		          <?php } ?>
+		        </ul>
+			</span>
+    	<?php if ($current_service != 'projects') echo 'projects'; ?>
+    	</h2>
 	</section>
 	<section class="bg-white" id="showroom">
 		<div id="projects-list" class="row-fluid">

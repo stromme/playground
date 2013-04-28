@@ -76,7 +76,7 @@ foreach($comments as $comment){
 	<div class="row-fluid">
 	
 		<div class="span8">
-			<div class="has-right-sidebar">
+			<div class="has-right-sidebar migrate">
 			
 			<!-- Service page post content goes here -->
 			      <?php
