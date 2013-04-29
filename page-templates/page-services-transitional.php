@@ -72,7 +72,7 @@ foreach($comments as $comment){
 
 ?>
 
-<section class="bg-slate page-left page-right bumper-top-medium bumper-bottom-medium top-radius migrate">
+<section class="bg-slate page-left page-right bumper-top-medium bumper-bottom-medium top-radius">
 	<div class="row-fluid">
 	
 		<div class="span8">
@@ -89,7 +89,7 @@ foreach($comments as $comment){
 		</div>
 		<div class="span4">
 			<h3 class="blue">Customer Reviews</h3>
-			<ul id="reviews-list" class="reviews-list">
+			<ul id="reviews-list" class="migrate-review reviews-list">
 			<?php
 			  global $review;
 			  if(count($reviews)>0){

@@ -44,12 +44,12 @@
     <?php if($prj->content!=''){ ?>
     <blockquote>
       <p>
-        <?php if(strlen($prj->content)<110){ ?>
+        <?php if(strlen($prj->content)<223){ ?>
           <?=$prj->content?>
         <?php } else { ?>
-          <span class="content-preview"><?=substr($prj->content, 0, 110).'...'?></span>
+          <span class="content-preview"><?=substr($prj->content, 0, 220).'...'?></span>
           <span class="content-full" itemprop="description"><?=$prj->content?></span>
-          <a href="" class="show-more"><i class="icon-expand-halfling"></i><span>More</span></a>
+          <a href="" class="show-more"><i class="icon-collapse-halfling"></i></a>
         <?php } ?>
       </p>
     </blockquote>

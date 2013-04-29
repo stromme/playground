@@ -351,26 +351,40 @@ section:first-of-type {
 			font-size: @baseFontSize;
             position: relative;
             .content-preview {
-              margin-right: 40px;
-              display: block;
+                margin-right: 10px;
+                display: block;
             }
             .content-full {
-              margin-right: 40px;
-              display: none;
+                margin-right: 10px;
+                display: none;
             }
             .show-more {
-              display: block;
-              position: absolute;
-              right: -5px;
-              top: 4px;
-              font-size: 12px;
-              i {
-                margin-right: 3px;
-              }
+                display: block;
+                position: absolute;
+                right: -10px;
+                top: 2px;
+                font-size: 12px;
+                i {
+                  .rotate(90deg);
+                  margin-right: 2px;
+                  .transition(all 0.3s ease);
+                }
+                i.icon-collapse-halfling.expanded {
+                  .rotate(180deg);
+                }
             }
 		}
-
 	}
+
+    blockquote:hover {
+        p {
+            .show-more {
+                i {
+                    .rotate(180deg);
+                }
+            }
+        }
+    }
 	
 	// Company and Service type tags
 	

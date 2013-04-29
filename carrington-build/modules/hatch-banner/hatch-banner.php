@@ -36,6 +36,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
           $image = $_img[0];
         }
         $js_single_data = new stdClass();
+        $js_single_data->id = '';
         $js_single_data->description = parse_embed_video_link(parse_shortclass($description));
         $js_single_data->author = parse_shortclass($author);
         $js_single_data->author_location = parse_shortclass($author_location);
@@ -174,6 +175,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
             }
 
             $js_single_data = new stdClass();
+            $js_single_data->id = $project->ID;
             $js_single_data->description = parse_shortclass($project->post_content);
             $js_single_data->author = parse_shortclass($name);
             $js_single_data->author_location = parse_shortclass($city);
