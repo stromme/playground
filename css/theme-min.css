@@ -5503,6 +5503,9 @@ blockquote {
 .grayLight {
   color: #999999;
 }
+.grayLighter {
+  color: #eeeeee;
+}
 .white {
   color: #ffffff;
 }
