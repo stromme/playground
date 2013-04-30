@@ -34,7 +34,6 @@
               <?php } ?>
               <a href="<?=home_url().((get_blog_prefix()!='')?get_blog_prefix():'/')?>reviews" class="review-link">Read more reviews</a>
             </p>
-           
             	
            
           <?php if(count($reviews)>1){ ?>

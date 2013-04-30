@@ -6167,7 +6167,6 @@ nav-callout .notch {
 }
 .review blockquote cite {
   font-size: 32px;
-  line-height: 60px;
   font-family: "tamarillo";
 }
 .review blockquote .author-location {
@@ -6180,6 +6179,10 @@ nav-callout .notch {
   font-weight: 100;
 }
 .review-link {
+  position: absolute;
+  right: 10px;
+  bottom: 0px;
+  text-align: center;
   margin-left: 20px;
   white-space: nowrap;
   font-size: 24px;
@@ -6215,7 +6218,6 @@ a.review-link:hover {
 }
 .review-invert blockquote cite {
   font-size: 32px;
-  line-height: 60px;
   font-family: "tamarillo";
 }
 .review-invert blockquote .author-location {
@@ -6224,6 +6226,21 @@ a.review-link:hover {
 .review-invert blockquote a.review-link {
   background-color: #48a948;
   line-height: 20px;
+}
+/* Review carousel */
+.review-carousel {
+  position: relative;
+}
+.review-carousel .carousel-control {
+  top: 45%;
+  left: -30px;
+  color: #222222;
+  border: none;
+  background: transparent;
+}
+.review-carousel .carousel-control.right {
+  left: auto;
+  right: -30px;
 }
 .gravatar {
   width: 100px;
@@ -6821,24 +6838,6 @@ section:first-of-type {
 .accolade-carousel .carousel-control.right {
   left: auto;
   right: 20px;
-}
-/* Review carousel */
-.review-link {
-  bottom: 20px;
-}
-.review-carousel {
-  position: relative;
-}
-.review-carousel .carousel-control {
-  top: 45%;
-  left: -30px;
-  color: #222222;
-  border: none;
-  background: transparent;
-}
-.review-carousel .carousel-control.right {
-  left: auto;
-  right: -30px;
 }
 /* Image */
 div.img-polaroid {
