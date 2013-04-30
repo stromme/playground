@@ -18,7 +18,7 @@
     <div class="modal-body">
 
       <!-- Centre selectable star rating here above text box -->
-      <div class="review-rating">
+      <div class="select-review-rating">
         <div id="comment-rating"></div>
       </div>
       <div>

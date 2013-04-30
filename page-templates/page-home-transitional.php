@@ -729,7 +729,7 @@ foreach($comments as $comment){
       </div>
       <div class="span5">
         <div>
-          <ul id="reviews-list" class="reviews-list migrate-review">
+          <ul id="reviews-list" class="reviews-list">
           <?php
             global $review;
             if(count($reviews)>0){

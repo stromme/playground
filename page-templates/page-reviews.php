@@ -71,7 +71,6 @@ foreach($comments as $comment){
 
 <!-- Wrap the page in .container to centre the content and keep it at a max width -->
 <div class="container gentle-shadow top-radius">
-	
 	<section class="banner-title page-left page-right top-radius">
 		<h2><?php echo ( get_the_title() != 'Reviews' ? get_the_title() : $company['name'] . ', loved in your neighborhood.'); ?></h2>
 	</section>
@@ -94,10 +93,4 @@ foreach($comments as $comment){
       ?>
 		</ul>
 	</section>
-	
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('.review-rating').raty({'readOnly': true, 'score': function(){return $(this).attr('data-score');}, 'path': ratyimgurl});
-  })
-</script>
 <?php get_footer(); ?>
