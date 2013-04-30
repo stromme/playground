@@ -1428,6 +1428,12 @@
     font-size: 24px !important;
   }
 }
+/*  Phones */
+@media (max-width: 320px) {
+  #new-lead input {
+    max-width: 80%;
+  }
+}
 @media (max-width: 600px) {
   .brand img {
     display: none;

@@ -1423,6 +1423,7 @@ select:focus:invalid:focus {
   vertical-align: middle;
   font-size: 0;
   white-space: nowrap;
+  max-width: 100%;
 }
 .input-append input,
 .input-prepend input,
