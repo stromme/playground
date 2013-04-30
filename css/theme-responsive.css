@@ -1188,6 +1188,9 @@
     display: block;
     text-align: center;
   }
+  .row-middle > .bumper-right-large {
+    padding-right: 0;
+  }
   div.img-polaroid {
     max-width: 480px;
   }
