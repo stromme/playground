@@ -24,7 +24,25 @@ foreach($services_terms as $term){
   );
   $promoted_posts = get_posts($args);
   if(count($promoted_posts)>0){
+    $term->page_type = 'services';
     array_push($promoted_services, $term);
+  }
+  else {
+    // Change the name, more descriptive
+    $has_project_services = $term->slug;
+    $args = array(
+      'post_type'		=> 'showroom',
+      'post_status'	=> 'publish',
+      'numberposts' => 1,
+      'posts_per_page'  => 1,
+      'services'    => $has_project_services
+    );
+    $loop = new WP_Query( $args );
+    $term_posts = $loop->posts;
+    if(count($term_posts)>0){
+      $term->page_type = 'showroom';
+      array_push($promoted_services, $term);
+    }
   }
 }
 $promoted_locations = array();
@@ -76,7 +94,7 @@ $comments = get_comments($args);
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
 				<ul class="dropdown-menu">
           <?php foreach($promoted_services as $service){ ?>
-					<li><a href="<?=get_home_url().$blog_prefix."/services/".$service->slug?>"><?=$service->name?></a></li>
+					<li><a href="<?=get_home_url().$blog_prefix."/".$service->page_type."/".$service->slug?>"><?=$service->name?></a></li>
           <?php } ?>
 				</ul>
 			</li>
@@ -94,7 +112,7 @@ $comments = get_comments($args);
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <?php foreach($promoted_services as $service){ ?>
-          <li><a href="<?=get_home_url().$blog_prefix."/services/".$service->slug?>"><?=$service->name?></a></li>
+          <li><a href="<?=get_home_url().$blog_prefix."/".$service->page_type."/".$service->slug?>"><?=$service->name?></a></li>
           <?php } ?>
         </ul>
 			</li>
