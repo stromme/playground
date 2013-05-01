@@ -39,7 +39,7 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
         $listed_comment->id = $comment->comment_ID;
         $listed_comment->name = $comment->comment_author;
         $listed_comment->content = $comment->comment_content;
-        $listed_comment->content = str_replace("\n", "<br />", $comment->comment_content);
+        $listed_comment->content = str_replace("\n", "<br />", trim($comment->comment_content));
         $listed_comment->company = get_comment_meta($comment->comment_ID, 'company', true);
         $listed_comment->featured = get_comment_meta($comment->comment_ID, 'featured', true);
         $listed_comment->rating = get_comment_meta($comment->comment_ID, 'rating', true);
@@ -75,7 +75,7 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
         $listed_comment = new stdClass();
         $listed_comment->id = $comment->comment_ID;
         $listed_comment->name = $comment->comment_author;
-        $listed_comment->content = $comment->comment_content;
+        $listed_comment->content = str_replace("\n", "<br />", trim($comment->comment_content));
         $listed_comment->company = get_comment_meta($comment->comment_ID, 'company', true);
         $listed_comment->pinned = get_comment_meta($comment->comment_ID, 'pinned', true);
         $listed_comment->rating = get_comment_meta($comment->comment_ID, 'rating', true);

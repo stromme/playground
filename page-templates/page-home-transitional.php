@@ -655,7 +655,7 @@ foreach($comments as $comment){
         $listed_comment->id = $comment->comment_ID;
         $listed_comment->name = $comment->comment_author;
         $listed_comment->content = $comment->comment_content;
-        $listed_comment->content = str_replace("\n", "<br />", $comment->comment_content);
+        $listed_comment->content = str_replace("\n", "<br />", trim($comment->comment_content));
         $listed_comment->company = get_comment_meta($comment->comment_ID, 'company', true);
         $listed_comment->featured = get_comment_meta($comment->comment_ID, 'featured', true);
         $listed_comment->rating = get_comment_meta($comment->comment_ID, 'rating', true);
@@ -729,7 +729,7 @@ foreach($comments as $comment){
       </div>
       <div class="span5">
         <div>
-          <ul id="reviews-list" class="reviews-list migrate-review">
+          <ul id="reviews-list" class="reviews-list">
           <?php
             global $review;
             if(count($reviews)>0){
@@ -833,109 +833,122 @@ foreach($comments as $comment){
       <div class="span4">
         <div>
           <!-- Service area Module - List of locations serviced ===================================================== -->
-          <?php
-          $users = get_users();
-          $owner_id = '';
-          if(count($users)>0){
-            foreach($users as $user){
-              $roles = $user->roles;
-              if(count($roles)>0){
-                if($roles[0]=='owner'){
-                  $owner_id = $user->id;
-                }
-              }
-            }
-          }
-          $other_blog_locations = array();
-          $other_blogs_link = array();
-          if($owner_id!='' && $owner_id>0){
-            $blogs = get_blogs_of_user($owner_id);
-            if(count($blogs)>1){
-              foreach($blogs as $user_blog){
-                $current_blog_id = get_current_blog_id();
-                if($user_blog->userblog_id!=$current_blog_id){
-                  switch_to_blog($user_blog->userblog_id);
-                  $blog_seo = get_option('tb_seo');
-                  restore_current_blog();
-                }
-                if(isset($blog_seo)){
-                  if(isset($blog_seo['seo_target_city']) && isset($blog_seo['seo_target_state'])){
-                    $blog_seo_slug = strtolower(preg_replace("/[^A-Za-z0-9\_\-]/", '', $blog_seo['seo_target_city'])).'-'.strtolower($blog_seo['seo_target_state']);
-                    $args = array('post_type' => 'cftl-tax-landing', 'taxonomy' => 'locations', 'term' => $blog_seo_slug);
-                    $is_location_promoted = TB_Promote::is_promoted($args);
-                    $blog_seo_promoted_url = '';
-                    if($is_location_promoted) $blog_seo_promoted_url = home_url().get_blog_prefix().'locations/'.$blog_seo_slug;
-                    array_push($other_blog_locations, array(
-                      'name' => $blog_seo['seo_target_city'].(($blog_seo['seo_target_state']!='')?', '.$blog_seo['seo_target_state']:''),
-                      'slug' => $blog_seo_slug,
-                      'promoted' => $is_location_promoted,
-                      'promoted_url' => $blog_seo_promoted_url
-                    ));
-                    array_push($other_blogs_link, array(
-                      'slug' => $blog_seo_slug,
-                      'blog_id' => $user_blog->userblog_id
-                    ));
-                  }
-                }
-              }
-            }
-          }
-          ?>
           <div>
-            <h3 class="light-weight"><?=parse_shortclass("Where we work...")?></h3>
+            <h3 class="light-weight"><?=parse_shortclass("Where we work")?></h3>
             <ul>
               <?php
+              $users = get_users();
+              $owner_id = '';
+              if(count($users)>0){
+                foreach($users as $user){
+                  $roles = $user->roles;
+                  if(count($roles)>0){
+                    if($roles[0]=='owner'){
+                      $owner_id = $user->id;
+                    }
+                  }
+                }
+              }
+
+              $blogs_list = array();
+              $locations_list = array();
+              $blog_seo_list = array();
+              $current_blog_id = get_current_blog_id();
+
+              if($owner_id!='' && $owner_id>0){
+                $blogs = get_blogs_of_user($owner_id);
+                if(count($blogs)>0){
+                  foreach($blogs as $user_blog){
+                    array_push($blogs_list, $user_blog->userblog_id);
+                  }
+                }
+              }
+              else {
+                array_push($blogs_list, $current_blog_id);
+              }
+
+              // Process the blog seo
+              foreach($blogs_list as $user_blog){
+                $blog_seo = get_blog_option($user_blog, 'tb_seo');
+                if(isset($blog_seo['seo_target_city']) && isset($blog_seo['seo_target_state'])){
+                  $blog_seo_name = $blog_seo['seo_target_city'].(($blog_seo['seo_target_state']!='')?', '.$blog_seo['seo_target_state']:'');
+                  $blog_seo_slug = strtolower(preg_replace("/[^A-Za-z0-9\_\-]/", '', $blog_seo['seo_target_city'])).'-'.strtolower($blog_seo['seo_target_state']);
+                  $new_blog_seo = new stdClass();
+                  $new_blog_seo->name = $blog_seo_name;
+                  $new_blog_seo->slug = $blog_seo_slug;
+                  $new_blog_seo->link = get_site_url($user_blog);
+                  array_push($blog_seo_list, $new_blog_seo);
+                }
+              }
+              foreach($blogs_list as $user_blog){
+                // Switch to blog if it's a different blog
+                if($user_blog!=$current_blog_id) switch_to_blog($user_blog);
                 $locations = get_terms('locations', array('hide_empty' => 0));
-                $seo_location_exists = array();
+                if($user_blog!=$current_blog_id) restore_current_blog();
+
+                // Process those locations
                 if(count($locations)>0){
-                  foreach ($locations as $location) {
-                    $name = $location->name;
+                  foreach($locations as $location) {
                     $args = array('post_type' => 'cftl-tax-landing', 'taxonomy' => 'locations', 'term' => $location->slug);
                     $is_location_promoted = TB_Promote::is_promoted($args);
+                    $loc_link = '';
                     if($is_location_promoted){
-                      $name = '<a href="'.home_url().((get_blog_prefix()!='')?get_blog_prefix():'/').'locations/'.($location->slug).'">'.$name.'</a>';
+                      $loc_link = home_url().((get_blog_prefix()!='')?get_blog_prefix():'/').'locations/'.($location->slug);
                     }
-                    else{
-                      foreach($other_blogs_link as $blog_link){
-                        if($blog_link['slug']==$location->slug){
-                          switch_to_blog($blog_link['blog_id']);
-                          $name = '<a href="'.home_url().'">'.$name.'</a>';
-                          restore_current_blog();
-                          break;
+                    else if(count($blog_seo_list)>0) {
+                      $li_found = false;
+                      for($li=0;$li<count($blog_seo_list) && !$li_found;$li++){
+                        $blog_seo = $blog_seo_list[$li];
+                        if($blog_seo->slug==$location->slug){
+                          $loc_link = $blog_seo->link;
+                          unset($blog_seo_list[$li]);
+                          $li_found = true;
                         }
                       }
                     }
-                    echo '<li>'.$name.'</li>';
-                    if(count($other_blog_locations)>0){
-                      foreach($other_blog_locations as $loc){
-                        if($loc['slug']==$location->slug){
-                          array_push($seo_location_exists, $loc['slug']);
-                        }
+                    $new_blog_location = new stdClass();
+                    $new_blog_location->slug = $location->slug;
+                    $new_blog_location->name = $location->name;
+                    $new_blog_location->link = $loc_link;
+                    array_push($locations_list, $new_blog_location);
+                  }
+                }
+              }
+              /* Remove already added blog seo list, the leftover */
+              if(count($locations_list)>0){
+                foreach($locations_list as $location){
+                  if(count($blog_seo_list)>0) {
+                    foreach($blog_seo_list as $bs_key=>$blog_seo){
+                      if($blog_seo->slug==$location->slug){
+                        unset($blog_seo_list[$bs_key]);
                       }
                     }
                   }
                 }
-                if(count($other_blog_locations)>0){
-                  foreach($other_blog_locations as $loc){
-                    if(!in_array($loc['slug'], $seo_location_exists, true)){
-                      $name = $loc['name'];
-                      if($loc['promoted']){
-                        $name = '<a href="'.$loc['promoted_url'].'">'.$name.'</a>';
-                      }
-                      else {
-                        foreach($other_blogs_link as $blog_link){
-                          if($blog_link['slug']==$loc['slug']){
-                            switch_to_blog($blog_link['blog_id']);
-                            $name = '<a href="'.home_url().'">'.$name.'</a>';
-                            restore_current_blog();
-                            break;
-                          }
-                        }
-                      }
-                      echo '<li>'.$name.'</li>';
-                    }
-                  }
+              }
+              if(count($blog_seo_list)>0) {
+                foreach($blog_seo_list as $blog_seo){
+                  $new_blog_location = new stdClass();
+                  $new_blog_location->slug = $blog_seo->slug;
+                  $new_blog_location->name = $blog_seo->name;
+                  $new_blog_location->link = $blog_seo->link;
+                  array_push($locations_list, $new_blog_location);
                 }
+              }
+              // Sort it by name
+              if(!function_exists('locsort')){
+                function locsort($a,$b) {
+                  return strcmp($a->name, $b->name)>0;
+                }
+              }
+              uasort($locations_list, "locsort");
+              if(count($locations_list)>0){
+                foreach($locations_list as $location){
+              ?>
+              <li><?=(($location->link)?"<a href=\"".$location->link."\">":"").$location->name.(($location->link)?"</a>":"")?></li>
+              <?php
+                }
+              }
               ?>
             </ul>
           </div>

@@ -1423,6 +1423,7 @@ select:focus:invalid:focus {
   vertical-align: middle;
   font-size: 0;
   white-space: nowrap;
+  max-width: 100%;
 }
 .input-append input,
 .input-prepend input,
@@ -6737,12 +6738,12 @@ section:first-of-type {
 #new-review a.disabled {
   background-color: #ddd;
 }
-#new-review .review-rating {
+#new-review .select-review-rating {
   padding-bottom: 5px;
   position: relative;
   height: 22px;
 }
-#new-review .review-rating > div {
+#new-review .select-review-rating > div {
   position: absolute;
   left: 50%;
   top: 0;

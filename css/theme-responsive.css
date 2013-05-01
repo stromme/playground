@@ -1188,6 +1188,9 @@
     display: block;
     text-align: center;
   }
+  .row-middle > .bumper-right-large {
+    padding-right: 0;
+  }
   div.img-polaroid {
     max-width: 480px;
   }
@@ -1423,6 +1426,19 @@
   }
   blockquote cite {
     font-size: 24px !important;
+  }
+}
+/*  Phones */
+@media (max-width: 320px) {
+  #new-lead input {
+    max-width: 80%;
+  }
+  .find-location input {
+    max-width: 60%;
+  }
+  .link-grid li {
+    padding-left: 35px;
+    padding-right: 35px;
   }
 }
 @media (max-width: 600px) {
