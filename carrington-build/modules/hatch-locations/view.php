@@ -70,7 +70,6 @@
               $blog_seo = $blog_seo_list[$li];
               if($blog_seo->slug==$location->slug){
                 $loc_link = $blog_seo->link;
-                unset($blog_seo_list[$li]);
                 $li_found = true;
               }
             }
