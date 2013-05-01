@@ -117,7 +117,7 @@ foreach($comments as $comment){
   $args = array(
     'orderby'		     => 'modified',
     'order'			     => 'DESC',
-    'post_type'		   => array('showroom'),
+    'post_type'		   => 'showroom',
     'post_status'	   => 'publish',
     'posts_per_page' => 4,
     'numberposts'    => 4
@@ -134,17 +134,19 @@ foreach($comments as $comment){
   $loop = new WP_Query( $post_args );
   $all_related_projects = $loop->posts;
   $related_projects = array();
-  foreach($all_related_projects as $rel_prj){
-    if(count($related_projects)<3){
-      $new_project = TB_Frontend::get_project_details($rel_prj);
-      array_push($related_projects, $new_project);
+  if(count($all_related_projects)>0){
+    foreach($all_related_projects as $rel_prj){
+      if(count($related_projects)<3){
+        $new_project = TB_Frontend::get_project_details($rel_prj);
+        array_push($related_projects, $new_project);
+      }
     }
   }
 
   // If there's no related project, then show default all project
   // And change the project category to all (the industry name)
   if(count($related_projects)<=0){
-    $term_name = $industry_name;
+    $service_name = "";
     $loop = new WP_Query( $args );
     $all_related_projects = $loop->posts;
     $related_projects = array();

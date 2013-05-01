@@ -89,7 +89,7 @@ $prj = TB_Frontend::get_project_details($post);
   $args = array(
     'orderby'		     => 'modified',
     'order'			     => 'DESC',
-    'post_type'		   => array('showroom'),
+    'post_type'		   => 'showroom',
     'post_status'	   => 'publish',
     'posts_per_page' => 4,
     'numberposts'    => 4
@@ -117,7 +117,7 @@ $prj = TB_Frontend::get_project_details($post);
   // If there's no related project, then show default all project
   // And change the project category to all (the industry name)
   if(count($related_projects)<=0){
-    $term_name = $industry_name;
+    $term_name = "";
     $loop = new WP_Query( $args );
     $all_related_projects = $loop->posts;
     $related_projects = array();
