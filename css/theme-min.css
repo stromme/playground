@@ -5513,6 +5513,9 @@ blockquote {
 .grayDark {
   color: #333333;
 }
+.black {
+  color: #000000;
+}
 .top-radius {
   -webkit-border-top-right-radius: 6px;
   -moz-border-radius-topright: 6px;
