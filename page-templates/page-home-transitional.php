@@ -882,7 +882,7 @@ foreach($comments as $comment){
           }
           ?>
           <div>
-            <h3 class="light-weight"><?=parse_shortclass("Where we work")?></h3>
+            <h3 class="light-weight"><?=parse_shortclass("Where we work...")?></h3>
             <ul>
               <?php
                 $locations = get_terms('locations', array('hide_empty' => 0));
