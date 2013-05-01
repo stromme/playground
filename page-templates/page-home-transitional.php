@@ -834,7 +834,7 @@ foreach($comments as $comment){
         <div>
           <!-- Service area Module - List of locations serviced ===================================================== -->
           <div>
-            <h3 class="light-weight"><?=parse_shortclass("Where we work")?></h3>
+            <h3 class="light-weight"><?=parse_shortclass("Where we work...")?></h3>
             <ul>
               <?php
               $users = get_users();
