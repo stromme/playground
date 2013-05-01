@@ -71,6 +71,88 @@ foreach($comments as $comment){
   array_push($all_reviews, $listed_comment);
 }
 
+$transitional_accolades = array(
+  'awards' => array('name' => 'Awards', 'content' => array()),
+  'news' => array('name' => 'News', 'content' => array()),
+  'certifications' => array('name' => 'Certifications', 'content' => array()),
+  'guarantees' => array('name' => 'Guarantees', 'content' => array())
+);
+$args = array(
+  'post_type' => array('accolades'),
+  'numberposts' => -1,
+  'post_status' => 'published',
+  'post_parent' => 0,
+  'orderby'        => 'post_date',
+  'order'          => 'DESC'
+);
+// Do get it
+$accolades_post = get_posts($args);
+if($accolades_post && count($accolades_post)>0){
+  foreach($accolades_post as $ac){
+    $terms = wp_get_post_terms($ac->ID, 'accolade-types');
+    $accolade_image = '';
+    if(gettype($terms)=='array' && $terms && count($terms)>0){
+      if(count($terms)>1){
+        $parent_slug = '';
+        foreach($terms as $term){
+          if(isset($transitional_accolades[$term->slug])) $parent_slug = $term->slug;
+        }
+        if($parent_slug!=''){
+          $acc_term  = "";
+          foreach($terms as $term){
+            if($term->slug!=$parent_slug) $acc_term = $term->slug;
+          }
+          if($acc_term!='') $accolade_image = TOOLBOX_IMAGES.'/accolades/'.$acc_term.'.png';
+          if(!file_exists(TOOLBOX_BASE_DIR.'/images/accolades/'.$acc_term.'.png')) $accolade_image = '';
+          $args = array(
+            'post_type' => 'attachment',
+            'numberposts' => 1,
+            'post_status' => 'any',
+            'post_parent' => $ac->ID
+          );
+          $attachments = get_posts($args);
+          $desc = get_post_meta($ac->ID, 'description', true);
+          if($attachments) {
+            $attachment = $attachments[0];
+            $image = wp_get_attachment_image_src($attachment->ID, 'full');
+            $accolade_image = $image[0];
+          }
+          array_push($transitional_accolades[$parent_slug]['content'], array(
+            'id' => $ac->ID,
+            'title' => $ac->post_title,
+            'link' => $ac->post_content,
+            'description' => $desc,
+            'image' => $accolade_image,
+            'term' => $acc_term
+          ));
+        }
+      }
+      else {
+        $args = array(
+          'post_type' => 'attachment',
+          'numberposts' => 1,
+          'post_status' => 'any',
+          'post_parent' => $ac->ID
+        );
+        $attachments = get_posts($args);
+        $desc = get_post_meta($ac->ID, 'description', true);
+        if($attachments) {
+          $attachment = $attachments[0];
+          $image = wp_get_attachment_image_src($attachment->ID, 'full');
+          $accolade_image = $image[0];
+        }
+        array_push($transitional_accolades[$terms[0]->slug]['content'], array(
+          'id' => $ac->ID,
+          'title' => $ac->post_title,
+          'link' => $ac->post_content,
+          'description' => $desc,
+          'image' => $accolade_image,
+          'term' => ""
+        ));
+      }
+    }
+  }
+}
 ?>
 
 <!-- Wrap the page in .container to centre the content and keep it at a max width -->
@@ -79,7 +161,7 @@ foreach($comments as $comment){
   <!-- Banner -->
   <section class="bg-white">
     <?php
-    $id = "banner-cfct-module-migrate-home";
+    $banner_id = "home_transitional_banner";
     $args = array(
       'numberposts' => 3,
       'post_type'   => 'showroom',
@@ -181,7 +263,7 @@ foreach($comments as $comment){
     }
     if(count($js_data)>0){
     ?>
-    <div id="<?=$id?>" class="carousel-<?=$id?> banner" class="top-radius">
+    <div id="<?=$banner_id?>" class="carousel-<?=$banner_id?> banner" class="top-radius">
       <?php if(count($js_data)>1){ ?>
       <div class="carousel-inner">
       <?php } ?>
@@ -228,7 +310,7 @@ foreach($comments as $comment){
                 $ic = 0;
                 foreach($js_data as $d){
               ?>
-              <li data-target="#<?=$id?>" data-slide-to="<?=$ic?>"<?=($ic==$i)?' class="active"':''?>></li>
+              <li data-target="#<?=$banner_id?>" data-slide-to="<?=$ic?>"<?=($ic==$i)?' class="active"':''?>></li>
               <?php
                   $ic++;
                 }
@@ -252,9 +334,9 @@ foreach($comments as $comment){
     </div>
 
     <script type="text/javascript">
-      var data_<?=str_replace("-", "_", $id)?> = <?=json_encode($js_data);?>;
+      var data_<?=str_replace("-", "_", $banner_id)?> = <?=json_encode($js_data);?>;
       $(document).ready(function(){
-        var carousel = $(".carousel-<?=$id?>");
+        var carousel = $(".carousel-<?=$banner_id?>");
         var current_item_id = 0;
         var current_image_idx = 0;
         var interval = 4000;
@@ -275,8 +357,8 @@ foreach($comments as $comment){
           items.removeAttr("style");
           var active_item = items[current_item_id];
           active_image = $(".banner-photo img", active_item);
-          if(data_<?=str_replace("-", "_", $id)?>[current_item_id].images)
-            active_image.attr("src", data_<?=str_replace("-", "_", $id)?>[current_item_id].images[current_image_idx]);
+          if(data_<?=str_replace("-", "_", $banner_id)?>[current_item_id].images)
+            active_image.attr("src", data_<?=str_replace("-", "_", $banner_id)?>[current_item_id].images[current_image_idx]);
           active_indicators = $(".carousel-indicators li", active_item);
           $(active_indicators[current_item_id]).addClass("active");
           timeout = setTimeout(function(){
@@ -293,16 +375,16 @@ foreach($comments as $comment){
           var max_width;
           var new_width;
           current_image_idx++;
-          if(data_<?=str_replace("-", "_", $id)?>.length>1 && data_<?=str_replace("-", "_", $id)?>[current_item_id].images && current_image_idx>=data_<?=str_replace("-", "_", $id)?>[current_item_id].images.length){
+          if(data_<?=str_replace("-", "_", $banner_id)?>.length>1 && data_<?=str_replace("-", "_", $banner_id)?>[current_item_id].images && current_image_idx>=data_<?=str_replace("-", "_", $banner_id)?>[current_item_id].images.length){
             current_item_id++;
             current_image_idx = 0;
-            if(current_item_id>=data_<?=str_replace("-", "_", $id)?>.length){
+            if(current_item_id>=data_<?=str_replace("-", "_", $banner_id)?>.length){
               current_item_id = 0;
             }
             active_item = items[current_item_id];
             banner_photo = $(".banner-photo", active_item);
             active_image = $("img", banner_photo);
-            banner_photo.append("<img src='"+data_<?=str_replace("-", "_", $id)?>[current_item_id].images[current_image_idx]+"' style='position:absolute;left:0;top:0;display:none;' />");
+            banner_photo.append("<img src='"+data_<?=str_replace("-", "_", $banner_id)?>[current_item_id].images[current_image_idx]+"' style='position:absolute;left:0;top:0;display:none;' />");
             new_image = $("img", banner_photo).last();
             new_image.load(function(){
               active_image.remove();
@@ -328,11 +410,11 @@ foreach($comments as $comment){
               }, interval);
             });
           }
-          else if(data_<?=str_replace("-", "_", $id)?>[current_item_id].images && data_<?=str_replace("-", "_", $id)?>[current_item_id].images.length>1) {
+          else if(data_<?=str_replace("-", "_", $banner_id)?>[current_item_id].images && data_<?=str_replace("-", "_", $banner_id)?>[current_item_id].images.length>1) {
             active_item = items[current_item_id];
             banner_photo = $(".banner-photo", active_item);
             active_image = $("img", banner_photo);
-            banner_photo.append("<img src='"+data_<?=str_replace("-", "_", $id)?>[current_item_id].images[current_image_idx]+"' style='position:absolute;left:0;top:0;display:none;' />");
+            banner_photo.append("<img src='"+data_<?=str_replace("-", "_", $banner_id)?>[current_item_id].images[current_image_idx]+"' style='position:absolute;left:0;top:0;display:none;' />");
             new_image = $("img", banner_photo).last();
             new_image.load(function(){
               active_image.fadeOut("fast");
@@ -344,8 +426,8 @@ foreach($comments as $comment){
                 timeout = setTimeout(function(){
                   cycle_image_banner_home_migrate();
                 }, interval);
-                if(data_<?=str_replace("-", "_", $id)?>.length<=1){
-                  if(current_image_idx>=data_<?=str_replace("-", "_", $id)?>[current_item_id].images.length-1) current_image_idx = -1;
+                if(data_<?=str_replace("-", "_", $banner_id)?>.length<=1){
+                  if(current_image_idx>=data_<?=str_replace("-", "_", $banner_id)?>[current_item_id].images.length-1) current_image_idx = -1;
                 }
               });
             }).error(function() {
@@ -364,103 +446,24 @@ foreach($comments as $comment){
 
   <!-- Awards accolades - Done -->
   <?php
-  $accolades = array(
-    'awards' => array('name' => 'Awards', 'content' => array()),
-    'news' => array('name' => 'News', 'content' => array()),
-    'certifications' => array('name' => 'Certifications', 'content' => array()),
-    'guarantees' => array('name' => 'Guarantees', 'content' => array())
-  );
-  $args = array(
-    'post_type' => array('accolades'),
-    'numberposts' => -1,
-    'post_status' => 'published',
-    'post_parent' => 0,
-    'orderby'        => 'post_date',
-    'order'          => 'DESC'
-  );
-  // Do get it
-  $accolades_post = get_posts($args);
-  if($accolades_post && count($accolades_post)>0){
-    foreach($accolades_post as $ac){
-      $terms = wp_get_post_terms($ac->ID, 'accolade-types');
-      $accolade_image = '';
-      if(gettype($terms)=='array' && $terms && count($terms)>0){
-        if(count($terms)>1){
-          $parent_slug = '';
-          foreach($terms as $term){
-            if(isset($accolades[$term->slug])) $parent_slug = $term->slug;
-          }
-          if($parent_slug!=''){
-            $acc_term  = "";
-            foreach($terms as $term){
-              if($term->slug!=$parent_slug) $acc_term = $term->slug;
-            }
-            if($acc_term!='') $accolade_image = TOOLBOX_IMAGES.'/accolades/'.$acc_term.'.png';
-            if(!file_exists(TOOLBOX_BASE_DIR.'/images/accolades/'.$acc_term.'.png')) $accolade_image = '';
-            $args = array(
-              'post_type' => 'attachment',
-              'numberposts' => 1,
-              'post_status' => 'any',
-              'post_parent' => $ac->ID
-            );
-            $attachments = get_posts($args);
-            $desc = get_post_meta($ac->ID, 'description', true);
-            if($attachments) {
-              $attachment = $attachments[0];
-              $image = wp_get_attachment_image_src($attachment->ID, 'full');
-              $accolade_image = $image[0];
-            }
-            array_push($accolades[$parent_slug]['content'], array(
-              'id' => $ac->ID,
-              'title' => $ac->post_title,
-              'link' => $ac->post_content,
-              'description' => $desc,
-              'image' => $accolade_image
-            ));
-          }
-        }
-        else {
-          $args = array(
-            'post_type' => 'attachment',
-            'numberposts' => 1,
-            'post_status' => 'any',
-            'post_parent' => $ac->ID
-          );
-          $attachments = get_posts($args);
-          $desc = get_post_meta($ac->ID, 'description', true);
-          if($attachments) {
-            $attachment = $attachments[0];
-            $image = wp_get_attachment_image_src($attachment->ID, 'full');
-            $accolade_image = $image[0];
-          }
-          array_push($accolades[$terms[0]->slug]['content'], array(
-            'id' => $ac->ID,
-            'title' => $ac->post_title,
-            'link' => $ac->post_content,
-            'description' => $desc,
-            'image' => $accolade_image
-          ));
-        }
-      }
+  $awards_id = "home_transitional_awards";
+  $chosen_carrousel_awards = array();
+  if(isset($transitional_accolades['awards']['content'])){
+    foreach($transitional_accolades['awards']['content'] as $ac){
+      array_push($chosen_carrousel_awards, $ac);
     }
   }
-  $chosen_accolade = array();
-  if(isset($accolades['awards']['content'])){
-    foreach($accolades['awards']['content'] as $ac){
-      array_push($chosen_accolade, $ac);
-    }
-  }
-  if(count($chosen_accolade)>0){
+  if(count($chosen_carrousel_awards)>0){
   ?>
   <section class="bg-white bumper-top-small bumper-bottom-small page-left page-right">
-    <div id="accolade-cfct-module-migrate-home" class="carousel-accolade-cfct-module-migrate-home accolade-carousel slide">
-      <?php if(count($chosen_accolade)>1){ ?>
+    <div id="<?=$awards_id?>" class="carousel-<?=$awards_id?> accolade-carousel slide">
+      <?php if(count($chosen_carrousel_awards)>1){ ?>
         <div class="carousel-inner">
       <?php } ?>
         <?php
           $i = 0;
-          foreach($chosen_accolade as $d){
-            if(count($chosen_accolade)>1){
+          foreach($chosen_carrousel_awards as $d){
+            if(count($chosen_carrousel_awards)>1){
         ?>
         <div class="<?=($i==0)?'active ':''?>item">
           <?php } ?>
@@ -474,25 +477,25 @@ foreach($comments as $comment){
             <h2><?=$d['title']?></h2>
           </div>
           </div>
-        <?php if(count($chosen_accolade)>1){ ?>
+        <?php if(count($chosen_carrousel_awards)>1){ ?>
         </div>
         <?php
             }
             $i++;
           }
         ?>
-      <?php if(count($chosen_accolade)>1){ ?>
+      <?php if(count($chosen_carrousel_awards)>1){ ?>
       </div>
       <?php } ?>
-      <?php if(count($chosen_accolade)>1){ ?>
-      <a class="carousel-control left" href="#<?=$id?>" data-slide="prev">&lsaquo;</a>
-      <a class="carousel-control right" href="#<?=$id?>" data-slide="next">&rsaquo;</a>
+      <?php if(count($chosen_carrousel_awards)>1){ ?>
+      <a class="carousel-control left" href="#<?=$awards_id?>" data-slide="prev">&lsaquo;</a>
+      <a class="carousel-control right" href="#<?=$awards_id?>" data-slide="next">&rsaquo;</a>
       <?php } ?>
     </div>
     <div class="pen-stroke"></div>
     <script type="text/javascript">
       $(document).ready(function(){
-        var carousel = $(".carousel-accolade-cfct-module-migrate-home");
+        var carousel = $(".carousel-<?=$awards_id?>");
         carousel.carousel({
           interval: 4000
         });
@@ -578,34 +581,72 @@ foreach($comments as $comment){
       </div>
       <div class="span7">
         <div class="bumper-bottom">
+          <?php
+          $award_best = array(
+            'img' => TOOLBOX_IMAGES."/accolades/window-cleaning-award.png"
+          );
+          if(count($transitional_accolades)>0){
+            foreach($transitional_accolades['awards']['content'] as $award){
+              if($award['term']=='window-cleaning-award'){
+                $award_best['img'] = $award['image'];
+                break;
+              }
+            }
+          }
+          ?>
           <div class="row-middle page-right">
             <div class="middle-fixed-small">
-              <img src="<?=TOOLBOX_IMAGES?>/accolades/window-cleaning-award.png" width="130">
+              <img src="<?=$award_best['img']?>" width="130">
             </div>
             <div class="middle">
               <h4>Awarded best in <?=$seo['city']?>, <?=$seo['state']?></h4>
               <p>WindowCleaning.com hand picks our technicians from the best window cleaners in North America. <?=$tb_company['name']?> is the only WindowCleaning.com member in <?=$seo['city']?>, <?=$seo['state']?>.</p>
             </div>
           </div>
-          <!-- / Accolades -->
         </div>
+
+        <?php
+        $streak_free = array(
+          'title' => "Hassle free money back guarantee.",
+          'img' => TOOLBOX_IMAGES."/accolades/streak-free-guarantee.png",
+          'content' => "We’re proud to offer the only $1000 Streak Free Guarantee in ".$seo['city'].", ".$seo['state']." . If you don’t love our work, we’ll refund up to $1000"
+        );
+        $insured = array(
+          'title' => "We carry $1 million in liability insurance.",
+          'img' => TOOLBOX_IMAGES."/accolades/insured.png",
+          'content' => "Protect your home and family. Only work with fully insured WindowCleaning.com professionals."
+        );
+        if(count($transitional_accolades)>0){
+          foreach($transitional_accolades['guarantees']['content'] as $guarantee){
+            if($guarantee['term']=='streak-free-guarantee'){
+              $streak_free['title'] = $guarantee['title'];
+              $streak_free['img'] = $guarantee['image'];
+            }
+            if($guarantee['term']=='insured'){
+              $insured['title'] = $guarantee['title'];
+              $insured['img'] = $guarantee['image'];
+              $insured['content'] = $guarantee['description'];
+            }
+          }
+        }
+        ?>
         <div>
           <div class="row-middle page-right">
             <div class="middle-fixed-small">
-              <img src="<?=TOOLBOX_IMAGES?>/accolades/streak-free-guarantee.png" width="130">
+              <img src="<?=$streak_free['img']?>" width="130">
             </div>
             <div class="middle">
-              <h4>Hassle free money back guarantee.</h4>
-              <p>We’re proud to offer the only $1000 Streak Free Guarantee in <?=$seo['city']?>, <?=$seo['state']?> . If you don’t love our work, we’ll refund up to $1000</p>
+              <h4><?=$streak_free['title']?></h4>
+              <p><?=$streak_free['content']?></p>
             </div>
           </div>
           <div class="row-middle page-right">
             <div class="middle-fixed-small">
-              <img src="<?=TOOLBOX_IMAGES?>/accolades/insured.png" width="130">
+              <img src="<?=$insured['img']?>" width="130">
             </div>
             <div class="middle">
-              <h4>We carry $1 million in liability insurance.</h4>
-              <p>Protect your home and family. <?=$tb_company['name']?> is fully insured.</p>
+              <h4><?=$insured['title']?></h4>
+              <p><?=$insured['content']?></p>
             </div>
           </div>
           <!-- / Accolades -->
@@ -617,6 +658,7 @@ foreach($comments as $comment){
   <!-- Featured review - Done -->
   <section class="bg-white bumper-top-small page-left page-right">
     <?php
+    $reviews_id = "home_transitional_review";
     $args = array(
       'number'  => 1,
       'post_id' => 0,
@@ -664,7 +706,7 @@ foreach($comments as $comment){
     }
     ?>
     <div>
-      <div id="review-cfct-module-home-migrate" class=" review-carousel slide" itemscope="http://schema.org/Review" itemprop="review">
+      <div id="<?=$reviews_id?>" class="review-<?=$reviews_id?> slide" itemscope="http://schema.org/Review" itemprop="review">
         <div class="review review-invert">
           <blockquote class="center well well-has-shadow">
             <?php if(count($featured_reviews)>1){ ?>
@@ -701,8 +743,8 @@ foreach($comments as $comment){
             </div>
             <?php } ?>
             <?php if(count($featured_reviews)>1){ ?>
-            <a class="carousel-control left" href="#<?=$id?>" data-slide="prev">&lsaquo;</a>
-            <a class="carousel-control right" href="#<?=$id?>" data-slide="next">&rsaquo;</a>
+            <a class="carousel-control left" href="#<?=$reviews_id?>" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#<?=$reviews_id?>" data-slide="next">&rsaquo;</a>
             <?php } ?>
           </blockquote>
           <div class="curved-shadow">
@@ -781,6 +823,71 @@ foreach($comments as $comment){
       <img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
     </div>
   </section>
+
+  <?
+  $transitional_certifications = $transitional_accolades['certifications']['content'];
+  if(count($transitional_certifications)>0){
+    $id = 'home_transitional_certifications';
+  ?>
+  <!-- Certifications -->
+  <section class="bg-white bumper-top-medium bumper-bottom-small page-left page-right">
+    <div id="<?=$id?>" class="<?=(count($transitional_certifications)>1)?'carousel-'.$id:''?> accolade-carousel slide">
+      <?php if(count($transitional_certifications)>1){ ?>
+      <div class="carousel-inner">
+      <?php } ?>
+        <?php
+          $i = 0;
+          foreach($transitional_certifications as $d){
+            if(count($transitional_certifications)>1){
+        ?>
+        <div class="<?=($i==0)?'active ':''?>item">
+          <?php } ?>
+          <div class="row-middle center-align bumper-bottom">
+          <?php if($d['image']!=''){ ?>
+          <div class="middle-fixed-small bumper-right">
+            <img src="<?=$d['image']?>" width="150">
+          </div>
+          <?php } ?>
+          <div class="middle">
+            <h2><?=$d['title']?></h2>
+          </div>
+          </div>
+        <?php if(count($transitional_certifications)>1){ ?>
+        </div>
+        <?php
+            }
+            $i++;
+          }
+        ?>
+      <?php if(count($transitional_certifications)>1){ ?>
+      </div>
+      <?php } ?>
+      <?php if(count($transitional_certifications)>1){ ?>
+      <a class="carousel-control left" href="#<?=$id?>" data-slide="prev">&lsaquo;</a>
+      <a class="carousel-control right" href="#<?=$id?>" data-slide="next">&rsaquo;</a>
+      <?php } ?>
+    </div>
+    <div class="pen-stroke"></div>
+    <script type="text/javascript">
+      <?php $js_id = 'data_'.str_replace('-','_',$id); ?>
+      var <?=$js_id?> = <?=json_encode($transitional_certifications)?>;
+      $(document).ready(function(){
+        var carousel = $(".carousel-<?=$id?>");
+        carousel.carousel({
+          interval: 4000
+        });
+        carousel.bind("slide", function(){
+          $(".item", $(this)).animate({"opacity":0}, 200, function(){
+            var items = $(this);
+            setTimeout(function(){
+              items.animate({"opacity":1}, 200);
+            }, 150);
+          });
+        });
+      });
+    </script>
+  </section>
+  <?php } ?>
 
   <!-- Address and were we work - Done -->
   <section class="bg-white bumper-top-medium bumper-bottom-medium page-left page-right">
