@@ -14,8 +14,7 @@ if (!class_exists('cfct_module_hatch_locations') && class_exists('cfct_build_mod
 // Display
 		public function display($data) {
       $title = isset($data[$this->get_field_id('title')]) ? $data[$this->get_field_id('title')] : $this->default_title;
-      $company = get_option('tb_company');
-			return $this->load_view($data, compact('title', 'company'));
+			return $this->load_view($data, compact('title'));
 		}
 
 		public function admin_form($data) {

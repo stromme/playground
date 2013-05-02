@@ -603,7 +603,7 @@ if($accolades_post && count($accolades_post)>0){
             </div>
             <div class="middle">
               <h4>Awarded best in <?=$seo['city']?>, <?=$seo['state']?></h4>
-              <p>WindowCleaning.com hand picks our technicians from the best window cleaners in North America. <?=$tb_company['name']?> is the only WindowCleaning.com member in <?=$seo['city']?>, <?=$seo['state']?>.</p>
+              <p>WindowCleaning.com hand picks our technicians from the best window cleaners in North America. <?=stripslashes($tb_company['name'])?> is the only WindowCleaning.com member in <?=$seo['city']?>, <?=$seo['state']?>.</p>
             </div>
           </div>
         </div>
@@ -659,21 +659,38 @@ if($accolades_post && count($accolades_post)>0){
   </section>
 
   <!-- Featured review - Done -->
-  <section class="bg-white bumper-top-small page-left page-right">
-    <?php
-    $reviews_id = "home_transitional_review";
+  <?php
+  $reviews_id = "home_transitional_review";
+  $args = array(
+    'number'  => 1,
+    'post_id' => 0,
+    'meta_query' => array(
+      'relation' => 'AND',
+      array(
+        'key' => 'featured',
+        'value' => '',
+        'type' => 'char',
+        'compare' => '!='
+      )
+    )
+  );
+  $comments = get_comments($args);
+  $featured_reviews = array();
+  foreach($comments as $comment){
+    $listed_comment = new stdClass();
+    $listed_comment->id = $comment->comment_ID;
+    $listed_comment->name = $comment->comment_author;
+    $listed_comment->content = $comment->comment_content;
+    $listed_comment->content = str_replace("\n", "<br />", $comment->comment_content);
+    $listed_comment->company = get_comment_meta($comment->comment_ID, 'company', true);
+    $listed_comment->featured = get_comment_meta($comment->comment_ID, 'featured', true);
+    $listed_comment->rating = get_comment_meta($comment->comment_ID, 'rating', true);
+    array_push($featured_reviews, $listed_comment);
+  }
+  if(count($featured_reviews)<=0){
     $args = array(
       'number'  => 1,
       'post_id' => 0,
-      'meta_query' => array(
-        'relation' => 'AND',
-        array(
-          'key' => 'featured',
-          'value' => '',
-          'type' => 'char',
-          'compare' => '!='
-        )
-      )
     );
     $comments = get_comments($args);
     $featured_reviews = array();
@@ -682,32 +699,15 @@ if($accolades_post && count($accolades_post)>0){
       $listed_comment->id = $comment->comment_ID;
       $listed_comment->name = $comment->comment_author;
       $listed_comment->content = $comment->comment_content;
-      $listed_comment->content = str_replace("\n", "<br />", $comment->comment_content);
+      $listed_comment->content = str_replace("\n", "<br />", trim($comment->comment_content));
       $listed_comment->company = get_comment_meta($comment->comment_ID, 'company', true);
       $listed_comment->featured = get_comment_meta($comment->comment_ID, 'featured', true);
       $listed_comment->rating = get_comment_meta($comment->comment_ID, 'rating', true);
       array_push($featured_reviews, $listed_comment);
     }
-    if(count($featured_reviews)<=0){
-      $args = array(
-        'number'  => 1,
-        'post_id' => 0,
-      );
-      $comments = get_comments($args);
-      $featured_reviews = array();
-      foreach($comments as $comment){
-        $listed_comment = new stdClass();
-        $listed_comment->id = $comment->comment_ID;
-        $listed_comment->name = $comment->comment_author;
-        $listed_comment->content = $comment->comment_content;
-        $listed_comment->content = str_replace("\n", "<br />", trim($comment->comment_content));
-        $listed_comment->company = get_comment_meta($comment->comment_ID, 'company', true);
-        $listed_comment->featured = get_comment_meta($comment->comment_ID, 'featured', true);
-        $listed_comment->rating = get_comment_meta($comment->comment_ID, 'rating', true);
-        array_push($featured_reviews, $listed_comment);
-      }
-    }
-    ?>
+  }
+  if(count($featured_reviews)>0){ ?>
+  <section class="bg-white bumper-top-small page-left page-right">
     <div>
       <div id="<?=$reviews_id?>" class="review-<?=$reviews_id?> slide" itemscope="http://schema.org/Review" itemprop="review">
         <div class="review review-invert">
@@ -757,6 +757,7 @@ if($accolades_post && count($accolades_post)>0){
       </div>
     </div>
   </section>
+  <?php } ?>
 
   <!-- Featurette and pinned reviews - Done -->
   <section class="bg-white bumper-top-medium bumper-bottom-medium page-left page-right">
@@ -764,7 +765,7 @@ if($accolades_post && count($accolades_post)>0){
       <div class="span7">
         <div class="has-right-sidebar migrate">
           <div class="cfct-mod-content">
-            <h2>Why <?=$tb_company['name']?> was awarded <strong class="green">Best in <?=$seo['city']?>, <?=$seo['state']?>.</strong></h2>
+            <h2>Why <?=stripslashes($tb_company['name'])?> was awarded <strong class="green">Best in <?=$seo['city']?>, <?=$seo['state']?>.</strong></h2>
             <?php
               the_post();
               the_content();
@@ -901,7 +902,7 @@ if($accolades_post && count($accolades_post)>0){
       <div class="span8">
         <!-- Address Module - Company address and Google map ===================================================== -->
         <?php
-          $company_name = isset($tb_company['name'])?$tb_company['name']:'';
+          $company_name = stripslashes(isset($tb_company['name'])?$tb_company['name']:'');
           $company_street = isset($tb_company['street'])?$tb_company['street']:'';
           $company_city = isset($tb_company['city'])?$tb_company['city']:'';
           $company_state = isset($tb_company['state'])?$tb_company['state']:'';

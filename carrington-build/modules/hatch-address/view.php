@@ -3,7 +3,7 @@
 -->
 
 <?php
-$company_name = isset($company['name'])?$company['name']:'';
+$company_name = stripslashes(isset($company['name'])?$company['name']:'');
 $company_street = isset($company['street'])?$company['street']:'';
 $company_city = isset($company['city'])?$company['city']:'';
 $company_state = isset($company['state'])?$company['state']:'';
