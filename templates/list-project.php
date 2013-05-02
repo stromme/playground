@@ -55,7 +55,7 @@
     </blockquote>
     <?php } ?>
     <div class="tags">
-      <?php if($prj->contact!=''){ ?>
+      <?php if($prj->contact!='' && !$prj->contact->is_private){ ?>
       <p><i class="icon-map-marker"></i>
         <?php
           if($prj->contact->company!=''){ echo $prj->contact->company; }

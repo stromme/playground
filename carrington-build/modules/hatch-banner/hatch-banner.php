@@ -153,12 +153,14 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
                 array_push($project_media, $_img[0]);
               }
             }
+            $private = 0;
             if($cust_id!=''){
               $contact = get_post($cust_id);
               $first_name = get_post_meta($contact->ID, 'first_name', true);
               $last_name = get_post_meta($contact->ID, 'last_name', true);
               $city = get_post_meta($contact->ID, 'city', true);
               $company = get_post_meta($contact->ID, 'company', true);
+              $private = get_post_meta($contact->ID, 'make_private', true);
               $name = ($company!='')?
                         $company:
                         (($first_name!='' && $last_name!='')?
@@ -182,6 +184,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
             $js_single_data->images = $project_media;
             $js_single_data->video = '';
             $js_single_data->term = $term;
+            $js_single_data->is_private = ($private==1)?true:false;
             array_push($js_data, $js_single_data);
             $i++;
           }

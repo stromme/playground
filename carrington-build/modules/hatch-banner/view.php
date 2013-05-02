@@ -31,7 +31,7 @@
           <blockquote>
             <?php $description = substr($d->description, 0, 180)."..."; ?>
             <p>"<span><?=(strlen($d->description)<=185)?$d->description:$description?></span>"</p>
-            <?php if($d->author!='' || $d->author_location!=''){ ?>
+            <?php if(($d->author!='' || $d->author_location!='') && !$d->is_private){ ?>
               <?php if($d->author!=''){ ?>
               <p class="banner-author"><cite id="author-<?=$id?>"><?=$d->author?></cite><?php
                 }

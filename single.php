@@ -60,10 +60,12 @@ $prj = TB_Frontend::get_project_details($post);
 		</div>
 		<div class="span6 page-right">
 			<p class="lead"><?=$prj->content?></p>
+      <?php if(!$prj->contact->is_private){ ?>
       <?php if($project_contact!='' || $project_location!=''){ ?>
 			  <h3 class="bumper-top">
-          <?php if($project_contact!=''){ ?><cite><?=$project_contact?></cite><?php } ?><?php if($project_location!=''){ ?><small>- <?=$project_location?></small><?php } ?>
+          <?php if($project_contact!=''){ ?><cite><?=$project_contact?></cite><?php } ?><?php if($project_location!=''){ ?><small> - <?=$project_location?></small><?php } ?>
         </h3>
+			<?php } ?>
 			<?php } ?>
 			<div class="bumper-top bumper-bottom">
 				<div class="pen-stroke"></div>

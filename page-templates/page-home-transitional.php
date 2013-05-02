@@ -229,12 +229,14 @@ if($accolades_post && count($accolades_post)>0){
             array_push($project_media, $_img[0]);
           }
         }
+        $private = 0;
         if($cust_id!=''){
           $contact = get_post($cust_id);
           $first_name = get_post_meta($contact->ID, 'first_name', true);
           $last_name = get_post_meta($contact->ID, 'last_name', true);
           $city = get_post_meta($contact->ID, 'city', true);
           $company = get_post_meta($contact->ID, 'company', true);
+          $private = get_post_meta($contact->ID, 'make_private', true);
           $name = ($company!='')?
                     $company:
                     (($first_name!='' && $last_name!='')?
@@ -257,6 +259,7 @@ if($accolades_post && count($accolades_post)>0){
         $js_single_data->author_location = parse_shortclass($city);
         $js_single_data->images = $project_media;
         $js_single_data->video = '';
+        $js_single_data->is_private = ($private==1)?true:false;
         array_push($js_data, $js_single_data);
         $i++;
       }
@@ -285,7 +288,7 @@ if($accolades_post && count($accolades_post)>0){
             <blockquote>
               <?php $description = substr($d->description, 0, 180)."..."; ?>
               <p>"<span><?=(strlen($d->description)<=185)?$d->description:$description?></span>"</p>
-              <?php if($d->author!='' || $d->author_location!=''){ ?>
+              <?php if(($d->author!='' || $d->author_location!='') && !$d->is_private){ ?>
                 <?php if($d->author!=''){ ?>
                 <p class="banner-author"><cite><?=$d->author?></cite><?php
                   }
