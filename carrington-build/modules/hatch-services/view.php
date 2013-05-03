@@ -34,7 +34,7 @@
         <?php if($is_have_post){ ?>
         <a href="<?=get_home_url()."/showroom/".$service->slug?>"><i class="icon-picture icon-white"></i> Showroom</a>
         <?php } if($is_service_promoted){ ?>
-        <a href="<?=get_home_url()."services/".$service->slug?>"><i class="icon-info-sign icon-white" itemprop="url"></i> Learn more</a>
+        <a href="<?=get_home_url()."/services/".$service->slug?>"><i class="icon-info-sign icon-white" itemprop="url"></i> Learn more</a>
         <?php } ?>
       </nav>
       <?php } ?>
@@ -50,7 +50,7 @@
     </div>
     <?php if($is_service_promoted){ ?>
     <div class="center">
-    <a href="<?=get_home_url()."services/".$service->slug?>" itemprop="name"><?=$service->name?></a>
+    <a href="<?=get_home_url()."/services/".$service->slug?>" itemprop="name"><?=$service->name?></a>
     </div>
     <?php } else { ?>
     <div class="center">
