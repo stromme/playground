@@ -7,11 +7,10 @@
  * @author Hatch
  */
  
-/* Init the Toolbox Framework
+/* Define working environment
  *
- * @since 0.0.1 
+ * @since 0.1.0 
  */
-/* Define the environment we're working in. DEV or LIVE. */
 
 $whitelist = array('127.0.0.1');
 if ( !in_array($_SERVER['REMOTE_ADDR'], $whitelist) ) { 
@@ -20,6 +19,10 @@ if ( !in_array($_SERVER['REMOTE_ADDR'], $whitelist) ) {
    define( 'ENVIRONMENT', 'LIVE' );
 }
 
+/* Init the Toolbox Framework
+ *
+ * @since 0.0.1 
+ */
 
 define( 'TOOLBOX_BASE_DIR', trailingslashit( get_template_directory() ) . 'toolbox-framework' );
 require_once( trailingslashit( TOOLBOX_BASE_DIR ) . 'toolbox.php' );
@@ -55,20 +58,12 @@ function hs_load_scripts() {
 	
 	if ( get_post_type() != 'toolbox' ) {
 		
-		// Force WP to latest version of JQuery by de-registering the version packaged with WP
-		wp_deregister_script( 'jquery' );
-		
 		// Load Bootstrap Framework
 		wp_register_script( 'theme-bootstrap-js', THEME_JS . 'bootstrap-min.js', array('jquery'));
 		wp_enqueue_script( 'theme-bootstrap-js' );
 		
 		
 		if ( ENVIRONMENT == 'LIVE' ) {
-
-			// Load jquery from CDN in production environment
-			
-	 		wp_register_script( 'jquery', 'http://code.jquery.com/jquery-latest.js');
-	 		wp_enqueue_script( 'jquery' );
 	 		
 	 		// Load Typekit for font management
 	 		
@@ -81,13 +76,7 @@ function hs_load_scripts() {
 	 		
 	 		add_action('wp_footer', 'hs_facebook');
 	 		
-	 	} elseif ( ENVIRONMENT == 'DEV' )  {
-	 		
-	 		// Load jquery from localhost in development environment
-	 		
-			wp_register_script( 'jquery', get_bloginfo('template_url') . '/toolbox-framework/js/jquery-latest.js');
-			wp_enqueue_script( 'jquery' );
-		}
+	 	}
 	}
 } 
 
@@ -130,7 +119,7 @@ function hs_load_css() {
 	// Prevent theme CSS from loading in the context of the Toolbox
 
 	if ( get_post_type() != 'toolbox' ) {
-
+	
 		wp_enqueue_style('theme-styles', get_bloginfo('template_url').'/css/theme-min.css');
 		wp_enqueue_style('theme-bootstrap-responsive', get_bloginfo('template_url').'/css/theme-responsive.css');
 	}
