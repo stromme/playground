@@ -3,6 +3,13 @@
 // --------------------------------------------------
 
 
+@media (min-width: 767px) {
+  .big-modal>.modal {
+    top: 10% !important;
+    position: fixed !important;
+  }
+}
+
 @media (min-width: 767px) and (max-width: 979px) {
     div.img-polaroid.middle9 {
         div {
@@ -10,6 +17,15 @@
         }
         width: 90%;
     }
+    
+    //When an h2 font size is used in a span6, span5 or span4 it needs to be shrunk for these smaller screens
+    
+    .span6 h2, .span5 h2, .span4 h2 {
+    	font-size: @baseFontSize*1.75;
+    	line-height: @baseLineHeight*2;
+    }
+    
+
 }
 
 @media (max-width: 767px) {
@@ -30,14 +46,6 @@
 		padding-bottom: @bumper;
 	}
 	
-	
-	// Move review link to not cover over author name on small screens
-	.review-link {
-		position: relative;
-		bottom: 0px;
-		right: 0px;
-	}
-	
 	// Should move to center of page, needs work
 	
 	.link-grid {
@@ -45,4 +53,61 @@
 		padding-left: @bumperLarge;
 		padding-right: @bumperLarge;
 	}
+
+    .banner-photo {
+        img {
+          height: auto;
+          max-width: 95%;
+        }
+        .embed-youtube {
+            iframe {
+                max-width: 95%;
+                height: 320px;
+            }
+        }
+    }
+
+    .featurette-horizontal {
+        iframe {
+            height: 360px;
+        }
+    }
+
+
+    .featurette-vertical {
+        .embed-youtube {
+            text-align: center;
+            width: 90%;
+            display: inline-block !important;
+        }
+    }
+
+    .big-modal.shown {
+        z-index: 1050;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow-y: scroll !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch;
+    }
+    .big-modal>.modal {
+        position: static;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
+        border-radius: 0;
+        .modal-body {
+          max-height: none;
+        }
+    }
+    
+    // Services transitional page border 
+    .has-right-sidebar {
+    	border: none;
+    	padding-right: 0px;
+    }
 }

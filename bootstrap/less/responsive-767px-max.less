@@ -53,8 +53,8 @@
     margin-left: 0;
   }
   .thumbnails > li {
-    float: none;
-    margin-left: 0; // Reset the default margin for all li elements when no .span* classes are present
+    //float: none;
+    //margin-left: 0; // Reset the default margin for all li elements when no .span* classes are present
   }
   // Make all grid-sized elements block level again
   [class*="span"],
@@ -110,7 +110,6 @@
     &.fade  { top: -100px; }
     &.fade.in { top: 20px; }
   }
-
 }
 
 
@@ -129,6 +128,27 @@
   .page-header h1 small {
     display: block;
     line-height: @baseLineHeight;
+  }
+  
+  // Headline
+  .headline ul li {
+  	// Push phone number below tag line
+  	display: block;
+  }
+  .headline-title {
+	&:after {
+		content: " ";
+		display: block;
+		background-image: -webkit-linear-gradient(left,@blue,#fff 25%,#fff 75%,@blue);
+		background-color: #fff;
+		height: 1px;
+	}
+  
+  }
+  .headline-title h1, .headline-title a, .headline-phone h4 {
+  	// Reduce the header font size.
+  	font-size: @baseFontSize !important;
+  	line-height: (@baseFontSize * 1.25) !important;
   }
 
   // Update checkboxes for iOS
@@ -189,5 +209,6 @@
   .carousel-caption {
     position: static;
   }
+  
 
 }

@@ -25,12 +25,31 @@
 	color: @grayLight;
 }
 
+.grayLighter {
+	color: @grayLighter;
+}
+
 .white {
 	color: @white;
 }
 .grayDark {
 	color: @grayDark;
 }
+.black {
+	color: @black;
+}
+
+// Borders
+//------------------
+
+.top-radius {
+	.border-top-radius(6px);
+}
+
+.bottom-radius {
+	.border-bottom-radius(6px);
+}
+
 
 // Shapes
 // ------------------
@@ -184,4 +203,10 @@
 	left: 0;
 	z-index: @zindexFixedNavbar;
 	margin-bottom: 0; 
+}
+
+// Visible only on portrait mode of a phone. 480 and below
+
+.visible-phone-portrait {
+	display: none;
 }

@@ -8,64 +8,21 @@
  * @since Hatch 1.0
  */
 if(session_id() == '') {
+  session_write_close();
   session_start();
 }
+global $post;
+$industry = get_option('tb_industry');
 ?><!DOCTYPE html>
-<!--[if IE 6]>
-<html id="ie6" <?php language_attributes(); ?>>
-<![endif]-->
-<!--[if IE 7]>
-<html id="ie7" <?php language_attributes(); ?>>
-<![endif]-->
-<!--[if IE 8]>
-<html id="ie8" <?php language_attributes(); ?>>
-<![endif]-->
-<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
-<html <?php language_attributes(); ?>>
-<!--<![endif]-->
 <head>
-<meta charset="<?php bloginfo( 'charset' ); ?>" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-title" content="Hatch" />
-<link rel="apple-touch-icon" href="<?=get_theme_root_uri().'/'.get_stylesheet()?>/iphone-icon.png"/>
-<title><?php
-	/*
-	 * Print the <title> tag based on what is being viewed.
-	 */
-	global $page, $paged;
-
-	wp_title( '|', true, 'right' );
-
-	// Add the blog name.
-	bloginfo( 'name' );
-
-	// Add a page number if necessary:
-	if ( $paged >= 2 || $page >= 2 )
-		echo ' | ' . sprintf( __( 'Page %s', 'twentyeleven' ), max( $paged, $page ) );
-
-	?></title>
-<link rel="profile" href="http://gmpg.org/xfn/11" />
-<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
-<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-<!--[if lt IE 9]>
-<script src="<?php echo get_template_directory_uri(); ?>/js/html5.js" type="text/javascript"></script>
-<![endif]-->
-<?php
-	/* We add some JavaScript to pages with the comment form
-	 * to support sites with threaded comments (when in use).
-	 */
-	if ( is_singular() && get_option( 'thread_comments' ) )
-		wp_enqueue_script( 'comment-reply' );
-
-	/* Always have wp_head() just before the closing </head>
-	 * tag of your theme, or you will break many plugins, which
-	 * generally use this hook to add elements to <head> such
-	 * as styles, scripts, and meta tags.
-	 */
-	wp_head();
-?>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
- 
+	<meta charset="<?php bloginfo( 'charset' ); ?>" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-title" content="Toolbox" />
+	<link rel="apple-touch-icon-precomposed" href="<?=TOOLBOX_IMAGES?>/apple-touch-icon.png"/>
+	<title>Toolbox | <?=ucwords($post->post_name)?></title>
+	<link rel="profile" href="http://gmpg.org/xfn/11" />
+	<!--link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" /-->
+	<?php wp_head(); ?>
 </head>
 
 <body>
@@ -87,12 +44,10 @@ if(session_id() == '') {
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
     <div class="container-fluid">
-			<!--button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button!-->
-      <a class="brand" href="">Hatch</a>
+    	<div class="brand hidden-phone">
+    		<?php 
+    		$seo = get_location_seo();
+    		if ( $industry['industry'] == 'window-cleaning' ) echo '<h2>'. $seo['city'] . ', ' . $seo['state'] . '</h2>'; else echo '<h2>Hatch</h2>';?></div>
 			<div><!--</div> class="nav-collapse collapse"-->
 				<ul class="nav">
 					<li class="has-nav-icon">
@@ -107,11 +62,30 @@ if(session_id() == '') {
 					<li class="dropdown has-nav-icon control-panel-expanded">
 						<a id="control-panel" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-nav-cog"></i> <b class="caret"></b></a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="control-panel">
+              <?php
+                if(!is_super_admin(get_current_user_id())){
+                  $blogs = get_blogs_of_user(get_current_user_id());
+                  if(count($blogs)>1){
+                    function blogsort($a,$b) {
+                      return strcmp($a->blogname, $b->blogname)>0;
+                    }
+                    usort($blogs, "blogsort");
+                    foreach($blogs as $blog){
+                      if($blog->userblog_id!=get_current_blog_id()){
+              ?>
+              <li><a tabindex="-1" href="<?=$blog->siteurl.'/toolbox/dashboard/'?>"><?=$blog->blogname?> <small class="muted"> - Switch site</small></a></li>
+              <?php
+                      }
+                    }
+                    echo '<li class="divider"></li>';
+                  }
+                }
+              ?>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
-							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing</a></li>
+							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing and Tracking</a></li>
 							<li class="divider"></li>
-							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account">My account</a></li>
+							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account">Personal Profile</a></li>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/logout?nonce=<?=wp_create_nonce('logout-'.date('Ymd'))?>">Log out</a></li>
 						</ul>
 					</li>
@@ -125,11 +99,27 @@ if(session_id() == '') {
 			</div>
       <div class="nav-collapse collapse">
         <ul class="nav">
+          <?php
+            if(!is_super_admin(get_current_user_id())){
+              $blogs = get_blogs_of_user(get_current_user_id());
+              if(count($blogs)>1){
+                usort($blogs, "blogsort");
+                foreach($blogs as $blog){
+                  if($blog->userblog_id!=get_current_blog_id()){
+          ?>
+          <li><a tabindex="-1" href="<?=$blog->siteurl.'/toolbox/dashboard/'?>"><?=$blog->blogname?></a></li>
+          <?php
+                  }
+                }
+                echo '<li class="divider"></li>';
+              }
+            }
+          ?>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
-          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing</a></li>
+          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing and Tracking</a></li>
           <li class="divider"></li>
-          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account">My account</a></li>
+          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account">Personal Profile</a></li>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/logout?nonce=<?=wp_create_nonce('logout-'.date('Ymd'))?>">Log out</a></li>
         </ul>
       </div>

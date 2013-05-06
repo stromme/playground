@@ -8,9 +8,9 @@
  * @since
  */
 ?>
-  <div id="<?=$id?>" class="<?=(count($reviews)>1)?'carousel-'.$id:''?> review-carousel slide">
-    <div class="review review-invert bumper-top-large bumper-bottom-large ">
-      <blockquote class="center well well-blue well-has-shadow">
+  <div id="<?=$id?>" class="<?=(count($reviews)>1)?'carousel-'.$id:''?> review-carousel slide" itemscope="http://schema.org/Review" itemprop="review">
+    <div class="review review-invert">
+      <blockquote class="center well well-has-shadow">
         <?php if(count($reviews)>1){ ?>
         <div class="carousel-inner">
         <?php } ?>
@@ -21,18 +21,21 @@
           ?>
           <div class="<?=($i==0)?'active ':''?>item">
           <?php } ?>
-
-              <p>"<?=$r->content?>"
-              </p>
-              <p class="citation"><cite><?=$r->name?></cite>
-                <?php if($type=='manual'){ ?>
-                  <span class="author-location">~ <?=$r->location?></span>
-                <?php } else if($r->company!=''){ ?>
-                  <span class="author-location">~ <?=$r->company?></span>
-                <?php } ?>
-              </p>
-              <a href="<?=home_url().get_blog_prefix()?>reviews" class="review-link">Read more reviews</a>
-
+            <p itemprop="comment">"<?=parse_shortclass($r->content)?>"</p>
+            <p class="citation">
+              <cite itemprop="author"><?=parse_shortclass($r->name)?></cite>
+              <?php $seo = get_location_seo(); ?>
+              <?php if($r->company!=''){ ?>
+                <span class="author-location"> - <?=parse_shortclass($r->company)?></span>
+              <?php } else if($r->location!=''){ ?>
+                <span class="author-location"> - <?=parse_shortclass($r->location)?></span>
+              <?php } else if(isset($seo['city']) && $seo['city']!='') { ?>
+                <span class="author-location"> - <?=$seo['city'].", ".$seo['state']?> </span>
+              <?php } ?>
+              <a href="<?=home_url()?>/reviews" class="review-link">Read more reviews</a>
+            </p>
+            	
+           
           <?php if(count($reviews)>1){ ?>
           </div>
           <?php

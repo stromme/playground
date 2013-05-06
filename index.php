@@ -90,7 +90,7 @@ get_header();
 				<blockquote class="center well well-blue well-has-shadow">
 					<p>"My assistant found Ernie of Quality Window Cleaning on the web. He gave us a quote and did a test clean of our windows. We found him to be quick and efficient and he was even able to get rid of some stubborn water stains. Needless to say, we have been very satisfied with his work and his price and would recommend him to other businesses"
 					</p>
-					<p class="citation"><cite>MC Hammer </cite><span class="author-location">~ Springfield, MA</span></p>
+					<p class="citation"><cite>MC Hammer </cite><span class="author-location">- Springfield, MA</span></p>
 					<a href="" class="review-link">Read more reviews</a>
 				</blockquote>
 				<div class="curved-shadow">
@@ -146,17 +146,17 @@ get_header();
 
 	<div class="bumper-bottom-large bumper-top-large">
 		<div class="well-blue well well-has-shadow">
-			<div class="green-man-75 clearfix">
+			<div class="clearfix">
 				<h2 class="white center ">What does the WindowCleaning.com award actually mean?</h2>
-				<p class="blueLightest page-left bumper-top">
+				<p class="blueLightest bumper-top">
 					WindowCleaning.com is a national network of the <strong>best window cleaners</strong> in each city. In most cities, <strong>only one window cleaner is chosen out of hundreds</strong> of window cleaners! Each window cleaner is interviewed personally by one of our team. We verify their level of experience, if they are properly insured, their reputation in the industry, and how their customers feel about the service they provide. Then we choose the best.
 					
 					You can be sure, that by choosing a WindowCleaning.com awarded member, you are choosing the best. And to back it up, all WindowCleaning.com members offer our no hassle <strong>$1000 Streak Free Guarantee!</strong>
 				</p>
 				<div class="center">
 					<div class="btn-group">
-						<button class="btn btn-primary btn-large hidden-phone">Call us  (233) 123-1234</button>
-						<button class="btn btn-success btn-large">Quick Online Estimate</button>
+						<a href="tel:<?=get_phone_number()?>" class="btn btn-primary btn-large hidden-phone">Call us <?=get_phone_number()?></a>
+						<button class="btn btn-success btn-large quick-estimate">Quick Online Estimate</button>
 					</div>
 				</div>
 			</div>
@@ -241,8 +241,8 @@ get_header();
 				<blockquote class="center well well-blue well-has-shadow">
 					<p>"My assistant found Ernie of Quality Window Cleaning on the web. He gave us a quote and did a test clean of our windows. We found him to be quick and efficient and he was even able to get rid of some stubborn water stains. Needless to say, we have been very satisfied with his work and his price and would recommend him to other businesses"
 					</p>
-					<p class="citation"><cite>MC Hammer </cite><span class="author-location">~ Springfield, MA</span></p>
-					<a href="" class="review-link">Read more reviews</a>
+					<p class="citation"><cite>Joseph Billings Stevenson</cite><span class="author-location">, All Country Window Cleaning </span><a href="<?=home_url()?>/reviews" class="review-link">Read more reviews</a></p>
+					
 				</blockquote>
 				<div class="curved-shadow">
 					<img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
@@ -279,10 +279,10 @@ get_header();
 			=====================================================
 			-->
 			
-			<div class="pull-left bumper-right-medium bumper-bottom">
+			<div class="pull-left bumper-right-medium bumper-bottom center">
 				<img class="img-polaroid" src="http://maps.google.com/maps/api/staticmap?center=North+Bethesda,5703+Luxemburg+Street%2C+Apt.100,MD,20852&amp;zoom=9&amp;size=270x210&amp;maptype=roadmap&amp;markers=color:blue%7Clabel:A%7CNorth+Bethesda,5703+Luxemburg+Street%2C+Apt.100,MD,20852&amp;sensor=false" itemprop="image">
 			</div>
-			<div class="">
+			<div class="center">
 				<h3 class="light-weight">Come say hello...</h3>
 				<address>
 				  <strong>Streak Free Clean</strong><br>

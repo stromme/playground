@@ -15,7 +15,7 @@
 	}
 	cite {
 		font-size: @baseFontSize*2;
-		line-height: @baseLineHeight * 3;
+		// line-height: @baseLineHeight * 3;
 		font-family: @scriptFont;
 	}
 		
@@ -34,12 +34,15 @@
 
 .review-link {
 	position: absolute;
-	bottom: 30px;
-	right: 30px;
+	right: 10px;
+	bottom: 0px;
+	text-align: center;
+	margin-left: @bumper;
+	white-space: nowrap;
 	font-size: @baseFontSize * 1.5;
 	font-family: @scriptFont;
 	color: @white;
-	padding: 5px 8px;
+	padding: 7px 9px;
 	background-color: @grayLight;
 	.border-radius(@borderRadiusSmall);
 }
@@ -50,6 +53,7 @@ a.review-link:hover {
 // Invert the colors to have a dark bg and light text
 
 .review-invert blockquote {
+	.well-blue;
 	p, h3, h4, .citation {
 		color: @white;
 	}
@@ -59,18 +63,37 @@ a.review-link:hover {
 	
 	cite {
 		font-size: @baseFontSize*2;
-		line-height: @baseLineHeight * 3;
+		//line-height: @baseLineHeight * 3;
 		font-family: @scriptFont;
 	}
 		
 	.author-location {
-		color: (lighten(@blue,30));
+		color: (lighten(@grayLighter,1%));
 	}
 	a.review-link {
-		// background-color: (lighten(@blue,15));
 		background-color: (lighten(@green,1%));
+		line-height: @baseLineHeight;
 	}
 }
+
+/* Review carousel */
+
+
+.review-carousel {
+  position: relative;
+  .carousel-control {
+    top: 45%;
+    left: -30px;
+    color: #222222;
+    border: none;
+    background: transparent;
+  }
+  .carousel-control.right {
+    left: auto;
+    right: -30px;
+  }
+}
+
 
 .gravatar {
 	width: 100px;
@@ -83,22 +106,22 @@ a.review-link:hover {
 
 .reviews-list {
 	list-style: none;
+	margin-left: 0;
 	
 	cite {
 		font-size: @baseFontSize * 1.25;
 	}
 }
 
-
 .author-callout {
     position: relative;
     margin: 18px 0;
-    padding: 10px 20px;
+    padding: 10px 20px; // was 10 20
     background-color: lighten(@blue,50%);
     .border-radius(@baseBorderRadius);
 }
 
-.author-callout .notch, author-callout .notch {
+.author-callout .notch {
     position: absolute;
     bottom: -10px;
     left: 20px;
@@ -119,11 +142,11 @@ a.review-link:hover {
     _filter: chroma(color=pink);
 }
 
-.author-callout-border { 
+.author-border-callout { 
 	border: 1px solid (lighten(@blue,30%)); 
-	padding: 10px 15px; 
+	padding: 8px 15px; // was 10 15
 }
-.author-callout-border .author-notch { 
+.author-border-callout .author-border-notch { 
 	border-top-color: (lighten(@blue,1%)); 
 	bottom: -11px; 
 }

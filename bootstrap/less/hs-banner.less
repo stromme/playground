@@ -9,9 +9,10 @@
 	.border-top-right-radius(@borderRadiusLarge);
 
     .carousel-indicators {
+      position: absolute;
+      bottom: 70px;
       right: 50%;
       margin-right: -22px;
-      top: 275px;
       li {
         cursor: pointer;
       }
@@ -21,7 +22,7 @@
 
 .banner-photo {
 	img {
-		max-width: 480px;
+		max-width: 460px;
 		max-height: 360px;
         height: 360px;
 		.border-top-left-radius(@borderRadiusLarge);
@@ -31,6 +32,12 @@
     -webkit-border-top-left-radius: 6px;
     -moz-border-radius-topleft: 6px;
     border-top-left-radius: 6px;
+    .embed-youtube {
+        margin-bottom: -4px;
+        iframe {
+            max-width: 460px;
+        }
+    }
 }
 
 .banner-review {
@@ -56,10 +63,18 @@
 		}
 		
 		p.banner-author {
+			margin-top: (@bumper / 2);
 			color: @grayLight;
-			padding-top: @bumper ;
+			padding-top: @bumper;
 			font-size: @baseFontSize * 2;
+			line-height: @baseFontSize * 1.25;
 			font-family: @scriptFontFamily;
+			text-align: right;
+			.author-location {
+				font-family: @baseFontFamily;
+				color: @grayLight;
+				font-size: @baseFontSize * 1.25;
+			}
 		}
 		
 		cite {
@@ -67,13 +82,14 @@
 		}
 	}
 }
-	
+
 .banner .share-it {
 	padding-left: @bumperMedium;
 	border-top: 1px solid @white;
 	border-bottom: 1px solid #DDDDDD;
 	#gradient > .vertical(#F5F5F5, #F5F5F5);
-	.clearfix;			
+	.clearfix;
+    min-width: 340px;
 }	
 
 // Front Page Locations Banner

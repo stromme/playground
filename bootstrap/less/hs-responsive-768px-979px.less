@@ -3,6 +3,12 @@
 // --------------------------------------------------
 
 @media (min-width: 979px) {
+    .banner-photo {
+        max-width: 460px;
+        img {
+          max-width: 900px;
+        }
+    }
 	.link-grid {
 		li:nth-of-type(3n + 2) {
 			padding-left: 0px;
@@ -17,6 +23,51 @@
             max-height: 140px;
         }
     }
+
+    .featurette-horizontal {
+        iframe {
+            height: 288px;
+        }
+    }
+
+
+    .span4 {
+        .featurette-vertical {
+            iframe {
+                height: 200px;
+            }
+        }
+    }
+    .span5 {
+        .featurette-vertical {
+            iframe {
+                height: 240px;
+            }
+        }
+    }
+    .span6,
+    .span7 {
+        .featurette-vertical {
+            iframe {
+                height: 320px;
+            }
+        }
+    }
+    .span8 {
+        .featurette-vertical {
+            iframe {
+                height: 360px;
+            }
+        }
+    }
+    .span12 {
+        .featurette-vertical {
+            iframe {
+                width: 640px;
+                height: 360px;
+            }
+        }
+    }
 }
 
 //
@@ -26,8 +77,8 @@
 
 @media (min-width: 768px) and (max-width: 979px) {
 	
-	.brand > img {
-		max-height: 110px;
+	.brand img {
+		max-height: 120px;
 	}
 	
 	.main-nav {
@@ -41,6 +92,43 @@
 			padding-right: 30px; 
 		}
 	}
+    .span4 {
+        .featurette-vertical {
+            iframe {
+                height: 160px;
+            }
+        }
+    }
+    .span5 {
+        .featurette-vertical {
+            iframe {
+                height: 180px;
+            }
+        }
+    }
+    .span6,
+    .span7 {
+        .featurette-vertical {
+            iframe {
+                height: 240px;
+            }
+        }
+    }
+    .span8 {
+        .featurette-vertical {
+            iframe {
+                height: 320px;
+            }
+        }
+    }
+    .span12 {
+        .featurette-vertical {
+            iframe {
+                width: 640px;
+                height: 360px;
+            }
+        }
+    }
 }
 
 //
@@ -64,6 +152,10 @@
 	.bumper-bottom-medium, .bumper-bottom-large, .bumper-bottom-Xlarge {
 		padding-bottom: @bumperMedium;
 	}
+
+    .bumper-left-large {
+        padding-left: 0;
+    }
 	
 	// Change fixed-top to absolute position
 	.fixed-top {
@@ -71,14 +163,15 @@
 	}
 	
 	// Get rid of padding on logo and nav bar
-	.brand > img {
+	.brand img {
 		padding-top: 55px;
+        max-width: 200px;
 	}
 	
 	// Convert Banner to block elements and adjust font size and spacing
 	.banner-photo {
 		display: block;
-		padding: @bumperLarge 0 @bumper;
+		padding: @bumper 0 @bumper;
 		img {
 			max-width: 100%;
 			padding: 4px;
@@ -106,6 +199,13 @@
             display: none !important;
         }
     }
+    
+    .review-link {
+    	position: relative;
+    	display: block;
+    	width: 150px;
+    	margin-top: 10px;
+    }
 
 	.banner-review {
 		margin: 0 auto;
@@ -117,12 +217,16 @@
 			font-size: @baseFontSize * 1.75;
 			line-height: @baseLineHeight * 1.75;	
 		}
+		
 		blockquote {
 			height: auto;
 			padding: @bumper;
+			p.banner-author {
+				text-align: center;
+			}
 		}
 	}
-
+	
 	// Convert featurettes to block elements
 	.row-middle {
 		// width: 100%;
@@ -136,10 +240,44 @@
 		display: block;
 		text-align: center;
 	}
+	.row-middle > .bumper-right-large {
+		padding-right: 0;
+	}
     div.img-polaroid {
         max-width: 480px;
         div {
             max-height: 640px;
         }
+    }
+    .project {
+        .curved-shadow {
+            max-width: 490px;
+            margin: 0 auto;
+        }
+    }
+
+    .grid-thumb {
+        nav {
+            display: block;
+            visibility: visible;
+        }
+    }
+
+    .thumbnail {
+        .thumbnail-placeholder {
+            max-height: inherit;
+            overflow: visible;
+            text-align: center;
+            img {
+                width: auto;
+            }
+        }
+    }
+    
+    .banner-title h2 {
+    	&:after {
+    		content: "";
+   			display: none;
+   		}
     }
 }

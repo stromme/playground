@@ -32,6 +32,8 @@ if (!class_exists('cfct_module_hatch_jumbotron') && class_exists('cfct_build_mod
 		public function display($data) {
       $title = isset($data[$this->get_field_id('title')]) ? $data[$this->get_field_id('title')] : '';
       $content = isset($data[$this->get_field_id('content')]) ? $data[$this->get_field_id('content')] : '';
+      $content = str_replace("\n", "<br />", $content);
+      $content = parse_embed_video_link(parse_shortclass($content));
 
       $heading = (!empty($data[$this->get_field_name('heading_style')]) ? esc_html($data[$this->get_field_name('heading_style')]) : '');
       if($heading=='') $heading = $this->default_heading_style;

@@ -2,46 +2,140 @@
 // Responsive: Phones
 // --------------------------------------------------
 
-
 /*  Phones */
-@media (max-width: 480px) { 
-
-	.brand > img {
-		display: none;
+@media (max-width: 480px) {
+	// Reduce page gutters
+	body {
+	  padding-left: 5px;
+	  padding-right: 5px;
 	}
 	
-	.brand-phone { display: inherit !important; }
+	//Utility Classes
+	.visible-phone-portrait {
+	    display: inline;
+	}
+	.hidden-phone-portrait {
+	    display: none;
+	}
+	
+	// Reduce some font sizes
+	  
+	h2 { font-size: @baseFontSize*1.5; line-height: @baseLineHeight*1.5; }
+	h3 { font-size: @baseFontSize*1.25; line-height: @baseLineHeight*1.25; }
+ 
+ 	// Reduce large button size
+ 	
+ 	.btn-large {
+ 		padding: 6px 6px;
+ 		font-size: @baseFontSize;
+ 	}
+ 	
+ 	// Reduce Modal Footer
+ 	
+ 	.modal-footer {
+ 		padding-top: 8px;
+ 		padding-bottom: 8px;
+ 	}
+ 	
+	// Fix brand elements 
 	.brand-phone > h4 {
+		margin-top: 100px;
 		margin-bottom: 0px;
 		font-weight: 200;
 		text-align: center;
 	}
 	
-	.main-nav {
-		//vertically align main nav between banner and headline - find a better way?
-		margin-top: 15px;
+	// Reduce size of lead inputs
+	
+	#new-lead input, #new-lead .add-on  {
+		padding-top: 6px;
+		padding-bottom: 6px;
 	}
-	.headline {		
-		h1, h4, a {
+	
+	.main-nav {
+		a {
 			font-size: @baseFontSize;
 		}
-		h1, h4 {
-			padding: 5px 9px 5px 9px;
+		.btn-large {
+			padding: 7px 6px;
+			font-size: @baseFontSize;
+		}
+		
+		.nav-callout-border {
+			padding: 8px 6px;
+		}
+		
+		.nav-callout {
+			margin-left: 4px;
+		}
+		
+		li.dropdown > a {
+			position: relative;
+			top: -1px;
+			margin-right: 10px;
+			padding: 10px 8px;
 		}
 	}
 	
+	// Headline
+	.headline {
+		ul li {
+			// Push phone number below tag line
+			display: block;
+			h1, h2, a {
+				font-size: @baseFontSize;
+				line-height: (@baseFontSize);
+			}
+		}
+	}
 	
-	.banner-photo {
-		padding: 0;
-		img {
-			.border-bottom-left-radius(0);
-			.border-bottom-right-radius(0);
-			padding: 0px;
-			border: none;
+	// Add a pen stroke after the title
+	.headline-title {
+		&:after {
+			content: " ";
+			display: block;
+			background-image: -webkit-linear-gradient(left,@blue,#fff 25%,#fff 75%,@blue);
+			background-color: #fff;
+			height: 1px;
+		}
+	}
+	
+	 // Banner
+	 
+    .banner-photo {
+        padding: 0;
+        img {
+            .border-bottom-left-radius(0);
+            .border-bottom-right-radius(0);
+            padding: 0px;
+            border: none;
             height: auto !important;
             width: 100%;
-		}
-	}
+            max-width: 100%;
+        }
+        .embed-youtube {
+            iframe {
+                max-width: 100%;
+                height: 280px;
+            }
+        }
+    }
+    
+    .banner-review blockquote { 
+    	p, p.banner-author {
+    		font-size: @baseFontSize*1.5; 
+    		line-height: @baseLineHeight*1.5;
+    	} 
+    }
+    
+    .banner .share-it {
+    	padding-left: 20px;
+    	text-align: center;
+    	min-width: 0px;
+    	.write-review span {
+    		display: none;
+    	}
+    }
 	
 	.footer {
 		.footer-links > a {
@@ -54,4 +148,59 @@
 		}
 	}
 
+    .featurette-horizontal,
+    .featurette-vertical {
+        iframe {
+            height: 240px;
+        }
+    }
+    
+    // Link Grid
+    .link-grid {
+    	padding: 0px;
+    }
+    
+    // Reviews
+    
+    blockquote cite {
+    	font-size: @baseFontSize * 1.5 !important;
+    }
+}
+
+/*  Phones */
+@media (max-width: 320px) {
+    #new-lead input {
+        max-width: 80%;
+    }
+    .find-location input {
+        max-width: 60%;
+    }
+    .link-grid li {
+        padding-left: 35px;
+        padding-right: 35px;
+    }
+}
+
+@media (max-width: 600px) {
+    .brand img {
+        display: none;
+    }
+    #showroom {
+    	padding-left: 0px;
+    	padding-right: 0px;
+    }
+    .project:first-of-type {
+    	padding-top: 0px;
+    }
+    .project {
+    	padding-top: @bumper;
+    	.project-container, .project-container img {
+    		.border-radius(0);
+    	}
+    }
+    .banner-title h2 { 
+    	font-size: @baseFontSize *1.25;
+    	line-height: @baseLineHeight * 1.25;
+    	padding: @bumper/2;  
+    }
 }

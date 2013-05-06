@@ -7,7 +7,6 @@
 a.link-decorate:hover, a.link-showoff {
 	text-decoration: none;
 	border-bottom: 1px dotted;
-	border-bottom-color: inherit;
 }
 a.link-inverse {
 	color: @white;
@@ -16,16 +15,21 @@ a.link-inverse:hover, .link-decorate, .link-decorate + .link-showoff {
 	border-bottom-color: @white;
 }
 
+b, strong {
+	font-weight: @strongFontWeight;
+}
+
 // Titles
 h1,
 h2 { line-height: @baseLineHeight * 2; }
 
 h3 { line-height: @baseLineHeight * 1.5; }
 
-h4 { line-height: @baseLineHeight * 1.25; }
+h4 { line-height: @baseLineHeight * 1.25; font-weight: 400; }
 
-h1, h2, h3 {
-	.light-weight;
+h2.large {
+	font-size: @baseFontSize * 2.5;
+	line-height:  @baseLineHeight * 2.5;
 }
 
 h2.jumbo {
@@ -39,6 +43,23 @@ h2.jumbo {
 	line-height: 1;
 	letter-spacing: -1px;
 	color: @gray;
+}
+
+.banner-title {
+	.bg-sea;
+	h2 { 
+		.white;
+		.center;
+		.bumper-top;
+		.bumper-bottom;
+		margin: 0;
+		&:after {
+			content: " ";
+			display: block;
+			.pen-stroke-blue;
+		}
+	}
+	 
 }
 
 

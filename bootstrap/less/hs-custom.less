@@ -9,25 +9,16 @@ body {
 	background: url(../images/backgrounds/fibre.png) repeat;
 }
 
+section:first-of-type {
+	.top-radius;
+}
+
 // Brand - Company logo
 //----------------------
 
-.brand > img {
+.brand img {
 	padding: 55px 6px 10px 0px;
 	max-height: 120px;
-}
-
-// Text version of the company name - phone display only
-.brand-phone {
-	display: none;
-}
-
-// Page title - used only at the very top of a container element
-// ----------------------------------------------------------------
-
-.page-title {
-	.border-top-left-radius(@borderRadiusLarge);
-	.border-top-right-radius(@borderRadiusLarge);
 }
 
 // Headline - Placed at the top of the page
@@ -39,6 +30,7 @@ body {
 	li {
 		.text-center;
 		.block-cell;
+		vertical-align: middle;
 		margin-left: 0px;
 		list-style: none;
 		border-right: 1px solid (lighten(@blue,20%));
@@ -63,18 +55,18 @@ body {
 	.border-bottom-right-radius(@baseBorderRadius);
 	.border-bottom-left-radius(@baseBorderRadius);
 	
-	h1, h4, a {
+	h1, h2, a {
 		color: @white;
 		font-size: @baseFontSize * 1.25;
+		line-height: @baseLineHeight * 1.25;
 	}
 	
-	h1, h4 {
-		.light-weight;
+	h1, h2 {
 		padding: 9px 13px 10px 13px;
 		margin: 0px;
 	}
 	
-	h4 > a, b {
+	h2 > a, b {
 		font-weight: 400;
 		text-decoration: none;
 	}
@@ -87,10 +79,9 @@ body {
 		#gradient > .vertical(darken(@green, 10%), @green);
 	}
 	
-	.headline-phone {
+	.headline-phone a {
 		white-space: nowrap;
 	}
-	
 }
 
 
@@ -133,11 +124,15 @@ body {
 	text-align: center;
 		
 	li {
-		padding: 14px 25px 14px 0;
+		padding: 14px 20px 14px 0;
 		margin-left: 0px;
 		list-style: none;
 		.pull-left;
+		text-align: left;
 	}
+    li:last-child {
+        padding-right: 0;
+    }
 	
 	.social-network {
 		// Line up the social network buttons with Write a Review link
@@ -192,6 +187,16 @@ body {
 	}
 }
 
+.thumbnail {
+    .thumbnail-placeholder {
+        max-height: 250px;
+        overflow: hidden;
+        img {
+            width: 100%;
+        }
+    }
+}
+
 // Showroom page
 
 #showroom {
@@ -210,13 +215,70 @@ body {
     }
 }
 
+.showroom-selector.dropdown {
+  .dropdown-menu {
+    margin-top: 12px;
+    li.show-text {
+      font-family: inherit;
+      font-size: 20px;
+      line-height: 32px;
+      color: #666666;
+      text-align: left;
+      padding: 3px 20px;
+      font-weight: normal;
+    }
+    li.triangle {
+      position: absolute;
+      width: 0;
+      height: 0;
+      left: 50%;
+      top: -15px;
+      margin-left: -10px;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-bottom: 15px solid #FFFFFF;
+    }
+    li:last-child {
+      margin-bottom: 5px;
+    }
+    a {
+      font-size: 16px;
+      line-height: 24px;
+      text-align: left;
+    }
+  }
+}
+
 .project {
+
+    .img-polaroid {
+        display: block;
+        position: relative;
+        text-align: center;
+        >a {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -24px;
+            margin-top: -24px;
+            opacity: .6;
+            display: none;
+        }
+        >a:hover {
+            opacity: 1;
+        }
+    }
+    .img-polaroid:hover {
+        >a {
+          display: block;
+        }
+    }
 
 	.bumper-top-medium;
 	
 	// Container for the showroom project
 	
-	div:first-child {
+	.project-container {
 		background-color: (lighten(@grayLighter,20));
 		.border-radius(@baseBorderRadius);
 		.gentle-shadow;
@@ -235,34 +297,24 @@ body {
 		position: relative;
         text-align: center;
         min-height: 70px;
-	
-		div:first-of-type {
+        
+		div.media-controls {
 			visibility: hidden;
 			position: absolute;
-			top: 10px;
-			right: 10px;
 			a { .opacity(60); }
 			a:hover { .opacity(100); }
+			top: 10px;
 		}
-
-        a.show-image {
-            width: 48px;
-            height: 48px;
-            display: none;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            margin-top: -24px;
-            margin-left: -24px;
-            .opacity(60);
-        }
-        a.show-image:hover { .opacity(100); }
+		div.media-controls:first-of-type {
+			left: 10px;
+		}
+		div.media-controls:nth-of-type(2) {
+			right: 10px;
+		}
 	}
 	
-	.favorite-photo:hover div:first-of-type { visibility: visible; }
-    .favorite-photo:hover a.show-image {
-        display: block;
-    }
+	.favorite-photo:hover div.media-controls { visibility: visible; }
+	.favorite-photo div.show-video-play { visibility:visible; }
 	
 	// Thumbnails under the main project photo
 	
@@ -299,26 +351,40 @@ body {
 			font-size: @baseFontSize;
             position: relative;
             .content-preview {
-              margin-right: 40px;
-              display: block;
+                margin-right: 10px;
+                display: block;
             }
             .content-full {
-              margin-right: 40px;
-              display: none;
+                margin-right: 10px;
+                display: none;
             }
             .show-more {
-              display: block;
-              position: absolute;
-              right: -5px;
-              top: 4px;
-              font-size: 12px;
-              i {
-                margin-right: 3px;
-              }
+                display: block;
+                position: absolute;
+                right: -10px;
+                top: 2px;
+                font-size: 12px;
+                i {
+                  .rotate(90deg);
+                  margin-right: 2px;
+                  .transition(all 0.3s ease);
+                }
+                i.icon-collapse-halfling.expanded {
+                  .rotate(180deg);
+                }
             }
 		}
-
 	}
+
+    blockquote:hover {
+        p {
+            .show-more {
+                i {
+                    .rotate(180deg);
+                }
+            }
+        }
+    }
 	
 	// Company and Service type tags
 	
@@ -376,7 +442,7 @@ body {
     a.disabled {
         background-color: #ddd;
     }
-    .review-rating {
+    .select-review-rating {
       padding-bottom: 5px;
       position: relative;
       height: 22px;
@@ -418,6 +484,7 @@ body {
 //
 
 .footer {
+	.bg-slate-invert;
 	small a {
 		color: @grayLight;
 	}
@@ -434,6 +501,7 @@ body {
 }
 
 .footer-links > a {
+	line-height: @baseLineHeight *1.75;
 	padding: 6px;
 	margin: 6px;
 	border: 1px solid @white;
@@ -449,7 +517,7 @@ body {
 // ----------------------------------------------
 
 .green-man-45 {
-	background: url("@{brandPath}window-cleaning-award.png") 5px 0px no-repeat;
+	background: url("@{brandPath}window-cleaning-award.png") 5px 2px no-repeat;
 	//background: url("@{iconsPath}window-cleaning-award-45px.png") 5px 0px no-repeat;
 	padding-left: 20px; 
 }
@@ -497,25 +565,6 @@ body {
   }
 }
 
-/* Review carousel */
-
-.review-carousel {
-  position: relative;
-  .review-link {
-    bottom: 0;
-  }
-  .carousel-control {
-    top: 45%;
-    left: -30px;
-    color: #222222;
-    border: none;
-    background: transparent;
-  }
-  .carousel-control.right {
-    left: auto;
-    right: -30px;
-  }
-}
 
 /* Image */
 
@@ -545,4 +594,44 @@ div.img-polaroid {
   z-index: (@zindexFixedNavbar + 100);
   margin-top: -2px;
   top: 0;
+}
+
+// Sidebar
+
+.has-right-sidebar {
+	padding-right: @bumper;
+	border-right: 1px solid lighten(@grayLight,20%);	
+}
+
+
+/* For the transitional services page */
+
+.container>.migrate {
+  h1 {
+    margin: 0;
+  }
+  .subtitle {
+    margin-bottom: 30px;
+  }
+  .service_item_wrap {
+    padding-top: 10px;
+    margin-right: 20px;
+  }
+  .youtube {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .textarea {
+    margin-top: 20px;
+  }
+  .service-image {
+    img {
+      max-width: 100%;
+      margin-bottom: 10px;
+    }
+    span {
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
 }

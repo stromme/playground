@@ -22,6 +22,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
 		public function display($data) {
       $banner_type = isset($data[$this->get_field_id('type')]) ? $data[$this->get_field_id('type')] : '';
       $interval = isset($data[$this->get_field_id('interval')]) ? intval($data[$this->get_field_id('interval')]) : 4000;
+      $video = isset($data[$this->get_field_name('video')]) ? esc_html($data[$this->get_field_name('video')]) : '';
       $id = 'banner-'.$data['module_id'];
       $image = '';
       $js_init = '';
@@ -31,14 +32,17 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
         $description = $data[$this->get_field_id('description')];
         $author = $data[$this->get_field_id('author')];
         $author_location = $data[$this->get_field_id('author-location')];
-        if (!empty($image_id) && $_img = wp_get_attachment_image_src($image_id, 'large', false)) {
+        if (!empty($image_id) && $_img = wp_get_attachment_image_src($image_id, 'banner', false)) {
           $image = $_img[0];
         }
         $js_single_data = new stdClass();
-        $js_single_data->description = $description;
-        $js_single_data->author = $author;
-        $js_single_data->author_location = $author_location;
+        $js_single_data->id = '';
+        $js_single_data->description = parse_embed_video_link(parse_shortclass($description));
+        $js_single_data->author = parse_shortclass($author);
+        $js_single_data->author_location = parse_shortclass($author_location);
         $js_single_data->images = array($image);
+        $js_single_data->video = $video;
+        $js_single_data->term = '';
         array_push($js_data, $js_single_data);
       }
       else {
@@ -51,6 +55,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
           'post_parent' => null,
           'order'       => 'ASC'
         );
+        $page_term = '';
         if($post_type=='page'){
           $posts_args = $args;
           $posts_args['meta_key'] = 'featured';
@@ -58,6 +63,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
           $projects = get_posts($posts_args);
 
           if(count($projects)<=0){
+            $args['order'] = 'DESC';
             $projects = get_posts($args);
           }
         }
@@ -65,8 +71,22 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
           $posts_args = $args;
           $posts_args['meta_key'] = 'pinned';
           $posts_args['orderby'] = 'pinned';
-          $projects = get_posts($args);
+          if($post_type=='cftl-tax-landing'){
+            $posts_args['numberposts'] = -1;
+            $services_terms = wp_get_post_terms($post->ID, 'services', array('hide_empty'=>0));
+            if($services_terms){
+              $page_term = $services_terms[0]->slug;
+            }
+            else {
+              $locations_terms = wp_get_post_terms($post->ID, 'services', array('hide_empty'=>0));
+              if($locations_terms){
+                $page_term = $locations_terms[0]->slug;
+              }
+            }
+          }
+          $projects = get_posts($posts_args);
           if(count($projects)<=0){
+            $args['order'] = 'DESC';
             $projects = get_posts($args);
           }
         }
@@ -76,6 +96,17 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
           foreach($projects as $project){
             $cust_id = get_post_meta($project->ID, 'customer_id', true);
             $favorite = get_post_meta($project->ID, 'favorite', true);
+            $services_terms = wp_get_post_terms($project->ID, 'services', array('hide_empty'=>0));
+            $term = '';
+            if($services_terms){
+              $term = $services_terms[0]->slug;
+            }
+            else {
+              $locations_terms = wp_get_post_terms($project->ID, 'services', array('hide_empty'=>0));
+              if($locations_terms){
+                $term = $locations_terms[0]->slug;
+              }
+            }
             $name = '';
             $city = '';
             $args = array(
@@ -118,16 +149,18 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
                 array_push($project_media, $video_image);
               }
               else {
-                $_img = wp_get_attachment_image_src($media->ID, 'large', false);
+                $_img = wp_get_attachment_image_src($media->ID, 'banner', false);
                 array_push($project_media, $_img[0]);
               }
             }
+            $private = 0;
             if($cust_id!=''){
               $contact = get_post($cust_id);
               $first_name = get_post_meta($contact->ID, 'first_name', true);
               $last_name = get_post_meta($contact->ID, 'last_name', true);
               $city = get_post_meta($contact->ID, 'city', true);
               $company = get_post_meta($contact->ID, 'company', true);
+              $private = get_post_meta($contact->ID, 'make_private', true);
               $name = ($company!='')?
                         $company:
                         (($first_name!='' && $last_name!='')?
@@ -144,89 +177,142 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
             }
 
             $js_single_data = new stdClass();
-            $js_single_data->description = $project->post_content;
-            $js_single_data->author = $name;
-            $js_single_data->author_location = $city;
+            $js_single_data->id = $project->ID;
+            $js_single_data->description = parse_shortclass($project->post_content);
+            $js_single_data->author = parse_shortclass($name);
+            $js_single_data->author_location = parse_shortclass($city);
             $js_single_data->images = $project_media;
+            $js_single_data->video = '';
+            $js_single_data->term = $term;
+            $js_single_data->is_private = ($private==1)?true:false;
             array_push($js_data, $js_single_data);
             $i++;
           }
         }
+
+        if($post_type=='cftl-tax-landing'){
+          $new_js_data = array();
+          if(count($js_data)>0){
+            $counter = 0;
+            foreach($js_data as $js_single_data){
+              if($js_single_data->term==$page_term){
+                array_push($new_js_data, $js_single_data);
+                $counter++;
+                if($counter>=3) break;
+              }
+            }
+          }
+          $js_data = $new_js_data;
+        }
+
         $js_id = 'data_'.str_replace('-','_',$id);
         $js_init = '
         <script type="text/javascript">
           var '.$js_id.' = '.json_encode($js_data).';
           $(document).ready(function(){
-            var carousel = $(".carousel-'.$id.'");
-            var current_item_id = 0;
-            var current_image_idx = 0;
-            var interval = '.$interval.';
-            var timeout = setTimeout(function(){
-              cycle_image();
-            }, interval);
-            $(".carousel-indicators li", carousel).mousedown(function(e){
-              e.preventDefault();
-            }).click(function(){
-              clearTimeout(timeout);
-              current_item_id = parseInt($(this).attr("data-slide-to"));
-              current_image_idx = 0;
-              carousel.carousel(current_item_id);
-              setTimeout(function(){
-                carousel.carousel("pause");
-              });
-              var items = $(".item", carousel);
-              items.removeAttr("style");
-              var active_item = items[current_item_id];
-              active_image = $(".banner-photo img", active_item);
-              active_image.attr("src", '.$js_id.'[current_item_id].images[current_image_idx]);
-              active_indicators = $(".carousel-indicators li", active_item);
-              $(active_indicators[current_item_id]).addClass("active");
-              timeout = setTimeout(function(){
-                cycle_image();
+            if('.$js_id.'.length>0){
+              var carousel = $(".carousel-'.$id.'");
+              var current_item_id = 0;
+              var current_image_idx = 0;
+              var interval = '.$interval.';
+              var timeout = setTimeout(function(){
+                cycle_image_'.$js_id.'();
               }, interval);
-            });
-            function cycle_image(){
+              $(".carousel-indicators li", carousel).mousedown(function(e){
+                e.preventDefault();
+              }).click(function(){
+                clearTimeout(timeout);
+                current_item_id = parseInt($(this).attr("data-slide-to"));
+                current_image_idx = 0;
+                carousel.carousel(current_item_id);
+                setTimeout(function(){
+                  carousel.carousel("pause");
+                });
+                var items = $(".item", carousel);
+                items.removeAttr("style");
+                var active_item = items[current_item_id];
+                active_image = $(".banner-photo img", active_item);
+                if('.$js_id.'[current_item_id].images)
+                  active_image.attr("src", '.$js_id.'[current_item_id].images[current_image_idx]);
+                active_indicators = $(".carousel-indicators li", active_item);
+                $(active_indicators[current_item_id]).addClass("active");
+                timeout = setTimeout(function(){
+                  cycle_image_'.$js_id.'();
+                }, interval);
+              });
+            }
+            function cycle_image_'.$js_id.'(){
               clearTimeout(timeout);
               var items = $(".item", carousel);
               var active_item;
               var active_image;
+              var banner_photo;
+              var new_image;
+              var max_width;
+              var new_width;
               current_image_idx++;
-              if('.$js_id.'.length>1 && current_image_idx>='.$js_id.'[current_item_id].images.length){
+              if('.$js_id.'.length>1 && '.$js_id.'[current_item_id].images && current_image_idx>='.$js_id.'[current_item_id].images.length){
                 current_item_id++;
                 current_image_idx = 0;
                 if(current_item_id>='.$js_id.'.length){
                   current_item_id = 0;
                 }
                 active_item = items[current_item_id];
-                active_image = $(".banner-photo img", active_item);
-                active_image.attr("src", '.$js_id.'[current_item_id].images[current_image_idx]);
-                $(active_item).css({"top":0,"position":"absolute","z-index":1});
-                $(active_item).fadeIn("fast", function(){
-                  $(active_item).removeAttr("style");
-                  carousel.carousel(current_item_id);
-                  carousel.carousel("pause");
-                  active_indicators = $(".carousel-indicators li", active_item);
-                  $(active_indicators[current_item_id]).addClass("active");
+                banner_photo = $(".banner-photo", active_item);
+                active_image = $("img", banner_photo);
+                banner_photo.append("<img src=\'"+'.$js_id.'[current_item_id].images[current_image_idx]+"\' style=\'position:absolute;left:0;top:0;display:none;\' />");
+                new_image = $("img", banner_photo).last();
+                new_image.load(function(){
+                  active_image.remove();
+                  banner_photo.removeAttr("style");
+                  new_image.removeAttr("style");
+                  active_image.remove();
+                  $(active_item).css({"top":0,"position":"absolute","z-index":1});
+                  $(active_item).fadeIn("fast", function(){
+                    $(active_item).removeAttr("style");
+                    carousel.carousel(current_item_id);
+                    carousel.carousel("pause");
+                    active_indicators = $(".carousel-indicators li", active_item);
+                    $(active_indicators[current_item_id]).addClass("active");
+                    timeout = setTimeout(function(){
+                      cycle_image_'.$js_id.'();
+                    }, interval);
+                  });
+                }).error(function() {
+                  banner_photo.removeAttr("style");
+                  new_image.remove();
                   timeout = setTimeout(function(){
-                    cycle_image();
+                    cycle_image_'.$js_id.'();
                   }, interval);
                 });
               }
-              else if('.$js_id.'[current_item_id].images.length>1) {
+              else if('.$js_id.'[current_item_id].images && '.$js_id.'[current_item_id].images.length>1) {
                 active_item = items[current_item_id];
-                active_image = $(".banner-photo img", active_item);
-                active_image.fadeOut("fast", function(){
-                  active_image.attr("src", '.$js_id.'[current_item_id].images[current_image_idx]);
-                  active_image.fadeIn("fast", function(){
+                banner_photo = $(".banner-photo", active_item);
+                active_image = $("img", banner_photo);
+                banner_photo.append("<img src=\'"+'.$js_id.'[current_item_id].images[current_image_idx]+"\' style=\'position:absolute;left:0;top:0;display:none;\' />");
+                new_image = $("img", banner_photo).last();
+                new_image.load(function(){
+                  active_image.fadeOut("fast");
+                  new_image.fadeIn("fast", function(){
+                    banner_photo.removeAttr("style");
+                    new_image.removeAttr("style");
+                    active_image.remove();
                     var width = $(".banner-review", active_item).outerWidth();
                     timeout = setTimeout(function(){
-                      cycle_image();
+                      cycle_image_'.$js_id.'();
                     }, interval);
+                    if('.$js_id.'.length<=1){
+                      if(current_image_idx>='.$js_id.'[current_item_id].images.length-1) current_image_idx = -1;
+                    }
                   });
-                });
-                if('.$js_id.'.length<=1){
-                  if(current_image_idx>'.$js_id.'[current_item_id].images.length-1) current_image_idx = 0;
-                }
+                }).error(function() {
+                  banner_photo.removeAttr("style");
+                  new_image.remove();
+                  timeout = setTimeout(function(){
+                    cycle_image_'.$js_id.'();
+                  }, interval);
+                });;
               }
             }
           });
@@ -288,6 +374,10 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
               <div>
                 <label for="'.$this->get_field_id('author-location').'">'.__('Author Location').'</label>
                 <input type="text" name="'.$this->get_field_name('author-location').'" id="'.$this->get_field_id('author-location').'" value="'.(!empty($data[$this->get_field_name('author-location')]) ? esc_html($data[$this->get_field_name('author-location')]) : '').'" />
+              </div>
+              <div>
+                <label for="'.$this->get_field_id('video').'">'.__('Video').'</label>
+                <input type="text" name="'.$this->get_field_name('video').'" id="'.$this->get_field_id('video').'" value="'.(!empty($data[$this->get_field_name('video')]) ? esc_html($data[$this->get_field_name('video')]) : '').'" />
               </div>
             </div>
           </div>

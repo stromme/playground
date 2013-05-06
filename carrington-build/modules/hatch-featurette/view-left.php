@@ -2,19 +2,25 @@
 =============================================================================
 -->
 
-<div class="row-middle">
-  <?php if($image!=''){ ?>
-	<div class="<?=$image_size?> <?=$image_padding?>">
-    <div<?=($border_style!='none')?' class="'.$border_style.'"':''?>>
-      <div>
-        <img src="<?=$image?>" />
-      </div>
+<div class="row-middle featurette-horizontal">
+  <?php if($video!=''){?>
+    <div class="<?=$image_size?> <?=$image_padding?>">
+      <?=parse_embed_video_link($video)?>
     </div>
-	</div>
+  <?php } else { ?>
+    <?php if($image!=''){ ?>
+      <div class="<?=$image_size?> <?=$image_padding?>">
+        <div<?=($border_style!='none')?' class="'.$border_style.'"':''?>>
+          <div>
+            <img src="<?=$image?>" />
+          </div>
+        </div>
+      </div>
+    <?php } ?>
   <?php } ?>
 	<div class="middle">
-		<<?=$heading?> class=""><?=parse_shortclass($title)?></<?=$heading?>>
-		<p class="blue"><?=$content?></p>
+		<<?=$heading?>><?=$title?></<?=$heading?>>
+		<p><?=$content?></p>
 	</div>
 </div>
 

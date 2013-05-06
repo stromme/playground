@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Reviews Page
+ * Template Name: Reviews
  * Description: 
  *
  * @package WordPress
@@ -49,7 +49,7 @@ if(count($reviews)>1){
 }
 
 $args = array(
-  'number'  => 10,
+  'number'  => 15,
   'post_id' => 0,
   'orderby' => 'modified',
   'order'   => 'DESC',
@@ -70,13 +70,9 @@ foreach($comments as $comment){
 ?>
 
 <!-- Wrap the page in .container to centre the content and keep it at a max width -->
-<div class="container gentle-shadow">
-	
-	<section class="bg-sea margin-left margin-right page-title">
-		<div class="bumper-top-medium bumper-bottom-medium bumper-left-large bumper-right-large center">
-			<h2 class="white"><?=$company['name']?>, loved in your neighborhood.</h2>
-			<div class="pen-stroke-blue"></div>
-		</div>
+<div class="container gentle-shadow top-radius">
+	<section class="banner-title page-left page-right top-radius">
+		<h2><?php echo ( get_the_title() != 'Reviews' ? get_the_title() : $company['name'] . ', loved in your neighborhood.'); ?></h2>
 	</section>
 	<section class="bg-white page-left page-right bumper-bottom-medium bumper-top-medium">
 		<ul id="reviews-list" class="reviews-list">
@@ -84,23 +80,17 @@ foreach($comments as $comment){
         global $review;
         if(count($reviews)>0){
           foreach($reviews as $review){
-            load_template( dirname(__FILE__).'/../templates/list-review.php', false);
+            get_template_part('templates/list', 'review');
           }
         }
         if(count($all_reviews)>0){
           foreach($all_reviews as $review){
             if(!in_array($review->id, $pinned_keys)){
-              load_template( dirname(__FILE__).'/../templates/list-review.php', false);
+              get_template_part('templates/list', 'review');
             }
           }
         }
       ?>
 		</ul>
 	</section>
-	
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('.review-rating').raty({'readOnly': true, 'score': function(){return $(this).attr('data-score');}, 'path': ratyimgurl});
-  })
-</script>
 <?php get_footer(); ?>

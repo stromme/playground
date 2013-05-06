@@ -16,11 +16,11 @@
 	<div class="banner-review">
 		<blockquote>
 			<p>"Couldn't be happier. They showed up on time and did a fantastic job. We'll call again for sure."</p>
-			<p class="banner-author"><cite>Rene C</cite>, Bethseda</p>
+			<p class="banner-author"><cite>Rene C.</cite> - Bethseda, CA</p>
 		</blockquote>
 		<div class="fixed-bottom">
 			<ul class="share-it">
-				<li class="write-review"><a href=""><i class="icon-full-conversation"></i> Write your review</a></li>
+				<li class="write-review"><a href=""><i class="icon-full-conversation"></i><span> Write your review</span></a></li>
 				<!-- Commented out for local development -->
 				<li class="social-network"><div class="fb-like" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="verdana" data-action="like"></div></li>
 				<li class="social-network"><a href="https://twitter.com/share" class="twitter-share-button" data-via="streakfreeclean" data-related="streakfreeclean" data-hashtags="WindowCleaning">Tweet</a>
