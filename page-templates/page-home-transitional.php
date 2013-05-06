@@ -835,11 +835,12 @@ if($accolades_post && count($accolades_post)>0){
   ?>
   <!-- Certifications -->
   <section class="bg-white bumper-top bumper-bottom-small page-left page-right">
+  	<div class="center">
+  		<h2>We're <strong class="green">proud to be members</strong> of the...</h2>
+  	</div>
+  	
     <div id="<?=$id?>" class="<?=(count($transitional_certifications)>1)?'carousel-'.$id:''?> accolade-carousel slide">
       <?php if(count($transitional_certifications)>1){ ?>
-      <div class="center">
-      	<h2>We're <strong class="green">proud to be members</strong> of the:</h2>
-      </div>
       <div class="carousel-inner">
       <?php } ?>
         <?php

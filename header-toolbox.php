@@ -46,7 +46,8 @@ $industry = get_option('tb_industry');
     <div class="container-fluid">
     	<div class="brand hidden-phone">
     		<?php 
-    		if ( $industry['industry'] == 'window-cleaning' ) echo '<h2>'. get_bloginfo( 'name' ) . '</h2>'; else echo '<h2>Hatch</h2>';?></div>
+    		$seo = get_location_seo();
+    		if ( $industry['industry'] == 'window-cleaning' ) echo '<h2>'. $seo['city'] . ', ' . $seo['state'] . '</h2>'; else echo '<h2>Hatch</h2>';?></div>
 			<div><!--</div> class="nav-collapse collapse"-->
 				<ul class="nav">
 					<li class="has-nav-icon">
