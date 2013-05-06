@@ -1,8 +1,7 @@
 <?php
 /**
  * Name: Playground Theme Functions
- * Description: 
- * A blank theme used for testing the Toolbox Framework
+ * Description: Master Hatch Theme
  *
  * @package Playground
  * @author Hatch
@@ -13,7 +12,15 @@
  * @since 0.0.1 
  */
 /* Define the environment we're working in. DEV or LIVE. */
-define( 'ENVIRONMENT', 'DEV' );
+
+$whitelist = array('127.0.0.1');
+if ( !in_array($_SERVER['REMOTE_ADDR'], $whitelist) ) { 
+   define( 'ENVIRONMENT', 'DEV' );
+} else {
+   define( 'ENVIRONMENT', 'LIVE' );
+}
+
+
 define( 'TOOLBOX_BASE_DIR', trailingslashit( get_template_directory() ) . 'toolbox-framework' );
 require_once( trailingslashit( TOOLBOX_BASE_DIR ) . 'toolbox.php' );
 $Toolbox = new TB_Framework();
@@ -55,16 +62,6 @@ function hs_load_scripts() {
 		wp_register_script( 'theme-bootstrap-js', THEME_JS . 'bootstrap-min.js', array('jquery'));
 		wp_enqueue_script( 'theme-bootstrap-js' );
 		
-		// Load Typekit for font management
-		
-		wp_register_script( 'typekit', 'http://use.typekit.net/cdw0wlx.js');
-		wp_enqueue_script( 'typekit' );
-
-		add_action('wp_head', 'try_typekit');
-		
-		// Load Facebook
-		
-		add_action('wp_footer', 'hs_facebook');
 		
 		if ( ENVIRONMENT == 'LIVE' ) {
 
@@ -84,7 +81,7 @@ function hs_load_scripts() {
 	 		
 	 		add_action('wp_footer', 'hs_facebook');
 	 		
-	 	} else {
+	 	} elseif ( ENVIRONMENT == 'DEV' )  {
 	 		
 	 		// Load jquery from localhost in development environment
 	 		
