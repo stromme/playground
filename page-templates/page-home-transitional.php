@@ -543,7 +543,7 @@ if($accolades_post && count($accolades_post)>0){
             <?php if($is_have_post){ ?>
             <a href="<?=get_home_url()."/showroom/".$service->slug?>"><i class="icon-picture icon-white"></i> Showroom</a>
             <?php } if($is_service_promoted){ ?>
-            <a href="<?=get_home_url().get_blog_prefix()."services/".$service->slug?>"><i class="icon-info-sign icon-white" itemprop="url"></i> Learn more</a>
+            <a href="<?=get_home_url()."/services/".$service->slug?>"><i class="icon-info-sign icon-white" itemprop="url"></i> Learn more</a>
             <?php } ?>
           </nav>
           <?php } ?>
@@ -559,7 +559,7 @@ if($accolades_post && count($accolades_post)>0){
         </div>
         <?php if($is_service_promoted){ ?>
         <div class="center">
-        <a href="<?=get_home_url().get_blog_prefix()."services/".$service->slug?>" itemprop="name"><?=$service->name?></a>
+        <a href="<?=get_home_url()."/services/".$service->slug?>" itemprop="name"><?=$service->name?></a>
         </div>
         <?php } else { ?>
         <div class="center">
@@ -1007,7 +1007,7 @@ if($accolades_post && count($accolades_post)>0){
                     $is_location_promoted = TB_Promote::is_promoted($args);
                     $loc_link = '';
                     if($is_location_promoted){
-                      $loc_link = home_url().((get_blog_prefix()!='')?get_blog_prefix():'/').'locations/'.($location->slug);
+                      $loc_link = home_url().'/locations/'.($location->slug);
                     }
                     else if(count($blog_seo_list)>0) {
                       $li_found = false;

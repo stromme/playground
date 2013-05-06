@@ -62,7 +62,7 @@
           $is_location_promoted = TB_Promote::is_promoted($args);
           $loc_link = '';
           if($is_location_promoted){
-            $loc_link = home_url().((get_blog_prefix()!='')?get_blog_prefix():'/').'locations/'.($location->slug);
+            $loc_link = home_url().'/locations/'.($location->slug);
           }
           else if(count($blog_seo_list)>0) {
             $li_found = false;

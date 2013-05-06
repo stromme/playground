@@ -12,13 +12,22 @@
  *
  * @since 0.0.1 
  */
+
+/**
+ * Fix redirect for non www address
+ */
+function redirect_non_www(){
+  var_dump($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+  exit;
+}
+redirect_non_www();
+
 /* Define the environment we're working in. DEV or LIVE. */
 define( 'ENVIRONMENT', 'DEV' );
 define( 'TOOLBOX_BASE_DIR', trailingslashit( get_template_directory() ) . 'toolbox-framework' );
 require_once( trailingslashit( TOOLBOX_BASE_DIR ) . 'toolbox.php' );
 $Toolbox = new TB_Framework();
 include_once(trailingslashit(TEMPLATEPATH) . 'carrington-build/carrington-build.php');
-
 
 /* Theme Constants
  * 

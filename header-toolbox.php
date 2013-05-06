@@ -72,7 +72,7 @@ $industry = get_option('tb_industry');
                     foreach($blogs as $blog){
                       if($blog->userblog_id!=get_current_blog_id()){
               ?>
-              <li><a tabindex="-1" href="<?=$blog->siteurl.((get_blog_prefix($blog->userblog_id))?get_blog_prefix($blog->userblog_id):'/').'toolbox/dashboard/'?>"><?=$blog->blogname?> <small class="muted"> - Switch site</small></a></li>
+              <li><a tabindex="-1" href="<?=$blog->siteurl.'/toolbox/dashboard/'?>"><?=$blog->blogname?> <small class="muted"> - Switch site</small></a></li>
               <?php
                       }
                     }
@@ -106,7 +106,7 @@ $industry = get_option('tb_industry');
                 foreach($blogs as $blog){
                   if($blog->userblog_id!=get_current_blog_id()){
           ?>
-          <li><a tabindex="-1" href="<?=$blog->siteurl.((get_blog_prefix($blog->userblog_id))?get_blog_prefix($blog->userblog_id):'/').'toolbox/dashboard/'?>"><?=$blog->blogname?></a></li>
+          <li><a tabindex="-1" href="<?=$blog->siteurl.'/toolbox/dashboard/'?>"><?=$blog->blogname?></a></li>
           <?php
                   }
                 }

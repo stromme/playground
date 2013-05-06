@@ -177,7 +177,7 @@ foreach($comments as $comment){
 					<div class="caption">
 						<p><?=(strlen($rel_prj->content)>120)?(substr($rel_prj->content, 0, 120).'...'):($rel_prj->content)?></p>
 						<p>
-							<a class="btn btn-primary btn-small" href="<?=$showroom_link?>">Visit Showroom</a><!-- <a class="btn btn-success btn-small" href="<?=home_url().((get_blog_prefix()!='')?get_blog_prefix():'/')?>projects/<?=$rel_prj->slug?>">View project</a>-->
+							<a class="btn btn-primary btn-small" href="<?=$showroom_link?>">Visit Showroom</a><!-- <a class="btn btn-success btn-small" href="<?=home_url()?>/projects/<?=$rel_prj->slug?>">View project</a>-->
 						</p>
 					</div>
 				</div>
