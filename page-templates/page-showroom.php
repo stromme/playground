@@ -59,7 +59,7 @@ $pinned_projects = $loop->posts;
 $pinned_keys = array();
 foreach($pinned_projects as $prj){
   array_push($pinned_keys, $prj->ID);
-  $new_project = TB_Frontend::get_project_details($prj);
+  $new_project = get_project_details($prj);
   array_push($initial_projects, $new_project);
 }
 
@@ -76,7 +76,7 @@ $loop = new WP_Query( $args );
 $first_ten_projects = $loop->posts;
 foreach($first_ten_projects as $prj){
   if(!in_array($prj->ID, $pinned_keys)){
-    $new_project = TB_Frontend::get_project_details($prj);
+    $new_project = get_project_details($prj);
     array_push($initial_projects, $new_project);
   }
 }

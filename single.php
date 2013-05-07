@@ -14,7 +14,7 @@ get_header();
 $contact_id = get_post_meta($post->ID, 'customer_id', true);
 $project_contact = get_contact_name($contact_id);
 $project_location = get_contact_location($contact_id);
-$prj = TB_Frontend::get_project_details($post);
+$prj = get_project_details($post);
 
 ?>
 
@@ -109,7 +109,7 @@ $prj = TB_Frontend::get_project_details($post);
     foreach($all_related_projects as $rel_prj){
       if(count($related_projects)<3){
         if($rel_prj->ID!=$prj->id){
-          $new_project = TB_Frontend::get_project_details($rel_prj);
+          $new_project = get_project_details($rel_prj);
           array_push($related_projects, $new_project);
         }
       }
@@ -127,7 +127,7 @@ $prj = TB_Frontend::get_project_details($post);
       foreach($all_related_projects as $rel_prj){
         if(count($related_projects)<3){
           if($rel_prj->ID!=$prj->id){
-            $new_project = TB_Frontend::get_project_details($rel_prj);
+            $new_project = get_project_details($rel_prj);
             array_push($related_projects, $new_project);
           }
         }
