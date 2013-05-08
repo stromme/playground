@@ -6869,30 +6869,37 @@ div.img-polaroid div {
   border-right: 1px solid #cccccc;
 }
 /* For the transitional services page */
-.container > .migrate h1 {
-  margin: 0;
-}
-.container > .migrate .subtitle {
-  margin-bottom: 30px;
-}
-.container > .migrate .service_item_wrap {
-  padding-top: 10px;
-  margin-right: 20px;
-}
-.container > .migrate .youtube {
-  margin-top: 20px;
-  text-align: center;
-}
-.container > .migrate .textarea {
-  margin-top: 20px;
-}
-.container > .migrate .service-image img {
+/*.container>.migrate {
+  h1 {
+    margin: 0;
+  }
+  .subtitle {
+    margin-bottom: 30px;
+  }
+  .service_item_wrap {
+    padding-top: 10px;
+    margin-right: 20px;
+  }
+  .youtube {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .textarea {
+    margin-top: 20px;
+  }
+  .service-image {
+    img {
+      max-width: 100%;
+      margin-bottom: 10px;
+    }
+    span {
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+}*/
+.migrate iframe {
   max-width: 100%;
-  margin-bottom: 10px;
-}
-.container > .migrate .service-image span {
-  display: block;
-  margin-bottom: 20px;
 }
 .pull-right {
   float: right;
