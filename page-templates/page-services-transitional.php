@@ -137,7 +137,7 @@ foreach($comments as $comment){
   if(count($all_related_projects)>0){
     foreach($all_related_projects as $rel_prj){
       if(count($related_projects)<3){
-        $new_project = TB_Frontend::get_project_details($rel_prj);
+        $new_project = get_project_details($rel_prj);
         array_push($related_projects, $new_project);
       }
     }
@@ -152,7 +152,7 @@ foreach($comments as $comment){
     $related_projects = array();
     foreach($all_related_projects as $rel_prj){
       if(count($related_projects)<3){
-        $new_project = TB_Frontend::get_project_details($rel_prj);
+        $new_project = get_project_details($rel_prj);
         array_push($related_projects, $new_project);
       }
     }

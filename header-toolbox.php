@@ -13,6 +13,7 @@ if(session_id() == '') {
 }
 global $post;
 $industry = get_option('tb_industry');
+$blogs = array();
 ?><!DOCTYPE html>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
@@ -72,8 +73,18 @@ $industry = get_option('tb_industry');
                     usort($blogs, "blogsort");
                     foreach($blogs as $blog){
                       if($blog->userblog_id!=get_current_blog_id()){
+                        $blog_seo = get_blog_option($blog->userblog_id, 'tb_seo');
+                        $city_state = '';
+                        if($blog_seo!=''){
+                          $city_state = $blog_seo['seo_target_city'].", ".$blog_seo['seo_target_state'];
+                        }
+                        if($city_state==''){
+                          $blog_details = get_blog_details($blog->userblog_id);
+                          $city_state = ucwords(str_replace('-', ' ', str_replace('/', ' ', trim($blog_details->path, '/'))));
+                        }
+
               ?>
-              <li><a tabindex="-1" href="<?=$blog->siteurl.'/toolbox/dashboard/'?>"><?=$blog->blogname?> <small class="muted"> - Switch site</small></a></li>
+              <li><a tabindex="-1" href="<?=$blog->siteurl.'/toolbox/dashboard/'?>"><?=$city_state?> <small class="muted"> - Switch site</small></a></li>
               <?php
                       }
                     }
@@ -101,13 +112,20 @@ $industry = get_option('tb_industry');
         <ul class="nav">
           <?php
             if(!is_super_admin(get_current_user_id())){
-              $blogs = get_blogs_of_user(get_current_user_id());
               if(count($blogs)>1){
-                usort($blogs, "blogsort");
                 foreach($blogs as $blog){
                   if($blog->userblog_id!=get_current_blog_id()){
+                    $blog_seo = get_blog_option($blog->userblog_id, 'tb_seo');
+                    $city_state = '';
+                    if($blog_seo!=''){
+                      $city_state = $blog_seo['seo_target_city'].", ".$blog_seo['seo_target_state'];
+                    }
+                    if($city_state==''){
+                      $blog_details = get_blog_details($blog->userblog_id);
+                      $city_state = ucwords(str_replace('-', ' ', str_replace('/', ' ', trim($blog_details->path, '/'))));
+                    }
           ?>
-          <li><a tabindex="-1" href="<?=$blog->siteurl.'/toolbox/dashboard/'?>"><?=$blog->blogname?></a></li>
+          <li><a tabindex="-1" href="<?=$blog->siteurl.'/toolbox/dashboard/'?>"><?=$city_state?></a></li>
           <?php
                   }
                 }

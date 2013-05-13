@@ -1301,6 +1301,14 @@
     border: none;
     padding-right: 0px;
   }
+  .select-location .btn-group a {
+    display: inline-block;
+    font-size: 16px;
+    min-width: 100px;
+  }
+  .select-location .btn-group .dropdown-menu a {
+    display: block;
+  }
 }
 /*  Phones */
 @media (max-width: 480px) {
@@ -1439,6 +1447,11 @@
   .link-grid li {
     padding-left: 35px;
     padding-right: 35px;
+  }
+  .select-location button.lookup {
+    width: 250px;
+    display: inline-block;
+    margin-top: 8px;
   }
 }
 @media (max-width: 600px) {

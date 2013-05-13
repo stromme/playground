@@ -59,8 +59,7 @@ function hs_load_scripts() {
 		// Load Bootstrap Framework
 		wp_register_script( 'theme-bootstrap-js', THEME_JS . 'bootstrap-min.js', array('jquery'));
 		wp_enqueue_script( 'theme-bootstrap-js' );
-		
-		
+
 		if ( ENVIRONMENT == 'LIVE' ) {
 	 		
 	 		// Load Typekit for font management
