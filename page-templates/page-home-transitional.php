@@ -602,7 +602,7 @@ if($accolades_post && count($accolades_post)>0){
               <img src="<?=$award_best['img']?>" width="130">
             </div>
             <div class="middle">
-              <h4>Awarded best in <?=$seo['city']?>, <?=$seo['state']?></h4>
+              <h4>Awarded best in <?=$seo['city']?></h4>
               <p>WindowCleaning.com hand picks our technicians from the best window cleaners in North America. <?=stripslashes($tb_company['name'])?> is the only WindowCleaning.com member in <?=$seo['city']?>, <?=$seo['state']?>.</p>
             </div>
           </div>
@@ -836,7 +836,7 @@ if($accolades_post && count($accolades_post)>0){
   <!-- Certifications -->
   <section class="bg-white bumper-top bumper-bottom-small page-left page-right">
   	<div class="center">
-  		<h2>We're <strong class="green">proud to be members</strong> of the...</h2>
+  		<h2>We're <strong class="green">proud members</strong> of the...</h2>
   	</div>
   	
     <div id="<?=$id?>" class="<?=(count($transitional_certifications)>1)?'carousel-'.$id:''?> accolade-carousel slide">

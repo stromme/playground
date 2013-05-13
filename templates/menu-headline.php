@@ -9,17 +9,18 @@
  */
 
 // Company name to include in titles
-
 $company = get_option('tb_company');
 
 // Location SEO keywords
-
 $seo = get_location_seo();
-$state = ( ( $seo['state'] != '' ) ? ', ' . $seo['state'] : '' );
+
+// Only show state if the city name is not too long
+if ( strlen($seo['city']) < 14 )
+	$state = ( ( $seo['state'] != '' ) ? ', ' . $seo['state'] : '' );
+
 $location = '<a href="'.get_site_url(1).'/locations/" class="link-inverse link-decorate link-showoff" data-toggle="tooltip" data-placement="bottom" title="Visit another location">'.$seo['city'].'<span class="hidden-phone-portrait" >'.$state.'</span></a>';
 
 // Service SEO keywords
-
 $tb_industry = get_option('tb_industry');
 $industry = ucwords( str_replace('-', ' ', $tb_industry['industry'] ) );
 
@@ -29,7 +30,6 @@ if (!is_front_page())
 	$keyword = ucwords(get_the_title());
 	
 // Award
-
 $award = '<span class="hidden-phone-portrait">Awarded '.date('Y').'</span> ';
 	
 // Default title
