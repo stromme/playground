@@ -165,6 +165,14 @@
     blockquote cite {
     	font-size: @baseFontSize * 1.5 !important;
     }
+
+    // Migrated home video embed
+    .migrate {
+        iframe,
+        embed {
+            max-height: 280px;
+        }
+    }
 }
 
 /*  Phones */
@@ -187,6 +195,14 @@
             margin-top: 8px;
         }
     }
+
+    // Migrated home video embed
+    .migrate {
+        iframe,
+        embed {
+            max-height: 240px;
+        }
+    }
 }
 
 @media (max-width: 600px) {
@@ -206,9 +222,9 @@
     		.border-radius(0);
     	}
     }
-    .banner-title h2 { 
+    .banner-title h2 {
     	font-size: @baseFontSize *1.25;
     	line-height: @baseLineHeight * 1.25;
-    	padding: @bumper/2;  
+    	padding: @bumper/2;
     }
 }

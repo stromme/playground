@@ -6898,7 +6898,8 @@ div.img-polaroid div {
     }
   }
 }*/
-.migrate iframe {
+.migrate iframe,
+.migrate embed {
   max-width: 100%;
 }
 .pull-right {

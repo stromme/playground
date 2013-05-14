@@ -1015,6 +1015,10 @@
     width: 640px;
     height: 480px;
   }
+  .migrate iframe,
+  .migrate embed {
+    max-height: 400px;
+  }
 }
 @media (min-width: 979px) {
   .banner-photo {
@@ -1052,6 +1056,10 @@
     width: 640px;
     height: 360px;
   }
+  .migrate iframe,
+  .migrate embed {
+    max-height: 320px;
+  }
 }
 @media (min-width: 768px) and (max-width: 979px) {
   .brand img {
@@ -1083,6 +1091,10 @@
   .span12 .featurette-vertical iframe {
     width: 640px;
     height: 360px;
+  }
+  .migrate iframe,
+  .migrate embed {
+    max-height: 280px;
   }
 }
 @media (max-width: 979px) {
@@ -1309,6 +1321,10 @@
   .select-location .btn-group .dropdown-menu a {
     display: block;
   }
+  .migrate iframe,
+  .migrate embed {
+    max-height: 400px;
+  }
 }
 /*  Phones */
 @media (max-width: 480px) {
@@ -1435,6 +1451,10 @@
   blockquote cite {
     font-size: 24px !important;
   }
+  .migrate iframe,
+  .migrate embed {
+    max-height: 280px;
+  }
 }
 /*  Phones */
 @media (max-width: 320px) {
@@ -1452,6 +1472,10 @@
     width: 250px;
     display: inline-block;
     margin-top: 8px;
+  }
+  .migrate iframe,
+  .migrate embed {
+    max-height: 240px;
   }
 }
 @media (max-width: 600px) {
