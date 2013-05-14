@@ -616,7 +616,11 @@ div.img-polaroid {
 #member-application {
   .select-state-province {
     display: inline-block;
-    width: 185px;
+    width: 220px;
+    .dropdown-menu {
+      max-height: 182px;
+      overflow: auto;
+    }
     li.list-description {
       background-color: #EEE;
       color: #999999;
@@ -633,6 +637,17 @@ div.img-polaroid {
   .control-group.error {
     .select-state-province>a {
       border-color: #c00;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  #member-application {
+    .select-state-province {
+      width: 185px;
+      .dropdown-menu {
+        max-height: 280px;
+      }
     }
   }
 }

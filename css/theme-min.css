@@ -6874,7 +6874,11 @@ div.img-polaroid div {
 }
 #member-application .select-state-province {
   display: inline-block;
-  width: 185px;
+  width: 220px;
+}
+#member-application .select-state-province .dropdown-menu {
+  max-height: 182px;
+  overflow: auto;
 }
 #member-application .select-state-province li.list-description {
   background-color: #EEE;
@@ -6892,6 +6896,14 @@ div.img-polaroid div {
 }
 #member-application .control-group.error .select-state-province > a {
   border-color: #c00;
+}
+@media (max-width: 767px) {
+  #member-application .select-state-province {
+    width: 185px;
+  }
+  #member-application .select-state-province .dropdown-menu {
+    max-height: 280px;
+  }
 }
 .pull-right {
   float: right;
