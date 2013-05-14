@@ -6868,39 +6868,30 @@ div.img-polaroid div {
   padding-right: 20px;
   border-right: 1px solid #cccccc;
 }
-/* For the transitional services page */
-/*.container>.migrate {
-  h1 {
-    margin: 0;
-  }
-  .subtitle {
-    margin-bottom: 30px;
-  }
-  .service_item_wrap {
-    padding-top: 10px;
-    margin-right: 20px;
-  }
-  .youtube {
-    margin-top: 20px;
-    text-align: center;
-  }
-  .textarea {
-    margin-top: 20px;
-  }
-  .service-image {
-    img {
-      max-width: 100%;
-      margin-bottom: 10px;
-    }
-    span {
-      display: block;
-      margin-bottom: 20px;
-    }
-  }
-}*/
 .migrate iframe,
 .migrate embed {
   max-width: 100%;
+}
+#member-application .select-state-province {
+  display: inline-block;
+  width: 185px;
+}
+#member-application .select-state-province li.list-description {
+  background-color: #EEE;
+  color: #999999;
+  padding: 3px 0;
+}
+#member-application .select-state-province > a {
+  -webkit-border-radius: 0 4px 4px 0;
+  -moz-border-radius: 0 4px 4px 0;
+  border-radius: 0 4px 4px 0;
+  display: block;
+  max-width: 200px;
+  color: #666666;
+  overflow: hidden;
+}
+#member-application .control-group.error .select-state-province > a {
+  border-color: #c00;
 }
 .pull-right {
   float: right;

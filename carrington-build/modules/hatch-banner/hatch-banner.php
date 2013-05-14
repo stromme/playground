@@ -39,6 +39,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
         $js_single_data->id = '';
         $js_single_data->description = parse_embed_video_link(parse_shortclass($description));
         $js_single_data->author = parse_shortclass($author);
+        $js_single_data->company = '';
         $js_single_data->author_location = parse_shortclass($author_location);
         $js_single_data->images = array($image);
         $js_single_data->video = $video;
@@ -154,6 +155,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
               }
             }
             $private = 0;
+            $company = '';
             if($cust_id!=''){
               $contact = get_post($cust_id);
               $first_name = get_post_meta($contact->ID, 'first_name', true);
@@ -161,13 +163,11 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
               $city = get_post_meta($contact->ID, 'city', true);
               $company = get_post_meta($contact->ID, 'company', true);
               $private = get_post_meta($contact->ID, 'make_private', true);
-              $name = ($company!='')?
-                        $company:
-                        (($first_name!='' && $last_name!='')?
-                          $first_name.' '.$last_name:
-                          (($first_name!='')?
-                            $first_name:
-                            (($last_name!='')?$last_name:'')));
+              $name = ($first_name!='' && $last_name!='')?
+                        $first_name.' '.$last_name:
+                        (($first_name!='')?
+                          $first_name:
+                          (($last_name!='')?$last_name:''));
             }
             if($i==0){
               $description = $project->post_content;
@@ -181,6 +181,7 @@ if (!class_exists('cfct_module_hatch_banner') && class_exists('cfct_build_module
             $js_single_data->description = parse_shortclass($project->post_content);
             $js_single_data->author = parse_shortclass($name);
             $js_single_data->author_location = parse_shortclass($city);
+            $js_single_data->company = parse_shortclass($company);
             $js_single_data->images = $project_media;
             $js_single_data->video = '';
             $js_single_data->term = $term;

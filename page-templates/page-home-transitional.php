@@ -230,6 +230,7 @@ if($accolades_post && count($accolades_post)>0){
           }
         }
         $private = 0;
+        $company = '';
         if($cust_id!=''){
           $contact = get_post($cust_id);
           $first_name = get_post_meta($contact->ID, 'first_name', true);
@@ -237,13 +238,11 @@ if($accolades_post && count($accolades_post)>0){
           $city = get_post_meta($contact->ID, 'city', true);
           $company = get_post_meta($contact->ID, 'company', true);
           $private = get_post_meta($contact->ID, 'make_private', true);
-          $name = ($company!='')?
-                    $company:
-                    (($first_name!='' && $last_name!='')?
+          $name = ($first_name!='' && $last_name!='')?
                       $first_name.' '.$last_name:
                       (($first_name!='')?
                         $first_name:
-                        (($last_name!='')?$last_name:'')));
+                        (($last_name!='')?$last_name:''));
         }
         if($i==0){
           $description = $project->post_content;
@@ -256,6 +255,7 @@ if($accolades_post && count($accolades_post)>0){
         $js_single_data->id = $project->ID;
         $js_single_data->description = parse_shortclass($project->post_content);
         $js_single_data->author = parse_shortclass($name);
+        $js_single_data->company = parse_shortclass($company);
         $js_single_data->author_location = parse_shortclass($city);
         $js_single_data->images = $project_media;
         $js_single_data->video = '';
@@ -288,14 +288,21 @@ if($accolades_post && count($accolades_post)>0){
             <blockquote>
               <?php $description = substr($d->description, 0, 180)."..."; ?>
               <p>"<span><?=(strlen($d->description)<=185)?$d->description:$description?></span>"</p>
-              <?php if(($d->author!='' || $d->author_location!='') && !$d->is_private){ ?>
-                <?php if($d->author!=''){ ?>
-                <p class="banner-author"><cite><?=$d->author?></cite><?php
-                  }
-                  if($d->author_location!=''){
-                ?>
-                  <span class="author-location"> - <?=$d->author_location?></span></p>
+              <?php if(($d->author!='' || $d->company!='' || $d->author_location!='') && !$d->is_private){ ?>
+                <p class="banner-author">
+                <?php if($d->author!='' && $d->company!=''){ ?>
+                  <cite><?=$d->author?></cite><span class="author-location"> - <?=$d->company?></span>
+                <?php } else { ?>
+                  <?php if($d->author!=''){ ?>
+                  <cite><?=$d->author?></cite>
+                  <?php } else if($d->company!='') { ?>
+                  <cite><?=$d->company?></cite>
+                  <?php } ?>
+                  <?php if($d->author_location!=''){ ?>
+                  <span class="author-location"> - <?=$d->author_location?></span>
+                  <?php } ?>
                 <?php } ?>
+                </p>
               <?php } ?>
             </blockquote>
             <div class="fixed-bottom">

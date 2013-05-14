@@ -31,14 +31,21 @@
           <blockquote>
             <?php $description = substr($d->description, 0, 180)."..."; ?>
             <p>"<span><?=(strlen($d->description)<=185)?$d->description:$description?></span>"</p>
-            <?php if(($d->author!='' || $d->author_location!='') && !$d->is_private){ ?>
-              <?php if($d->author!=''){ ?>
-              <p class="banner-author"><cite id="author-<?=$id?>"><?=$d->author?></cite><?php
-                }
-                if($d->author_location!=''){
-              ?>
-                <span class="author-location" id="author-location-<?=$id?>"> - <?=$d->author_location?></span></p>
+            <?php if(($d->author!='' || $d->company!='' || $d->author_location!='') && !$d->is_private){ ?>
+              <p class="banner-author">
+              <?php if($d->author!='' && $d->company!=''){ ?>
+                <cite><?=$d->author?></cite><span class="author-location"> - <?=$d->company?></span>
+              <?php } else { ?>
+                <?php if($d->author!=''){ ?>
+                <cite><?=$d->author?></cite>
+                <?php } else if($d->company!='') { ?>
+                <cite><?=$d->company?></cite>
+                <?php } ?>
+                <?php if($d->author_location!=''){ ?>
+                <span class="author-location"> - <?=$d->author_location?></span>
+                <?php } ?>
               <?php } ?>
+              </p>
             <?php } ?>
           </blockquote>
           <div class="fixed-bottom">
