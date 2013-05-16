@@ -36,6 +36,7 @@ $prj = get_project_details($post);
 			<div class="curved-shadow">
 				<img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
 			</div>
+      <?php if($prj->media!='' && count($prj->media)>1){ ?>
 			<ul class="thumbnails align-center bumper-top">
         <li>
           <a href="" class="thumbnail" <?=($prj->favorite_media->media_type=="video")?"data-video=\"1\"":""?> data-image="<?=$prj->favorite_media->image[0]?>" data-image-large="<?=$prj->favorite_media->image_large[0]?>">
@@ -43,20 +44,19 @@ $prj = get_project_details($post);
           </a>
         </li>
         <?php
-          if($prj->media!='' && count($prj->media)>1){
-            foreach($prj->media as $media){
-              if($media->id!=$prj->favorite_media->id){ ?>
-                <li>
-                  <a href="" class="thumbnail" <?=($media->media_type=="video")?"data-video=\"1\"":""?> data-image="<?=$media->image[0]?>" data-image-large="<?=$media->image_large[0]?>">
-                    <img src="<?=$media->thumbnail?>" />
-                  </a>
-                </li>
-              <?php
-              }
+          foreach($prj->media as $media){
+            if($media->id!=$prj->favorite_media->id){ ?>
+              <li>
+                <a href="" class="thumbnail" <?=($media->media_type=="video")?"data-video=\"1\"":""?> data-image="<?=$media->image[0]?>" data-image-large="<?=$media->image_large[0]?>">
+                  <img src="<?=$media->thumbnail?>" />
+                </a>
+              </li>
+            <?php
             }
           }
         ?>
 			</ul>
+      <?php } ?>
 		</div>
 		<div class="span6 page-right">
 			<p class="lead"><?=$prj->content?></p>
