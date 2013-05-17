@@ -24,6 +24,7 @@ $blogs = array();
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
 	<!--link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" /-->
 	<?php wp_head(); ?>
+	<?=get_google_analytics_code();?>
 </head>
 
 <body>
