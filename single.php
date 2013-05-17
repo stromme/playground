@@ -23,8 +23,14 @@ $prj = get_project_details($post);
 	<div class="row-fluid bumper-top-large bumper-bottom single-project project">
 		<div class="span6 page-left">
 			<div class="img-polaroid favorite-photo">
-        <img src="<?=$prj->favorite_media->image[0]?>" />
-        <a href="<?=$prj->favorite_media->image_large[0]?>" <?=($prj->favorite_media->media_type=="video")?"data-video=\"1\"":""?> class="colorbox-element show-image" rel="gallery-<?=$prj->id?>"><i class="icon-fullscreen-2x"></i></a>
+        <img src="<?=$prj->favorite_media->image[0]?>" itemprop="image" />
+        <div class="media-controls <?=($prj->favorite_media->media_type=="video")?"show-video-play":""?>">
+          <a href="<?=$prj->favorite_media->image_large[0]?>" class="show-image colorbox-element" <?=($prj->favorite_media->media_type=="video")?"data-video=\"1\"":""?> rel="gallery-<?=$prj->id?>"><i class="<?=($prj->favorite_media->media_type=="video")?"icon-media-play":"icon-media-expand"?>"></i></a>
+        </div>
+        <div class="media-controls">
+          <a onclick="share_project('twitter', '<?=home_url().'/projects/'.$prj->slug?>', '<?=$prj->title?>');" href="javascript:void(0);" ><i class="icon-media-twitter"></i></a>
+          <a onclick="share_project('facebook', '<?=home_url().'/projects/'.$prj->slug?>', '<?=$prj->title?>');" href="javascript:void(0);"><i class="icon-media-facebook"></i></a>
+        </div>
         <?php if($prj->media!='' && count($prj->media)>1){ ?>
           <div class="colorbox-image-list" style="display:none;">
             <?php foreach($prj->media as $media){ ?>
