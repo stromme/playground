@@ -98,7 +98,7 @@ foreach($first_ten_projects as $prj){
 		          <li><a href="<?=home_url().'/showroom'?>">All projects</a></li>
 		          <?php } ?>
 		          <?php foreach($terms as $term){ ?>
-		          <li><a href="<?=home_url().'/showroom/'.$term->slug?>"><?=$term->name?></a></li>
+		          <li><a href="<?=home_url().'/showroom/'.$term->slug?>/"><?=$term->name?></a></li>
 		          <?php } ?>
 		        </ul>
 			</span>
