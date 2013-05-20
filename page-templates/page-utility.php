@@ -8,4 +8,8 @@
  * @subpackage Hatch
  * @since 
  */
- phpinfo(); ?>
+ 
+ get_header(); 
+ phpinfo(); 
+ get_footer(); 
+ ?>
