@@ -25,6 +25,7 @@ $blogs = array();
 	<!--link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" /-->
   <?=get_google_analytics_code();?>
 	<?php wp_head(); ?>
+	<?=get_google_analytics_code();?>
 </head>
 
 <body>
