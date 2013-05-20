@@ -90,7 +90,7 @@ $comments = get_comments($args);
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
 				<ul class="dropdown-menu">
           <?php foreach($promoted_services as $service){ ?>
-					<li><a href="<?=get_home_url()."/".$service->page_type."/".$service->slug?>"><?=$service->name?></a></li>
+					<li><a href="<?=get_home_url()."/".$service->page_type."/".$service->slug?>/"><?=$service->name?></a></li>
           <?php } ?>
 				</ul>
 			</li>
@@ -108,7 +108,7 @@ $comments = get_comments($args);
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <?php foreach($promoted_services as $service){ ?>
-          <li><a href="<?=get_home_url()."/".$service->page_type."/".$service->slug?>"><?=$service->name?></a></li>
+          <li><a href="<?=get_home_url()."/".$service->page_type."/".$service->slug?>/"><?=$service->name?></a></li>
           <?php } ?>
         </ul>
 			</li>

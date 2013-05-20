@@ -37,8 +37,6 @@
         <div class="pen-stroke"></div>
       </div>
       <p class="page-left page-right">We receive your request instantly via SMS and usually <strong><u>respond within minutes!</u></strong></p>
-
-
     </div>
 
     <div class="modal-footer center">
