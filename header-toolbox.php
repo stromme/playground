@@ -23,6 +23,7 @@ $blogs = array();
 	<title>Toolbox | <?=ucwords($post->post_name)?></title>
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
 	<!--link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" /-->
+  <?=get_google_analytics_code();?>
 	<?php wp_head(); ?>
 </head>
 
