@@ -28,7 +28,7 @@
       <input type="hidden" id="social-media-id" value="" />
       <div class="social-comment">
         <div class="social-login">
-          <p class="bumper-top-small"> Login with <a href="" class="comment-via-fb"><i class="icon-facebook"></i> Facebook</a> or <a href="" class="comment-via-twitter"><i class="icon-twitter"></i> Twitter</a>, or <a href="" class="comment-via-register">register</a> to add your review.</p>
+          <p class="bumper-top-small"> Login with <a href="" class="comment-via-fb"><i class="icon-facebook"></i> Facebook</a>, <a href="" class="comment-via-twitter"><i class="icon-twitter"></i> Twitter</a> or <a href="" class="comment-via-register">register</a> to add your review.</p>
         </div>
         <div class="social-user"></div>
       </div>
