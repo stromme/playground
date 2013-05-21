@@ -5924,6 +5924,7 @@ nav-callout .notch {
 }
 .grid-thumb img {
   max-width: 240px;
+  min-height: 75px;
 }
 .grid-thumb nav {
   padding: 0 0 0 5px;
