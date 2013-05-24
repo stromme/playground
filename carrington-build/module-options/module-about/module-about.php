@@ -50,7 +50,7 @@ define('BUILD_ABOUT_MENU_USER_OPTION', 'build-always-show-module-about');
 			*/
 			$js = preg_replace('/^(\t){4}/m', '', '
 				// Module Extra: About Module
-				$(".cfct-build-module-options .cfct-build-help-header a").live("click", function() {
+				$(document).on("click", ".cfct-build-module-options .cfct-build-help-header a", function() {
 					if ($("#cfct-popup-cfct-module-about").is(":visible")) {
 						cfct_builder.moduleOptionsSlideClose();
 					}

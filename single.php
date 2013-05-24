@@ -110,6 +110,7 @@ $prj = get_project_details($post);
   }
   $loop = new WP_Query( $post_args );
   $all_related_projects = $loop->posts;
+  unset($loop);
   $related_projects = array();
   if(count($all_related_projects)>0){
     foreach($all_related_projects as $rel_prj){
@@ -120,6 +121,7 @@ $prj = get_project_details($post);
         }
       }
     }
+    unset($all_related_projects);
   }
 
   // If there's no related project, then show default all project
@@ -128,6 +130,8 @@ $prj = get_project_details($post);
     $term_name = "";
     $loop = new WP_Query( $args );
     $all_related_projects = $loop->posts;
+    unset($loop);
+    unset($related_projects);
     $related_projects = array();
     if(count($all_related_projects)>0){
       foreach($all_related_projects as $rel_prj){
@@ -138,6 +142,7 @@ $prj = get_project_details($post);
           }
         }
       }
+      unset($all_related_projects);
     }
   }
 ?>
@@ -171,4 +176,7 @@ $prj = get_project_details($post);
 </section>
 <?php } ?>
 	
-<?php get_footer(); ?>
+<?php
+  unset($related_projects);
+  get_footer();
+?>

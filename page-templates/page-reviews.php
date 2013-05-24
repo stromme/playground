@@ -40,12 +40,7 @@ foreach($comments as $comment){
 }
 // Sort by pinned
 if(count($reviews)>1){
-  if(!function_exists('pinsort')){
-    function pinsort($a,$b) {
-      return $a->pinned>$b->pinned;
-    }
-  }
-  uasort($reviews, "pinsort");
+  uasort($reviews, "compare_pinned_desc");
 }
 
 $args = array(

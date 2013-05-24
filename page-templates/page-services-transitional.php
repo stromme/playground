@@ -43,12 +43,7 @@ foreach($comments as $comment){
 }
 // Sort by pinned
 if(count($reviews)>1){
-  if(!function_exists('pinsort')){
-    function pinsort($a,$b) {
-      return $a->pinned>$b->pinned;
-    }
-  }
-  uasort($reviews, "pinsort");
+  uasort($reviews, "compare_pinned_desc");
 }
 
 $args = array(
@@ -133,6 +128,7 @@ foreach($comments as $comment){
   }
   $loop = new WP_Query( $post_args );
   $all_related_projects = $loop->posts;
+  unset($loop);
   $related_projects = array();
   if(count($all_related_projects)>0){
     foreach($all_related_projects as $rel_prj){
@@ -141,6 +137,7 @@ foreach($comments as $comment){
         array_push($related_projects, $new_project);
       }
     }
+    unset($all_related_projects);
   }
 
   // If there's no related project, then show default all project
@@ -149,12 +146,14 @@ foreach($comments as $comment){
     $service_name = "";
     $loop = new WP_Query( $args );
     $all_related_projects = $loop->posts;
+    unset($loop);
     $related_projects = array();
     foreach($all_related_projects as $rel_prj){
       if(count($related_projects)<3){
         $new_project = get_project_details($rel_prj);
         array_push($related_projects, $new_project);
       }
+      unset($all_related_projects);
     }
   }
 ?>

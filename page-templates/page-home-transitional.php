@@ -44,12 +44,7 @@ foreach($comments as $comment){
 }
 // Sort by pinned
 if(count($reviews)>1){
-  if(!function_exists('pinsort')){
-    function pinsort($a,$b) {
-      return $a->pinned>$b->pinned;
-    }
-  }
-  uasort($reviews, "pinsort");
+  uasort($reviews, "compare_pinned_desc");
 }
 
 $args = array(
@@ -152,6 +147,7 @@ if($accolades_post && count($accolades_post)>0){
       }
     }
   }
+  unset($accolades_post);
 }
 ?>
 
@@ -263,6 +259,7 @@ if($accolades_post && count($accolades_post)>0){
         array_push($js_data, $js_single_data);
         $i++;
       }
+      unset($projects);
     }
     if(count($js_data)>0){
     ?>
@@ -542,6 +539,7 @@ if($accolades_post && count($accolades_post)>0){
             );
             $service_post_query = new WP_Query( $args );
             $is_have_post = $service_post_query->have_posts();
+            unset($service_post_query);
       ?>
       <li itemprop="makesOffer" itemscope="http://schema.org/Offer">
         <div class="grid-thumb">
@@ -1057,18 +1055,14 @@ if($accolades_post && count($accolades_post)>0){
                 }
               }
               // Sort it by name
-              if(!function_exists('locsort')){
-                function locsort($a,$b) {
-                  return strcmp($a->name, $b->name)>0;
-                }
-              }
-              uasort($locations_list, "locsort");
+              uasort($locations_list, "compare_location_name");
               if(count($locations_list)>0){
                 foreach($locations_list as $location){
               ?>
               <li><?=(($location->link)?"<a href=\"".$location->link."\">":"").$location->name.(($location->link)?"</a>":"")?></li>
               <?php
                 }
+                unset($locations_list);
               }
               ?>
             </ul>

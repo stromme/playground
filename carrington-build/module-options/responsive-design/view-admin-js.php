@@ -10,13 +10,13 @@ $(cfct_builder).bind('responsive-update-response', function(evt, ret) {
 });
 	
 // Responsive CSS class selector handlers
-$('a.cfct-responsive-trigger').live('click', function() {
+$(document).on('click', 'a.cfct-responsive-trigger', function() {
 	var _this = $(this);
 	_this.parent().children('div.cfct-responsive-inner').toggle();
 	return false;
 });
 
-$('div.cfct-responsive-inner li span').live('click', function() {
+$(document).on('click', 'div.cfct-responsive-inner li span', function() {
 	var _this = $(this);
 	_this.parent().find('input[type="checkbox"]').each(function() {
 		$(this).trigger('click');
@@ -24,7 +24,7 @@ $('div.cfct-responsive-inner li span').live('click', function() {
 	return false;
 });
 
-$('div.cfct-responsive-inner input[type="checkbox"]').live('change', function() {
+$(document).on('change', 'div.cfct-responsive-inner input[type="checkbox"]', function() {
 	/**
 	 * Change does not fire if you do
 		if ($(this).is(':checked')) {
@@ -38,7 +38,7 @@ $('div.cfct-responsive-inner input[type="checkbox"]').live('change', function() 
 	$(this).parents('div.cfct-responsive-inner ul').trigger('cfct-responsive-update');
 });
 
-$('div.cfct-responsive-inner ul').live('cfct-responsive-update', function() {
+$(document).on('cfct-responsive-update', 'div.cfct-responsive-inner ul', function() {
 	var _this = $(this);
 	var toggle_link = _this.parents('div.cfct-responsive').find('a.cfct-responsive-trigger');
 	//_this.parents('div.cfct-responsive').append(cfct_builder.spinner('&nbsp;'));

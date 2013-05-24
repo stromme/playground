@@ -271,7 +271,7 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
           var ul;
           var li;
           $("label", container).mousedown(function(){return false;});
-          check_all.live("change", function(){
+          container.on("change", ".cfct-check-all", function(){
             ul = $(".cfct-accolade-list", $(this).closest(".cfct-accolade-container", container));
             li = $("li", ul);
             if($(this).is(":checked")){
@@ -283,8 +283,8 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
               li.removeClass("selected");
             }
           });
-          $(".cfct-accolade-list li", container).live("mousedown", function(){return false;});
-          $("li input[type=\'checkbox\']", container).live("change", function(){
+          container.on("mousedown", ".cfct-accolade-list li", function(){return false;});
+          container.on("change", "li input[type=\'checkbox\']", function(){
             if($(this).is(":checked")){
               $(this).closest("li").addClass("selected");
             }
@@ -302,13 +302,13 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
               accolade_check_all.removeAttr("checked");
             }
           });
-          $("#'.$this->get_field_id('type').'", container).live("change", function(){
+          container.on("change", "#'.$this->get_field_id('type').'", function(){
             var value = $(this).val();
             var accolades_container = $(".cfct-accolade-container", container);
             accolades_container.filter(function(){return !$(this).hasClass("accolade-"+value);}).slideUp("fast");
             accolades_container.filter(function(){return $(this).hasClass("accolade-"+value);}).slideDown("fast");
           });
-          $("#'.$this->get_field_id('style').'", container).live("change", function(){
+          container.on("change", "#'.$this->get_field_id('style').'", function(){
             var value = $(this).val();
             if(value=="featurette"){
               $("#'.$this->get_field_id('interval').'_selector", container).fadeOut("fast");

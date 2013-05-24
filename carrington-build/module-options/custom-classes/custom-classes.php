@@ -156,7 +156,7 @@ class cfct_module_option_custom_classes extends cfct_module_option {
 		$js = '
 // Module Extra: Custom CSS			
 	// show/hide the pre-defined css list from toggle button
-	$("#'.$this->get_field_id('class-list-toggle').'").live("click", function() {
+	$(document).on("click", "#'.$this->get_field_id('class-list-toggle').'", function() {
 		var tgt = $(this).siblings("div.cfct-select-menu");
 		
 		// check to see if any pre-defined class names need toggling before opening the drawer
@@ -169,7 +169,7 @@ class cfct_module_option_custom_classes extends cfct_module_option {
 	});
 	
 	// show the pre-defined css list when input is focused
-	$("#'.$this->get_field_id('custom-css').'").live("click", function(e) {
+	$(document).on("click", "#'.$this->get_field_id('custom-css').'", function(e) {
 		var tgt = $(this).siblings("div.cfct-select-menu");
 		if (tgt.is(":hidden")) {
 			toggle_css_module_options_list_use();
@@ -178,12 +178,12 @@ class cfct_module_option_custom_classes extends cfct_module_option {
 		return false;
 	});
 	
-	$("#'.$this->get_field_id('custom-css').'").live("keyup", function() {
+	$(document).on("keyup", "#'.$this->get_field_id('custom-css').'", function() {
 		setTimeout(toggle_css_module_options_list_use, 200);
 	});
 	
 	// catch a click in the popup and close the flyout
-	$("#cfct-popup").live("click", function(){
+	$(document).on("click", "#cfct-popup", function(){
 		$("#'.$this->get_field_id('class-list-menu').':visible").hide();
 	});
 
@@ -201,7 +201,7 @@ class cfct_module_option_custom_classes extends cfct_module_option {
 	}
 
 	// insert the clicked item in to the text-input
-	$("#'.$this->get_field_id('class-list-menu').' a").live("click", function(e) {
+	$(document).on("click", "#'.$this->get_field_id('class-list-menu').' a", function(e) {
 		_this = $(this);
 		if (!_this.hasClass("inactive")) {
 			_this.addClass("inactive");
@@ -211,7 +211,7 @@ class cfct_module_option_custom_classes extends cfct_module_option {
 		return false;
 	});
 	
-	$("#'.$this->get_field_id('class-list-menu').'").live("click", function() {
+	$(document).on("click", "#'.$this->get_field_id('class-list-menu').'", function() {
 		return false;
 	});	
 			';

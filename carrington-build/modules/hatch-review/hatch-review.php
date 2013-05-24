@@ -47,12 +47,7 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
       }
       // Sort by featured
       if(count($this->featured_reviews)>1){
-        if(!function_exists('featuresort')){
-          function featuresort($a,$b) {
-            return $a->featured<$b->featured;
-          }
-        }
-        uasort($this->featured_reviews, "featuresort");
+        uasort($this->featured_reviews, "compare_featured");
       }
 
       // Get all pinned reviews
@@ -83,12 +78,7 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
       }
       // Sort by pinned
       if(count($this->pinned_reviews)>1){
-        if(!function_exists('pinsort')){
-          function pinsort($a,$b) {
-            return $a->pinned<$b->pinned;
-          }
-        }
-        uasort($this->pinned_reviews, "pinsort");
+        uasort($this->pinned_reviews, "compare_pinned_asc");
       }
 		}
 
@@ -315,8 +305,8 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
           var ul;
           var li;
           $("label", container).mousedown(function(){return false;});
-          $(".cfct-review-list li", container).live("mousedown", function(){return false;});
-          $("li input[type=\'checkbox\']", container).live("change", function(){
+          container.on("mousedown", ".cfct-review-list li", function(){return false;});
+          container.on("change", "li input[type=\'checkbox\']", function(){
             if($(this).is(":checked")){
               $(this).closest("li").addClass("selected");
             }
@@ -324,7 +314,7 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
               $(this).closest("li").removeClass("selected");
             }
           });
-          $("#'.$this->get_field_id('type').'", container).live("change", function(){
+          container.on("change", "#'.$this->get_field_id('type').'", function(){
             var value = $(this).val();
             switch(value){
               case "featured":

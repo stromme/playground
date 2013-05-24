@@ -550,7 +550,7 @@ if (!class_exists('cfct_module_loop') && class_exists('cfct_build_module')) {
 				$type = get_post_type($this->default_post_type);
 				$post_taxonomies = $this->get_post_type_taxonomies($type->name);
 				$html .= '
-					<input type="hidden" class="post-type-select" name="'.$this->gfn('post_type').'[]" value="'.$post_type->name.'" data-taxonomies="'.implode(',', $post_taxonomies).'" />';
+					<input type="hidden" class="post-type-select" name="'.$this->gfn('post_type').'[]" value="'.$type->name.'" data-taxonomies="'.implode(',', $post_taxonomies).'" />';
 			}
 			
 			$html .= '					
@@ -1080,7 +1080,7 @@ if (!class_exists('cfct_module_loop') && class_exists('cfct_build_module')) {
 					}
 					
 					// generic repeater element remove button
-					$(".cfct-module-admin-repeater-block .cfct-repeater-item .cfct-repeater-item-remove").live("click", function() {
+					$(document).on("click", ".cfct-module-admin-repeater-block .cfct-repeater-item .cfct-repeater-item-remove", function() {
 						var _list = $(this).closest("ol");
 						$(this).closest("li").remove();
 						if (_list.find("li.cfct-repeater-item").size() == 1) {
@@ -1264,6 +1264,9 @@ if (!class_exists('cfct_module_loop') && class_exists('cfct_build_module')) {
 		 * @return string of <select> element's HTML
 		 **/
 		protected function dropdown($field_name, $options, $value = false, $args = '') {
+      $excludes = array();
+      $default = null;
+      $multi = false;
 			$defaults = array(
 				'label' => '', // The text for the label element
 				'default' => null, // Add a default option ('all', 'none', etc.)

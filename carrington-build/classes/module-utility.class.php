@@ -43,7 +43,7 @@ class cfct_build_module_utility {
 	 * @param $active_tab
 	 * @return string HTML
 	 */
-	protected function cfct_module_tabs($tabs_id, $tabs = array(), $active_tab = null) {
+	function cfct_module_tabs($tabs_id, $tabs = array(), $active_tab = null) {
 		$html = '';
 		if (count($tabs)) {
 			$html = '
@@ -66,7 +66,7 @@ class cfct_build_module_utility {
 	/**
 	 *	Add this JS to your module's addModuleSaveCallback JavaScript
 	 */
-	protected function cfct_module_tabs_js() {
+	function cfct_module_tabs_js() {
 		return '
 			$(".cfct-module-tabs a").click(function(){
 				var _this = $(this);
@@ -351,7 +351,7 @@ class cfct_build_module_utility {
 	 * @param array $args - see this::image_selector() for args definition
 	 * @return string HTML 
 	 */
-	protected function _image_selector_size_select($args) {
+	function _image_selector_size_select($args) {
 		$html = '
 			<div class="cfct-image-select-size">
 				<label for="'.$this->id_base.'-'.$args['field_name'].'-image-select-size">'.__('Image Size', 'carrington-build').'</label>
@@ -543,7 +543,7 @@ class cfct_build_module_utility {
 	 * @param string $post_type @deprecated @since 1.2
 	 * @return void
 	 */
-	protected function get_author_dropdown($data = array(), $post_type = null) {
+	function get_author_dropdown($data = array(), $post_type = null) {
 		if (!is_null($post_type)) {
 			_deprecated_argument(__FUNCTION__, '1.2' , 'Use of the <code>$post_type</code> parameter has been deprecated.  The author dropdown includes all authors, similar to the WordPress admin author dropdown.');
 		}
@@ -563,7 +563,7 @@ class cfct_build_module_utility {
 		return $html;
 	}
 
-	protected function get_taxonomy_selector($args) {
+	function get_taxonomy_selector($args) {
 		if(is_int($args['taxonomy'])) {
 			throw new Exception("Need to query the taxonomy here >.<");
 		}
@@ -611,6 +611,7 @@ class cfct_build_module_utility {
 	 * Text Input boilerplate
 	 */
 	protected function input_text($field_name, $label_text, $value, $args = array()) {
+    $prefix = null;
 		$defaults = array(
 			'prefix' => null,
 			'class' => 'widefat',

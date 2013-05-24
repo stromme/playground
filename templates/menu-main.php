@@ -20,6 +20,7 @@ foreach($services_terms as $term){
   );
   $promoted_posts = get_posts($args);
   if(count($promoted_posts)>0){
+    unset($promoted_posts);
     $term->page_type = 'services';
     array_push($promoted_services, $term);
   }
@@ -35,6 +36,7 @@ foreach($services_terms as $term){
     );
     $loop = new WP_Query( $args );
     $term_posts = $loop->posts;
+    unset($loop);
     if(count($term_posts)>0){
       $term->page_type = 'showroom';
       array_push($promoted_services, $term);
@@ -50,6 +52,7 @@ foreach($locations_terms as $term){
   );
   $promoted_posts = get_posts($args);
   if(count($promoted_posts)>0){
+    unset($promoted_posts);
     array_push($promoted_locations, $term);
   }
 }

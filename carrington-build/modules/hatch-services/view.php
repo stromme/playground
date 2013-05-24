@@ -26,6 +26,7 @@
         );
         $service_post_query = new WP_Query( $args );
         $is_have_post = $service_post_query->have_posts();
+        unset($service_post_query);
   ?>
   <li itemprop="makesOffer" itemscope="http://schema.org/Offer">
     <div class="grid-thumb">
@@ -63,3 +64,6 @@
     }
   ?>
 </ul>
+<?php
+  unset($services);
+?>

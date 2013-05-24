@@ -1322,13 +1322,13 @@
 		}
 		// Rows
 			// select row to insert buttons
-			$('#cfct-select-new-row .cfct-il-a').live('click', function(e) {
+			$(document).on('click', '#cfct-select-new-row .cfct-il-a', function(e) {
 				_that.$rowTrigger.data('popover').hide();
 				cfct_builder.insertRow($(this).attr('rel'));
 				return false;
 			});
 			// delete row buttons
-			$('#cfct-sortables .cfct-row-delete').live('click', function() {
+			$(document).on('click', '#cfct-sortables .cfct-row-delete', function() {
 				var _this = $(this);
 				if (_this.parents('.cfct-row').find('div.cfct-module').length == 0) {
 					cfct_builder.doRemoveRow(_this.parents('.cfct-row'));
@@ -1341,7 +1341,7 @@
 			
 		// new module
 			// standard new button
-			$('a.cfct-add-new-module').live('click', function() {
+			$(document).on('click', 'a.cfct-add-new-module', function() {
 				var _this = $(this);
 
 				cfct_builder.editing({
@@ -1359,7 +1359,7 @@
 			});
 			
 			// cancel new module
-			$('#cfct-add-module-cancel').live('click', function() {
+			$(document).on('click', '#cfct-add-module-cancel', function() {
 				if ($(this).closest('.cfct-module-sideload').size() > 0) {
 					cfct_builder.sideloadClose(function() {
 						cfct_builder.sideloadSetContent('');
@@ -1373,7 +1373,7 @@
 			});
 		
 		// remove module actions
-			$('a.cfct-module-clear').live('click', function() {
+			$(document).on('click', 'a.cfct-module-clear', function() {
 				var _this = $(this);
 				var clear_module_data = {
 					'module_id':_this.attr('href').slice(_this.attr('href').indexOf('#')+1),
@@ -1396,7 +1396,7 @@
 				return false;
 			});
 		// Enable / disable module rendering actions
-			$('a.cfct-module-toggle-render').live('click', function() {
+			$(document).on('click', 'a.cfct-module-toggle-render', function() {
 				var _this = $(this);
 				cfct_builder.module_spinner(_this);
 				var module_data = {
@@ -1415,7 +1415,7 @@
 				
 		// Delete Module Confirmation
 			// standard delete module button
-			$('#cfct-delete-module-confirm').live('click', function() {
+			$(document).on('click', '#cfct-delete-module-confirm', function() {
 				var _wrapper = $(this).closest('.cfct-module-form');
 				var callback = 'remove-module-response';
 
@@ -1429,7 +1429,7 @@
 			});
 			
 			// standard cancel delete action
-			$('#cfct-delete-module-cancel').live('click', function() {
+			$(document).on('click', '#cfct-delete-module-cancel', function() {
 				if ($(this).closest('.cfct-module-sideload').size() > 0) {
 					cfct_builder.editing({
 						'sideload_module_id': null
@@ -1446,7 +1446,7 @@
 			});
 		
 		// edit module cancel	
-			$('.cfct-module-form a.cancel').live('click', function() {			
+			$(document).on('click', '.cfct-module-form a.cancel', function() {
 				if ($(this).closest('.cfct-module-sideload').size() > 0) {
 					cfct_builder.sideloadCancelSelectModule();
 				}
@@ -1459,7 +1459,7 @@
 			});
 			
 		// new module selection
-			$('.cfct-module-list li a.cfct-il-a').live('click', function() {
+			$(document).on('click', '.cfct-module-list li a.cfct-il-a', function() {
 				var _this = $(this);
 
 				if (new Date().getTime() < this.submitted_at + 500) {
@@ -1488,7 +1488,7 @@
 			});
 			
 		// edit module actions
-			$('a.cfct-module-edit').live('click', function() {
+			$(document).on('click', 'a.cfct-module-edit', function() {
 				var _this = $(this);
 
 
@@ -1516,7 +1516,7 @@
 			
 		// module form submit
 			// handle form submit
-			$('form.cfct-module-edit-form').live('submit', function(){
+			$(document).on('submit', 'form.cfct-module-edit-form', function(){
 				var _this = $(this);
 				if (_this.closest('.cfct-module-sideload').size() > 0) {
 					callback = 'sideload-submit-module-form-response';
@@ -1529,26 +1529,26 @@
 			});
 		
 			// add action to module form submit button
-			$('.cfct-module-edit-form input[type="submit"]').live('click', function(){
+			$(document).on('click', '.cfct-module-edit-form input[type="submit"]', function(){
 				$(this).closest('form').submit();
 				return false;
 			});
 			
 		// module options
 			// actions menu action
-			$('.cfct-build-module-options .cfct-build-options-header a').live('click', function() {
+			$(document).on('click', '.cfct-build-module-options .cfct-build-options-header a', function() {
 				cfct_builder.toggleModuleOptions(this);
 				return false;
 			});
 
 			// actions menu action
-			$('.cfct-build-row-options .cfct-build-options-header a')
-      .live('mousedown', function(e){e.preventDefault();return false;})
-      .live('click', function() {
+			$(document)
+      .on('mousedown', '.cfct-build-row-options .cfct-build-options-header a', function(e){e.preventDefault();return false;})
+      .on('click', '.cfct-build-row-options .cfct-build-options-header a', function() {
         cfct_builder.rowOptionsSliderShowHide($(this));
 				return false;
 			});
-      $('.cfct-row-option-block .save').live('click', function(){
+      $(document).on('click', '.cfct-row-option-block .save', function(){
         $(this).addClass('disabled').attr('disabled', 'disabled');
         var block = $(this).closest('.cfct-row-option-block');
         cfct_builder.fetch('update_row_class',{
@@ -1560,7 +1560,7 @@
           'bumper-bottom': $('.cfct-custom-bumper-bottom', block).val()
         }, 'custom-row-class-response');
       });
-      $('.cfct-row-option-block .close').live('click', function(){
+      $(document).on('click', '.cfct-row-option-block .close', function(){
         cfct_builder.rowOptionsSliderShowHide($(this));
         var button = $(this);
         var container = button.closest('.cfct-row-option-block');
@@ -1585,27 +1585,27 @@
       });
 
 			// take the link ID as a reference to the ID of the item that needs to be displayed
-			$('.cfct-build-module-options .cfct-build-module-options-list a').live('click', function() {
+			$(document).on('click', '.cfct-build-module-options .cfct-build-module-options-list a', function() {
 				cfct_builder.toggleModuleOptions(this);
 				cfct_builder.moduleOptionsSliderShowHide(this);
 				return false;
 			});
 
       // take the link ID as a reference to the ID of the item that needs to be displayed
-      $('.cfct-build-row-options .cfct-build-options-list a').live('click', function(e) {
+      $(document).on('click', '.cfct-build-row-options .cfct-build-options-list a', function(e) {
         e.preventDefault();
         cfct_builder.toggleRowOptions($(e.target));
         cfct_builder.rowOptionsSliderShowHide($(e.target));
         return false;
       });
 			
-			$('div#cfct-popup-advanced-actions a.close').live('click', function() {
+			$(document).on('click', 'div#cfct-popup-advanced-actions a.close', function() {
 				cfct_builder.moduleOptionsSlideClose();
 				return false;
 			});
 			
 		// new module list toggle
-		$('.cfct-module-list-toggle').live('click', function() {
+		$(document).on('click', '.cfct-module-list-toggle', function() {
 			var _this = $(this);
 			_tgt = $('ul.cfct-module-list');
 			
@@ -1629,7 +1629,7 @@
 		});
 		
 		// reset layout
-		$('#cfct-reset-build-data').live('click', function() {
+		$(document).on('click', '#cfct-reset-build-data', function() {
 			cfct_builder.editing(0);
 			cfct_builder.toggleOptions();
 			cfct_builder.confirmResetTemplate();
@@ -1637,7 +1637,7 @@
 		});
 		
 		// save layout as template
-		$('#cfct-save-as-template').live('click', function() {
+		$(document).on('click', '#cfct-save-as-template', function() {
 			cfct_builder.editing(0);
 			cfct_builder.saveAsTemplate();
 			cfct_builder.toggleOptions();
@@ -1668,17 +1668,17 @@
 		});
 		
 		// proof of concept block change listeners
-		// $('.cfct-block').live('add-module', function(evt, module_id) {
+		// $(document).on('add-module', '.cfct-block', function(evt, module_id) {
 		// 	console.log(this);
 		// 	console.log('added: ' + module_id);
 		// });
-		// $('.cfct-block').live('remove-module', function(evt, module_id) {
+		// $(document).on('remove-module', '.cfct-block', function(evt, module_id) {
 		// 	console.log(this);
 		// 	console.log('removed: ' + module_id);
 		// });
 		
 		// Global Image Search boxes
-		$('.cfct-global-image-select .cfct-image-select-items-list-item').live('click', function() {
+		$(document).on('click', '.cfct-global-image-select .cfct-image-select-items-list-item', function() {
 			var _this = $(this);
 			_this.addClass('active').siblings().removeClass('active');
 
@@ -1693,7 +1693,7 @@
 		});
 
 		// Post image select: account for single select boxes
-		$('.cfct-post-image-select.cfct-post-image-select-single .cfct-image-select-items-list-item').live('click', function() {
+		$(document).on('click', '.cfct-post-image-select.cfct-post-image-select-single .cfct-image-select-items-list-item', function() {
 			var _this = $(this);
 
 			_this.addClass('active').siblings().removeClass('active');
@@ -1703,7 +1703,7 @@
 		});
 
 		// Post image select: account for multi-select boxes
-		$('.cfct-post-image-select.cfct-post-image-select-multiple .cfct-image-select-items-list-item').live('click', function() {
+		$(document).on('click', '.cfct-post-image-select.cfct-post-image-select-multiple .cfct-image-select-items-list-item', function() {
 			var _this = $(this);
                    
 			var val = _this.closest('.cfct-image-select-items-list').find('input:hidden').val();

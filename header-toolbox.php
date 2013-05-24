@@ -7,10 +7,6 @@
  * @subpackage Hatch
  * @since Hatch 1.0
  */
-if(session_id() == '') {
-  session_write_close();
-  session_start();
-}
 global $post;
 $industry = get_option('tb_industry');
 $blogs = array();
@@ -22,14 +18,12 @@ $blogs = array();
 	<link rel="apple-touch-icon-precomposed" href="<?=TOOLBOX_IMAGES?>/apple-touch-icon.png"/>
 	<title>Toolbox | <?=ucwords($post->post_name)?></title>
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
-	<!--link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" /-->
   <?=get_google_analytics_code();?>
 	<?php wp_head(); ?>
 	<?=get_google_analytics_code();?>
 </head>
 
 <body>
-
 
 <!-- Urgent Alerts - fixed to top - default visibility hidden
     ================================================== -->	
@@ -50,7 +44,7 @@ $blogs = array();
     	<div class="brand hidden-phone">
     		<?php 
     		$seo = get_location_seo();
-    		if ( $industry['industry'] == 'window-cleaning' ) echo '<h2>'. $seo['city'] . ', ' . $seo['state'] . '</h2>'; else echo '<h2>Hatch</h2>';?></div>
+    		if ( $industry['industry'] == 'window-cleaning' ) echo '<h2>' , $seo['city'] , ', ' , $seo['state'] , '</h2>'; else echo '<h2>Hatch</h2>';?></div>
 			<div><!--</div> class="nav-collapse collapse"-->
 				<ul class="nav">
 					<li class="has-nav-icon">
@@ -69,10 +63,7 @@ $blogs = array();
                 if(!is_super_admin(get_current_user_id())){
                   $blogs = get_blogs_of_user(get_current_user_id());
                   if(count($blogs)>1){
-                    function blogsort($a,$b) {
-                      return strcmp($a->blogname, $b->blogname)>0;
-                    }
-                    usort($blogs, "blogsort");
+                    usort($blogs, "compare_blogname");
                     foreach($blogs as $blog){
                       if($blog->userblog_id!=get_current_blog_id()){
                         $blog_seo = get_blog_option($blog->userblog_id, 'tb_seo');

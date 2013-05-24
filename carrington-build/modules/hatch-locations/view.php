@@ -104,18 +104,14 @@
       }
     }
     // Sort it by name
-    if(!function_exists('locsort')){
-      function locsort($a,$b) {
-        return strcmp($a->name, $b->name)>0;
-      }
-    }
-    uasort($locations_list, "locsort");
+    uasort($locations_list, "compare_location_name");
     if(count($locations_list)>0){
       foreach($locations_list as $location){
     ?>
     <li><?=(($location->link)?"<a href=\"".$location->link."\">":"").$location->name.(($location->link)?"</a>":"")?></li>
     <?php
       }
+      unset($locations_list);
     }
     ?>
 	</ul>

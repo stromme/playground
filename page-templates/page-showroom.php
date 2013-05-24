@@ -10,7 +10,6 @@
 
 get_header(); 
 // Get all pinned reviews
-
 $terms = get_terms('services', array('hide_empty', true));
 $service = get_query_var('service');
 $service_name = '';
@@ -26,13 +25,16 @@ if(count($terms)>0){
     );
     $loop = new WP_Query( $args );
     $term_posts = $loop->posts;
+    unset($loop);
     if(count($term_posts)>0){
       array_push($new_terms, $term);
       if($service==$term->slug) $service_name = $term->name;
     }
   }
+  unset($terms);
 }
 $terms = $new_terms;
+unset($new_terms);
 $current_industry = get_option('tb_industry');
 $industry_name = str_replace('-', ' ', $current_industry['industry']);
 $current_service = ($service!='' && $service_name!='')?strtolower($service_name):'projects';
@@ -56,12 +58,14 @@ $args = array(
 if($service_name!='') $args['services'] = $service;
 $loop = new WP_Query( $args );
 $pinned_projects = $loop->posts;
+unset($loop);
 $pinned_keys = array();
 foreach($pinned_projects as $prj){
   array_push($pinned_keys, $prj->ID);
   $new_project = get_project_details($prj);
   array_push($initial_projects, $new_project);
 }
+unset($pinned_projects);
 
 $args = array(
   'orderby'		     => 'modified',
@@ -74,6 +78,7 @@ $args = array(
 if($service_name!='') $args['services'] = $service;
 $loop = new WP_Query( $args );
 $first_ten_projects = $loop->posts;
+unset($loop);
 foreach($first_ten_projects as $prj){
   if(!in_array($prj->ID, $pinned_keys)){
     $new_project = get_project_details($prj);
@@ -100,6 +105,7 @@ foreach($first_ten_projects as $prj){
 		          <?php foreach($terms as $term){ ?>
 		          <li><a href="<?=home_url().'/showroom/'.$term->slug?>/"><?=$term->name?></a></li>
 		          <?php } ?>
+		          <?php unset($terms); ?>
 		        </ul>
 			</span>
     	<?php if ($current_service != 'projects') echo 'projects'; ?>
@@ -146,4 +152,7 @@ foreach($first_ten_projects as $prj){
 	</section>
 </div>
 
-<?php get_footer(); ?>
+<?php
+  unset($initial_projects);
+  get_footer();
+?>
