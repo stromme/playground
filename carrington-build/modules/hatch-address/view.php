@@ -21,6 +21,8 @@ if(count($users)>0){
         $owner_name = $user->first_name.' '.$user->last_name;
         $owner_role = ucfirst($roles[0]);
         $owner_email = $user->user_email;
+        $user_position = get_user_meta($user->ID, 'job_title', true);
+        if($user_position!='') $owner_role = $user_position;
       }
     }
   }
