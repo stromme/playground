@@ -23,8 +23,8 @@
 
 <body itemscope itemtype="http://schema.org/ProfessionalService/">
 
-<? get_template_part('templates/menu', 'headline'); ?>
-<? get_template_part('templates/menu', 'main'); ?>
+<? if (!is_page_template('page-templates/page-launch.php')) get_template_part('templates/menu', 'headline'); ?>
+<? if (!is_page_template('page-templates/page-launch.php')) get_template_part('templates/menu', 'main'); ?>
 
 <!-- Urgent Alerts - fixed to top - default visibility hidden
     ================================================== -->
