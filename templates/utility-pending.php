@@ -1,15 +1,12 @@
 <?php
 /**
- * Template Name: Launch
- * Description: Launching template
+ * Description: Used to show a pending post.
  *
  *
  * @package WordPress
  * @subpackage Hatch
  * @since
  */
-
-get_header();
 
 // Location SEO keywords
 $seo = get_location_seo();
@@ -30,4 +27,3 @@ $company = get_option('tb_company');
   </section>
 
 </div>
-<?php // get_footer(); ?>
