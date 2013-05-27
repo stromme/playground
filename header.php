@@ -22,9 +22,12 @@
 </head>
 
 <body itemscope itemtype="http://schema.org/ProfessionalService/">
+<?php 
 
-<? get_template_part('templates/menu', 'headline'); ?>
-<? get_template_part('templates/menu', 'main'); ?>
+get_template_part('templates/menu', 'headline');
+get_template_part('templates/menu', 'main');
+
+?>
 
 <!-- Urgent Alerts - fixed to top - default visibility hidden
     ================================================== -->
@@ -40,4 +43,5 @@
 
 <!-- Wrap the page in .container to centre the content and keep it at a max width -->
 <div class="container gentle-shadow">
-<?php do_action('output'); ?>
+<?php do_action('output');
+?>
