@@ -8,9 +8,24 @@
  * @since 
  */
 
-$services_terms = get_terms('services', array('hide_empty' => 1, 'orderby' => 'post_date', 'order' => 'DESC'));
-$locations_terms = get_terms('locations', array('hide_empty' => 1, 'orderby' => 'post_date', 'order' => 'DESC'));
-
+$services_terms = get_terms('services', array('hide_empty' => 1, 'orderby' => 'term_name', 'order' => 'ASC'));
+$locations_terms = get_terms('locations', array('hide_empty' => 1, 'orderby' => 'term_name', 'order' => 'ASC'));
+$i=0;
+foreach ($services_terms as $key=>$service) {
+  $desc = json_decode($service->description);
+  $services_terms[$key]->order = ($desc && isset($desc->order))?($desc->order):$i;
+  ++$i;
+  unset($service);
+}
+uasort($services_terms, "compare_promote_order");
+$i=0;
+foreach ($locations_terms as $key=>$location) {
+  $desc = json_decode($location->description);
+  $locations_terms[$key]->order = ($desc && isset($desc->order))?($desc->order):$i;
+  ++$i;
+  unset($location);
+}
+uasort($locations_terms, "compare_promote_order");
 $promoted_services = array();
 foreach($services_terms as $term){
   $args = array(

@@ -23,7 +23,15 @@ if (!class_exists('cfct_module_hatch_services') && class_exists('cfct_build_modu
 		 */
 		public function display($data) {
       $title = isset($data[$this->get_field_id('title')]) ? stripslashes($data[$this->get_field_id('title')]) : stripslashes($this->default_title);
-      $services = get_terms('services', array('hide_empty' => 0, 'orderby' => 'post_date', 'order' => 'DESC'));
+      $services = get_terms('services', array('hide_empty' => 1, 'orderby' => 'term_name', 'order' => 'ASC'));
+      $i=0;
+      foreach ($services as $key=>$service) {
+        $desc = json_decode($service->description);
+        $services[$key]->order = ($desc && isset($desc->order))?($desc->order):$i;
+        ++$i;
+        unset($service);
+      }
+      uasort($services, "compare_promote_order");
 			return $this->load_view($data, compact('title', 'services'));
 		}
 
