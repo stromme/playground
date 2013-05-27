@@ -75,10 +75,10 @@ class cfct_module_option_custom_classes extends cfct_module_option {
       array('value'=>'bumper-bottom-large', 'text'=>'Large'),
       array('value'=>'bumper-bottom-Xlarge', 'text'=>'Xlarge')
     );
-    $bumper_left = ($data['bumper-left']!='')?$data['bumper-left']:'';
-    $bumper_right = ($data['bumper-right']!='')?$data['bumper-right']:'';
-    $bumper_top = ($data['bumper-top']!='')?$data['bumper-top']:'';
-    $bumper_bottom = ($data['bumper-bottom']!='')?$data['bumper-bottom']:'';
+    $bumper_left = (isset($data['bumper-left']) && $data['bumper-left']!='')?$data['bumper-left']:'';
+    $bumper_right = (isset($data['bumper-right']) && $data['bumper-right']!='')?$data['bumper-right']:'';
+    $bumper_top = (isset($data['bumper-top']) && $data['bumper-top']!='')?$data['bumper-top']:'';
+    $bumper_bottom = (isset($data['bumper-bottom']) && $data['bumper-bottom']!='')?$data['bumper-bottom']:'';
     $bumper_left_options = '';
     $bumper_right_options = '';
     $bumper_top_options = '';
@@ -106,7 +106,7 @@ class cfct_module_option_custom_classes extends cfct_module_option {
 					<div id="'.$this->get_field_id('class-list-menu').'" class="cfct-select-menu" style="display: none;">
 						<ul>';
 		foreach($dropdown_opts as $classname => $title) {
-			$class = (in_array($classname, $data['custom-css']) ? 'inactive' : null);
+			$class = (isset($data['custom-css']) && in_array($classname, $data['custom-css']) ? 'inactive' : null);
 			$html .= '
 							<li><a class="'.$class.'" href="#'.esc_attr($classname).'" title="'.esc_attr($title).'">'.esc_html($classname).'</a></li>';
 		}
