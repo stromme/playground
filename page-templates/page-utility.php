@@ -11,5 +11,6 @@
  
  get_header(); 
  phpinfo(); 
+ echo '<br> End of PHP Info Output </br>';
  get_footer(); 
  ?>
