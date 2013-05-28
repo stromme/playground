@@ -522,7 +522,7 @@ if($accolades_post && count($accolades_post)>0){
   <!-- Services list - Done -->
   <section class="bg-slate bumper-top-small bumper-bottom-medium">
     <?php
-      $services = get_terms('services', array('hide_empty' => 1, 'orderby' => 'term_name', 'order' => 'ASC'));
+      $services = get_terms('services', array('hide_empty' => 0, 'orderby' => 'term_name', 'order' => 'ASC'));
       $i=0;
       foreach ($services as $key=>$service) {
         $desc = json_decode($service->description);
