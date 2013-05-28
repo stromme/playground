@@ -257,7 +257,7 @@ class cfct_build_row {
 		$row_values = array(
 			'{class}' => $this->row_class(array(), 'admin'),
 			'{id}' => $opts['guid'],
-      '{post-id}' => $_GET['post'],
+      '{post-id}' => (isset($_GET['post']))?$_GET['post']:'',
       '{classes}' => $classes,
       '{page-left-check}' => $page_left_check,
       '{page-right-check}' => $page_right_check,

@@ -10,7 +10,15 @@
 
 get_header(); 
 // Get all pinned reviews
-$terms = get_terms('services', array('hide_empty', true));
+$terms = get_terms('services', array('hide_empty' => 1, 'orderby' => 'term_name', 'order' => 'ASC'));
+$i=0;
+foreach ($terms as $key=>$service) {
+  $desc = json_decode($service->description);
+  $terms[$key]->order = ($desc && isset($desc->order))?($desc->order):$i;
+  ++$i;
+  unset($service);
+}
+uasort($terms, "compare_promote_order");
 $service = get_query_var('service');
 $service_name = '';
 $new_terms = array();
