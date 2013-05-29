@@ -8,10 +8,15 @@
  * @subpackage Hatch
  * @since 
  */
- 
- get_header(); 
+ ?>
+ <!DOCTYPE html>
+ <head> 
+ </head>
+ <body>
+ <?php
  error_reporting(-1);
  phpinfo(); 
  echo '<br> End of PHP Info Output </br>';
  get_footer(); 
  ?>
+ </body>
