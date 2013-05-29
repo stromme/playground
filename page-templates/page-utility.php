@@ -16,7 +16,7 @@
  <?php
  error_reporting(-1);
  phpinfo(); 
- echo '<br> End of PHP Info Output </br>';
- get_footer(); 
  ?>
+ <br><br>
+ End of PHP Info Output
  </body>
