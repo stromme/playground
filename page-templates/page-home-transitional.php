@@ -969,18 +969,9 @@ if($accolades_post && count($accolades_post)>0){
             <h3 class="light-weight"><?=parse_shortclass("Where we work...")?></h3>
             <ul>
               <?php
-              $users = get_users();
               $owner_id = '';
-              if(count($users)>0){
-                foreach($users as $user){
-                  $roles = $user->roles;
-                  if(count($roles)>0){
-                    if($roles[0]=='owner'){
-                      $owner_id = $user->id;
-                    }
-                  }
-                }
-              }
+              $owner = get_site_owner();
+              if($owner) $owner_id = $owner->ID;
 
               $blogs_list = array();
               $locations_list = array();
