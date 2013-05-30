@@ -5432,6 +5432,12 @@ blockquote {
   line-height: 24px;
   width: 24px;
 }
+.icon-linkedin {
+  background: url('../toolbox-framework/bootstrap/img/glyphicons/glyphicons_397_linked_in.png') 0 0 no-repeat;
+  height: 24px;
+  line-height: 24px;
+  width: 24px;
+}
 .icon-facebook {
   background: url('../toolbox-framework/bootstrap/img/glyphicons/glyphicons_410_facebook.png') 0 0 no-repeat;
   height: 24px;
