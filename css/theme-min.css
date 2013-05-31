@@ -6664,46 +6664,35 @@ section:first-of-type {
   font-size: 16px;
   position: relative;
 }
-.project blockquote p .content-preview {
-  margin-right: 10px;
+.project blockquote p .content-description {
   display: block;
 }
-.project blockquote p .content-full {
-  margin-right: 10px;
-  display: none;
-}
-.project blockquote p .show-more {
-  display: block;
-  position: absolute;
-  right: -10px;
-  top: 2px;
+.project blockquote p .content-description .show-more {
+  display: inline-block;
   font-size: 12px;
 }
-.project blockquote p .show-more i {
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  transform: rotate(90deg);
+.project blockquote p .content-description .show-more i {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
   margin-right: 2px;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-.project blockquote p .show-more i.icon-collapse-halfling.expanded {
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-  transform: rotate(180deg);
+.project blockquote p .content-description.expanded i.icon-collapse-halfling {
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
 }
-.project blockquote:hover p .show-more i {
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-  transform: rotate(180deg);
+.project blockquote p .content-preview,
+.project blockquote p .content-rest {
+  display: none;
 }
 .project .tags {
   padding: 15px;

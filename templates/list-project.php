@@ -44,12 +44,15 @@
     <?php if($prj->content!=''){ ?>
     <blockquote>
       <p>
-        <?php if(strlen($prj->content)<223){ ?>
-          <?=$prj->content?>
+        <?php if(strlen($prj->content)<405){ ?>
+          <span class="content-description" itemprop="description"><?=$prj->content?></span>
         <?php } else { ?>
-          <span class="content-preview"><?=substr($prj->content, 0, 220).'...'?></span>
-          <span class="content-full" itemprop="description"><?=$prj->content?></span>
-          <a href="" class="show-more"><i class="icon-collapse-halfling"></i></a>
+          <span class="content-description" itemprop="description">
+            <?=substr($prj->content, 0, 400).'...'?>
+            <a href="" class="show-more"><i class="icon-collapse-halfling"></i></a>
+          </span>
+          <span class="content-preview"></span>
+          <span class="content-rest"><?=substr($prj->content, 400)?></span>
         <?php } ?>
       </p>
     </blockquote>
