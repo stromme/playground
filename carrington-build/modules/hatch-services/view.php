@@ -33,9 +33,9 @@
       <?php if($is_have_post || $is_service_promoted){ ?>
       <nav>
         <?php if($is_have_post){ ?>
-        <a href="<?=get_home_url()."/showroom/".$service->slug?>"><i class="icon-picture icon-white"></i> Showroom</a>
+        <a href="<?=get_home_url()."/showroom/".$service->slug?>/"><i class="icon-picture icon-white"></i> Showroom</a>
         <?php } if($is_service_promoted){ ?>
-        <a href="<?=get_home_url()."/services/".$service->slug?>"><i class="icon-info-sign icon-white" itemprop="url"></i> Learn more</a>
+        <a href="<?=get_home_url()."/services/".$service->slug?>/"><i class="icon-info-sign icon-white" itemprop="url"></i> Learn more</a>
         <?php } ?>
       </nav>
       <?php } ?>
