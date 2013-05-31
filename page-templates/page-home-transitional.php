@@ -184,13 +184,17 @@ if($accolades_post && count($accolades_post)>0){
         $args = array(
           'numberposts' => -1,
           'post_type' => 'attachment',
-          'post_parent' => $project->ID
+          'post_parent' => $project->ID,
+          'orderby'     => 'created',
+          'order'       => 'ASC'
         );
         $attachments = get_posts($args);
         $args = array(
           'numberposts' => -1,
           'post_type' => 'videos',
-          'post_parent' => $project->ID
+          'post_parent' => $project->ID,
+          'orderby'     => 'created',
+          'order'       => 'ASC'
         );
         $videos = get_posts($args);
         if(count($attachments)>0){
