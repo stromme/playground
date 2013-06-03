@@ -29,6 +29,7 @@ class cfct_module_shortcode extends cfct_build_module {
 	 */
 	public function display($data) {
 		$text = do_shortcode($data[$this->get_field_name('content')]);
+    if(strstr($text, '[')) $text = parse_embed_video_link($data[$this->get_field_name('content')]);
 		return $this->load_view($data, compact('text'));
 	}
 
