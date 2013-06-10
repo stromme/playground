@@ -1016,7 +1016,7 @@ if($accolades_post && count($accolades_post)>0){
                 // Process those locations
                 if(count($locations)>0){
                   foreach($locations as $location) {
-                    $args = array('post_type' => 'cftl-tax-landing', 'taxonomy' => 'locations', 'term' => $location->slug);
+                    $args = array('post_type' => 'cftl-tax-landing', 'taxonomy' => 'locations', 'term' => $location->slug, 'post_status' => 'publish');
                     $is_location_promoted = TB_Promote::is_promoted($args);
                     $loc_link = '';
                     if($is_location_promoted){
