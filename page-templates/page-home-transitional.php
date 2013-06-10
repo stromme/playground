@@ -543,7 +543,7 @@ if($accolades_post && count($accolades_post)>0){
       <?php
         if(class_exists('TB_Promote')){
           foreach($services as $service){
-            $args = array('post_type' => 'cftl-tax-landing', 'taxonomy' => 'services', 'term' => $service->slug);
+            $args = array('post_type' => 'cftl-tax-landing', 'taxonomy' => 'services', 'term' => $service->slug, 'post_status' => 'publish');
             $is_service_promoted = TB_Promote::is_promoted($args);
             $args = array(
               'post_type'   => 'showroom',
