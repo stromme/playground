@@ -19,6 +19,7 @@
 	<?php wp_head(); ?>
 	<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
   <?=get_google_analytics_code();?>
+  <?do_action('get_zopim_code');?>
 </head>
 
 <body itemscope itemtype="http://schema.org/ProfessionalService/">
