@@ -101,7 +101,7 @@ $comments = get_comments($args);
 		<!-- /Text version  -->
 		
 		<!-- Main Navigation Menu Bar -->
-		<ul class="main-nav nav nav-pills">
+		<ul class="main-nav nav nav-pills fixed-nav">
 			<li class="visible-desktop"><a href="<?=get_home_url()?>/">Home</a>
       <?php if(count($promoted_services)>0){ ?>
 			<li class="dropdown hidden-desktop">
@@ -142,7 +142,7 @@ $comments = get_comments($args);
 	</nav>
 	
 	<!-- Brand -->
-	<div class="brand" itemprop="brand" itemscope="http://schema.org/Brand">
+	<div class="brand fixed-brand" itemprop="brand" itemscope="http://schema.org/Brand">
 		<a href="<?=get_home_url()?>/"><img src="<?php echo get_header_image(); ?>" itemprop="logo"></a>
 	</div>
 	<!-- /Brand -->

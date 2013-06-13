@@ -15,8 +15,7 @@ $company = get_option('tb_company');
 $seo = get_location_seo();
 
 // Only show state if the city name is not too long
-if ( strlen($seo['city']) < 14 )
-	$state = ( ( $seo['state'] != '' ) ? ', ' . $seo['state'] : '' );
+$state = ((strlen($seo['city'])<14 && $seo['state']!='')?', '.$seo['state']:'');
 
 $location = '<a href="'.get_site_url(1).'/locations/" class="link-inverse link-decorate link-showoff" data-toggle="tooltip" data-placement="bottom" title="Visit another location">'.$seo['city'].'<span class="hidden-phone-portrait" >'.$state.'</span></a>';
 
@@ -48,9 +47,13 @@ if ( ( 'cftl-tax-landing' == get_post_type() ) && ( $taxonomy == 'services' ) ) 
 }
 
 if ( ( 'cftl-tax-landing' == get_post_type() ) && ( $taxonomy == 'locations' ) ) {
+  $terms = get_the_terms(get_the_ID(), $taxonomy);
+  if($terms && count($terms)>0){
+    $keyword = reset($terms)->name;
+  }
 	$title = $award . '<b>Best ' . $industry . '</b> in <a href="'.get_site_url(1).'/locations/" class="link-inverse link-decorate link-showoff" data-toggle="tooltip" data-placement="bottom" title="Visit another location">'.$keyword.'</a>';
 	if (strlen($keyword) > 16)
-		$title = '<b>Best ' . $industry . '</b> in <a href="'.get_site_url(1).'/locations/" class="link-inverse link-decorate link-showoff" data-toggle="tooltip" data-placement="bottom" title="Visit another location">'.$keyword.'</a>';	
+		$title = '<b>Best ' . $industry . '</b> in <a href="'.get_site_url(1).'/locations/" class="link-inverse link-decorate link-showoff" data-toggle="tooltip" data-placement="bottom" title="Visit another location">'.$keyword.'</a>';
 }
 
 if ( is_page( 'reviews' ) ) {
@@ -62,7 +65,7 @@ if ( is_page( 'reviews' ) ) {
 <!-- Headline - Fixed to top of page
 ==================================================
 -->
-<div class="fixed-top">
+<div class="fixed-top fixed-headline">
 	<div class="container headline">
 		<ul>
 			<li class="headline-title green-man-45">
