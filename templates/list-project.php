@@ -59,7 +59,7 @@
     <?php } ?>
     <div class="tags">
       <?php if($prj->contact!='' && !$prj->contact->is_private){ ?>
-      <p><i class="icon-map-marker"></i>
+      <p><i class="showroom-icon-map-marker"></i>
         <?php
           if($prj->contact->company!=''){ echo $prj->contact->company; }
           else if($prj->contact->first_name!=''){
@@ -75,7 +75,7 @@
       </p>
       <?php } ?>
       <?php if($prj->term!=''){ ?>
-      <p itemprop="itemReviewed"><a href="<?=home_url().'/showroom/'.$prj->term->slug?>"><i class="icon-tag"></i> <?=$prj->term->name?></a></p>
+      <p itemprop="itemReviewed"><a href="<?=home_url().'/showroom/'.$prj->term->slug?>"><i class="showroom-icon-tag"></i> <?=$prj->term->name?></a></p>
       <?php } ?>
     </div>
   </div>

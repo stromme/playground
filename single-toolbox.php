@@ -25,6 +25,17 @@ get_header('toolbox');
 </div>
 <!-- / modal -->
 
+<!-- Delete media modal -->
+<?php
+  generate_delete_modal(array(
+    'id'=>'delete-media-confirm',
+    'buton-id'=>'action-confirm',
+    'title'=>'Are you sure?',
+    'content'=>'If you delete this media it will be permanently removed from our server.'
+  ));
+?>
+<!-- / modal -->
+
 <?
 load_template(TOOLBOX_BASE_DIR.'/toolbox-'.$post->post_name.'.php', false);
 ?>

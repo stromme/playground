@@ -6729,6 +6729,24 @@ section:first-of-type {
   font-size: 20px;
   font-family: "tamarillo";
 }
+/* White icons with optional class, or on hover/active states of certain elements */
+[class^="showroom-icon-"],
+[class*=" showroom-icon-"] {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  *margin-right: .3em;
+  line-height: 14px;
+  vertical-align: text-top;
+  background: url("../images/glyphicons-showroom.png") no-repeat 0 0 scroll transparent;
+  margin-top: 2px;
+}
+.showroom-icon-tag {
+  background-position: 0 0;
+}
+.showroom-icon-map-marker {
+  background-position: -24px 0;
+}
 #new-review .icon-facebook,
 #new-review .icon-twitter {
   position: relative;
