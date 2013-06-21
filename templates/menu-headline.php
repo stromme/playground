@@ -40,13 +40,13 @@ if (strlen($location) > 14) {
 
 // Titles for main pages
 
-if ( ( 'cftl-tax-landing' == get_post_type() ) && ( $taxonomy == 'services' ) ) {
+if ( ( 'cftl-tax-landing' == get_post_type() ) && ( isset($taxonomy) && $taxonomy == 'services' ) ) {
 	$title = $award . '<b>Best ' . $keyword . '</b> in ' . $location;
 	if (strlen($keyword) > 16)
 		$title = '<b>Best ' . $keyword . '</b><span class="hidden-phone-portrait"> in ' . $location . '</span>';
 }
 
-if ( ( 'cftl-tax-landing' == get_post_type() ) && ( $taxonomy == 'locations' ) ) {
+if ( ( 'cftl-tax-landing' == get_post_type() ) && ( isset($taxonomy) && $taxonomy == 'locations' ) ) {
   $terms = get_the_terms(get_the_ID(), $taxonomy);
   if($terms && count($terms)>0){
     $keyword = reset($terms)->name;

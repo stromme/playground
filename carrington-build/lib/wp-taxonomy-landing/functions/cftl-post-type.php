@@ -45,7 +45,7 @@ function cftl_register_taxonomy_landing() {
 			'thumbnail',
 			'revisions',
 		),
-		'public' => false,
+		'public' => true,
 		'exclude_from_search' => true,
 		'show_in_nav_menus' => false,
 		'show_ui' => true,
