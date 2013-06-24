@@ -32,7 +32,13 @@
             <span class="add-on"><i class="icon-phone-halfling"></i></span>
             <input id="lead-phone" validation="not-empty phone" placeholder="Phone Number" type="text" value="" />
         </div>
-      </div>
+      </div><?php if(!strstr($_SERVER['HTTP_HOST'], 'windowcleaning.com')){ ?>
+      <div>
+        <div class="input-prepend"><?php
+        require_once(TOOLBOX_INC.'/recaptchalib.php');
+        echo recaptcha_get_html('6LeWPOMSAAAAAFOhDTuE_puAVHNqL3ff8R4tXsKq');
+      ?></div>
+      </div><?php } ?>
       <div class="bumper-top-small bumper-bottom">
         <div class="pen-stroke"></div>
       </div>
