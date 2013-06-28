@@ -95,8 +95,7 @@ $blogs = array();
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing and Tracking</a></li>
-              <?php if(!strstr($_SERVER['HTTP_HOST'], 'windowcleaning.com')){
-              ?><li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/apps">Add-on Apps</a></li><?php } ?>
+              <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/apps">Add-on Apps</a></li>
 							<li class="divider"></li>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account">Personal Profile</a></li>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/logout?nonce=<?=wp_create_nonce('logout-'.date('Ymd'))?>">Log out</a></li>
@@ -138,8 +137,7 @@ $blogs = array();
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing and Tracking</a></li>
-          <?php if(!strstr($_SERVER['HTTP_HOST'], 'windowcleaning.com')){
-          ?><li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/apps">Add-on Apps</a></li><?php } ?>
+          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/apps">Add-on Apps</a></li>
           <li class="divider"></li>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account">Personal Profile</a></li>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/logout?nonce=<?=wp_create_nonce('logout-'.date('Ymd'))?>">Log out</a></li>
