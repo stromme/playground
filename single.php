@@ -66,7 +66,7 @@ $prj = get_project_details($post);
 		<div class="span6 page-right">
 
       <?php
-      $comments = get_comments(array('post_id'=>$prj->id, 'comment_status'=>1));
+      $comments = get_comments(array('post_id'=>$prj->id, 'status'=>'approve'));
       $reviews = array();
       foreach($comments as $comment){
         $listed_comment = new stdClass();

@@ -11,7 +11,7 @@ $id = get_the_ID();
 $add_review = false;
 if(isset($id) && isset($_REQUEST[wp_create_nonce('review-'.$id)])){
   $prj = get_project_details(get_post($id));
-  if(!isset($prj->reviews) || count($prj->reviews)<=0){
+  if(!isset($prj->any_review) || !$prj->any_review){
     $add_review = true;
   }
 }
