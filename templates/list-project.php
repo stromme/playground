@@ -41,6 +41,18 @@
       </ul>
       <?php } ?>
     <?php } ?>
+    <?php if(isset($prj->reviews) && count($prj->reviews)>0){ ?>
+    <div class="customer-review">
+      <h3>Customer reviewed</h3>
+      <?php foreach($prj->reviews as $review){ ?>
+      <p>"<?=$review->content?>"
+      </p>
+      <div class="author">
+        <p><cite><?=$review->name?></cite> &nbsp;<span class="review-rating" data-score="<?=$review->rating?>"></span></p>
+      </div>
+      <?php } ?>
+    </div>
+    <?php } ?>
     <?php if($prj->content!=''){ ?>
     <blockquote>
       <p>

@@ -19,7 +19,6 @@ $prj = get_project_details($post);
 ?>
 
 <section class="bg-slate">
-	
 	<div class="row-fluid bumper-top-large bumper-bottom single-project project">
 		<div class="span6 page-left">
 			<div class="img-polaroid favorite-photo">
@@ -65,14 +64,44 @@ $prj = get_project_details($post);
       <?php } ?>
 		</div>
 		<div class="span6 page-right">
+
+      <?php
+      $comments = get_comments(array('post_id'=>$prj->id));
+      $reviews = array();
+      foreach($comments as $comment){
+        $listed_comment = new stdClass();
+        $listed_comment->id = $comment->comment_ID;
+        $listed_comment->name = $comment->comment_author;
+        $listed_comment->content = $comment->comment_content;
+        $listed_comment->rating = get_comment_meta($comment->comment_ID, 'rating', true);
+        array_push($reviews, $listed_comment);
+      }
+      if(count($reviews)>0){
+      ?>
+      <ul id="reviews-list" class="migrate-review reviews-list">
+      <?php
+        global $review;
+        if(count($reviews)>0){
+          foreach($reviews as $review){
+            get_template_part('templates/list', 'review');
+          }
+        }
+      ?>
+      </ul>
+      <?php } ?>
+
 			<p class="lead"><?=$prj->content?></p>
-      <?php if(!$prj->contact->is_private){ ?>
-      <?php if($project_contact!='' || $project_location!=''){ ?>
-			  <h3 class="bumper-top">
+      <?php
+      if(!$prj->contact->is_private){
+        if($project_contact!='' || $project_location!=''){
+      ?>
+        <h3 class="bumper-top">
           <?php if($project_contact!=''){ ?><cite><?=$project_contact?></cite><?php } ?><?php if($project_location!=''){ ?><small> - <?=$project_location?></small><?php } ?>
         </h3>
-			<?php } ?>
-			<?php } ?>
+      <?php
+			  }
+			}
+      ?>
 			<div class="bumper-top bumper-bottom">
 				<div class="pen-stroke"></div>
 			</div>
@@ -162,10 +191,20 @@ $prj = get_project_details($post);
           <div class="thumbnail-placeholder">
 					  <img src="<?=$rel_prj->favorite_media->image[0]?>" />
           </div>
+          <?php if(isset($rel_prj->reviews) && count($rel_prj->reviews)>0){ ?>
+          <div class="customer-review">
+            <h3>Customer reviewed</h3>
+            <p>"<?=$rel_prj->reviews[0]->content?>"
+            </p>
+            <div class="author">
+              <p><cite><?=$rel_prj->reviews[0]->name?></cite> &nbsp;<span class="review-rating" data-score="<?=$rel_prj->reviews[0]->rating?>"></span></p>
+            </div>
+          </div>
+          <?php } ?>
 					<div class="caption">
 						<p><?=(strlen($rel_prj->content)>120)?(substr($rel_prj->content, 0, 120).'...'):($rel_prj->content)?></p>
 						<p>
-							<a class="btn btn-primary btn-small" href="<?=$showroom_link?>">Visit Showroom</a><!-- <a class="btn btn-success btn-small" href="<?=home_url()?>/projects/<?=$rel_prj->slug?>">View project</a>-->
+							<a class="btn btn-primary btn-small" href="<?=$showroom_link?>">Visit Showroom</a>
 						</p>
 					</div>
 				</div>

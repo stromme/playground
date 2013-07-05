@@ -40,6 +40,30 @@ get_header('toolbox');
 load_template(TOOLBOX_BASE_DIR.'/toolbox-'.$post->post_name.'.php', false);
 ?>
 
+<!-- Share project modal -->
+<div class="share-project-template hide">
+	<div class="share-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h3>Share your work with your customer!</h3>
+	</div>
+	<div class="share-body">
+		<div class="input-prepend">
+      <span class="add-on"><i class="icon-envelope"></i></span>
+      <input class="input-block-level" id="customer-email" placeholder="Customer's email" validation="not-empty email" type="text" value="" />
+		</div>
+		<div>
+			<textarea class="input-block-level" id="customer-message" placeholder="Message to customer" validation="not-empty" rows="5">We've just finished your home window cleaning project. We're sending over a few pictures of the completed work. Please don't hesitate to contact us if you need anything else. And if you get a chance, [review-link]leave us a review[/] and let us know how we did.</textarea>
+		</div>
+		<p>Your customer will be sent a link to view this project in your showroom.</p>
+	</div>
+	<div class="share-footer">
+    <a href="#" class="btn btn-primary action-send" data-nonce="<?=wp_create_nonce('send-email-'.date('Ymd'))?>">Send email</a>
+    <a href="#" class="btn action-preview" data-nonce="<?=wp_create_nonce('preview-email-'.date('Ymd'))?>">Preview</a>
+    <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Skip</a>
+	</div>
+</div>
+<!-- / modal -->
+
 <div class="project-template hide">
   <?php
     // Template for new project

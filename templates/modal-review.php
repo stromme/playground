@@ -6,14 +6,28 @@
  * @subpackage 
  * @since 
  */
+
+$id = get_the_ID();
+$add_review = false;
+if(isset($id) && isset($_REQUEST[wp_create_nonce('review-'.$id)])){
+  $prj = get_project_details(get_post($id));
+  if(!isset($prj->reviews) || count($prj->reviews)<=0){
+    $add_review = true;
+  }
+}
+$review_first_name = (isset($prj->contact->first_name) && $prj->contact->first_name!='')?$prj->contact->first_name:'';
+$review_last_name = (isset($prj->contact->last_name) && $prj->contact->last_name!='')?$prj->contact->last_name:'';
+$review_email = (isset($prj->contact->email) && $prj->contact->email!='')?$prj->contact->email:'';
+$review_company = (isset($prj->contact->company) && $prj->contact->company!='')?$prj->contact->company:'';
+$review_location = (isset($prj->contact->city) && $prj->contact->city!='')?$prj->contact->city:'';
 ?>
 
 <!-- Review Modal -->
 <div class="big-modal">
-  <div class="modal hide fade" id="new-review">
+  <div class="modal hide fade" id="new-review"<?=($add_review)?' data-project-id="'.$id.'"':''?>>
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h3>So, how did we do?</h3>
+      <h3><?=($review_first_name!='' || $review_last_name!='')?'Hi '.$review_first_name.(($review_first_name!='' && $review_last_name!='')?' ':'').$review_last_name.', how did we do?"':'So, how did we do?'?></h3>
     </div>
     <div class="modal-body">
 
@@ -38,13 +52,13 @@
           <div class="span6">
             <div class="input-prepend">
               <span class="add-on"><i class="icon-user"></i></span>
-              <input id="comment-name" class="input-block-level" validation="not-empty" placeholder="Your Name" type="text" />
+              <input id="comment-name" class="input-block-level" validation="not-empty" placeholder="Your Name" type="text"<?=($review_first_name!='' || $review_last_name!='')?' value="'.$review_first_name.(($review_first_name!='' && $review_last_name!='')?' ':'').$review_last_name.'"':''?> />
             </div>
           </div>
           <div class="span6">
             <div class="input-prepend">
               <span class="add-on"><i class="icon-user"></i></span>
-              <input id="comment-company" class="input-block-level" placeholder="Company" type="text" />
+              <input id="comment-company" class="input-block-level" placeholder="Company" type="text"<?=($review_company!='')?' value="'.$review_company.'"':''?> />
             </div>
           </div>
         </div>
@@ -52,13 +66,13 @@
           <div class="span6">
             <div class="input-prepend">
               <span class="add-on"><i class="icon-envelope"></i></span>
-              <input id="comment-email" class="input-block-level" validation="not-empty email" placeholder="Email Address" type="text" />
+              <input id="comment-email" class="input-block-level" validation="not-empty email" placeholder="Email Address" type="text"<?=($review_email!='')?' value="'.$review_email.'"':''?> />
             </div>
           </div>
           <div class="span6">
             <div class="input-prepend">
               <span class="add-on"><i class="icon-map-marker"></i></span>
-              <input id="comment-location" class="input-block-level" validation="not-empty" placeholder="Location" type="text" />
+              <input id="comment-location" class="input-block-level" validation="not-empty" placeholder="Location" type="text"<?=($review_location!='')?' value="'.$review_location.'"':''?> />
             </div>
           </div>
         </div>
