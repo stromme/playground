@@ -44,17 +44,18 @@ load_template(TOOLBOX_BASE_DIR.'/toolbox-'.$post->post_name.'.php', false);
 <div class="share-project-template hide">
 	<div class="share-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		<h3>Share your work with your customer!</h3>
+		<h3>Email photos of this project to your customer</h3>
 	</div>
 	<div class="share-body">
 		<div class="input-prepend">
       <span class="add-on"><i class="icon-envelope"></i></span>
       <input class="input-block-level" id="customer-email" placeholder="Customer's email" validation="not-empty email" type="text" value="" />
 		</div>
-		<div>
-			<textarea class="input-block-level" id="customer-message" placeholder="Message to customer" validation="not-empty" rows="5">We've just finished your home window cleaning project. We're sending over a few pictures of the completed work. Please don't hesitate to contact us if you need anything else. And if you get a chance, [review-link]leave us a review[/] and let us know how we did.</textarea>
+		<div class="well bumper">
+      <label for="customer-message">Email message</label>
+			<textarea class="input-block-level" id="customer-message" placeholder="Message to customer" validation="not-empty" rows="5">We've just finished your {project-slug}project. We're sending over a few pictures of the completed work. Please don't hesitate to contact us if you need anything else.</textarea>
 		</div>
-		<p>Your customer will be sent a link to view this project in your showroom.</p>
+		<p>Your customer will also be emailed a link to review this project.</p>
 	</div>
 	<div class="share-footer">
     <a href="#" class="btn btn-primary action-send" data-nonce="<?=wp_create_nonce('send-email-'.date('Ymd'))?>">Send email</a>
