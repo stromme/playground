@@ -66,7 +66,7 @@ $review_location = (isset($prj->contact->city) && $prj->contact->city!='')?$prj-
           <div class="span6">
             <div class="input-prepend">
               <span class="add-on"><i class="icon-envelope"></i></span>
-              <input id="comment-email" class="input-block-level" validation="not-empty email" placeholder="Email Address" type="text"<?=($review_email!='')?' value="'.$review_email.'"':''?> />
+              <input id="comment-email" class="input-block-level lowercase" validation="not-empty email" placeholder="Email Address" type="text"<?=($review_email!='')?' value="'.$review_email.'"':''?> />
             </div>
           </div>
           <div class="span6">
