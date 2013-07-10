@@ -49,7 +49,7 @@ load_template(TOOLBOX_BASE_DIR.'/toolbox-'.$post->post_name.'.php', false);
 	<div class="share-body">
 		<div class="input-prepend">
       <span class="add-on"><i class="icon-envelope"></i></span>
-      <input class="input-block-level lowercase" id="customer-email" placeholder="Customer's email" validation="not-empty email" type="text" value="" />
+      <input class="input-block-level lowercase-only" id="customer-email" placeholder="Customer's email" validation="not-empty email" type="text" value="" />
 		</div>
 		<div class="well bumper">
       <label for="customer-message">Email message</label>
