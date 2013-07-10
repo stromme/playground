@@ -24,13 +24,13 @@
       <div>
         <div class="input-prepend">
             <span class="add-on"><i class="icon-envelope"></i></span>
-            <input id="lead-email" validation="not-empty email" placeholder="Email Address" type="text" value="" />
+            <input id="lead-email" class="lowercase-only" validation="not-empty email" placeholder="Email Address" type="email" value="" />
         </div>
       </div>
       <div>
         <div class="input-prepend">
             <span class="add-on"><i class="icon-phone-halfling"></i></span>
-            <input id="lead-phone" validation="not-empty phone" placeholder="Phone Number" type="text" value="" />
+            <input id="lead-phone" validation="not-empty phone" placeholder="Phone Number" type="tel" value="" />
         </div>
       </div><?php if(!strstr($_SERVER['HTTP_HOST'], 'windowcleaning.com')){ ?>
       <div>
