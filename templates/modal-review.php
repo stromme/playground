@@ -87,7 +87,7 @@ $review_location = (isset($prj->contact->city) && $prj->contact->city!='')?$prj-
           <input id="review-social-post" type="checkbox" value="1" name="review-social-post" checked="checked" /> <label for="review-social-post"><small>Share on <span class="social-media-name">Facebook</span></small></label>
         </div>
       </div>
-      <a href="javascript:void(0);" class="btn btn-success save disabled">Add Review</a>
+      <a href="javascript:void(0);" class="btn btn-success save disabled<?=(($review_first_name!='' || $review_last_name!='') && $review_email!='' && $review_company!='' && $review_location!='')?' solid':''?>">Add Review</a>
     </div>
   </div>
 </div>
