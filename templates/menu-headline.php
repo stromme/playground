@@ -38,6 +38,20 @@ if (strlen($location) > 14) {
 	$title = $award . '<b>Best ' . $industry . '</b> in ' . $location;
 }
 
+// When taxonomy is not defined, try looking for it
+if('cftl-tax-landing' == get_post_type() && !isset($taxonomy)){
+  $terms = get_the_terms(get_the_ID(), 'locations');
+  if($terms){
+    $taxonomy = 'locations';
+  }
+  else {
+    $terms = get_the_terms(get_the_ID(), 'services');
+    if($terms){
+      $taxonomy = 'services';
+    }
+  }
+}
+
 // Titles for main pages
 
 if ( ( 'cftl-tax-landing' == get_post_type() ) && ( isset($taxonomy) && $taxonomy == 'services' ) ) {
