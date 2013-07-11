@@ -60,7 +60,7 @@ load_template(TOOLBOX_BASE_DIR.'/toolbox-'.$post->post_name.'.php', false);
 	<div class="share-footer">
     <a href="#" class="btn btn-primary action-send" data-nonce="<?=wp_create_nonce('send-email-'.date('Ymd'))?>">Send email</a>
     <a href="#" class="btn action-preview" data-nonce="<?=wp_create_nonce('preview-email-'.date('Ymd'))?>">Preview</a>
-    <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Skip</a>
+    <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Skip email</a>
 	</div>
 </div>
 <!-- / modal -->
