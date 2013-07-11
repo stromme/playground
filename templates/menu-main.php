@@ -116,7 +116,7 @@ $comments = get_comments($args);
 			<li class="dropdown visible-desktop"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Locations <b class="caret"></b></a>
 				<ul class="dropdown-menu">
           <?php foreach($promoted_locations as $location){ ?>
-					<li><a href="<?=get_home_url()."/locations/".$location->slug?>"><?=$location->name?></a></li>
+					<li><a href="<?=get_home_url()."/locations/".$location->slug?>/"><?=$location->name?></a></li>
           <?php } ?>
 				</ul>
 			</li>
