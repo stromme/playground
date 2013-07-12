@@ -13,6 +13,12 @@
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="Test title"/>
+  <meta property="og:url" content="Ttest url"/>
+  <meta property="og:image" content="https://lh5.ggpht.com/qTjFRAkS4P-5Tfrr_ovb9CbpDcM2DQopnSMqZ_lzsWVLnK-2x649xbULVXma6ulLZido=w705"/>
+  <meta property="og:site_name" content="Awesome site"/>
+  <meta property="og:type" content="The type"/>
+  <meta property="og:description" content="The description"/>
 	<title><?php wp_title(); ?></title>
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
