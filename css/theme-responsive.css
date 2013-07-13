@@ -1339,6 +1339,12 @@
     margin-left: -18px;
     margin-right: -20px;
   }
+  .media-controls {
+    visibility: visible !important;
+  }
+  #colorbox {
+    left: 0 !important;
+  }
 }
 @media (max-width: 600px) {
   .brand img {
@@ -1679,7 +1685,7 @@
     padding-right: 10px;
   }
 }
-@media (min-width: 980px) {
+@media (min-width: 979px + 1) {
   .nav-collapse.collapse {
     height: auto !important;
     overflow: visible !important;
