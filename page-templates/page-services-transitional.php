@@ -118,26 +118,27 @@ foreach($comments as $comment){
     'numberposts'    => 4
   );
 
+  $related_projects = array();
   $terms = wp_get_post_terms($post->ID, "services");
-  $term = $terms[0];
-  if(isset($term)){
+  if($terms && count($terms)>0){
+    $term = $terms[0];
     $term_name = strtolower($term->name);
     $showroom_link .= '/'.$term->slug;
     $post_args = $args;
     $post_args['services'] = $term->slug;
-  }
-  $loop = new WP_Query( $post_args );
-  $all_related_projects = $loop->posts;
-  unset($loop);
-  $related_projects = array();
-  if(count($all_related_projects)>0){
-    foreach($all_related_projects as $rel_prj){
-      if(count($related_projects)<3){
-        $new_project = get_project_details($rel_prj);
-        array_push($related_projects, $new_project);
+    $loop = new WP_Query( $post_args );
+    $all_related_projects = $loop->posts;
+    unset($loop);
+
+    if(count($all_related_projects)>0){
+      foreach($all_related_projects as $rel_prj){
+        if(count($related_projects)<3){
+          $new_project = get_project_details($rel_prj);
+          array_push($related_projects, $new_project);
+        }
       }
+      unset($all_related_projects);
     }
-    unset($all_related_projects);
   }
 
   // If there's no related project, then show default all project

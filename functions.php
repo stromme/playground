@@ -116,7 +116,6 @@ function hs_load_css() {
 	// Prevent theme CSS from loading in the context of the Toolbox
 
 	if ( get_post_type() != 'toolbox' ) {
-	
 		wp_enqueue_style('theme-styles', get_bloginfo('template_url').'/css/theme-min.css');
 		wp_enqueue_style('theme-bootstrap-responsive', get_bloginfo('template_url').'/css/theme-responsive.css');
 	}
