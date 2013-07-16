@@ -53,7 +53,7 @@ load_template(TOOLBOX_BASE_DIR.'/toolbox-'.$post->post_name.'.php', false);
 		</div>
 		<div class="well bumper">
       <label for="customer-message">Email message</label>
-			<textarea class="input-block-level" id="customer-message" placeholder="Message to customer" validation="not-empty" rows="5">We just finished your project and wanted to share with you how great things turned out. Here's a few photo's of the completed work. Let us know if you need anything else.</textarea>
+			<textarea class="input-block-level" id="customer-message" placeholder="Message to customer" validation="not-empty" rows="5">We just finished your project and wanted to share how great things turned out. Here's a few photo's of the completed work. Let us know if you need anything else.</textarea>
 		</div>
 		<p>Your customer will also be emailed a link to review this project.</p>
 	</div>
