@@ -780,9 +780,11 @@ if($accolades_post && count($accolades_post)>0){
 
   <!-- Featurette and pinned reviews - Done -->
   <section class="bg-white bumper-top-medium bumper-bottom-medium page-left page-right">
+    <?php if(count($reviews)>0 || count($all_reviews)>0){ ?>
     <div class="row-fluid">
       <div class="span7">
         <div class="has-right-sidebar migrate">
+    <?php } else { echo '<div class="migrate">'; } ?>
           <div class="cfct-mod-content">
             <h2>Why <?=stripslashes($tb_company['name'])?> was awarded <strong class="green">Best in <?=$seo['city']?>, <?=$seo['state']?>.</strong></h2>
             <?php
@@ -791,6 +793,7 @@ if($accolades_post && count($accolades_post)>0){
             ?>
           </div>
         </div>
+    <?php if(count($reviews)>0 || count($all_reviews)>0){ ?>
       </div>
       <div class="span5">
         <div>
@@ -813,6 +816,7 @@ if($accolades_post && count($accolades_post)>0){
         </div>
       </div>
     </div>
+    <?php } ?>
   </section>
 
   <!-- Award info - No changes - Done -->
