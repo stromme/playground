@@ -1342,6 +1342,12 @@
   .media-controls {
     visibility: visible !important;
   }
+  .media-controls .show-image {
+    display: none;
+  }
+  .media-controls .show-image[data-video] {
+    display: block;
+  }
   #colorbox {
     left: 0 !important;
   }
