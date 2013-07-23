@@ -6729,6 +6729,12 @@ section:first-of-type {
   font-size: 20px;
   font-family: "tamarillo";
 }
+.project .project-customer-author {
+  color: #222222;
+  font-size: 32px;
+  line-height: 20px;
+  font-family: "tamarillo";
+}
 /* White icons with optional class, or on hover/active states of certain elements */
 [class^="showroom-icon-"],
 [class*=" showroom-icon-"] {

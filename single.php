@@ -69,7 +69,7 @@ $prj = get_project_details($post);
       <?php if(!$prj->contact->is_private){ ?>
       <?php if($project_contact!='' || $project_location!=''){ ?>
 			  <h3 class="bumper-top">
-          <?php if($project_contact!=''){ ?><cite><?=$project_contact?></cite><?php } ?><?php if($project_location!=''){ ?><small> - <?=$project_location?></small><?php } ?>
+          <?php if($project_contact!=''){ ?><cite class="project-customer-author"><?=$project_contact?></cite><?php } ?><?php if($project_location!=''){ ?><small> - <?=$project_location?></small><?php } ?>
         </h3>
 			<?php } ?>
 			<?php } ?>
