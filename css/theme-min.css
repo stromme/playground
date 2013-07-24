@@ -5385,6 +5385,9 @@ blockquote {
 .center {
   text-align: center;
 }
+.lowercase {
+  text-transform: lowercase;
+}
 [class^="icon-full-"],
 [class*=" icon-full-"] {
   display: inline-block;
@@ -6712,27 +6715,26 @@ section:first-of-type {
   opacity: 0.7;
   filter: alpha(opacity=70);
 }
-.project .review {
+.project .project-customer-author {
+  color: #222222;
+  font-size: 32px;
+  line-height: 20px;
+}
+.customer-review {
   padding: 15px;
   margin: 0px;
   background-color: #0083e0;
   border-bottom: 1px solid #0065ad;
 }
-.project .review p,
-.project .review h3 {
+.customer-review p,
+.customer-review h3 {
   color: #ffffff;
 }
-.project .review p {
+.customer-review p {
   line-height: 20px;
 }
-.project .review .author {
+.customer-review .author {
   font-size: 20px;
-  font-family: "tamarillo";
-}
-.project .project-customer-author {
-  color: #222222;
-  font-size: 32px;
-  line-height: 20px;
   font-family: "tamarillo";
 }
 /* White icons with optional class, or on hover/active states of certain elements */
@@ -6761,6 +6763,10 @@ section:first-of-type {
 #new-review a {
   opacity: 0.65;
   filter: alpha(opacity=65);
+}
+#new-review a.solid {
+  opacity: 1 !important;
+  filter: alpha(opacity=100) !important;
 }
 #new-review a:hover {
   opacity: 1;

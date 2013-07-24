@@ -140,4 +140,18 @@
         margin-left: -18px;
         margin-right: -20px;
     }
+
+    // Fix media controls
+    .media-controls {
+        visibility: visible !important;
+        .show-image {
+            display: none;
+        }
+        .show-image[data-video] {
+            display: block;
+        }
+    }
+    #colorbox {
+        left: 0 !important;
+    }
 }
