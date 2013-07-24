@@ -6760,14 +6760,6 @@ section:first-of-type {
   position: relative;
   top: -4px;
 }
-#new-review a {
-  opacity: 0.65;
-  filter: alpha(opacity=65);
-}
-#new-review a.solid {
-  opacity: 1 !important;
-  filter: alpha(opacity=100) !important;
-}
 #new-review a:hover {
   opacity: 1;
   filter: alpha(opacity=100);
