@@ -1380,6 +1380,9 @@
   .fixed-nav {
     margin-top: 20px;
   }
+  .project.single-project.bumper-top-large {
+    padding-top: 20px;
+  }
 }
 /*  Phones */
 @media (max-width: 480px) {
@@ -1480,13 +1483,27 @@
     font-size: 24px;
     line-height: 30px;
   }
-  .banner .share-it {
+  .share-it {
     padding-left: 20px;
     text-align: center;
     min-width: 0px;
   }
-  .banner .share-it .write-review span {
-    display: none;
+  .share-it .write-review {
+    padding-right: 0;
+    float: none;
+    text-align: center;
+  }
+  .share-it .social-network {
+    width: 48%;
+    padding-top: 0;
+  }
+  .share-it .social-network.sc-facebook {
+    padding-right: 2%;
+    text-align: right;
+  }
+  .share-it .social-network.sc-twitter {
+    padding-left: 2%;
+    text-align: left;
   }
   .footer .footer-links > a {
     padding: 3px;

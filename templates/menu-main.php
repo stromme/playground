@@ -68,9 +68,25 @@ foreach($locations_terms as $term){
   $promoted_posts = get_posts($args);
   if(count($promoted_posts)>0){
     unset($promoted_posts);
+    $term->link = get_home_url()."/locations/".$term->slug."/";
     array_push($promoted_locations, $term);
   }
 }
+// Add this member's sites to locations
+$owner = get_site_owner();
+$current_blog_id = get_current_blog_id();
+if($owner && isset($owner->ID) && $owner->ID>0){
+  $blogs = get_blogs_of_user($owner->ID);
+  foreach($blogs as $user_blog){
+    if($user_blog->userblog_id!=$current_blog_id){
+      $term = new stdClass();
+      $term->link = get_site_url($user_blog->userblog_id);
+      $term->name = get_blog_name($user_blog->userblog_id);
+      array_push($promoted_locations, $term);
+    }
+  }
+}
+
 $args = array(
   'orderby'		  => 'modified',
   'order'			  => 'DESC',
@@ -116,7 +132,7 @@ $comments = get_comments($args);
 			<li class="dropdown visible-desktop"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Locations <b class="caret"></b></a>
 				<ul class="dropdown-menu">
           <?php foreach($promoted_locations as $location){ ?>
-					<li><a href="<?=get_home_url()."/locations/".$location->slug?>/"><?=$location->name?></a></li>
+					<li><a href="<?=$location->link?>"><?=$location->name?></a></li>
           <?php } ?>
 				</ul>
 			</li>

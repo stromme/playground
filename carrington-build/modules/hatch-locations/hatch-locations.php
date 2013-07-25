@@ -2,7 +2,7 @@
 
 if (!class_exists('cfct_module_hatch_locations') && class_exists('cfct_build_module')) {
 	class cfct_module_hatch_locations extends cfct_build_module {
-    private $default_title = 'Where we work';
+    private $default_title = 'Where we work...';
 		public function __construct() {
 			$opts = array(
 				'description' => __('Display company locations.', 'carrington-build'),

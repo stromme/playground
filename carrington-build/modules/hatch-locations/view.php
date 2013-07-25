@@ -6,26 +6,14 @@
 	<h3 class="light-weight"><?=parse_shortclass($title)?></h3>
 	<ul>
     <?php
-    $users = get_users();
-    $owner_id = '';
-    if(count($users)>0){
-      foreach($users as $user){
-        $roles = $user->roles;
-        if(count($roles)>0){
-          if($roles[0]=='owner'){
-            $owner_id = $user->id;
-          }
-        }
-      }
-    }
-
+    $owner = get_site_owner();
     $blogs_list = array();
     $locations_list = array();
     $blog_seo_list = array();
     $current_blog_id = get_current_blog_id();
 
-    if($owner_id!='' && $owner_id>0){
-      $blogs = get_blogs_of_user($owner_id);
+    if($owner && isset($owner->ID) && $owner->ID>0){
+      $blogs = get_blogs_of_user($owner->ID);
       if(count($blogs)>0){
         foreach($blogs as $user_blog){
           array_push($blogs_list, $user_blog->userblog_id);
