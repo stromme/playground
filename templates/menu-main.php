@@ -78,12 +78,10 @@ $current_blog_id = get_current_blog_id();
 if($owner && isset($owner->ID) && $owner->ID>0){
   $blogs = get_blogs_of_user($owner->ID);
   foreach($blogs as $user_blog){
-    if($user_blog->userblog_id!=$current_blog_id){
-      $term = new stdClass();
-      $term->link = get_site_url($user_blog->userblog_id);
-      $term->name = get_blog_name($user_blog->userblog_id);
-      array_push($promoted_locations, $term);
-    }
+    $term = new stdClass();
+    $term->link = get_site_url($user_blog->userblog_id);
+    $term->name = get_blog_name($user_blog->userblog_id);
+    array_push($promoted_locations, $term);
   }
 }
 
