@@ -9,7 +9,7 @@
 
 $id = get_the_ID();
 $add_review = false;
-if(isset($id) && isset($_REQUEST[substr(md5($id.'-review'),0,8)])){
+if(isset($id) && isset($_REQUEST[substr(base64_encode($id.'-review'),0,8)])){
   $prj = get_project_details(get_post($id));
   if(!isset($prj->any_review) || !$prj->any_review){
     $add_review = true;
