@@ -5252,7 +5252,6 @@ a.badge:focus {
 .middle6 {
   display: table-cell;
   vertical-align: middle;
-  display: inline-block;
 }
 .middle img,
 .middle-fixed-small img,
