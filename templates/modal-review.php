@@ -11,9 +11,9 @@ $id = get_the_ID();
 $add_review = false;
 if(isset($id) && isset($_REQUEST[substr(base64_encode($id.'-review'),0,8)])){
   $prj = get_project_details(get_post($id));
-  if(!isset($prj->any_review) || !$prj->any_review){
+  //if(!isset($prj->any_review) || !$prj->any_review){
     $add_review = true;
-  }
+  //}
 }
 $review_first_name = (isset($prj->contact->first_name) && $prj->contact->first_name!='')?$prj->contact->first_name:'';
 $review_last_name = (isset($prj->contact->last_name) && $prj->contact->last_name!='')?$prj->contact->last_name:'';
