@@ -83,7 +83,7 @@ if ( is_page( 'reviews' ) ) {
 	<div class="container headline">
 		<ul>
 			<li class="headline-title green-man-45">
-        <a href="<?=home_url()?>" class="home-link"></a>
+        <a href="<?=get_home_url()?>/" class="home-link"></a>
 				<h1 itemprop="description"><?=$title?></h1>
 			</li>
 			<li class="headline-phone">

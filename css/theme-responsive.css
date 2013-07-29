@@ -1098,6 +1098,13 @@
   }
 }
 @media (max-width: 979px) {
+  .headline-title a.home-link {
+    display: block;
+    position: absolute;
+    width: 30px;
+    height: 100%;
+    margin-left: -20px;
+  }
   .page-right,
   .page-left {
     padding-left: 40px;
@@ -1260,13 +1267,6 @@
   }
 }
 @media (max-width: 767px) {
-  .headline-title a.home-link {
-    display: block;
-    position: absolute;
-    width: 30px;
-    height: 100%;
-    margin-left: -20px;
-  }
   .page-right,
   .page-left {
     padding-left: 20px;
