@@ -9,7 +9,7 @@
         </div>
         <div class="media-controls">
           <a onclick="share_project('twitter', '<?=home_url().'/projects/'.$prj->slug?>', '<?='Great looking '.(($prj->term!='')?strtolower($prj->term->name):'').' job: '?>');" href="javascript:void(0);" ><i class="icon-media-twitter"></i></a>
-          <a onclick="share_project('facebook', '<?=home_url().'/projects/'.$prj->slug?>', '<?=$prj->title?>');" href="javascript:void(0);"><i class="icon-media-facebook"></i></a>
+          <a onclick="share_project('facebook', '<?=home_url().'/projects/'.$prj->slug?>', '<?=str_replace("'", '\\\'', $prj->title)?>');" href="javascript:void(0);"><i class="icon-media-facebook"></i></a>
         </div>
         <?php if($prj->media!='' && count($prj->media)>1){ ?>
           <div class="colorbox-image-list">
