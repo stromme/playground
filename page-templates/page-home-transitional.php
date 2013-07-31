@@ -13,6 +13,7 @@ get_header();
 $service_name = get_the_title();
 
 $tb_company = get_option('tb_company');
+if(!isset($tb_company['name'])){ $tb_company['name']=''; }
 $seo = get_location_seo();
 // Get all pinned reviews
 $args = array(
