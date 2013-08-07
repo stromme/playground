@@ -156,7 +156,7 @@ get_header();
 				<div class="center">
 					<div class="btn-group">
 						<a href="tel:<?=get_phone_number()?>" class="btn btn-primary btn-large hidden-phone">Call us <?=get_phone_number()?></a>
-						<button class="btn btn-success btn-large quick-estimate">Quick Online Estimate</button>
+						<button class="btn btn-success btn-large quick-estimate <?=apply_filters('apply_responsibid', false);?>">Quick Online Estimate</button>
 					</div>
 				</div>
 			</div>

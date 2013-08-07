@@ -32,7 +32,7 @@
             <span class="add-on"><i class="icon-phone-halfling"></i></span>
             <input id="lead-phone" validation="not-empty phone" placeholder="Phone Number" type="tel" value="" />
         </div>
-      </div><?php if(!strstr($_SERVER['HTTP_HOST'], 'windowcleaning.com')){ ?>
+      </div><?php if(!strstr($_SERVER['HTTP_HOST'], 'windowcleaning.com') && apply_filters('apply_responsibid', false)==false){ ?>
       <div>
         <div class="input-prepend"><?php
         require_once(TOOLBOX_INC.'/recaptchalib.php');

@@ -841,7 +841,7 @@ if($accolades_post && count($accolades_post)>0){
         <div class="center">
           <div class="btn-group">
             <a href="tel:<?=tb_format_phone_plain(get_phone_number())?>" class="btn btn-primary btn-large hidden-phone" itemprop="telephone"><?=get_phone_number()?></a>
-            <button class="btn btn-success btn-large quick-estimate">Quick Online Estimate</button>
+            <button class="btn btn-success btn-large quick-estimate <?=apply_filters('apply_responsibid', false);?>">Quick Online Estimate</button>
           </div>
         </div>
       </div>
