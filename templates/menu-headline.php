@@ -95,7 +95,7 @@ if ( is_page( 'reviews' ) ) {
 			</li>
       <?php } ?>
 			<li class="headline-link hidden-phone hidden-tablet">
-				<h2><a href="" class="quick-estimate <?=apply_filters('apply_responsibid', false);?>">Quick Estimate</a></h2>
+				<h2><a href="javascript:void(0);" class="quick-estimate <?=apply_filters('apply_responsibid', false);?>">Quick Estimate</a></h2>
 			</li>
 		</ul>
 	</div>
