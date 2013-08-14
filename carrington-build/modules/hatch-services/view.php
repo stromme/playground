@@ -30,7 +30,7 @@
   ?>
   <li itemprop="makesOffer" itemscope="http://schema.org/Offer">
     <div class="grid-thumb">
-      <?php if($is_have_post || $is_service_promoted){ ?>
+      <?php if(($is_have_post || $is_service_promoted) && !$no_image){ ?>
       <nav>
         <?php if($is_have_post){ ?>
         <a href="<?=get_home_url()."/showroom/".$service->slug?>/"><i class="icon-picture icon-white"></i> Showroom</a>
@@ -45,6 +45,9 @@
           $service_image = '<img src="'.TOOLBOX_IMAGES.'/services/'.$service->slug.'.jpg" itemprop="image"/>';
         } else {
           $service_image = '<img src="'.TOOLBOX_IMAGES.'/spacer.gif" style="width:240px;height:80px;background-color:#F6F6F6;" />';
+        }
+        if($no_image){
+          $service_image = '<img src="'.TOOLBOX_IMAGES.'/spacer.gif" style="width:240px;height:1px;min-height:1px;" />';
         }
       ?>
       <?=$service_image?>
