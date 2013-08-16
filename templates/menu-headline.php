@@ -82,8 +82,8 @@ if ( is_page( 'reviews' ) ) {
 <div class="fixed-top fixed-headline">
 	<div class="container headline">
 		<ul>
-			<li class="headline-title green-man-45">
-        <a href="<?=get_home_url()?>/" class="home-link"></a>
+			<li class="headline-title <?=(!isset($tb_industry['industry']) || (isset($tb_industry['industry']) && $tb_industry['industry']=='window-cleaning'))?'green-man-45':''?>">
+        <?=(!isset($tb_industry['industry']) || (isset($tb_industry['industry']) && $tb_industry['industry']=='window-cleaning'))?'<a href="'.get_home_url().'/" class="home-link"></a>':''?>
 				<h1 itemprop="description"><?=$title?></h1>
 			</li>
       <?php
