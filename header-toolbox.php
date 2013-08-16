@@ -18,7 +18,8 @@ $blogs = array();
 	<link rel="apple-touch-icon-precomposed" href="<?=TOOLBOX_IMAGES?>/apple-touch-icon.png"/>
 	<title>Toolbox | <?=ucwords($post->post_name)?></title>
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
-  <?=get_google_analytics_code();?>
+  <!-- W3TC-include-css -->
+  <!-- W3TC-include-js-head -->
 	<?php wp_head(); ?>
 	<?=get_google_analytics_code();?>
 </head>
