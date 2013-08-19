@@ -1284,8 +1284,13 @@
   }
   .link-grid {
     margin: 0 auto;
-    padding-left: 60px;
-    padding-right: 60px;
+    padding-left: 0;
+    padding-right: 0;
+    width: 240px;
+  }
+  .link-grid li {
+    padding-left: 0;
+    padding-rigth: 0;
   }
   .banner-photo img {
     height: auto;
