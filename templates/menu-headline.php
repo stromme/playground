@@ -74,6 +74,11 @@ if ( is_page( 'reviews' ) ) {
 	$title = '<span class="hidden-phone-portrait">' . esc_html( stripslashes($company['name'])) . '</span> <b>Customer Reviews</b>';
 }
 
+if ( ( 'cftl-tax-landing' == get_post_type() ) || ( 'page' == get_post_type() ) ) {
+  $custom_title = get_post_meta(get_the_ID(), '_custom_headline', true);
+  $title = ($custom_title!='') ? $custom_title : $title;
+}
+
 ?>
 
 <!-- Headline - Fixed to top of page
