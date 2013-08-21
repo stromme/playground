@@ -12,7 +12,14 @@
 <div class="big-modal">
   <div class="modal hide fade bg-slate" id="new-lead">
     <div class="modal-header center bumper-top bumper-bottom">
-      <h3>Home of the <strong class="green">$1000</strong> streak free guarantee.</h3>
+      <?php
+        $tb_customize = get_option('tb_customize');
+        $tb_industry = get_option('tb_industry');
+        $estimate_header = 'Home of the <strong class="green">$1000</strong> streak free guarantee.';
+        if(isset($tb_customize["estimate_header"])) $estimate_header = stripslashes($tb_customize["estimate_header"]);
+        else if(isset($tb_industry['industry']) && $tb_industry['industry']!='window-cleaning') $estimate_header = 'Get an instant estimate.';
+      ?>
+      <h3><?=$estimate_header?></h3>
     </div>
     <div class="modal-body center bumper-top">
       <div>
