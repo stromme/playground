@@ -6788,6 +6788,9 @@ section:first-of-type {
   line-height: 16px;
   margin: 0;
 }
+.modal-backdrop {
+  z-index: 1040 !important;
+}
 #new-lead input {
   margin-bottom: 5px;
   padding: 10px 8px;
