@@ -16,7 +16,12 @@
       $blogs = get_blogs_of_user($owner->ID);
       if(count($blogs)>0){
         foreach($blogs as $user_blog){
-          array_push($blogs_list, $user_blog->userblog_id);
+          if($user_blog->userblog_id==$current_blog_id){
+            array_unshift($blogs_list, $user_blog->userblog_id);
+          }
+          else {
+            array_push($blogs_list, $user_blog->userblog_id);
+          }
         }
       }
     }
@@ -37,10 +42,19 @@
         array_push($blog_seo_list, $new_blog_seo);
       }
     }
+
     foreach($blogs_list as $user_blog){
       // Switch to blog if it's a different blog
       if($user_blog!=$current_blog_id) switch_to_blog($user_blog);
-      $locations = get_terms('locations', array('hide_empty' => 0));
+      $locations = get_terms('locations', array('hide_empty' => 0, 'orderby' => 'term_name', 'order' => 'ASC'));
+      $i=0;
+      foreach ($locations as $key=>$location) {
+        $desc = json_decode($location->description);
+        $locations[$key]->order = ($desc && isset($desc->order))?($desc->order):$i;
+        ++$i;
+        unset($location);
+      }
+      uasort($locations, "compare_promote_order");
       if($user_blog!=$current_blog_id) restore_current_blog();
 
       // Process those locations
@@ -92,7 +106,7 @@
       }
     }
     // Sort it by name
-    uasort($locations_list, "compare_location_name");
+    //uasort($locations_list, "compare_location_name");
     if(count($locations_list)>0){
       foreach($locations_list as $location){
     ?>
