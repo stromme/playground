@@ -25,9 +25,9 @@
             <p class="citation">
               <cite itemprop="author"><?=parse_shortclass($r->name)?></cite>
               <?php $seo = get_location_seo(); ?>
-              <?php if($r->company!=''){ ?>
+              <?php if(isset($r->company) && $r->company!=''){ ?>
                 <span class="author-location"> - <?=parse_shortclass($r->company)?></span>
-              <?php } else if($r->location!=''){ ?>
+              <?php } else if(isset($r->location) && $r->location!=''){ ?>
                 <span class="author-location"> - <?=parse_shortclass($r->location)?></span>
               <?php } else if(isset($seo['city']) && $seo['city']!='') { ?>
                 <span class="author-location"> - <?=$seo['city'].", ".$seo['state']?> </span>

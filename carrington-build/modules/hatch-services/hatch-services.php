@@ -3,14 +3,20 @@
 if (!class_exists('cfct_module_hatch_services') && class_exists('cfct_build_module')) {
 	class cfct_module_hatch_services extends cfct_build_module {
     private $default_title = 'What we\'re [strong green]really[/] good at.';
+    private $services = array();
 
 		public function __construct() {
 			$opts = array(
 				'description' => __('Display services', 'carrington-build'),
 				'icon' => 'hatch-services/icon.png'
 			);
+      $this->services = get_terms('services', array('hide_empty' => 0, 'orderby' => 'term_name', 'order' => 'ASC'));
       parent::__construct('cfct-module-hatch-services', __('.: Hatch Services :.', 'carrington-build'), $opts);
 		}
+
+    public function count(){
+      return count($this->services);
+    }
 
 // Display
 
@@ -22,18 +28,7 @@ if (!class_exists('cfct_module_hatch_services') && class_exists('cfct_build_modu
 		 * @return void
 		 */
 		public function display($data) {
-      $title = isset($data[$this->get_field_id('title')]) ? stripslashes($data[$this->get_field_id('title')]) : stripslashes($this->default_title);
-      $no_image = (isset($data[$this->get_field_id('no_image')]) && $data[$this->get_field_id('no_image')]==1);
-      $services = get_terms('services', array('hide_empty' => 0, 'orderby' => 'term_name', 'order' => 'ASC'));
-      $i=0;
-      foreach ($services as $key=>$service) {
-        $desc = json_decode($service->description);
-        $services[$key]->order = ($desc && isset($desc->order))?($desc->order):$i;
-        ++$i;
-        unset($service);
-      }
-      uasort($services, "compare_promote_order");
-			return $this->load_view($data, compact('title', 'services', 'no_image'));
+			return $this->load_view($data, apply_filters('cbtb_query_services', array('data'=>$data, 'obj'=>$this, 'services'=>$this->services, 'default_title'=>$this->default_title)));
 		}
 
 // Admin

@@ -19,7 +19,7 @@
 		</p>
 		<div class="center">
 			<div class="btn-group">
-				<a href="tel:<?=get_phone_number()?>" class="btn btn-primary btn-large hidden-phone">Call us <?=get_phone_number()?></a>
+				<a href="tel:<?=tb_format_phone_plain(get_phone_number())?>" class="btn btn-primary btn-large hidden-phone">Call us <?=get_phone_number()?></a>
 				<button class="btn btn-success btn-large quick-estimate <?=apply_filters('apply_responsibid', false);?>">Quick Online Estimate</button>
 			</div>
 		</div>

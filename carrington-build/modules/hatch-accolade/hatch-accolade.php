@@ -66,7 +66,8 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
                   'title' => $ac->post_title,
                   'link' => $ac->post_content,
                   'description' => $desc,
-                  'image' => $accolade_image
+                  'image' => $accolade_image,
+                  'term' => $acc_term
                 ));
               }
             }
@@ -89,7 +90,8 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
                 'title' => $ac->post_title,
                 'link' => $ac->post_content,
                 'description' => $desc,
-                'image' => $accolade_image
+                'image' => $accolade_image,
+                'term' => ""
               ));
             }
           }
@@ -97,58 +99,14 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
       }
 		}
 
+    public function count($data) {
+      $type = (isset($data[$this->get_field_id('type')]) ? $data[$this->get_field_id('type')] : '');
+      return isset($this->accolades[$type]['content'])?count($this->accolades[$type]['content']):0;
+    }
 // Display
 		public function display($data) {
-      $id = 'accolade-'.$data['module_id'];
-      $type = isset($data[$this->get_field_id('type')]) ? $data[$this->get_field_id('type')] : '';
-      $select_all = isset($data[$this->get_field_id('select_all_'.$type)]) ? $data[$this->get_field_id('select_all_'.$type)] : '';
-      $chosen_accolade = array();
-      if($select_all!='' && $select_all==1){
-        if(isset($this->accolades[$type]['content'])){
-          foreach($this->accolades[$type]['content'] as $ac){
-            array_push($chosen_accolade, $ac);
-          }
-        }
-      }
-      else {
-        $accolade_id = isset($data[$this->get_field_id('accolade_id')]) ? $data[$this->get_field_id('accolade_id')] : '';
-        if(isset($accolade_id[$type]) && count($accolade_id[$type])>0 && count($this->accolades[$type]['content'])>0){
-          foreach($this->accolades[$type]['content'] as $ac){
-            if(in_array($ac['id'], $accolade_id[$type])){
-              array_push($chosen_accolade, $ac);
-            }
-          }
-        }
-      }
-      $interval = isset($data[$this->get_field_id('interval')]) ? intval($data[$this->get_field_id('interval')]) : 4000;
-      $style = (!empty($data[$this->get_field_name('style')]) ? esc_html($data[$this->get_field_name('style')]) : '');
-      if($style=='') $style = 'header';
-
-      $js_id = '';
-      $js_init = '';
-      if($style=="header"){
-        $js_id = 'data_'.str_replace('-','_',$id);
-        $js_init = '
-        <script type="text/javascript">
-          var '.$js_id.' = '.json_encode($chosen_accolade).';
-          $(document).ready(function(){
-            var carousel = $(".carousel-'.$id.'");
-            carousel.carousel({
-              interval: '.$interval.'
-            });
-            carousel.bind("slide", function(){
-              $(".item", $(this)).animate({"opacity":0}, 200, function(){
-                var items = $(this);
-                setTimeout(function(){
-                  items.animate({"opacity":1}, 200);
-                }, 150);
-              });
-            });
-          });
-        </script>';
-      }
-      $this->view = 'view-'.$style.'.php';
-			return $this->load_view($data, compact('id', 'type', 'chosen_accolade', 'interval', 'js_id', 'js_init'));
+      $this->view = 'view-'.(!empty($data[$this->get_field_name('style')]) ? esc_html($data[$this->get_field_name('style')]) : 'header').'.php';
+			return $this->load_view($data, apply_filters('cbtb_query_accolade', array('data'=>$data, 'obj'=>$this, 'accolades'=>$this->accolades)));
 		}
 
 		public function admin_form($data) {
@@ -178,7 +136,7 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
       $acollade_selection = $this->accolades[$type]['content'];
       $accolade_id_options = '';
       foreach($acollade_selection as $accolade){
-        $accolade_id_options .= '<option value="'.$accolade->ID.'"'.(($accolade->ID==$accolade_id)?' selected=""':'').'>'.$accolade->post_title.'</option>';
+        $accolade_id_options .= '<option value="'.$accolade['id'].'"'.(($accolade['id']==$accolade_id)?' selected=""':'').'>'.$accolade['title'].'</option>';
       }
 
 			$html = '

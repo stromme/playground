@@ -13,66 +13,13 @@ get_header();
 $service_name = get_the_title();
 
 $company = get_option('tb_company');
-// Get all pinned reviews
-$args = array(
-  'number'  => 3,
-  'post_id' => 0,
-  'status'  => 'approve',
-  'meta_query' => array(
-    'relation' => 'AND',
-    array(
-      'key' => 'pinned',
-      'value' => '',
-      'type' => 'char',
-      'compare' => '!='
-    )
-  )
-);
-$comments = get_comments($args);
-$reviews = array();
-$pinned_keys = array();
-foreach($comments as $comment){
-  $listed_comment = new stdClass();
-  $listed_comment->id = $comment->comment_ID;
-  $listed_comment->name = $comment->comment_author;
-  $listed_comment->content = $comment->comment_content;
-  $listed_comment->pinned = get_comment_meta($comment->comment_ID, 'pinned', true);
-  $listed_comment->rating = get_comment_meta($comment->comment_ID, 'rating', true);
-  array_push($reviews, $listed_comment);
-  array_push($pinned_keys, $comment->comment_ID);
-}
-// Sort by pinned
-if(count($reviews)>1){
-  uasort($reviews, "compare_pinned_desc");
-}
-
-$args = array(
-  'number'  => 3,
-  'post_id' => 0,
-  'orderby' => 'modified',
-  'order'   => 'DESC',
-  'status'  => 'approve'
-);
-$comments = get_comments($args);
-$all_reviews = array();
-foreach($comments as $comment){
-  $listed_comment = new stdClass();
-  $listed_comment->id = $comment->comment_ID;
-  $listed_comment->name = $comment->comment_author;
-  $listed_comment->content = $comment->comment_content;
-  $listed_comment->rating = get_comment_meta($comment->comment_ID, 'rating', true);
-  if($listed_comment->rating=='') $listed_comment->rating = 0;
-  array_push($all_reviews, $listed_comment);
-}
-
 ?>
 
 <section class="bg-slate page-left page-right bumper-top-medium bumper-bottom-medium top-radius">
 	<div class="row-fluid">
-	
 		<div class="span8">
 			<div class="has-right-sidebar migrate">
-			
+
 			<!-- Service page post content goes here -->
 			      <?php
 			      the_post();
@@ -80,26 +27,14 @@ foreach($comments as $comment){
 			      ?>
 			</div>
 			<div class="clearfix"></div>
-			
+
 		</div>
 		<div class="span4">
 			<h3 class="blue">Customer Reviews</h3>
-			<ul id="reviews-list" class="migrate-review reviews-list">
-			<?php
-			  global $review;
-			  if(count($reviews)>0){
-			    foreach($reviews as $review){
-			      get_template_part('templates/list', 'review');
-			    }
-			  } elseif (count($all_reviews)>0){
-			    foreach($all_reviews as $review){
-			      if(!in_array($review->id, $pinned_keys)){
-			        get_template_part('templates/list', 'review');
-			      }
-			    }
-			  }
-			?>
-			</ul>
+      <?php
+        $featurette_reviews = apply_filters('cbtb_load_featurette_reviews', true);
+        echo $featurette_reviews['display'];
+      ?>
 		</div>
 	</div>
 </section>

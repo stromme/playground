@@ -16,6 +16,9 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
 				'description' => __('Display reviews.', 'carrington-build'),
 				'icon' => 'hatch-review/icon.png'
 			);
+      if(!wp_script_is('toolbox-rating')){
+        wp_enqueue_script('toolbox-rating', TOOLBOX_JS . '/jquery.raty.min.js', array('jquery'));
+      }
 			parent::__construct('cfct-module-hatch-review', __('.: Hatch Review :.', 'carrington-build'), $opts);
       $this->image_path = TOOLBOX_IMAGES.'/raty/';
       // Get all featured reviews
@@ -84,81 +87,13 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
 
 // Display
 		public function display($data) {
-      $id = 'review-'.$data['module_id'];
-
-      $rating = (!empty($data[$this->get_field_name('rating')]) ? esc_html($data[$this->get_field_name('rating')]) : '');
-      if($rating=='') $rating = 5;
-      $content = (!empty($data[$this->get_field_name('content')]) ? esc_html($data[$this->get_field_name('content')]) : '');
-      $name = (!empty($data[$this->get_field_name('name')]) ? esc_html($data[$this->get_field_name('name')]) : '');
-      $location = (!empty($data[$this->get_field_name('location')]) ? esc_html($data[$this->get_field_name('location')]) : '');
-      $company = (!empty($data[$this->get_field_name('company')]) ? esc_html($data[$this->get_field_name('company')]) : '');
-
-      $review_id = isset($data[$this->get_field_name('review_id')]) ? $data[$this->get_field_name('review_id')] : '';
-      if($review_id=='') $review_id = array();
-
-      $type = (!empty($data[$this->get_field_name('type')]) ? esc_html($data[$this->get_field_name('type')]) : '');
-      if($type=='') $type = $this->default_type;
-
-      if($type=='manual'){
-        $manual_review = new stdClass();
-        $manual_review->id = '';
-        $manual_review->name = $name;
-        $manual_review->content = $content;
-        $manual_review->location = $location;
-        $manual_review->rating = $content;
-        $manual_review->company = $company;
-        $reviews = array(
-          $manual_review
-        );
-      }
-      else if($type=='select'){
-        $reviews = array();
-        foreach($review_id as $current_review){
-          $found_review = '';
-          foreach($this->featured_reviews as $f){
-            if($f->id==$current_review){
-              $found_review = $f;
-              break;
-            }
-          }
-          if($found_review==''){
-            foreach($this->pinned_reviews as $p){
-              if($p->id==$current_review){
-                $found_review = $p;
-                break;
-              }
-            }
-          }
-          array_push($reviews, $found_review);
-        }
-      }
-      else {
-        $reviews = $this->featured_reviews;
-      }
-
-      $interval = isset($data[$this->get_field_id('interval')]) ? intval($data[$this->get_field_id('interval')]) : 4000;
-
-      $js_init = '';
-      if(($type=="featured" && count($this->featured_reviews)>1) || ($type=="select" && count($review_id)>1)){
-        $js_init = '
-        <script type="text/javascript">
-          $(document).ready(function(){
-            var carousel = $(".carousel-'.$id.'");
-            carousel.carousel({
-              interval: '.$interval.'
-            });
-            carousel.bind("slide", function(){
-              $(".item", $(this)).animate({"opacity":0}, 250, function(){
-                var items = $(this);
-                setTimeout(function(){
-                  items.animate({"opacity":1}, 200);
-                }, 200);
-              });
-            });
-          });
-        </script>';
-      }
-			return $this->load_view($data, compact('id', 'type', 'reviews', 'js_init'));
+			return $this->load_view($data, apply_filters('cbtb_query_reviews', array(
+        'data' => $data,
+        'obj' => $this,
+        'default_type' => $this->default_type,
+        'featured' => $this->featured_reviews,
+        'pinned' => $this->pinned_reviews
+      )));
 		}
 
 		public function admin_form($data) {
@@ -298,7 +233,7 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
         cfct_builder.addModuleLoadCallback("'.$this->id_base.'", function() {
           $("#'.$this->get_field_id('rating').'_selector").raty({
             "score": function(){return $(this).attr("data-score");},
-            "path": ratyimgurl,
+            "path": "'.TOOLBOX_IMAGES.'/raty/'.'",
             "scoreName": function(){return $(this).attr("data-score-name");}
           });
           var container = $("#'.$this->id_base.'-content-fields");

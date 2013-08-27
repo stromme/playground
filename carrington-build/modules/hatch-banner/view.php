@@ -8,15 +8,15 @@
  * @since
  */;
 ?>
-<?php if(count($js_data)>0){ ?>
-  <div id="<?=$id?>" class="<?=(count($js_data)>1)?'carousel-'.$id.' ':''?>banner" class="top-radius">
-    <?php if(count($js_data)>1){ ?>
+<?php if(count($banner_data)>0){ ?>
+  <div id="<?=$id?>" class="<?=(count($banner_data)>1)?'carousel-'.$id.' ':''?>banner" class="top-radius">
+    <?php if(count($banner_data)>1){ ?>
     <div class="carousel-inner">
     <?php } ?>
       <?php
         $i = 0;
-        foreach($js_data as $d){
-          if(count($js_data)>1){
+        foreach($banner_data as $d){
+          if(count($banner_data)>1){
       ?>
       <div class="<?=($i==0)?'active ':''?>item">
         <?php } ?>
@@ -57,11 +57,11 @@
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
             </ul>
           </div>
-          <?php if(count($js_data)>1){ ?>
+          <?php if(count($banner_data)>1){ ?>
           <ol class="carousel-indicators">
             <?php
               $ic = 0;
-              foreach($js_data as $d){
+              foreach($banner_data as $d){
             ?>
             <li data-target="#<?=$id?>" data-slide-to="<?=$ic?>"<?=($ic==$i)?' class="active"':''?>></li>
             <?php
@@ -71,14 +71,14 @@
           </ol>
           <?php } ?>
         </div>
-        <?php if(count($js_data)>1){ ?>
+        <?php if(count($banner_data)>1){ ?>
       </div>
       <?php
           }
           $i++;
         }
       ?>
-    <?php if(count($js_data)>1){ ?>
+    <?php if(count($banner_data)>1){ ?>
     </div>
     <?php } ?>
   </div>
@@ -86,4 +86,4 @@
 <div class="curved-shadow">
 	<img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
 </div>
-<?php if(count($js_data)>0){ ?><?=$js_init?><?php } ?>
+<?php if(count($banner_data)>0){ ?><?=$js_init?><?php } ?>
