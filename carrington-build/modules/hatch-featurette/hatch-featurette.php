@@ -185,42 +185,6 @@ if (!class_exists('cfct_module_hatch_featurette') && class_exists('cfct_build_mo
 						</div>
 					</div>
 					<!-- / image selector tabs -->';
-
-        /*$html .= '<fieldset class="cfct-custom-theme-style">
-          <div id="cfct-custom-theme-style-chooser" class="cfct-custom-theme-style-chooser cfct-image-select-b">
-            <input type="hidden" id="cfct-custom-theme-style" class="cfct-custom-theme-style-input" name="cfct-custom-theme-style" value="">
-
-            <label onclick="cfct_toggle_theme_chooser(this); return false;">Style</label>
-            <div class="cfct-image-select-current-image cfct-image-select-items-list-item cfct-theme-style-chooser-current-image" onclick="cfct_toggle_theme_chooser(this); return false;">
-              <div class="cfct-image-select-items-list-item">
-                <div style="background: #d2cfcf url(http://demo.crowdfavorite.com/favebusiness/wp/wp-content/themes/favebusiness/carrington-build/img/none-icon.png) 50% 50% no-repeat;"></div>
-              </div>
-            </div>
-
-            <div class="clear"></div>
-
-            <div id="cfct-theme-select-images-wrapper">
-              <h4>Select a style...</h4>
-              <div class="cfct-image-select-items-list cfct-image-select-items-list-horizontal cfct-theme-select-items-list">
-                <ul class="cfct-image-select-items">
-                  <li class="cfct-image-select-items-list-item  active" data-image-id="0" onclick="cfct_set_theme_choice(this); return false;">
-                    <div style="background: #d2cfcf url(http://demo.crowdfavorite.com/favebusiness/wp/wp-content/themes/favebusiness/carrington-build/img/none-icon.png) no-repeat 50% 50%;"></div>
-                  </li>
-                  <li class="cfct-image-select-items-list-item" data-image-id="style-a" onclick="cfct_set_theme_choice(this); return false;">
-                    <div style="background: url(http://demo.crowdfavorite.com/favebusiness/wp/wp-content/themes/favebusiness/wp-admin/module-callout-previews/box-style-a-loop.png) 0 0 no-repeat;"></div>
-                  </li>
-                  <li class="cfct-image-select-items-list-item" data-image-id="style-b" onclick="cfct_set_theme_choice(this); return false;">
-                    <div style="background: url(http://demo.crowdfavorite.com/favebusiness/wp/wp-content/themes/favebusiness/wp-admin/module-callout-previews/box-style-b-loop.png) 0 0 no-repeat;"></div>
-                  </li>
-                  <li class="cfct-image-select-items-list-item" data-image-id="style-c" onclick="cfct_set_theme_choice(this); return false;">
-                    <div style="background: url(http://demo.crowdfavorite.com/favebusiness/wp/wp-content/themes/favebusiness/wp-admin/module-callout-previews/box-style-c.png) 0 0 no-repeat;"></div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </fieldset>';*/
-					
 			return $html;
 		}
 

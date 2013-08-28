@@ -91,18 +91,18 @@ $prj = get_project_details($post);
       <?php } ?>
 
 			<p class="lead"><?=$prj->content?></p>
-      <?php if(!$prj->contact->is_private){ ?>
+      <?php if(!isset($prj->contact->is_private) || !$prj->contact->is_private){ ?>
       <?php if($project_contact!='' || $project_location!=''){ ?>
 			  <h3 class="bumper-top">
           <?php if($project_contact!=''){ ?><cite class="project-customer-author"><?=$project_contact?></cite><?php } ?><?php if($project_location!=''){ ?><small> - <?=$project_location?></small><?php } ?>
         </h3>
+        <div class="bumper-top bumper-bottom">
+          <div class="pen-stroke"></div>
+        </div>
       <?php
 			  }
 			}
       ?>
-			<div class="bumper-top bumper-bottom">
-				<div class="pen-stroke"></div>
-			</div>
 			
 			<ul class="share-it">
 				<li class="write-review"><a href=""><i class="icon-full-conversation"></i> Review this project</a></li>
@@ -185,9 +185,9 @@ $prj = get_project_details($post);
 		<ul class="thumbnails page-right page-left">
       <?php foreach($related_projects as $rel_prj){ ?>
 			<li class="span4 bg-white">
-				<div class="thumbnail">
+				<div class="thumbnail recent-projects">
           <div class="thumbnail-placeholder">
-					  <img src="<?=$rel_prj->favorite_media->image[0]?>" />
+					  <img src="<?=$rel_prj->favorite_media->image_small[0]?>" />
           </div>
           <?php if(isset($rel_prj->reviews) && count($rel_prj->reviews)>0){ ?>
           <div class="customer-review">
@@ -201,9 +201,7 @@ $prj = get_project_details($post);
           <?php } ?>
 					<div class="caption">
 						<p><?=(strlen($rel_prj->content)>120)?(substr($rel_prj->content, 0, 120).'...'):($rel_prj->content)?></p>
-						<p>
-							<a class="btn btn-primary btn-small" href="<?=$showroom_link?>">Visit Showroom</a>
-						</p>
+            <a class="btn btn-primary btn-small" href="<?=$showroom_link?>">Visit Showroom</a>
 					</div>
 				</div>
 			</li>
