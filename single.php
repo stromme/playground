@@ -201,7 +201,7 @@ $prj = get_project_details($post);
           <?php } ?>
 					<div class="caption">
 						<p><?=(strlen($rel_prj->content)>120)?(substr($rel_prj->content, 0, 120).'...'):($rel_prj->content)?></p>
-            <a class="btn btn-primary btn-small" href="<?=$showroom_link?>">Visit Showroom</a>
+            <a class="btn btn-primary btn-small" href="<?=$showroom_link?>" target="_blank">Visit Showroom</a>
 					</div>
 				</div>
 			</li>
