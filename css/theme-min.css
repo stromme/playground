@@ -5249,7 +5249,8 @@ a.badge:focus {
 .middle3,
 .middle4,
 .middle5,
-.middle6 {
+.middle6,
+.middle9 {
   display: table-cell;
   vertical-align: middle;
 }
@@ -5258,7 +5259,8 @@ a.badge:focus {
 .middle3 img,
 .middle4 img,
 .middle5 img,
-.middle6 img {
+.middle6 img,
+.middle9 img {
   vertical-align: middle;
 }
 .middle-fixed-small,
