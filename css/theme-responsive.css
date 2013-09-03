@@ -804,6 +804,16 @@
   .dl-horizontal dd {
     margin-left: 0;
   }
+  .thumbnail .thumbnail-placeholder {
+    max-height: inherit;
+    overflow: visible;
+    text-align: center;
+  }
+  .thumbnail .thumbnail-placeholder img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+  }
   .container {
     width: auto;
   }
@@ -1223,14 +1233,6 @@
   .grid-thumb nav {
     display: block;
     visibility: visible;
-  }
-  .thumbnail .thumbnail-placeholder {
-    max-height: inherit;
-    overflow: visible;
-    text-align: center;
-  }
-  .thumbnail .thumbnail-placeholder img {
-    width: auto;
   }
   .banner-title h2:after {
     content: "";
