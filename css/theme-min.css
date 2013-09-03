@@ -6515,7 +6515,7 @@ section:first-of-type {
 }
 .thumbnail .thumbnail-placeholder {
   max-height: 200px;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 .thumbnail .thumbnail-placeholder img {
   height: 200px;
