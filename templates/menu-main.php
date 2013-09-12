@@ -58,7 +58,7 @@ foreach($services_terms as $term){
     }
   }
 }
-$promoted_locations = array();
+/*$promoted_locations = array();
 foreach($locations_terms as $term){
   $args = array(
     'post_type' => 'cftl-tax-landing',
@@ -83,7 +83,7 @@ if($owner && isset($owner->ID) && $owner->ID>0){
     $term->name = get_blog_name($user_blog->userblog_id);
     array_push($promoted_locations, $term);
   }
-}
+}*/
 
 $args = array(
   'orderby'		  => 'modified',
@@ -126,7 +126,7 @@ $comments = get_comments($args);
           <?php } ?>
 				</ul>
 			</li>
-      <? } if(count($promoted_locations)>0){ ?>
+      <? } /*if(count($promoted_locations)>0){ ?>
 			<li class="dropdown visible-desktop"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Locations <b class="caret"></b></a>
 				<ul class="dropdown-menu">
           <?php foreach($promoted_locations as $location){ ?>
@@ -134,7 +134,7 @@ $comments = get_comments($args);
           <?php } ?>
 				</ul>
 			</li>
-      <? } ?>
+      <? }*/ ?>
       <?php if(count($promoted_services)>0){ ?>
 			<li class="dropdown visible-desktop">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <b class="caret"></b></a>
