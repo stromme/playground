@@ -148,7 +148,7 @@ $blogs = array();
           <li class="divider"></li>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account">Personal Profile</a></li><?php if(strstr($_SERVER['HTTP_HOST'], 'localhost') || strstr($_SERVER['HTTP_HOST'], 'uzbuz.com')){ ?>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account-notifications">Account Notifications</a></li><?php } ?>
-          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/logout?nonce=<?=wp_create_nonce('logout-'.date('Ymd'))?>">Log out</a></li>
+          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account/?logout=1&nonce=<?=wp_create_nonce('logout-'.date('Ymd'))?>">Log out</a></li>
         </ul>
       </div>
 		</div>
