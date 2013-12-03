@@ -1030,6 +1030,16 @@
     max-height: 400px;
   }
 }
+@media (max-width: 767px) {
+  .row-fluid .mobile12 {
+    float: none;
+    width: 100%;
+  }
+  .row-fluid .mobile12.address-map,
+  .row-fluid .mobile12.address {
+    text-align: center;
+  }
+}
 @media (min-width: 979px) {
   .banner-photo {
     max-width: 460px;
@@ -1108,6 +1118,19 @@
   }
 }
 @media (max-width: 979px) {
+  .row-fluid .tablet12 {
+    float: none;
+    width: 100%;
+  }
+  .row-fluid .tablet12.locations {
+    text-align: center;
+  }
+  .row-fluid .tablet12.locations ul {
+    display: inline-block;
+  }
+  .row-fluid .tablet12.locations ul li {
+    text-align: left;
+  }
   .headline-title a.home-link {
     display: block;
     position: absolute;

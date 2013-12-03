@@ -108,17 +108,11 @@ $seo = get_location_seo();
   <!-- Address and were we work -->
   <section class="bg-white bumper-top-medium bumper-bottom-medium page-left page-right">
     <div class="row-fluid">
-      <div class="span8">
-        <!-- Address Module - Company address and Google map -->
+      <div class="span8 tablet12">
         <?=apply_filters('cbtb_load_address', true);?>
-        <!-- / Address -->
       </div>
-      <div class="span4">
-        <div>
-          <!-- Service area Module - List of locations serviced -->
-          <?=apply_filters('cbtb_load_locations', true);?>
-          <!-- / Service area -->
-        </div>
+      <div class="span4 tablet12 locations">
+        <?=apply_filters('cbtb_load_locations', true);?>
       </div>
     </div>
   </section>

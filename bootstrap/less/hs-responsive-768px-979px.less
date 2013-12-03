@@ -2,6 +2,19 @@
 // Responsive: Tablet and up
 // --------------------------------------------------
 
+@media (max-width: 767px) {
+    .row-fluid {
+      .mobile12 {
+        float: none;
+        width: 100%;
+        &.address-map,
+        &.address {
+          text-align: center;
+        }
+      }
+    }
+}
+
 @media (min-width: 979px) {
     .banner-photo {
         max-width: 460px;
@@ -154,15 +167,29 @@
 
 @media (max-width: 979px) {
 
-    .headline-title {
-        a.home-link {
-            display: block;
-            position: absolute;
-            width: 30px;
-            height: 100%;
-            margin-left: -20px;
+  .row-fluid .tablet12 {
+    float: none;
+    width: 100%;
+    &.locations {
+      text-align: center;
+      ul {
+        display: inline-block;
+        li {
+          text-align: left;
         }
+      }
     }
+  }
+
+  .headline-title {
+      a.home-link {
+          display: block;
+          position: absolute;
+          width: 30px;
+          height: 100%;
+          margin-left: -20px;
+      }
+  }
 
 	// Elements with margin-right or margin-left need both margins when converted to a block
 	

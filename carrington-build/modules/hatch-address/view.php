@@ -29,22 +29,26 @@ if(count($users)>0){
 }
 ?>
 
-<div class="pull-left bumper-right-medium bumper-bottom">
-	<img class="img-polaroid" src="http://maps.google.com/maps/api/staticmap?center=<?=urlencode($company_street).'+'.urlencode($company_city.', '.$company_state).'+'.urlencode($company_zip)?>&amp;zoom=11&amp;size=270x210&amp;maptype=roadmap&amp;markers=color:blue%7Clabel:A%7C<?=urlencode($company_street).'+'.urlencode($company_city.', '.$company_state).'+'.urlencode($company_zip)?>&amp;sensor=false" itemprop="image">
-</div>
-<div class="">
-	<h3 class="light-weight"><?=parse_shortclass($title)?></h3>
-	<address itemprop="location" itemscope="http://schema.org/PostalAddress">
-	  <strong><?=$company_name?></strong><br>
-    <span itemprop="streetAddress"><?=$company_street?></span><br>
-    <span itemprop="addressLocality"><?=$company_city?></span>, <?=$company_state?> <?=$company_zip?><br>
-	  <abbr title="Phone">P:</abbr> <span itemprop="telephone"><?=$company_phone?></span>
-	</address>
+<div class="row-fluid">
+  <div class="mobile12 address-map pull-left bumper-right-medium bumper-bottom">
+    <img class="img-polaroid" src="http://maps.google.com/maps/api/staticmap?center=<?=urlencode($company_street).'+'.urlencode($company_city.', '.$company_state).'+'.urlencode($company_zip)?>&amp;zoom=11&amp;size=270x210&amp;maptype=roadmap&amp;markers=color:blue%7Clabel:A%7C<?=urlencode($company_street).'+'.urlencode($company_city.', '.$company_state).'+'.urlencode($company_zip)?>&amp;sensor=false" itemprop="image">
+  </div>
+  <div class="mobile12 address">
+    <h3 class="light-weight"><?=parse_shortclass($title)?></h3>
+    <address itemprop="location" itemscope="http://schema.org/PostalAddress">
+      <strong><?=$company_name?></strong><br>
+      <span itemprop="streetAddress"><?=$company_street?></span><br>
+      <span itemprop="addressLocality"><?=$company_city?></span>, <?=$company_state?> <?=$company_zip?><br>
+      <abbr title="Phone">P:</abbr> <span itemprop="telephone"><?=$company_phone?></span>
+    </address>
 
-	<address itemprop="founder" itemscope="http://schema.org/Person">
-	  <strong itemprop="name"><?=$owner_name?></strong><span class="grayLight">, <span itemprop="jobTitle"><?=$owner_role?></span></span><br>
-	  <a href="mailto:<?=$owner_email?>" itemprop="email"><?=$owner_email?></a>
-	</address>
+    <?php if($owner_name!='' || $owner_role!='' || $owner_email!=''){ ?>
+    <address itemprop="founder" itemscope="http://schema.org/Person">
+      <strong itemprop="name"><?=$owner_name?></strong><span class="grayLight">, <span itemprop="jobTitle"><?=$owner_role?></span></span><br>
+      <a href="mailto:<?=$owner_email?>" itemprop="email"><?=$owner_email?></a>
+    </address>
+    <?php } ?>
+  </div>
 </div>
 
 <!-- / Address -->

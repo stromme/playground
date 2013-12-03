@@ -7,7 +7,7 @@ if (!class_exists('cfct_module_hatch_award_info') && class_exists('cfct_build_mo
 				'description' => __('Display award info', 'carrington-build'),
 				'icon' => 'hatch-award-info/icon.png'
 			);
-      parent::__construct('cfct-module-hatch-award-info', __('.: Hatch Award Info :.', 'carrington-build'), $opts);
+      parent::__construct('cfct-module-hatch-award-info', __('.: WindowCleaning.com Awarded Best :.', 'carrington-build'), $opts);
 		}
 
 // Display
