@@ -29,6 +29,21 @@
 }
 
 @media (max-width: 767px) {
+
+  .row-fluid {
+    .mobile12 {
+      float: none;
+      width: 100%;
+      &.address-map {
+        max-width: 95%;
+        text-align: center;
+        padding-right: 0;
+      }
+      &.address {
+        text-align: center;
+      }
+    }
+  }
 	
 	// Elements with margin-right or margin-left need both margins when converted to a block
 	
@@ -45,6 +60,14 @@
 	.bumper-bottom-medium, .bumper-bottom-large, .bumper-bottom-Xlarge {
 		padding-bottom: @bumper;
 	}
+
+  .review-link {
+    position: relative;
+    display: inline-block;
+    width: auto;
+    margin-top: 10px;
+    margin-left: 0;
+  }
 	
 	// Should move to center of page, needs work
 	
@@ -59,104 +82,104 @@
         }
 	}
 
-    .banner-photo {
-        img {
-          height: auto;
-          max-width: 95%;
-        }
-        .embed-youtube {
-            iframe {
-                max-width: 95%;
-                height: 320px;
-            }
-        }
-    }
+  .banner-photo {
+      img {
+        height: auto;
+        max-width: 95%;
+      }
+      .embed-youtube {
+          iframe {
+              max-width: 95%;
+              height: 320px;
+          }
+      }
+  }
 
-    .featurette-horizontal {
-        iframe {
-            height: 360px;
-        }
-    }
+  .featurette-horizontal {
+      iframe {
+          height: 360px;
+      }
+  }
 
 
-    .featurette-vertical {
-        .embed-youtube {
-            text-align: center;
-            width: 90%;
-            display: inline-block !important;
-        }
-    }
+  .featurette-vertical {
+      .embed-youtube {
+          text-align: center;
+          width: 90%;
+          display: inline-block !important;
+      }
+  }
 
-    .big-modal.shown {
-        z-index: 1050;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        overflow-y: scroll !important;
-        overflow-x: hidden !important;
-        -webkit-overflow-scrolling: touch;
-    }
-    .big-modal>.modal {
-        position: static;
-        top: 0;
-        left: 0;
-        right: 0;
-        margin: 0;
-        border-radius: 0;
-        .modal-body {
-          max-height: none;
-          overflow: visible !important;
-        }
-    }
-    
-    // Services transitional page border 
-    .has-right-sidebar {
-    	border: none;
-    	padding-right: 0px;
-    }
+  .big-modal.shown {
+      z-index: 1050;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow-y: scroll !important;
+      overflow-x: hidden !important;
+      -webkit-overflow-scrolling: touch;
+  }
+  .big-modal>.modal {
+      position: static;
+      top: 0;
+      left: 0;
+      right: 0;
+      margin: 0;
+      border-radius: 0;
+      .modal-body {
+        max-height: none;
+        overflow: visible !important;
+      }
+  }
 
-    .select-location {
-        .btn-group {
-            a {
-                display: inline-block;
-                font-size: 16px;
-                min-width: 100px;
-            }
-            .dropdown-menu {
-                a {
-                    display: block;
-                }
-            }
-        }
-    }
+  // Services transitional page border
+  .has-right-sidebar {
+    border: none;
+    padding-right: 0px;
+  }
 
-    // Migrated home video embed
-    .migrate {
-        iframe,
-        embed {
-            max-height: 400px;
-        }
-    }
+  .select-location {
+      .btn-group {
+          a {
+              display: inline-block;
+              font-size: 16px;
+              min-width: 100px;
+          }
+          .dropdown-menu {
+              a {
+                  display: block;
+              }
+          }
+      }
+  }
 
-    // Fix long company name on small screen
-    .fixed-headline {
-        margin-left: -18px;
-        margin-right: -20px;
-    }
+  // Migrated home video embed
+  .migrate {
+      iframe,
+      embed {
+          max-height: 400px;
+      }
+  }
 
-    // Fix media controls
-    .media-controls {
-        visibility: visible !important;
-        .show-image {
-            display: none;
-        }
-        .show-image[data-video] {
-            display: block;
-        }
-    }
-    #colorbox {
-        left: 0 !important;
-    }
+  // Fix long company name on small screen
+  .fixed-headline {
+      margin-left: -18px;
+      margin-right: -20px;
+  }
+
+  // Fix media controls
+  .media-controls {
+      visibility: visible !important;
+      .show-image {
+          display: none;
+      }
+      .show-image[data-video] {
+          display: block;
+      }
+  }
+  #colorbox {
+      left: 0 !important;
+  }
 }

@@ -32,7 +32,7 @@
               <?php } else if(isset($seo['city']) && $seo['city']!='') { ?>
                 <span class="author-location"> - <?=$seo['city'].", ".$seo['state']?> </span>
               <?php } ?>
-              <div class="clearfix"></div>
+              <span class="hidden-tablet hidden-desktop clearfix"></span>
               <a href="<?=home_url()?>/reviews" class="review-link">Read more reviews</a>
             </p>
             	

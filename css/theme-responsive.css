@@ -1030,26 +1030,6 @@
     max-height: 400px;
   }
 }
-@media (max-width: 767px) {
-  .row-fluid .mobile12 {
-    float: none;
-    width: 100%;
-  }
-  .row-fluid .mobile12.address-map {
-    max-width: 95%;
-    text-align: center;
-    padding-right: 0;
-  }
-  .row-fluid .mobile12.address {
-    text-align: center;
-  }
-  a.review-link {
-    margin-left: auto;
-    margin-right: auto;
-    display: inline-block;
-    width: auto;
-  }
-}
 @media (min-width: 979px) {
   .banner-photo {
     max-width: 460px;
@@ -1215,12 +1195,6 @@
   .accolade-carousel .carousel-indicators {
     display: none !important;
   }
-  .review-link {
-    position: relative;
-    display: block;
-    width: 150px;
-    margin-top: 10px;
-  }
   .banner-review {
     margin: 0 auto;
     max-width: 100%;
@@ -1302,6 +1276,18 @@
   }
 }
 @media (max-width: 767px) {
+  .row-fluid .mobile12 {
+    float: none;
+    width: 100%;
+  }
+  .row-fluid .mobile12.address-map {
+    max-width: 95%;
+    text-align: center;
+    padding-right: 0;
+  }
+  .row-fluid .mobile12.address {
+    text-align: center;
+  }
   .page-right,
   .page-left {
     padding-left: 20px;
@@ -1316,6 +1302,13 @@
   .bumper-bottom-large,
   .bumper-bottom-Xlarge {
     padding-bottom: 20px;
+  }
+  .review-link {
+    position: relative;
+    display: inline-block;
+    width: auto;
+    margin-top: 10px;
+    margin-left: 0;
   }
   .link-grid {
     margin: 0 auto;
