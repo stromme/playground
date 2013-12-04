@@ -102,54 +102,54 @@
 	
 	 // Banner
 	 
-    .banner-photo {
-        padding: 0;
-        img {
-            .border-bottom-left-radius(0);
-            .border-bottom-right-radius(0);
-            padding: 0px;
-            border: none;
-            height: auto !important;
-            width: 100%;
-            max-width: 100%;
-        }
-        .embed-youtube {
-            iframe {
-                max-width: 100%;
-                height: 280px;
-            }
-        }
+  .banner-photo {
+      padding: 0;
+      img {
+          .border-bottom-left-radius(0);
+          .border-bottom-right-radius(0);
+          padding: 0px;
+          border: none;
+          height: auto !important;
+          width: 100%;
+          max-width: 100%;
+      }
+      .embed-youtube {
+          iframe {
+              max-width: 100%;
+              height: 280px;
+          }
+      }
+  }
+
+  .banner-review blockquote {
+    p, p.banner-author {
+      font-size: @baseFontSize*1.5;
+      line-height: @baseLineHeight*1.5;
     }
-    
-    .banner-review blockquote { 
-    	p, p.banner-author {
-    		font-size: @baseFontSize*1.5; 
-    		line-height: @baseLineHeight*1.5;
-    	} 
+  }
+
+  .banner .share-it {
+    padding-left: 20px;
+    text-align: center;
+    min-width: 0px;
+    .write-review {
+      padding-right: 0;
+          float: none;
+          text-align: center;
     }
-    
-    .share-it {
-    	padding-left: 20px;
-    	text-align: center;
-    	min-width: 0px;
-    	.write-review {
-    		padding-right: 0;
-            float: none;
-            text-align: center;
-    	}
-        .social-network {
-            width: 48%;
-            padding-top: 0;
-        }
-        .social-network.sc-facebook {
-            padding-right: 2%;
-            text-align: right;
-        }
-        .social-network.sc-twitter {
-            padding-left: 2%;
-            text-align: left;
-        }
-    }
+      .social-network {
+          width: 48%;
+          padding-top: 0;
+      }
+      .social-network.sc-facebook {
+          padding-right: 2%;
+          text-align: right;
+      }
+      .social-network.sc-twitter {
+          padding-left: 2%;
+          text-align: left;
+      }
+  }
 	
 	.footer {
 		.footer-links > a {
@@ -207,11 +207,6 @@
     .find-location input {
         max-width: 60%;
     }
-    .link-grid li {
-        padding-left: 35px;
-        padding-right: 35px;
-    }
-
     .select-location {
         button.lookup {
             width: 250px;

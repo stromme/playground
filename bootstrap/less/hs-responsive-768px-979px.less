@@ -3,25 +3,35 @@
 // --------------------------------------------------
 
 @media (max-width: 767px) {
-    .row-fluid {
-      .mobile12 {
-        float: none;
-        width: 100%;
-        &.address-map,
-        &.address {
-          text-align: center;
-        }
+  .row-fluid {
+    .mobile12 {
+      float: none;
+      width: 100%;
+      &.address-map {
+        max-width: 95%;
+        text-align: center;
+        padding-right: 0;
+      }
+      &.address {
+        text-align: center;
       }
     }
+  }
+  a.review-link {
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+    width: auto;
+  }
 }
 
 @media (min-width: 979px) {
-    .banner-photo {
-        max-width: 460px;
-        img {
-          max-width: 900px;
-        }
+  .banner-photo {
+    max-width: 460px;
+    img {
+      max-width: 900px;
     }
+  }
 	.link-grid {
 		li:nth-of-type(3n + 2) {
 			padding-left: 0px;

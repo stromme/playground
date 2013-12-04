@@ -1035,9 +1035,19 @@
     float: none;
     width: 100%;
   }
-  .row-fluid .mobile12.address-map,
+  .row-fluid .mobile12.address-map {
+    max-width: 95%;
+    text-align: center;
+    padding-right: 0;
+  }
   .row-fluid .mobile12.address {
     text-align: center;
+  }
+  a.review-link {
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+    width: auto;
   }
 }
 @media (min-width: 979px) {
@@ -1520,25 +1530,25 @@
     font-size: 24px;
     line-height: 30px;
   }
-  .share-it {
+  .banner .share-it {
     padding-left: 20px;
     text-align: center;
     min-width: 0px;
   }
-  .share-it .write-review {
+  .banner .share-it .write-review {
     padding-right: 0;
     float: none;
     text-align: center;
   }
-  .share-it .social-network {
+  .banner .share-it .social-network {
     width: 48%;
     padding-top: 0;
   }
-  .share-it .social-network.sc-facebook {
+  .banner .share-it .social-network.sc-facebook {
     padding-right: 2%;
     text-align: right;
   }
-  .share-it .social-network.sc-twitter {
+  .banner .share-it .social-network.sc-twitter {
     padding-left: 2%;
     text-align: left;
   }
@@ -1579,10 +1589,6 @@
   }
   .find-location input {
     max-width: 60%;
-  }
-  .link-grid li {
-    padding-left: 35px;
-    padding-right: 35px;
   }
   .select-location button.lookup {
     width: 250px;
