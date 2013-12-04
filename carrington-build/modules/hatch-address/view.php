@@ -44,8 +44,8 @@ if(count($users)>0){
 
     <?php if($owner_name!='' || $owner_role!='' || $owner_email!=''){ ?>
     <address itemprop="founder" itemscope="http://schema.org/Person">
-      <strong itemprop="name"><?=$owner_name?></strong><span class="grayLight">, <span itemprop="jobTitle"><?=$owner_role?></span></span><br>
-      <a href="mailto:<?=$owner_email?>" itemprop="email"><?=$owner_email?></a>
+      <strong itemprop="name"><?=$owner_name?></strong><span class="grayLight"><?php if($owner_role!=''){ ?>, <span itemprop="jobTitle"><?=$owner_role?></span><?php } ?></span><br>
+      <a href="mailto:<?=$owner_email?>" itemprop="email" <?=(strlen($owner_email)>30)?'class="small"':''?>><?=$owner_email?></a>
     </address>
     <?php } ?>
   </div>
