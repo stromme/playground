@@ -7005,6 +7005,7 @@ div.img-polaroid div {
 }
 .mobile12.address .small {
   font-size: 14px;
+  word-break: break-word;
 }
 .pull-right {
   float: right;
