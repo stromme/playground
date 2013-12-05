@@ -105,7 +105,7 @@ $blogs = array();
               ?>
               <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account-notifications">Account Notifications</a></li>
               <?php } ?>
-							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/logout?nonce=<?=wp_create_nonce('logout-'.date('Ymd'))?>">Log out</a></li>
+              <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account/?logout=1&nonce=<?=wp_create_nonce('logout-'.date('Ymd'))?>">Log out</a></li>
 						</ul>
 					</li>
           <li class="control-panel-collapsed">
