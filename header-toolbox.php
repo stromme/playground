@@ -95,7 +95,11 @@ $blogs = array();
                 }
               ?>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
+              <?php
+              $user = wp_get_current_user();
+              if($user && !in_array('manager', $user->roles) && !in_array('owner', $user->roles)){ ?>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
+              <?php } ?>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing and Tracking</a></li>
               <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/apps">Add-on Apps</a></li>
 							<li class="divider"></li>
@@ -143,7 +147,9 @@ $blogs = array();
             }
           ?>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
+          <?php if($user && !in_array('manager', $user->roles) && !in_array('owner', $user->roles)){ ?>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
+          <?php } ?>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing and Tracking</a></li>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/apps">Add-on Apps</a></li>
           <li class="divider"></li>
