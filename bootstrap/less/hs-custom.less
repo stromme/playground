@@ -319,34 +319,33 @@ section:first-of-type {
 	
 	.favorite-photo:hover div.media-controls { visibility: visible; }
 	.favorite-photo div.show-video-play { visibility:visible; }
+
+  // Thumbnails under the main project photo
+  .thumbnails {
+
+    margin: 0px;
+    padding: 15px 0px 0px;
+    li {
+      margin: 0px;
+      padding: 0px 0px 10px 10px;
+      a {
+        padding: 2px;
+      }
+    }
+  }
+
+  .thumbnail {
+    width: 65px;
+    height: 65px;
+    overflow: hidden;
+    img {
+      min-height: 65px;
+    }
+  }
 	
-
+	// Project descriptio
 	
-	// Project description
-	
-	blockquote {	// Thumbnails under the main project photo
-
-		.thumbnails {
-
-			margin: 0px;
-			padding: 15px 0px 0px;
-			li {
-				margin: 0px;
-				padding: 0px 0px 10px 10px;
-				a {
-					padding: 2px;
-				}
-			}
-		}
-
-		.thumbnail {
-			width: 65px;
-			height: 65px;
-			overflow: hidden;
-			img {
-				min-height: 65px;
-			}
-		}
+	blockquote {
 		padding: 15px;
 		margin: 0px;
 		border-bottom: 1px solid (darken(@grayLighter,8));

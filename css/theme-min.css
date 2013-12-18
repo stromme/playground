@@ -6644,6 +6644,25 @@ section:first-of-type {
 .project .favorite-photo div.show-video-play {
   visibility: visible;
 }
+.project .thumbnails {
+  margin: 0px;
+  padding: 15px 0px 0px;
+}
+.project .thumbnails li {
+  margin: 0px;
+  padding: 0px 0px 10px 10px;
+}
+.project .thumbnails li a {
+  padding: 2px;
+}
+.project .thumbnail {
+  width: 65px;
+  height: 65px;
+  overflow: hidden;
+}
+.project .thumbnail img {
+  min-height: 65px;
+}
 .project blockquote {
   padding: 15px;
   margin: 0px;
@@ -6656,25 +6675,6 @@ section:first-of-type {
   background-image: linear-gradient(to bottom, #ffffff, #f6f6f6);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff6f6f6', GradientType=0);
-}
-.project blockquote .thumbnails {
-  margin: 0px;
-  padding: 15px 0px 0px;
-}
-.project blockquote .thumbnails li {
-  margin: 0px;
-  padding: 0px 0px 10px 10px;
-}
-.project blockquote .thumbnails li a {
-  padding: 2px;
-}
-.project blockquote .thumbnail {
-  width: 65px;
-  height: 65px;
-  overflow: hidden;
-}
-.project blockquote .thumbnail img {
-  min-height: 65px;
 }
 .project blockquote p {
   font-size: 16px;
