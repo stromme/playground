@@ -22,5 +22,6 @@ restore_current_blog();
 <? get_template_part('templates/modal', 'review'); ?>
 <? get_template_part('templates/modal', 'lead'); ?>
 <?php wp_footer(); ?>
+<?=get_google_remarketing_code();?>
 </body>
 </html>
