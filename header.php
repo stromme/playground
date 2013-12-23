@@ -24,7 +24,7 @@
   <?do_action('get_zopim_code');?>
 </head>
 
-<body itemscope itemtype="http://schema.org/ProfessionalService/">
+<body itemscope itemtype="http://schema.org/ProfessionalService">
 <?php 
 
 get_template_part('templates/menu', 'headline');
