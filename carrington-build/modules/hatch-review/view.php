@@ -21,22 +21,20 @@
           ?>
           <div class="<?=($i==0)?'active ':''?>item">
           <?php } ?>
-            <p itemprop="comment">"<?=parse_shortclass($r->content)?>"</p>
+            <p>"<span itemprop="reviewBody"><?=parse_shortclass($r->content)?></span>"</p>
             <p class="citation">
               <cite itemprop="author"><?=parse_shortclass($r->name)?></cite>
               <?php $seo = get_location_seo(); ?>
               <?php if(isset($r->company) && $r->company!=''){ ?>
-                <span class="author-location"> - <?=parse_shortclass($r->company)?></span>
+                <span class="author-location" itemprop="location"> - <?=parse_shortclass($r->company)?></span>
               <?php } else if(isset($r->location) && $r->location!=''){ ?>
-                <span class="author-location"> - <?=parse_shortclass($r->location)?></span>
+                <span class="author-location" itemprop="location"> - <?=parse_shortclass($r->location)?></span>
               <?php } else if(isset($seo['city']) && $seo['city']!='') { ?>
-                <span class="author-location"> - <?=$seo['city'].", ".$seo['state']?> </span>
+                <span class="author-location" itemprop="location"> - <?=$seo['city'].", ".$seo['state']?> </span>
               <?php } ?>
               <span class="hidden-tablet hidden-desktop clearfix"></span>
               <a href="<?=home_url()?>/reviews" class="review-link">Read more reviews</a>
             </p>
-            	
-           
           <?php if(count($reviews)>1){ ?>
           </div>
           <?php

@@ -24,7 +24,7 @@
           <?php if($d->video!=''){?>
             <?=parse_embed_video_link($d->video)?>
           <?php } else { ?>
-            <img id="image-<?=$id?>" src="<?=$d->images[0]?>" />
+            <img id="image-<?=$id?>" src="<?=$d->images[0]?>" itemprop="image" />
           <?php } ?>
         </div>
         <div class="banner-review">
