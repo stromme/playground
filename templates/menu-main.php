@@ -106,14 +106,6 @@ $comments = get_comments($args);
 -->
 <header class="container">
 	<nav>
-		
-		<!-- Text version of company name replaces logo on Phones -->
-		<!--<div class="brand-phone clearfix">
-			<?php $tb_company = get_option('tb_company'); ?>
-			<h4><?=esc_html( stripslashes($tb_company['name']))?></h4>
-		</div>-->
-		<!-- /Text version  -->
-		
 		<!-- Main Navigation Menu Bar -->
 		<ul class="main-nav nav nav-pills fixed-nav">
 			<li class="visible-desktop"><a href="<?=get_home_url()?>/">Home</a>
@@ -156,7 +148,8 @@ $comments = get_comments($args);
 	</nav>
 	
 	<!-- Brand -->
-	<div class="brand fixed-brand" itemprop="brand" itemscope="http://schema.org/Brand">
+	<div class="brand fixed-brand">
+    <span class="hide" itemprop="brand"><?php bloginfo( 'title' ); ?></span>
 		<a href="<?=get_home_url()?>/"><img src="<?php echo get_header_image(); ?>" itemprop="logo"></a>
 	</div>
 	<!-- /Brand -->
