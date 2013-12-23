@@ -1,5 +1,5 @@
 <?php global $prj ?>
-<div class="project" itemprop="review" itemscope="http://schema.org/Review">
+<div class="project">
   <div class="project-container">
     <?php if(count($prj->media)>0){ ?>
       <div class="favorite-photo">
@@ -42,13 +42,14 @@
       <?php } ?>
     <?php } ?>
     <?php if(isset($prj->reviews) && count($prj->reviews)>0){ ?>
-    <div class="customer-review">
+    <div class="customer-review" itemprop="review" itemscope="http://schema.org/Review">
       <h3>Customer reviewed</h3>
       <?php foreach($prj->reviews as $review){ ?>
-      <p>"<?=$review->content?>"
+      <p>"<span itemprop="reviewBody"><?=$review->content?></span>"
       </p>
       <div class="author">
-        <p><cite><?=$review->name?></cite> &nbsp;<span class="review-rating" data-score="<?=$review->rating?>"></span></p>
+        <p><cite itemprop="author"><?=$review->name?></cite> &nbsp;<span class="review-rating" data-score="<?=$review->rating?>"></span></p>
+        <span class="hide" itemprop="reviewRating"><?=$review->rating?></span>
       </div>
       <?php } ?>
     </div>
@@ -57,9 +58,9 @@
     <blockquote>
       <p>
         <?php if(strlen($prj->content)<405){ ?>
-          <span class="content-description" itemprop="description"><?=$prj->content?></span>
+          <span class="content-description"><?=$prj->content?></span>
         <?php } else { ?>
-          <span class="content-description" itemprop="description">
+          <span class="content-description">
             <?=substr($prj->content, 0, 400).'...'?>
             <a href="" class="show-more"><i class="icon-collapse-halfling"></i></a>
           </span>
@@ -75,7 +76,7 @@
         <?php
           if($prj->contact->company!=''){ echo $prj->contact->company; }
           else if($prj->contact->first_name!=''){
-            echo '<itemprop="author">'.$prj->contact->first_name.'</itemprop> ';
+            echo $prj->contact->first_name;
             if($prj->contact->last_name!=''){
               echo $prj->contact->last_name;
             }
