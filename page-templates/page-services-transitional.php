@@ -112,8 +112,7 @@ $company = get_option('tb_company');
           <?php if(isset($rel_prj->reviews) && count($rel_prj->reviews)>0){ ?>
           <div class="customer-review">
             <h3>Customer reviewed</h3>
-            <p>"<?=$rel_prj->reviews[0]->content?>"
-            </p>
+            <p>"<?=$rel_prj->reviews[0]->content?>"</p>
             <div class="author">
               <p><cite><?=$rel_prj->reviews[0]->name?></cite> &nbsp;<span class="review-rating" data-score="<?=$rel_prj->reviews[0]->rating?>"></span></p>
             </div>
