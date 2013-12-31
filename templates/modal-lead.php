@@ -12,6 +12,7 @@
 <div class="big-modal">
   <div class="modal hide fade bg-slate" id="new-lead">
     <div class="modal-header center bumper-top bumper-bottom">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       <?php
         $tb_customize = get_option('tb_customize');
         $tb_industry = get_option('tb_industry');
