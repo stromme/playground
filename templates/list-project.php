@@ -78,7 +78,7 @@
           else if($prj->contact->first_name!=''){
             echo $prj->contact->first_name;
             if($prj->contact->last_name!=''){
-              echo $prj->contact->last_name;
+              echo ' '.$prj->contact->last_name;
             }
           }
           if($prj->contact->city!=''){
