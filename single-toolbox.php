@@ -55,7 +55,7 @@ load_template(TOOLBOX_BASE_DIR.'/toolbox-'.$post->post_name.'.php', false);
       <label for="customer-message">Email message</label>
       <?php
       $tb_company = get_option('tb_company');
-      $company_name = (isset($tb_company['name']) && ''!=$tb_company['name'])?$tb_company['name']:'us';
+      $company_name = stripslashes((isset($tb_company['name']) && ''!=$tb_company['name'])?$tb_company['name']:'us');
       ?>
 			<textarea class="input-block-level" id="customer-message" placeholder="Message to customer" validation="not-empty" rows="5">We just finished your project and wanted to share how great things turned out. Here's a few photo's of the completed work. Thanks again for choosing <?=$company_name?>, please don't hesitate to contact us if you need anything else.</textarea>
 		</div>
