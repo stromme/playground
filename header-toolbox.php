@@ -22,6 +22,10 @@ $blogs = array();
   <!-- W3TC-include-js-head -->
 	<?php wp_head(); ?>
 	<?=get_google_analytics_code();?>
+  <?php
+    $social = new Social();
+    $social->process_pending_sharing();
+  ?>
 </head>
 
 <body>
