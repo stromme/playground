@@ -49,7 +49,7 @@ $blogs = array();
     	<div class="brand hidden-phone">
     		<?php 
     		$seo = get_location_seo();
-    		if ( $industry['industry'] == 'window-cleaning' ) echo '<h2>' , $seo['city'] , ', ' , $seo['state'] , '</h2>'; else echo '<h2>Hatch</h2>';?></div>
+    		if ( $industry['industry'] == 'window-cleaning' && isset($seo['city']) && $seo['city']!='') echo '<h2>' , $seo['city'] , ', ' , $seo['state'] , '</h2>'; else echo '<h2>Hatch</h2>';?></div>
 			<div><!--</div> class="nav-collapse collapse"-->
 				<ul class="nav">
 					<li class="has-nav-icon">
