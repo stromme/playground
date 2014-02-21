@@ -86,7 +86,7 @@ $blogs = array();
                       }
                       if($city_state==''){
                         $blog_details = get_blog_details($blog->userblog_id);
-                        $city_state = ucwords(str_replace('-', ' ', str_replace('/', ' ', trim($blog_details->path, '/'))));
+                        $city_state = stripslashes(ucwords(str_replace('-', ' ', str_replace('/', ' ', trim($blog_details->path, '/')))));
                       }
 
               ?>
