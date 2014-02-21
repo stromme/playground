@@ -82,7 +82,7 @@ $blogs = array();
                       $blog_seo = get_blog_option($blog->userblog_id, 'tb_seo');
                       $city_state = '';
                       if($blog_seo!=''){
-                        $city_state = $blog_seo['seo_target_city'].", ".$blog_seo['seo_target_state'];
+                        $city_state = stripslashes($blog_seo['seo_target_city']).(($blog_seo['seo_target_city']!='' && $blog_seo['seo_target_state'])?", ":"").$blog_seo['seo_target_state'];
                       }
                       if($city_state==''){
                         $blog_details = get_blog_details($blog->userblog_id);
