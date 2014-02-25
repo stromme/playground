@@ -99,6 +99,12 @@ $blogs = array();
               ?>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
               <?php
+                $net = get_site_option('tb_network_setting');
+                if(isset($net['name']) && $net['name']!='WindowCleaning.com'){
+              ?>
+              <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/domain">Custom Domain Name</a></li>
+              <?php } ?>
+              <?php
               $user = wp_get_current_user();
               if($user && !in_array('manager', $user->roles) && !in_array('owner', $user->roles)){ ?>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
@@ -150,6 +156,12 @@ $blogs = array();
             }
           ?>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
+          <?php
+            $net = get_site_option('tb_network_setting');
+            if(isset($net['name']) && $net['name']!='WindowCleaning.com'){
+          ?>
+          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/domain">Custom Domain Name</a></li>
+          <?php } ?>
           <?php if($user && !in_array('manager', $user->roles) && !in_array('owner', $user->roles)){ ?>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
           <?php } ?>
