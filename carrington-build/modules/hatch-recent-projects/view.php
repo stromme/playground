@@ -1,3 +1,4 @@
+<?php if(count($recent_projects)>0){ ?>
 <div class="row-fluid bumper-top-medium bumper-bottom-medium">
 	<div class="span12">
 		<<?=$heading?> class="blue center"><?=$title?></<?=$heading?>>
@@ -33,3 +34,4 @@
      <?php  } ?>
 	</ul>
 </div>
+<?php } ?>

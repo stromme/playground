@@ -29,6 +29,14 @@ if (!class_exists('cfct_module_hatch_recent_projects') && class_exists('cfct_bui
       foreach($this->heading_styles as $key=>$head_style){
         $heading_style_options .= '<option value="'.$key.'"'.(($key==$heading_style)?' selected=""':'').'>'.$head_style.'</option>';
       }
+      $tag = (!empty($data[$this->get_field_name('tag')]) ? esc_html($data[$this->get_field_name('tag')]) : '');
+      $tags = get_terms('services', array('hide_empty' => 0));
+      $tag_options = '<option value="" '.(($tag=='')?' selected="selected"':'').'>Select project tag</option>';
+      foreach($tags as $t) {
+        $args = array('post_type' => 'showroom', 'services' => $t->slug, 'post_status' => 'publish', 'posts_per_page' => 4);
+        $count_posts = count(get_posts($args));
+        $tag_options .= '<option value="'.$t->slug.'"'.(($t->slug==$tag)?' selected="selected"':'').'>'.$t->name.(($count_posts>0)?' ('.(($count_posts>3)?'more than 3':$count_posts).' project'.(($count_posts>1)?'s':'').')':'').'</option>';
+      }
 			$html = '
 				<div id="'.$this->id_base.'-content-info">
 					<div id="'.$this->id_base.'-content-fields">
@@ -36,6 +44,12 @@ if (!class_exists('cfct_module_hatch_recent_projects') && class_exists('cfct_bui
               <label for="'.$this->get_field_id('title').'">'.__('Title').'</label>
               <input type="text" name="'.$this->get_field_name('title').'" id="'.$this->get_field_id('title').'" value="'.(!empty($data[$this->get_field_name('title')]) ? esc_html($data[$this->get_field_name('title')]) : $this->default_title).'" />
               <p class="help">Eg. Our [green]recent[/] projects</p>
+            </div>
+					  <div class="cfct-field">
+              <label for="'.$this->get_field_id('tag').'">'.__('Project Tag').'</label>
+              <div>
+                <select id="'.$this->get_field_id('tag').'" name="'.$this->get_field_name('tag').'" class="cfct-style-chooser">'.$tag_options.'</select>
+              </div>
             </div>
 					</div>
 					<div id="'.$this->id_base.'-styling">
