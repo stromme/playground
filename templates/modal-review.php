@@ -20,13 +20,15 @@ $review_last_name = (isset($prj->contact->last_name) && $prj->contact->last_name
 $review_email = (isset($prj->contact->email) && $prj->contact->email!='')?$prj->contact->email:'';
 $review_company = (isset($prj->contact->company) && $prj->contact->company!='')?$prj->contact->company:'';
 $review_location = (isset($prj->contact->city) && $prj->contact->city!='')?$prj->contact->city:'';
+
+global $close_button;
 ?>
 
 <!-- Review Modal -->
 <div class="big-modal">
   <div class="modal hide fade" id="new-review"<?=($add_review)?' data-project-id="'.$id.'"':''?>>
     <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <?php if(!isset($close_button) || !$close_button){ ?><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><?php } ?>
       <h3><?=($review_first_name!='' || $review_last_name!='')?'Hi '.$review_first_name.(($review_first_name!='' && $review_last_name!='')?' ':'').$review_last_name.', how did we do?"':'So, how did we do?'?></h3>
     </div>
     <div class="modal-body">
@@ -87,6 +89,7 @@ $review_location = (isset($prj->contact->city) && $prj->contact->city!='')?$prj-
           <input id="review-social-post" type="checkbox" value="1" name="review-social-post" checked="checked" /> <label for="review-social-post"><small>Share on <span class="social-media-name">Facebook</span></small></label>
         </div>
       </div>
+      <?php if(isset($close_button) && $close_button){ ?><button class="btn project-cancel" data-dismiss="modal" aria-hidden="true">Cancel</button><?php } ?>
       <a href="javascript:void(0);" class="btn btn-success save disabled<?=(($review_first_name!='' || $review_last_name!='') && $review_email!='' && $review_company!='' && $review_location!='')?' solid':''?>">Add Review</a>
     </div>
   </div>
