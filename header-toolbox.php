@@ -7,7 +7,7 @@
  * @subpackage Hatch
  * @since Hatch 1.0
  */
-if($_GET['test705u4']==1) do_action('send_monthly_status');
+
 global $post;
 $industry = get_option('tb_industry');
 $blogs = array();
