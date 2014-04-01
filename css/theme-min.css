@@ -5330,11 +5330,11 @@ h2.jumbo {
   content: " ";
   display: block;
   background-color: #339ce6;
-  background-image: -webkit-gradient(left, linear, 0 0, 0 100%, from(#ffffff), color-stop(75%, #0083e0), to(#ffffff));
-  background-image: -webkit-linear-gradient(left, #ffffff, #0083e0 75%, #ffffff);
-  background-image: -moz-linear-gradient(left, #ffffff, #0083e0 75%, #ffffff);
-  background-image: -o-linear-gradient(left, #ffffff, #0083e0 75%, #ffffff);
-  background-image: linear-gradient(to right, #ffffff, #0083e0 75%, #ffffff);
+  background-image: -webkit-gradient(left, linear, 0 0, 0 100%, from(#ffffff), color-stop(50%, #0083e0), to(#ffffff));
+  background-image: -webkit-linear-gradient(left, #ffffff, #0083e0 50%, #ffffff);
+  background-image: -moz-linear-gradient(left, #ffffff, #0083e0 50%, #ffffff);
+  background-image: -o-linear-gradient(left, #ffffff, #0083e0 50%, #ffffff);
+  background-image: linear-gradient(to right, #ffffff, #0083e0 50%, #ffffff);
   background-repeat: no-repeat;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffffffff', GradientType=0);
   background-color: #fff;
@@ -5536,12 +5536,12 @@ blockquote {
   border-bottom-left-radius: 6px;
 }
 .pen-stroke {
-  background-color: #adadad;
-  background-image: -webkit-gradient(left, linear, 0 0, 0 100%, from(#ffffff), color-stop(75%, #999999), to(#ffffff));
-  background-image: -webkit-linear-gradient(left, #ffffff, #999999 75%, #ffffff);
-  background-image: -moz-linear-gradient(left, #ffffff, #999999 75%, #ffffff);
-  background-image: -o-linear-gradient(left, #ffffff, #999999 75%, #ffffff);
-  background-image: linear-gradient(to right, #ffffff, #999999 75%, #ffffff);
+  background-color: #777777;
+  background-image: -webkit-gradient(left, linear, 0 0, 0 100%, from(#ffffff), color-stop(50%, #555555), to(#ffffff));
+  background-image: -webkit-linear-gradient(left, #ffffff, #555555 50%, #ffffff);
+  background-image: -moz-linear-gradient(left, #ffffff, #555555 50%, #ffffff);
+  background-image: -o-linear-gradient(left, #ffffff, #555555 50%, #ffffff);
+  background-image: linear-gradient(to right, #ffffff, #555555 50%, #ffffff);
   background-repeat: no-repeat;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffffffff', GradientType=0);
   background-color: #000;
@@ -5551,11 +5551,11 @@ blockquote {
 }
 .pen-stroke-blue {
   background-color: #339ce6;
-  background-image: -webkit-gradient(left, linear, 0 0, 0 100%, from(#ffffff), color-stop(75%, #0083e0), to(#ffffff));
-  background-image: -webkit-linear-gradient(left, #ffffff, #0083e0 75%, #ffffff);
-  background-image: -moz-linear-gradient(left, #ffffff, #0083e0 75%, #ffffff);
-  background-image: -o-linear-gradient(left, #ffffff, #0083e0 75%, #ffffff);
-  background-image: linear-gradient(to right, #ffffff, #0083e0 75%, #ffffff);
+  background-image: -webkit-gradient(left, linear, 0 0, 0 100%, from(#ffffff), color-stop(50%, #0083e0), to(#ffffff));
+  background-image: -webkit-linear-gradient(left, #ffffff, #0083e0 50%, #ffffff);
+  background-image: -moz-linear-gradient(left, #ffffff, #0083e0 50%, #ffffff);
+  background-image: -o-linear-gradient(left, #ffffff, #0083e0 50%, #ffffff);
+  background-image: linear-gradient(to right, #ffffff, #0083e0 50%, #ffffff);
   background-repeat: no-repeat;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffffffff', GradientType=0);
   background-color: #fff;
