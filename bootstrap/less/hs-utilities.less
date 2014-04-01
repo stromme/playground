@@ -57,14 +57,14 @@
 // Pen Stroke - a HR rule like element that tapers on both sides
 
 .pen-stroke {
-	background-image: -webkit-linear-gradient(left,#fff,#000 25%,#000 75%,#fff);
+  #gradient.horizontal-three-colors(white; @grayLight; 50%; white);
 	background-color: #000;
 	height: 1px;
 	.opacity(30);
 }
 
 .pen-stroke-blue {
-	background-image: -webkit-linear-gradient(left,@blue,#fff 25%,#fff 75%,@blue);
+  #gradient.horizontal-three-colors(white; @blue; 50%; white);
 	background-color: #fff;
 	height: 1px;
 	margin-bottom: @bumper;
