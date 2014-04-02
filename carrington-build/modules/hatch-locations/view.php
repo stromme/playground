@@ -24,12 +24,13 @@
   else {
     array_push($blogs_list, $current_blog_id);
   }
+
   // Process the blog seo
   foreach($blogs_list as $user_blog){
     $blog_seo = get_blog_option($user_blog, 'tb_seo');
     if(isset($blog_seo['seo_target_city']) && isset($blog_seo['seo_target_state'])){
       $blog_seo_name = $blog_seo['seo_target_city'].(($blog_seo['seo_target_state']!='')?', '.$blog_seo['seo_target_state']:'');
-      $blog_seo_slug = strtolower(preg_replace("/[^A-Za-z0-9\_\-]/", '', $blog_seo['seo_target_city'])).'-'.strtolower($blog_seo['seo_target_state']);
+      $blog_seo_slug = strtolower(preg_replace("/[^A-Za-z0-9\_\-]/", '-', $blog_seo['seo_target_city'])).'-'.strtolower($blog_seo['seo_target_state']);
       $new_blog_seo = new stdClass();
       $new_blog_seo->name = $blog_seo_name;
       $new_blog_seo->slug = $blog_seo_slug;
@@ -79,6 +80,7 @@
       }
     }
   }
+
   /* Remove already added blog seo list, the leftover */
   if(count($locations_list)>0){
     foreach($locations_list as $location){
@@ -91,15 +93,7 @@
       }
     }
   }
-  if(count($blog_seo_list)>0) {
-    foreach($blog_seo_list as $blog_seo){
-      $new_blog_location = new stdClass();
-      $new_blog_location->slug = $blog_seo->slug;
-      $new_blog_location->name = $blog_seo->name;
-      $new_blog_location->link = $blog_seo->link;
-      array_push($locations_list, $new_blog_location);
-    }
-  }
+
   if(count($locations_list)>0){
 ?>
 <h3 class="light-weight"><?=parse_shortclass($title)?></h3>
