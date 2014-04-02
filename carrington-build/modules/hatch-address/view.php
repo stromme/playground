@@ -31,7 +31,7 @@ if(count($users)>0){
 
 <div class="row-fluid">
   <div class="mobile12 address-map pull-left bumper-right-medium bumper-bottom">
-    <img class="img-polaroid" src="http://maps.google.com/maps/api/staticmap?center=<?=urlencode($company_street).'+'.urlencode($company_city.', '.$company_state).'+'.urlencode($company_zip)?>&amp;zoom=11&amp;size=270x210&amp;maptype=roadmap&amp;markers=color:blue%7Clabel:A%7C<?=urlencode($company_street).'+'.urlencode($company_city.', '.$company_state).'+'.urlencode($company_zip)?>&amp;sensor=false">
+    <img class="img-polaroid" src="http://maps.google.com/maps/api/staticmap?center=<?=urlencode($company_street).'+'.urlencode($company_city.', '.$company_state).'+'.urlencode($company_zip)?>&amp;zoom=11&amp;size=270x210&amp;maptype=roadmap&amp;markers=color:blue%7Clabel:A%7C<?=urlencode($company_street).'+'.urlencode($company_city.', '.$company_state).'+'.urlencode($company_zip)?>&amp;sensor=false&amp;key=AIzaSyDsgeBIjdh92uqzr0jWMHz_2YRljj_4sxc">
   </div>
   <div class="mobile12 address">
     <h3 class="light-weight"><?=parse_shortclass($title)?></h3>
