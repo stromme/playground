@@ -39,7 +39,7 @@ $seo = get_location_seo();
 $streak_free = array(
   'title' => "Hassle free money back guarantee.",
   'img' => TOOLBOX_IMAGES."/accolades/streak-free-guarantee.png",
-  'content' => "We’re proud to offer the only $1000 Streak Free Guarantee in ".$seo['city'].", ".$seo['state']." . If you don’t love our work, we’ll refund up to $1000"
+  'content' => "We’re proud to offer the only $1000 Streak Free Guarantee in ".$seo['city'].", ".$seo['state'].". If you don’t love our work, we’ll refund up to $1000"
 );
 $insured = array(
   'title' => "We carry $1 million in liability insurance.",
