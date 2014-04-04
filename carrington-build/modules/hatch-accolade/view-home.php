@@ -7,6 +7,8 @@
  * @subpackage
  * @since
  */
+
+$seo = get_location_seo();
 ?>
 <div class="bumper-bottom">
   <?php

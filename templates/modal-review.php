@@ -54,7 +54,7 @@ global $cancel_button;
           <div class="span6">
             <div class="input-prepend">
               <span class="add-on"><i class="icon-user"></i></span>
-              <input id="comment-name" class="input-block-level" validation="not-empty" placeholder="Your Name" type="text"<?=($review_first_name!='' || $review_last_name!='')?' value="'.$review_first_name.(($review_first_name!='' && $review_last_name!='')?' ':'').$review_last_name.'"':''?> />
+              <input id="comment-name" class="input-block-level" validation="not-empty" placeholder="<?=(isset($cancel_button) && $cancel_button)?'Customer':'Your'?> Name" type="text"<?=($review_first_name!='' || $review_last_name!='')?' value="'.$review_first_name.(($review_first_name!='' && $review_last_name!='')?' ':'').$review_last_name.'"':''?> />
             </div>
           </div>
           <div class="span6">
