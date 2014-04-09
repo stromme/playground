@@ -29,7 +29,7 @@ global $cancel_button;
   <div class="modal hide fade" id="new-review"<?=($add_review)?' data-project-id="'.$id.'"':''?>>
     <div class="modal-header">
       <?php if(!isset($cancel_button) || !$cancel_button){ ?><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><?php } ?>
-      <h3><?=($review_first_name!='' || $review_last_name!='')?'Hi '.$review_first_name.(($review_first_name!='' && $review_last_name!='')?' ':'').$review_last_name.', how did we do?"':'So, how did we do?'?></h3>
+      <h3><?=($review_first_name!='' || $review_last_name!='')?'Hi '.$review_first_name.(($review_first_name!='' && $review_last_name!='')?' ':'').$review_last_name.', how did we do?':'So, how did we do?'?></h3>
     </div>
     <div class="modal-body">
 
