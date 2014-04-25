@@ -5329,14 +5329,14 @@ h2.jumbo {
 .banner-title h2:after {
   content: " ";
   display: block;
-  background-color: #339ce6;
-  background-image: -webkit-gradient(left, linear, 0 0, 0 100%, from(#ffffff), color-stop(50%, #0083e0), to(#ffffff));
-  background-image: -webkit-linear-gradient(left, #ffffff, #0083e0 50%, #ffffff);
-  background-image: -moz-linear-gradient(left, #ffffff, #0083e0 50%, #ffffff);
-  background-image: -o-linear-gradient(left, #ffffff, #0083e0 50%, #ffffff);
-  background-image: linear-gradient(to right, #ffffff, #0083e0 50%, #ffffff);
+  background-color: #cce6f9;
+  background-image: -webkit-gradient(left, linear, 0 0, 0 100%, from(#0083e0), color-stop(50%, #ffffff), to(#0083e0));
+  background-image: -webkit-linear-gradient(left, #0083e0, #ffffff 50%, #0083e0);
+  background-image: -moz-linear-gradient(left, #0083e0, #ffffff 50%, #0083e0);
+  background-image: -o-linear-gradient(left, #0083e0, #ffffff 50%, #0083e0);
+  background-image: linear-gradient(to right, #0083e0, #ffffff 50%, #0083e0);
   background-repeat: no-repeat;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffffffff', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0083e0', endColorstr='#ff0083e0', GradientType=0);
   background-color: #fff;
   height: 1px;
   margin-bottom: 20px;
@@ -5558,6 +5558,20 @@ blockquote {
   background-image: linear-gradient(to right, #ffffff, #0083e0 50%, #ffffff);
   background-repeat: no-repeat;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffffffff', GradientType=0);
+  background-color: #fff;
+  height: 1px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.pen-stroke-blue-inverse {
+  background-color: #cce6f9;
+  background-image: -webkit-gradient(left, linear, 0 0, 0 100%, from(#0083e0), color-stop(50%, #ffffff), to(#0083e0));
+  background-image: -webkit-linear-gradient(left, #0083e0, #ffffff 50%, #0083e0);
+  background-image: -moz-linear-gradient(left, #0083e0, #ffffff 50%, #0083e0);
+  background-image: -o-linear-gradient(left, #0083e0, #ffffff 50%, #0083e0);
+  background-image: linear-gradient(to right, #0083e0, #ffffff 50%, #0083e0);
+  background-repeat: no-repeat;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0083e0', endColorstr='#ff0083e0', GradientType=0);
   background-color: #fff;
   height: 1px;
   margin-bottom: 20px;
