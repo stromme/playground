@@ -29,8 +29,6 @@ if (!class_exists('cfct_module_heading')) {
 		public function display($data) {
 			$h_tag = $this->h_tag($data);
 			$title = esc_html($data[$this->get_field_id('content')]);
-      $title = str_replace("\n", "<br />", $title);
-      $title = parse_shortclass($title);
 			return $this->load_view($data, compact('h_tag', 'title'));
 		}
 
@@ -47,7 +45,8 @@ if (!class_exists('cfct_module_heading')) {
 	<label for="'.$this->get_field_id('content').'">'.__('Heading Text', 'carrington-build').'</label>
 	<input type="text" name="'.$this->get_field_name('content').'" id="'.$this->get_field_id('content').'" value="'.(!empty($data[$this->get_field_id('content')]) ? esc_attr($data[$this->get_field_id('content')]) : '').'" />
 </div>
-<div  id="'.$this->id_base.'-header-options" class="cfct-post-layout-controls">
+<p><a href="#cfct-header-adv-options" id="cfct-header-adv-options-toggle">'.__('Advanced Options', 'carrington-build').'</a></p>
+<div id="cfct-header-adv-options" class="cfct-post-layout-controls hidden">
 	<p>
 		<label for="'.$this->get_field_id('h_tag').'">'.__('HTML Tag', 'carrington-build').'</label>
 		<select name="'.$this->get_field_id('h_tag').'" id="'.$this->get_field_id('h_tag').'">
@@ -123,7 +122,15 @@ if (!class_exists('cfct_module_heading')) {
 		 * @return string JavaScript
 		 */
 		public function admin_js() {
-			return '';
+			return '
+// perform an action when the module admin screen loads
+cfct_builder.addModuleLoadCallback("'.$this->id_base.'", function(form) {
+	jQuery("#cfct-header-adv-options-toggle").click(function() {
+		jQuery(jQuery(this).attr("href")).slideToggle("fast");
+		return false;
+	});
+});
+			';
 		}
 		
 		/**
@@ -133,15 +140,7 @@ if (!class_exists('cfct_module_heading')) {
 		 * @return string CSS
 		 */
 		public function admin_css() {
-			return '
-			  #'.$this->id_base.'-header-options.cfct-post-layout-controls {
-			    margin-top: 10px;
-			  }
-			  #'.$this->id_base.'-header-options.cfct-post-layout-controls p>label {
-			    width: auto;
-			    margin-right: 10px;
-			  }
-			';
+			return '';
 		}
 	}
 	// register the module with Carrington Build

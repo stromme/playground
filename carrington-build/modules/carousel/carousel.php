@@ -123,7 +123,7 @@ if (!class_exists('cfct_module_carousel') && class_exists('cfct_build_module')) 
 	
 			return $this->load_view($data, compact('items', 'control_layout_order', 'image_size', 'car_opts', 'js_init'));
 		}
-
+		
 // Admin
 
 		public function text($data) {
@@ -674,7 +674,8 @@ if (!class_exists('cfct_module_carousel') && class_exists('cfct_build_module')) 
 				'post_type' => apply_filters('cfct-carousel-search-in', array_filter(get_post_types(array('public' => 1)), array($this, 'filter_post_types'))),
 				'posts_per_page' => $posts_per_page,
 				'paged' => $page,
-				'meta_key' => '_thumbnail_id'
+				'meta_key' => '_thumbnail_id',
+				'ignore_sticky_posts' => 1,
 			));
 			
 			$ids = array();

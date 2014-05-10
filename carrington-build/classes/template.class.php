@@ -72,7 +72,7 @@ class cfct_build_template implements Iterator {
 	public function html(array $data) {
 		$this->data = $data;		
 		$this->html = '';
-		foreach ($this->template['rows'] as $row_id => $row) {			
+		foreach ($this->template['rows'] as $row_id => $row) {
 			$this->current_row = $row_id;
 			$this->html .= $this->row($row);
 		}
@@ -136,6 +136,8 @@ class cfct_build_template implements Iterator {
 			return false;
 		}
 		
+		$ret = '';
+
 		$this->current_row = $_row;
 
 		if (isset($this->return_format) && $this->return_format == 'text') {
@@ -145,7 +147,9 @@ class cfct_build_template implements Iterator {
 			$ret = $_row->admin($row, ($new ? array() : $this->data), $this);
 		}
 		else {
-			$ret = $_row->html($row,($new ? array() : $this->data), $this);
+			if (!isset($row['render']) || $row['render']) {
+				$ret = $_row->html($row,($new ? array() : $this->data), $this);
+			}
 		}
 		
 		$this->current_row = null;
@@ -299,7 +303,7 @@ class cfct_build_template implements Iterator {
 			unset($this->{$registered_objects}[$id]);
 		}
 		
-		return true;		
+		return true;
 	}
 	
 	private function init_types() {

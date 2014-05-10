@@ -39,8 +39,12 @@ if (!class_exists('cfct_module_divider')) {
 			$classes = apply_filters(
 				'cfct-module-divider-css-classes',
 				array(
-					'cfct-div-solid' => 'Solid',
-					'cfct-div-dotted' => 'Dotted',
+					'' => 'Solid',
+					'none' => 'Invisible',
+					//'cfct-div-solid' => 'Solid',
+					//'cfct-div-solid-wide' => 'Solid Wide',
+					//'cfct-div-blue' => 'Blue',
+					//'cfct-div-blue-wide' => 'Blue Wide',
 				)
 			);
 			if (!is_array($classes) || !count($classes)) {

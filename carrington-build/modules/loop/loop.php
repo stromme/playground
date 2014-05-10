@@ -74,7 +74,9 @@ if (!class_exists('cfct_module_loop') && class_exists('cfct_build_module')) {
 			$this->content_display_options = array(
 				'title' => __('Titles Only', 'carrington-build'),
 				'excerpt' => __('Titles &amp; Excerpts', 'carrington-build'),
-				'content' => __('Titles &amp; Post Content', 'carrington-build')
+				'content' => __('Titles &amp; Post Content', 'carrington-build'),
+				'read-more' => __('Titles &amp; Post Content (with Read More)', 'carrington-build'),
+				'smart-teaser' => __('Titles &amp; Post Teaser (or Excerpt if no more tag)', 'carrington-build'),
 			);
 			
 			// We need to enqueue the suggest script so we can use it later for type-ahead search
@@ -281,6 +283,18 @@ if (!class_exists('cfct_module_loop') && class_exists('cfct_build_module')) {
 					elseif ($args['display'] == 'content') {
 						$this->post_item_content();
 					}
+					elseif ($args['display'] == 'read-more') {
+						$this->post_item_teaser();
+					}
+					elseif ($args['display'] == 'smart-teaser') {
+						global $post;
+						if (preg_match( '/<!--more(.*?)?-->/', $post->post_content)) {
+							$this->post_item_teaser();
+						}
+						else {
+							$this->post_item_excerpt();
+						}
+					}
 					$item = ob_get_clean();
 					$item = apply_filters('cfct-build-loop-item', $item, $data, $args, $query); // @TODO deprecate in 1.2? doesn't scale well when extending the loop object
 					echo apply_filters($this->id_base.'-loop-item', $item, $data, $args, $query);
@@ -457,6 +471,19 @@ if (!class_exists('cfct_module_loop') && class_exists('cfct_build_module')) {
 			}
 		}
 
+		/**
+		 * Run content functions with Read More enabled
+		 *
+		 * @return void
+		 */
+		protected function post_item_teaser() {
+			global $more;
+			$old_more = $more;
+			$more = 0;
+			$this->post_item_content();
+			$more = $old_more;
+		}
+
 # Admin Form
 
 		/**
@@ -550,7 +577,7 @@ if (!class_exists('cfct_module_loop') && class_exists('cfct_build_module')) {
 				$type = get_post_type($this->default_post_type);
 				$post_taxonomies = $this->get_post_type_taxonomies($type->name);
 				$html .= '
-					<input type="hidden" class="post-type-select" name="'.$this->gfn('post_type').'[]" value="'.$type->name.'" data-taxonomies="'.implode(',', $post_taxonomies).'" />';
+					<input type="hidden" class="post-type-select" name="'.$this->gfn('post_type').'[]" value="'.$post_type->name.'" data-taxonomies="'.implode(',', $post_taxonomies).'" />';
 			}
 			
 			$html .= '					
@@ -1264,9 +1291,6 @@ if (!class_exists('cfct_module_loop') && class_exists('cfct_build_module')) {
 		 * @return string of <select> element's HTML
 		 **/
 		protected function dropdown($field_name, $options, $value = false, $args = '') {
-      $excludes = array();
-      $default = null;
-      $multi = false;
 			$defaults = array(
 				'label' => '', // The text for the label element
 				'default' => null, // Add a default option ('all', 'none', etc.)

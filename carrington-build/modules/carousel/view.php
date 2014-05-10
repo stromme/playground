@@ -1,7 +1,6 @@
 <?php
 	$carousel_id = 'carousel-'.$data['module_id'];
 	$carousel_class = 'carousel car-size-'.$image_size;
-	$carousel_items_style = !empty($car_opts['height']) ? 'height: '.$car_opts['height'].'px; overflow: hidden;' : '';
 ?>
 <div id="<?php echo $carousel_id; ?>" class="<?php echo $carousel_class; ?>">
 	<div class="carousel-inner"><?php
@@ -13,8 +12,12 @@
 		<div class="car-content">
 <?php
 if (!empty($items)) {
+	$carousel_items_style = 'clear:both;overflow:hidden;width:'.$items[0]['img_src'][1].'px;';
+	if (!empty($car_opts['height'])) {
+		$carousel_items_style .= 'height:'.$car_opts['height'].'px;';
+	}
 ?>
-			<ul style="clear: both; height: <?php echo $car_opts['height']; ?>px; width: <?php echo $items[0]['img_src'][1]; ?>px; overflow: hidden;">
+			<ul style="<?php echo esc_attr($carousel_items_style); ?>">
 <?php
 	foreach ($items as $key => $item) {
 		$title = !empty($item['link']) ? '<a href="'.$item['link'].'">'.$item['title'].'</a>' : $item['title'];

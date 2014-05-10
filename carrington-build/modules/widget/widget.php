@@ -179,10 +179,7 @@ if (!class_exists('cfct_module_widget')) {
 					}
 					else {
 						$this->suppress_save = true;
-						$html .= '
-							<p>'.__('Widget type', 'carrington-build').' `'.esc_html($data['widget_id']).'` '.__('is not a WordPress 2.7+ compatible widget.', 'carrington-build').'<p>
-							<p>'.__('To use this Widget, please use the sidebar module type to define a new sidebar and then add the desired widget to that sidebar in the Widgets admin screen.', 'carrington-build').'</p>
-							';
+						$html .= '<p>'.__('Widget type', 'carrington-build').' `'.esc_html($data['widget_id']).'` '.__('is not a WordPress 2.7+ compatible widget.', 'carrington-build').'<p>';
 					}
 				}
 				else {
@@ -313,8 +310,8 @@ if (!class_exists('cfct_module_widget')) {
 				$args = array(
 					'module_id' => 'cfct-widget-module-'.$id,
 					'id' => $id,
-					'name' => $widget['name'],
-					'description' => $widget['description'],
+					'name' => empty($widget['name']) ? '' : $widget['name'],
+					'description' => empty($widget['description']) ? '' : $widget['description'],
 					'icon' => 'widget/icon.png'
 				);
 				cfct_build_register_module('cfct_module_widget_full', $args);

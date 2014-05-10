@@ -556,10 +556,10 @@ if (!class_exists('post_callout_module')) {
 		protected $reference_fields = array('global_image', 'post_image', 'featured_image', 'post_id');
 
 		public function get_referenced_ids($data) {
-			$references = array();			
+			$references = array();
 			foreach ($this->reference_fields as $field) {
 				$id = $this->get_data($field, $data);
-				if (!is_null($id)) {
+				if ($id) {
 					$post = get_post($id);
 					$references[$field] = array(
 						'type' => 'post_type',
@@ -575,7 +575,7 @@ if (!class_exists('post_callout_module')) {
 		public function merge_referenced_ids($data, $reference_data) {
 			if (!empty($reference_data) && !empty($data)) {
 				foreach ($this->reference_fields as $field) {
-					if (isset($data[$this->gfn($field)])) {
+					if (isset($data[$this->gfn($field)]) && isset($reference_data[$field])) {
 						$data[$this->gfn($field)] = $reference_data[$field]['value'];
 					}
 				}

@@ -55,6 +55,10 @@ Carrington Build can add multiple rows of data to a post. Each row contains bloc
 - Triple Column
 	- 33/33/33 split
 
+### Advanced Row Options
+
+Rows support the addition of custom attributes. Custom row options are responsible for saving and using the saved data. If advanced row options are available there will be a cog icon on the left side under the delete icon will appear.
+
 ---
 
 
@@ -144,13 +148,12 @@ Each modules exports a plain text version of itself to the standard WordPress `p
 	- Requires the new WordPress 2.7+ Widget format
 - Sidebar
 	- Auto Sidebar generation
-	- The only way to use Pre WordPress 2.7 Widgets
 - Pullquote
 	- Designed and included to show the possibilities with module output
 
 ### Advanced Module Options
 
-Modules support the addition of custom attributes. Custom module options are responsible for saving and using the saved data. If advanced module options are available there will be a cog icon on the right side of the header when editing a module.
+Modules support the addition of custom attributes. Custom module options are responsible for saving and using the saved data. If advanced module options are available there will be a cog icon on the right side of the header when editing a module, or within the module while in the layout view.
 
 ### Module-Specific Instructions
 

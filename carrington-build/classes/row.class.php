@@ -10,7 +10,8 @@ class cfct_build_row {
 	private $defaults = array(
 		'row_class' => 'row',
 		'block_class' => 'cfct-block',
-		
+		'extras' => array(),
+
 		/* do not override these default classes or none of them
 		will correspond to needed classes in JS */
 		'add_new_module_class' => 'cfct-add-new-module',
@@ -24,28 +25,29 @@ class cfct_build_row {
 	 */
 	protected $classes = array();
 	protected $classes_groups = array();
-	
+
 	/**
 	 * cfct_block instances belonging to this row.
 	 */
 	protected $blocks = array();
 	public $current_module;
-	
+	public $row_options;
+
 	public function __construct($config) {
 		// Auto-create a filter key modifier if none was set.
 		if (!$this->get_filter_mod()) {
 			$this->set_filter_mod($this->generate_filter_mod());
 		}
-		
+
 		/* Leave these here for backwards compatibility
 		but we want to move away from ::$defaults and make these part
-		of the construction process for the object state rather than a property 
+		of the construction process for the object state rather than a property
 		that is accessed when ever we need a default. */
 		$this->defaults = apply_filters('cfct-row-defaults', $this->defaults);
-		
+
 		/* Deprecated! $config[class] field.
 		Use $this->add_classes(array) instead.
-		
+
 		Patching up deprecated config array stuff... */
 		$classes = cfct_tpl::extract_classes($this->defaults['row_class']);
 		if (!empty($config['class'])) {
@@ -56,7 +58,7 @@ class cfct_build_row {
 			unset($config['class']);
 		}
 		$this->add_classes($classes);
-		
+
 		// Allow general classes to be filtered for each row type.
 		$key_mod = $this->get_filter_mod();
 		$filter_key = $key_mod.'-classes';
@@ -65,12 +67,42 @@ class cfct_build_row {
 			$filter_key, $this->get_classes(), $this
 		);
 		$this->set_classes($classes);
-		
+
 		// Add class for admin class group only
 		$this->add_classes(array('cfct-row'), 'admin');
-		
+
+		$this->row_options = new cfct_row_options();
+
 		// validate config first...
+		$config['extras'] = (isset($config['extras'])) ? $config['extras'] : array();
 		$this->config = array_merge($this->config, $config);
+
+	}
+
+	protected function do_extras() {
+		global $cfct_build;
+		return $cfct_build->enable_custom_attributes && ($this->row_options instanceof cfct_row_options);
+	}
+
+	public function get_extras() {
+		return apply_filters('cfct-build-row-options', $this->config['extras'], get_class($this));
+	}
+
+	public function add_extra($attr) {
+		if (class_exists($attr)) {
+			$this->config['extras'][] = $attr;
+			$this->config['extras'] = array_unique($this->config['extras']);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public function remove_extra($attr) {
+		if (in_array($attr, $this->config['config'])) {
+			$this->config['extras'] = array_diff($this->config['extras'], array($attr));
+		}
 	}
 
 // Module integrity check
@@ -78,8 +110,8 @@ class cfct_build_row {
 	/**
 	 * Simple validation of module data to check validity
 	 *
-	 * @param array $module_data 
-	 * @param array $build_data 
+	 * @param array $module_data
+	 * @param array $build_data
 	 * @return bool
 	 */
 	public function is_malformed_module_data($module_data, $build_data) {
@@ -87,7 +119,7 @@ class cfct_build_row {
 		if (empty($module_data)) {
 			return true;
 		}
-		
+
 		// check required fields
 		$required_fields = array(
 			'module_type',
@@ -99,7 +131,7 @@ class cfct_build_row {
 				return true;
 			}
 		}
-		
+
 		// widgets need a widget id
 		if ($module_data['module_type'] == 'cfct_module_widget_full') {
 			if (empty($module_data['widget_id'])) {
@@ -109,7 +141,7 @@ class cfct_build_row {
 
 		return false;
 	}
-	
+
 	/**
 	 * Auto-generate filter key modifier for making filters unique.
 	 * Based on classname.
@@ -123,7 +155,7 @@ class cfct_build_row {
 		));
 		return strtolower($key);
 	}
-	
+
 	/**
 	 * Customize the filter key modifier. Useful if you don't want the
 	 * auto-generated filter modifier. We use it in our row-types to maintain
@@ -134,7 +166,7 @@ class cfct_build_row {
 		$this->filter_key_mod = $key;
 		return $this;
 	}
-	
+
 	/**
 	 * Gets the current class and turns it into a key that you can add
 	 * to your filters to make them unique to the row.
@@ -143,7 +175,7 @@ class cfct_build_row {
 	public function get_filter_mod() {
 		return $this->filter_key_mod;
 	}
-	
+
 	/**
 	 * Pull the module key from the saved data
 	 *
@@ -156,9 +188,9 @@ class cfct_build_row {
 	 * @return string the module key used to pull the right output module
 	 */
 	public function determine_module_key($module) {
-	
+
 		$module_key = $module['module_type'];
-		
+
 		if (!empty($module['widget_id'])) {
 			if (!empty($module['module_id_base'])) {
 				$module_key = $module['module_id_base'];
@@ -176,15 +208,15 @@ class cfct_build_row {
 	/**
 	 * Process Admin data for output, then pass to builder for return
 	 *
-	 * @param array $opts 
-	 * @param array $data 
-	 * @param object $template 
+	 * @param array $opts
+	 * @param array $data
+	 * @param object $template
 	 * @return string html
 	 */
 	public function admin(array $opts, array $data = array(), $template) {
 		$blocks = array();
 		$empty = true;
-		
+
 		if (count($this->blocks)) {
 			foreach ($this->blocks as $a => $block) {
 				$modules = '';
@@ -192,7 +224,7 @@ class cfct_build_row {
 				if (isset($data['blocks'][$blockdata['guid']]) && is_array($data['blocks'][$blockdata['guid']])) {
 					foreach ($data['blocks'][$blockdata['guid']] as $module_id) {
 						$module = $data['modules'][$module_id];
-						
+
 						if ($this->is_malformed_module_data($module, $data)) {
 							continue;
 						}
@@ -204,11 +236,11 @@ class cfct_build_row {
 						}
 					}
 				}
-				
+
 				if (!empty($modules)) {
 					$empty = false;
 				}
-				
+
 				$blocks[$a] = $block->as_admin_html(array(
 					'{modules}' => $modules,
 					'{id}' => $blockdata['guid']
@@ -221,54 +253,22 @@ class cfct_build_row {
 				);
 			}
 		}
-		
-		$html = $this->row_html(true);
 
-    $bumper_top_selections = array(
-      array('value'=>'', 'text'=>'none'),
-      array('value'=>'bumper-top-small', 'text'=>'Small'),
-      array('value'=>'bumper-top', 'text'=>'Normal'),
-      array('value'=>'bumper-top-medium', 'text'=>'Medium'),
-      array('value'=>'bumper-top-large', 'text'=>'Large'),
-      array('value'=>'bumper-top-Xlarge', 'text'=>'Xlarge')
-    );
-    $bumper_bottom_selections = array(
-      array('value'=>'', 'text'=>'none'),
-      array('value'=>'bumper-bottom-small', 'text'=>'Small'),
-      array('value'=>'bumper-bottom', 'text'=>'Normal'),
-      array('value'=>'bumper-bottom-medium', 'text'=>'Medium'),
-      array('value'=>'bumper-bottom-large', 'text'=>'Large'),
-      array('value'=>'bumper-bottom-Xlarge', 'text'=>'Xlarge')
-    );
-    $bumper_top_value = ($opts['bumper-top']!='')?$opts['bumper-top']:'';
-    $bumper_bottom_value = ($opts['bumper-bottom']!='')?$opts['bumper-bottom']:'';
-    $bumper_top_options = '';
-    $bumper_bottom_options = '';
-    foreach($bumper_top_selections as $option){
-      $bumper_top_options .= '<option value="'.$option['value'].'"'.(($option['value']==$bumper_top_value)?' selected="selected"':'').'>'.$option['text'].'</option>';
-    }
-    foreach($bumper_bottom_selections as $option){
-      $bumper_bottom_options .= '<option value="'.$option['value'].'"'.(($option['value']==$bumper_bottom_value)?' selected="selected"':'').'>'.$option['text'].'</option>';
-    }
-    $page_left_check = ($opts['page-left']!='')?' checked="checked"':'';
-    $page_right_check = ($opts['page-right']!='')?' checked="checked"':'';
-    $classes = ($opts['classes']!='')?$opts['classes']:'';
+		$html = $this->row_html($opts, true);
 
 		$row_values = array(
 			'{class}' => $this->row_class(array(), 'admin'),
-			'{id}' => $opts['guid'],
-      '{post-id}' => (isset($_GET['post']))?$_GET['post']:'',
-      '{classes}' => $classes,
-      '{page-left-check}' => $page_left_check,
-      '{page-right-check}' => $page_right_check,
-      '{bumper-top-options}' => $bumper_top_options,
-      '{bumper-bottom-options}' => $bumper_bottom_options
+			'{id}' => $opts['guid']
 		);
 
 		if ($empty) {
 			$row_values['{class}'] .= ' cfct-row-empty';
 		}
-		
+
+		if (isset($opts['render']) && !$opts['render']) {
+			$row_values['{class}'] .= ' cfct-row-disabled';
+		}
+
 		// handle custom blocks order
 		if (isset($this->config['admin_blocks']) && !empty($this->config['admin_blocks'])) {
 			$blocks_html = $this->config['admin_blocks'];
@@ -276,7 +276,7 @@ class cfct_build_row {
 			foreach ($match[2] as $key => $block_id) {
 				$row_values['{'.$match[1][$key].'}'] = $blocks[$block_id];
 				$row_values['{'.$match[1][$key].'_controls}'] = $blocks_controls[$block_id];
-				
+
 			}
 			$html = str_replace('{row_blocks}', $blocks_html, $html);
 		}
@@ -286,19 +286,19 @@ class cfct_build_row {
 			$row_values['{blocks_controls}'] = implode('', $blocks_controls);
 		}
 		$html = str_replace(array_keys($row_values), array_values($row_values), $html);
-		
+
 		return apply_filters('cfct-build-row-'.$this->get_filter_mod().'-admin-html', $html);
 	}
-	
+
 	/**
 	 * Get the row in a plain text form with no formatting
 	 * Calls 'text' method on each module.
-	 * Modules that should not be included in such items as search data should return 
+	 * Modules that should not be included in such items as search data should return
 	 * an emtpy value for their textual representation.
 	 *
-	 * @param array $opts 
-	 * @param array $data 
-	 * @param string $template 
+	 * @param array $opts
+	 * @param array $data
+	 * @param string $template
 	 * @return void
 	 */
 	public function text(array $opts, array $data = array(), $template) {
@@ -312,9 +312,9 @@ class cfct_build_row {
 						if ($this->is_malformed_module_data($module, $data)) {
 							continue;
 						}
-						
+
 						$module_key = $this->determine_module_key($module);
-						
+
 						if ($template->module_type_exists($module_key)) {
 							$text .= trim($template->get_module($module_key)->_text($module, true)).PHP_EOL;
 						}
@@ -324,13 +324,13 @@ class cfct_build_row {
 		}
 		return $text;
 	}
-	
+
 	/**
 	 * Process Client data for output, then pass to builder for return
 	 *
-	 * @param array $opts 
-	 * @param array $data 
-	 * @param string $template 
+	 * @param array $opts
+	 * @param array $data
+	 * @param string $template
 	 * @return void
 	 */
 	public function html(array $opts, array $data = array(), $template) {
@@ -341,7 +341,7 @@ class cfct_build_row {
 				$modules = '';
 				$blockdata = array_shift($opts['blocks']);
 				$module_types[$blockdata['guid']] = array();
-				
+
 				if (isset($data['blocks'][$blockdata['guid']]) && is_array($data['blocks'][$blockdata['guid']])) {
 					foreach ($data['blocks'][$blockdata['guid']] as $module_id) {
 						$module = $data['modules'][$module_id];
@@ -349,7 +349,7 @@ class cfct_build_row {
 						if ($this->is_malformed_module_data($module, $data)) {
 							continue;
 						}
-						
+
 						if (isset($module['render']) && !$module['render']) {
 							continue;
 						}
@@ -358,7 +358,18 @@ class cfct_build_row {
 
 						if ($template->module_type_exists($module_key)) {
 							$this->current_module = $template->get_module($module_key);
-							$modules .= $template->get_module($module_key)->html($module);
+							$module_html = $template->get_module($module_key)->html($module);
+							global $post;
+							if (current_user_can('edit_post', $post->ID)) {
+								// add an Edit link for the module
+
+								$module_html = '
+<div class="cfct-module-border" id="'.esc_attr($module_id).'">
+	<a href="'.esc_url(admin_url('post.php?post='.$post->ID.'&action=edit#'.$module_id)).'" class="cfct-build-module-edit-link">'.__('Edit', 'carrington-build').'</a>
+	'.$module_html.'
+</div>';
+							}
+							$modules .= $module_html;
 							if (!isset($module_types[$blockdata['guid']][$module['module_type']])) {
 								$module_types[$blockdata['guid']][$module['module_type']] = $module['module_type'];
 							}
@@ -366,7 +377,7 @@ class cfct_build_row {
 						}
 					}
 				}
-				
+
 				/* Add last-minute hook for backwards compat plugin
 				to add block-$a class */
 				$block->add_classes(apply_filters(
@@ -375,16 +386,17 @@ class cfct_build_row {
 					$a,
 					$block
 				));
-				
+
 				$blocks[$a] = $block->as_client_html(array(
 					'{modules}' => $modules,
-					'{id}' => $blockdata['guid']
+					'{id}' => $blockdata['guid'],
+					'{class}' => apply_filters('cfct-client-block-classes', $block->make_classname(), $blockdata),
 				));
 			}
 		}
-		
-		$html = $this->row_html();
-		
+
+		$html = $this->row_html($opts);
+
 		/* Last-minute hook for adding back in the inrow classes that
 		were default in last version.
 		@see ::add_in_row_classes() */
@@ -395,34 +407,17 @@ class cfct_build_row {
 			$this
 		);
 
-    $array_classes = array();
-    $opts_classes = (isset($opts['classes'])?$opts['classes']:'');
-    if($opts_classes!='') array_push($array_classes, $opts['classes']);
-    $opts_bumper_top = (isset($opts['bumper-top'])?$opts['bumper-top']:'');
-    if($opts_bumper_top!='') array_push($array_classes, $opts['bumper-top']);
-    $opts_bumper_bottom = (isset($opts['bumper-bottom'])?$opts['bumper-bottom']:'');
-    if($opts_bumper_bottom!='') array_push($array_classes, $opts['bumper-bottom']);
-    $opts_page_left = (isset($opts['page-left'])?$opts['page-left']:'');
-    if($opts_page_left!='') array_push($array_classes, 'page-left');
-    $opts_page_right = (isset($opts['page-right'])?$opts['page-right']:'');
-    if($opts_page_right!='') array_push($array_classes, 'page-right');
-    $classes = '';
-    if(count($array_classes)>0){
-      $classes = ' class="'.implode(' ', $array_classes).'"';
-    }
-
 		// build row HTML
 		$row_values = array(
-			'{class}' => $this->row_class($generated_row_classes),
-			'{id}' => $opts['guid'],
-      '{classes}' => $classes
+			'{class}' => apply_filters('cfct-build-row-class', $this->row_class($generated_row_classes), $opts),
+			'{id}' => $opts['guid']
 		);
-		
+
 		$row_values['{class}'] = apply_filters(
 			'cfct-build-row-'.$this->get_filter_mod().'-classes',
 			$row_values['{class}']
 		);
-		
+
 		// handle custom blocks order
 		if (strpos($html, '{blocks}') === false) {
 			preg_match_all('/{block_([0-9])}/', $html, $match);
@@ -433,7 +428,7 @@ class cfct_build_row {
 		else {
 			$row_values['{blocks}'] = implode('', $blocks);
 		}
-		
+
 		// put it all together
 		$html = str_replace(array_keys($row_values), array_values($row_values), $html);
 		return apply_filters(
@@ -448,62 +443,29 @@ class cfct_build_row {
 	 * row_html
 	 * Define row_html defaults
 	 *
-	 * @param bool $admin 
+	 * @param bool $admin
 	 * @return string html
 	 */
-	public function row_html($admin = false) {
+	public function row_html($opts, $admin = false) {
+		global $cfct_build;
+		$post_data = $cfct_build->get_postmeta();
+		$options_layout_html = '';
+		if ($this->do_extras()) {
+			$row_options = (isset($post_data['row-options'][$opts['guid']])) ? $post_data['row-options'][$opts['guid']] : array();
+      $opts['class'] = 'row-options-popup';
+			$options_layout_html = $this->row_options->list_html($opts, $row_options, $this->get_extras());
+		}
 		if ($admin) {
 			$html = '
-				<div id="{id}" class="{class}" data-row-id="{id}" data-post-id="{post-id}">
-					<div class="cfct-row-inner">
-					  <div class="cfct-row-option-block">
-              <div class="cfct-popup-advanced-actions">
-                <div class="cfct-custom-field-line">
-                  <label class="cfct-custom-main-label">CSS Classes:</label>
-                  <div class="cfct-custom-input-row">
-                    <input type="text" class="no-button cfct-custom-classes" data-old-value="{classes}" value="{classes}" autocomplete="off">
-                  </div>
-                </div>
-                <div class="cfct-custom-field-line">
-                  <label class="cfct-custom-main-label">Horizontal padding:</label>
-                  <div class="cfct-custom-input-row">
-                    <input id="page-left-{id}" type="checkbox" value="1" class="cfct-custom-page-left"{page-left-check}></input><label for="page-left-{id}">page-left</label>
-                    <input id="page-right-{id}" type="checkbox" value="1" class="cfct-custom-page-right l-10"{page-left-check}></input><label for="page-right-{id}">page-right</label>
-                  </div>
-                </div>
-                <div class="cfct-custom-field-line">
-                  <label class="cfct-custom-main-label">Vertical bumper:</label>
-                  <div class="cfct-custom-input-row">
-                    <label for="bumper-top-{id}">Top</label>
-                    <select id="bumper-top-{id}" class="cfct-custom-bumper-top">
-                      {bumper-top-options}
-                    </select>
-                    <label for="bumper-bottom-{id}" class="l-10">Bottom</label>
-                    <select id="bumper-bottom-{id}" class="cfct-custom-bumper-bottom">
-                      {bumper-bottom-options}
-                    </select>
-                  </div>
-                </div>
-                <div class="cfct-custom-field-line action-buttons">
-                  <label class="cfct-custom-main-label">&nbsp;</label>
-                  <div class="cfct-custom-input-row">
-                    <button type="button" class="button button-primary save">Save</button>
-                    <button type="button" class="button close">Cancel</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+				<div id="{id}" class="{class}">
+					<div class="cfct-row-inner">'.apply_filters('tb_insert_row_name', $this->get_config_item('name')).'
 						<div title="'.__('Drag and drop to reorder', 'carrington-build').'" class="'.$this->defaults['row_handle_class'].'">
-							<a class="'.$this->defaults['remove_row_class'].'" href="#">'.__('Remove', 'carrington-build').'</a>
+						<a class="'.$this->defaults['remove_row_class'].'" href="#">'.__('Remove', 'carrington-build').'</a>
+						'.$options_layout_html.'
 						</div>
 						'.$this->row_table().'
-						<div class="cfct-row-option">
-              <div class="cfct-build-row-options">
-                <h2 class="cfct-build-options-header"><a class="module-options-button">Advanced Options</a></h2>
-                <ul class="cfct-build-options-list"><a href="#">Set CSS Classes</a></ul>
-              </div>
-            </div>
 					</div>
+					<div class="row-disabled">Row Disabled</div>
 				</div>';
 		}
 		else {
@@ -511,15 +473,12 @@ class cfct_build_row {
 			if (!empty($config_html)) {
 				$html = $this->get_config_item('html');
 			}
-			else if($this->get_config_item('multi-column')) {
-				$html = '<section{classes}><div class="row-fluid">{blocks}</div></section>';
-			}
 			else {
-				//$html = '<div class="{class}">{blocks}</div>';
-				$html = '<section{classes}>{blocks}</section>';
+				$html = '<div class="{class}">{blocks}</div>';
 			}
+      $html = apply_filters('tb_wc_get_row_html', $html, $this);
 		}
-		return apply_filters('cfct-row-'.($admin ? 'admin-' : '').'html', 
+		return apply_filters('cfct-row-'.($admin ? 'admin-' : '').'html',
 			$html,
 			/* Pass as string to avoid breaking backward compatibility
 			for this filter */
@@ -527,10 +486,11 @@ class cfct_build_row {
 			/* Add new additional parameter for classes as array */
 			$this->get_classes(),
 			/* Add new additional parameter for row filtermod */
-			$this->get_filter_mod()
+			$this->get_filter_mod(),
+			$opts
 		);
 	}
-	
+
 	public function row_table() {
 		return '
 			<table class="cfct-row-blocks">
@@ -539,7 +499,7 @@ class cfct_build_row {
 				</tbody>
 			</table>';
 	}
-	
+
 	public function row_blocks() {
 		return '
 			<tr>
@@ -549,7 +509,7 @@ class cfct_build_row {
 				{blocks_controls}
 			</tr>';
 	}
-	
+
 	/**
 	 * Block registration API.
 	 * @param cfct_block $block instance.
@@ -562,7 +522,7 @@ class cfct_build_row {
 		$block->add_classes($classes);
 		$this->blocks[] = $block;
 	}
-	
+
 	public function block_controls($id = null) {
 		$html = '
 			<td class="cfct-build-add-module"{attrs}>
@@ -572,12 +532,12 @@ class cfct_build_row {
 	}
 
 // Helpers
-	
+
 	/**
 	 * Go through the row options and generate guids
 	 * Called when processing generation of a blank row
 	 *
-	 * @param array $opts 
+	 * @param array $opts
 	 * @return array
 	 */
 	public function process_new($opts) {
@@ -592,10 +552,10 @@ class cfct_build_row {
 				$opts['blocks'][$block['guid']] = $block;
 			}
 		}
-		
+
 		return $opts;
 	}
-	
+
 	/**
 	 * Call this from a filter on 'cfct-generated-row-classes' to add
 	 * back the old inrow classes that said what kinds of modules there
@@ -609,18 +569,18 @@ class cfct_build_row {
 	 */
 	public function add_in_row_classes($module_types) {
 		$modules_in_row = $this->find_modules_in_row($module_types);
-		
+
 		/* Adds classes for modules inside of rows. Since this is a bit
-		of an edge-case, outputting only on front-end (doesn't modify 
+		of an edge-case, outputting only on front-end (doesn't modify
 		row instance state). May make this an optional flag in the constructor
 		at some point. */
 		$generated_classes = array_map(array($this, 'create_in_row_classname'), $modules_in_row);
 		return $generated_classes;
 	}
-	
+
 	public function find_modules_in_row($module_types) {
 		$out = array();
-		
+
 		// Convert from a list of modules down columns to a list of modules
 		// across columns, recording only the first instance of a module.
 		// Will stop processing after the 20th module in a given column.
@@ -644,11 +604,11 @@ class cfct_build_row {
 		}
 		return $out;
 	}
-	
+
 	/**
 	 * Turn a module ID string to a row class with various simple transformations.
 	 *
-	 * @param string $type_string 
+	 * @param string $type_string
 	 * @return string row_class
 	 */
 	private function create_in_row_classname($type_string) {
@@ -659,7 +619,7 @@ class cfct_build_row {
 		$type_string = 'cfct-inrow-' . $type_string;
 		return $type_string;
 	}
-		
+
 	/**
 	 * Build string of row classes for this row
 	 * @param array $classes Ad-hock classes that don't get added
@@ -672,7 +632,7 @@ class cfct_build_row {
 		$row_classes = $this->get_classes($group);
 		return cfct_tpl::to_classname($row_classes, $classes);
 	}
-	
+
 	/**
 	 * Add additional classes to a group in this instance (default = general)
 	 * @param array $classes
@@ -684,7 +644,7 @@ class cfct_build_row {
 		$this->classes_groups[$group] = cfct_tpl::clean_classes($classes);
 		return $this;
 	}
-	
+
 	/**
 	 * Set a group of classes (default = general)
 	 */
@@ -692,7 +652,7 @@ class cfct_build_row {
 		$this->classes_groups[$group] = cfct_tpl::clean_classes($classes);
 		return $this;
 	}
-	
+
 	/**
 	 * Get a group of classes (default = general)
 	 */
@@ -706,11 +666,11 @@ class cfct_build_row {
 		}
 		return cfct_tpl::clean_classes($classes);
 	}
-	
+
 	public function make_classname($group = null) {
 		return cfct_tpl::to_classname( $this->get_classes($group) );
 	}
-	
+
 	/**
 	 * Public CSS function to allow row to provide custom CSS
 	 * Override in child class to use.
@@ -720,17 +680,26 @@ class cfct_build_row {
 	public function css() {
 		return null;
 	}
-	
+
 	/**
 	 * Admin CSS function to allow additional CSS to be added to the Admin
 	 * neck, meet rope.
 	 *
 	 * @return string
 	 */
-	public function _admin_css() {
+	public function admin_css() {
 		return null;
 	}
-	
+
+	public function _admin_css() {
+		// admin css
+		$css = null;
+		if (method_exists($this, 'admin_css')) {
+			$css = $this->admin_css();
+		}
+		return $css;
+	}
+
 	/**
 	 * Empty block
 	 *
@@ -756,7 +725,7 @@ class cfct_build_row {
 	 */
 	public function get_icon() {
 		if ($path = $this->icon()) {
-			$icon = $path;			
+			$icon = $path;
 			if (!preg_match('/^(http)/', $icon)) {
 				$icon = CFCT_BUILD_URL.'rows/'.preg_replace('/^(\\/)/', '', $icon);
 			}
@@ -770,17 +739,17 @@ class cfct_build_row {
 			$icon
 		);
 	}
-	
+
 // Getters
 
 	public function get_name() {
 		return $this->config['name'];
 	}
-	
+
 	public function get_config() {
 		return $this->config;
 	}
-	
+
 	public function get_config_item($key) {
 		if (isset($this->config[$key])) {
 			return $this->config[$key];
@@ -789,11 +758,11 @@ class cfct_build_row {
 			return false;
 		}
 	}
-	
+
 	public function get_desc() {
 		return isset($this->config['description']) ? $this->config['description'] : null;
 	}
-	
+
 	/**
 	 * Handle pre-1.1 legacy ID attributes that were used to identify modules and rows
 	 *
@@ -802,31 +771,31 @@ class cfct_build_row {
 	public function _legacy_id() {
 		return !empty($this->_deprecated_id) ? $this->_deprecated_id : false;
 	}
-	
+
 	public function __get($var) {
 		if (isset($this->config[$var])) {
 			return $this->config[$var];
 		}
 		return false;
 	}
-	
+
 	public function __isset($var) {
 		return isset($this->config[$var]);
 	}
-	
+
 	public function __set($var, $val) {
 		// setting disabled
 		return false;
 	}
-	
+
 // Revision Manager Integration
 
 	/**
 	 * Describe the row contents in human readable form
 	 *
-	 * @param array $opts 
-	 * @param array $data 
-	 * @param object $template 
+	 * @param array $opts
+	 * @param array $data
+	 * @param object $template
 	 * @return string html
 	 */
 	public function describe(array $opts, array $data, $template) {
@@ -835,7 +804,7 @@ class cfct_build_row {
 				<b>Row Type: '.esc_html($this->get_name()).' ('.$this->make_classname().')</b><br />
 				Row Modules:
 				<ul style="margin-left: 1.5em; list-style: disc outside;">';
-				
+
 		if (count($this->blocks)) {
 			foreach ($this->blocks as $a => $block) {
 				$blockdata = array_shift($opts['blocks']);
@@ -855,7 +824,7 @@ class cfct_build_row {
 		else {
 			$ret .= '<li>Row has no blocks</li>';
 		}
-		
+
 		$ret .= '
 				</ul>
 			</li>';

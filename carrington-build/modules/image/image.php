@@ -36,11 +36,12 @@ if (!class_exists('cfct_module_image')) {
 					'class' => 'cfct-mod-image '.$this->id_base.'-mod-image'
 				);
 				$size = (!empty($data[$this->get_field_name('image_id').'-size']) ? $data[$this->get_field_name('image_id').'-size'] : 'thumbnail');
+        $caption = (!empty($data[$this->get_field_name('caption')]) ? $data[$this->get_field_name('caption')] : '');
 				$image = wp_get_attachment_image($data[$this->get_field_name('image_id')], $size, false, $atts);
 
 				$url = $this->get_link_url($data);
 			}
-			return $this->load_view($data, compact('image', 'url'));
+			return $this->load_view($data, compact('image', 'url', 'caption'));
 		}
 		
 		protected function get_link_url($data) {
@@ -85,7 +86,8 @@ if (!class_exists('cfct_module_image')) {
 			if (!empty($data[$this->get_field_name('global_image')])) {
 				$active_tab = $this->id_base.'-global-image-wrap';
 			}
-			
+      $caption = isset($data[$this->get_field_name('caption')])?$data[$this->get_field_name('caption')]:'';
+
 			// set default link target
 			$link_target = $this->link_target($data);
 			
@@ -95,6 +97,10 @@ if (!class_exists('cfct_module_image')) {
 			$html = '
 				<fieldset>
 					<!-- image selector tabs -->
+					<div id="'.$this->id_base.'-image-caption">
+					  <label for="'.$this->get_field_id('caption').'">'.__('Caption', 'carrington-build').'</label>
+					  <input type="text" name="'.$this->get_field_id('caption').'" value="'.$caption.'" id="'.$this->get_field_id('caption').'" />
+					</div>
 					<div id="'.$this->id_base.'-image-selectors">
 						<!-- tabs -->
 						'.$this->cfct_module_tabs($this->id_base.'-image-selector-tabs', $image_selector_tabs, $active_tab).'
@@ -220,6 +226,9 @@ if (!class_exists('cfct_module_image')) {
 					float: left;
 					width: 650px;
 				}
+				#'.$this->id_base.'-image-caption {
+					margin-bottom: 10px;
+				}
 			';
 		}
 		
@@ -273,10 +282,10 @@ if (!class_exists('cfct_module_image')) {
 		protected $reference_fields = array('global_image', 'post_image', 'image_id');
 	
 		public function get_referenced_ids($data) {
-			$references = array();			
+			$references = array();
 			foreach ($this->reference_fields as $field) {
 				$id = $this->get_data($field, $data);
-				if (!is_null($id)) {
+				if ($id) {
 					$post = get_post($id);
 					$references[$field] = array(
 						'type' => 'post_type',
@@ -292,7 +301,7 @@ if (!class_exists('cfct_module_image')) {
 		public function merge_referenced_ids($data, $reference_data) {
 			if (!empty($reference_data) && !empty($data)) {
 				foreach ($this->reference_fields as $field) {
-					if (isset($data[$this->gfn($field)])) {
+					if (isset($data[$this->gfn($field)]) && isset($reference_data[$field])) {
 						$data[$this->gfn($field)] = $reference_data[$field]['value'];
 					}
 				}

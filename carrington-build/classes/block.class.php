@@ -179,7 +179,18 @@ class cfct_block {
 		$this->classes_groups[$group] = cfct_tpl::clean_classes($classes);
 		return $this;
 	}
-	
+
+	/**
+	 * Add additional classes to a group (default = general)
+	 */
+	public function remove_classes($classes = array(), $group = 'general') {
+		if (!empty($this->classes_groups[$group])) {
+			$classes = array_diff($this->classes_groups[$group], $classes);
+		}
+		$this->classes_groups[$group] = cfct_tpl::clean_classes($classes);
+		return $this;
+	}
+
 	/**
 	 * Set a group of classes (default = general)
 	 */
@@ -289,6 +300,7 @@ class cfct_multi_block_c4_1234 extends cfct_multi_block {
 }
 
 /* Hatch blocks */
+/* Hatch blocks */
 class hatch_block_1_col extends cfct_block {
 	public function __construct($classes = array()) {
     $this->set_client_template('{modules}');
@@ -386,5 +398,3 @@ class hatch_block_right_sidebar_2 extends cfct_block {
 		parent::__construct($classes);
 	}
 }
-
-?>

@@ -9,10 +9,20 @@
  * @package Carrington Build
  */
 class cfct_module_option_custom_classes extends cfct_module_option {
-	
+
 	public function __construct() {
-		parent::__construct('Set CSS Classes', 'custom-classes');
+		global $cfct_build;
+		parent::__construct(__('Set CSS Classes', 'carrington-build'), 'custom-classes');
+		$cfct_build->register_ajax_handler('option_custom_classes_update', array($this, 'ajax_update'));
 		add_filter('cfct-build-module-class', array($this, 'apply_classes'), 10, 2);
+
+		// Add to all modules
+		add_filter(
+			'cfct-build-module-options',
+			create_function('$options',
+				'return array_merge($options, array("cfct_module_option_custom_classes"));'
+			)
+		);
 	}
 
 	/**
@@ -24,21 +34,49 @@ class cfct_module_option_custom_classes extends cfct_module_option {
 	 * @return string
 	 */
 	public function apply_classes($class, $data) {
-		if (!empty($data['cfct-module-options'][$this->id_base]['custom-css'])) {
+		global $cfct_build;
+		$build_data = $cfct_build->get_postmeta();
+		if (!empty($build_data['module-options'][$data['module_id']][$this->id_base]['custom-css'])) {
 			$classes = cfct_tpl::extract_classes($class);
 			$class = cfct_tpl::to_classname(
 				$classes,
-				$data['cfct-module-options'][$this->id_base]['custom-css']
+				$build_data['module-options'][$data['module_id']][$this->id_base]['custom-css']
 			);
 		}
-		return $class;
+		return apply_filters('tb_apply_custom_module_options', $build_data['module-options'][$data['module_id']][$this->id_base]);
 	}
 
-	public function form($data, $module_type) {
+	public function html($data, $options_data) {
+		$value = null;
+		$btn_text = 'Add';
+		if (isset($options_data['custom-css']) && is_array($options_data['custom-css'])) {
+			$value = implode(' ', array_map('esc_attr', $options_data['custom-css']));
+			$btn_text = 'Edit';
+		} else {
+			$value = '<span class="option-note"><em>none specified</em></span>';
+		}
+    $value = apply_filters('tb_list_module_classes', $options_data);
+		$html = '<div class="cfct-rendering cfct-module-option-custom-css">
+					<div class="cfct-option cfct-clearfix">
+						<div class="class-list'.(!strstr($value,'>none specified<')?' full-width':'').'">Module Classes: <span class="custom-css">'.$value.'</span></div>
+						<a href="#" class="cfct-button cfct-button-dark trigger add-class-btn">'.$btn_text.'</a>
+					</div>
+					<div class="form" style="display:none;">
+						'.$this->form($options_data).'
+						<div class="option-note add-class-note">Space seperated</div>
+						'.apply_filters('tb_custom_module_options', $data, $options_data).'
+						<button class="save cfct-button cfct-button-dark">Save</button>
+						<a class="cancel" href="#">Cancel</a>
+					</div>
+				</div>';
+		return $html;
+	}
+
+	private function form($data) {
 		$dropdown_opts = apply_filters('cfct-module-predefined-class-options', cfct_class_groups('wrapper'));
 		$predefined_classes = array();
 		$input_class = (empty($dropdown_opts) ? 'no-button' : null);
-		
+
 		$value = null;
 		if (!isset($data['custom-css'])) {
 			$data['custom-css'] = array();
@@ -47,66 +85,16 @@ class cfct_module_option_custom_classes extends cfct_module_option {
 			$value = implode(' ', array_map('esc_attr', $data['custom-css']));
 		}
 
-    $bumper_left_selections = array(
-      array('value'=>'', 'text'=>'none'),
-      array('value'=>'bumper-left', 'text'=>'Normal'),
-      array('value'=>'bumper-left-medium', 'text'=>'Medium'),
-      array('value'=>'bumper-left-large', 'text'=>'Large'),
-    );
-    $bumper_right_selections = array(
-      array('value'=>'', 'text'=>'none'),
-      array('value'=>'bumper-right', 'text'=>'Normal'),
-      array('value'=>'bumper-right-medium', 'text'=>'Medium'),
-      array('value'=>'bumper-right-large', 'text'=>'Large'),
-    );
-    $bumper_top_selections = array(
-      array('value'=>'', 'text'=>'none'),
-      array('value'=>'bumper-top-small', 'text'=>'Small'),
-      array('value'=>'bumper-top', 'text'=>'Normal'),
-      array('value'=>'bumper-top-medium', 'text'=>'Medium'),
-      array('value'=>'bumper-top-large', 'text'=>'Large'),
-      array('value'=>'bumper-top-Xlarge', 'text'=>'Xlarge')
-    );
-    $bumper_bottom_selections = array(
-      array('value'=>'', 'text'=>'none'),
-      array('value'=>'bumper-bottom-small', 'text'=>'Small'),
-      array('value'=>'bumper-bottom', 'text'=>'Normal'),
-      array('value'=>'bumper-bottom-medium', 'text'=>'Medium'),
-      array('value'=>'bumper-bottom-large', 'text'=>'Large'),
-      array('value'=>'bumper-bottom-Xlarge', 'text'=>'Xlarge')
-    );
-    $bumper_left = (isset($data['bumper-left']) && $data['bumper-left']!='')?$data['bumper-left']:'';
-    $bumper_right = (isset($data['bumper-right']) && $data['bumper-right']!='')?$data['bumper-right']:'';
-    $bumper_top = (isset($data['bumper-top']) && $data['bumper-top']!='')?$data['bumper-top']:'';
-    $bumper_bottom = (isset($data['bumper-bottom']) && $data['bumper-bottom']!='')?$data['bumper-bottom']:'';
-    $bumper_left_options = '';
-    $bumper_right_options = '';
-    $bumper_top_options = '';
-    $bumper_bottom_options = '';
-    foreach($bumper_left_selections as $option){
-      $bumper_left_options .= '<option value="'.$option['value'].'"'.(($option['value']==$bumper_left)?' selected="selected"':'').'>'.$option['text'].'</option>';
-    }
-    foreach($bumper_right_selections as $option){
-      $bumper_right_options .= '<option value="'.$option['value'].'"'.(($option['value']==$bumper_right)?' selected="selected"':'').'>'.$option['text'].'</option>';
-    }
-    foreach($bumper_top_selections as $option){
-      $bumper_top_options .= '<option value="'.$option['value'].'"'.(($option['value']==$bumper_top)?' selected="selected"':'').'>'.$option['text'].'</option>';
-    }
-    foreach($bumper_bottom_selections as $option){
-      $bumper_bottom_options .= '<option value="'.$option['value'].'"'.(($option['value']==$bumper_bottom)?' selected="selected"':'').'>'.$option['text'].'</option>';
-    }
-
 		$html = '
-		  <div class="cfct-custom-field-line">
-				<label for="" class="cfct-custom-main-label">CSS Classes:</label>
+				<label for="">Classes:</label>
 				<div class="cfct-select-menu-wrapper">
-					<input type="text" class="'.$input_class.'" name="'.$this->get_field_name('custom-css').'" id="'.$this->get_field_id('custom-css').'" value="'.$value.'"  autocomplete="off" />';
+					<input type="text" class="'.$input_class.' cfct_custom_class_input" name="'.$this->get_field_name('custom-css').'" id="'.$this->get_field_id('custom-css').'" value="'.$value.'"  autocomplete="off" />';
 		if (is_array($dropdown_opts) && !empty($dropdown_opts)) {
 		$html .= '<input type="button" name="" id="'.$this->get_field_id('class-list-toggle').'" class="cfct-button cfct-button-dark" value="">
 					<div id="'.$this->get_field_id('class-list-menu').'" class="cfct-select-menu" style="display: none;">
 						<ul>';
 		foreach($dropdown_opts as $classname => $title) {
-			$class = (isset($data['custom-css']) && in_array($classname, $data['custom-css']) ? 'inactive' : null);
+			$class = (in_array($classname, $data['custom-css']) ? 'inactive' : null);
 			$html .= '
 							<li><a class="'.$class.'" href="#'.esc_attr($classname).'" title="'.esc_attr($title).'">'.esc_html($classname).'</a></li>';
 		}
@@ -116,122 +104,58 @@ class cfct_module_option_custom_classes extends cfct_module_option {
 		}
 		$html .= '
 				</div>
-			</div>
-    ';
-
-    $html .= '
-      <div class="cfct-custom-field-line">
-        <label for="" class="cfct-custom-main-label custom-bumper-label">Bumper:</label>
-        <table class="cfct-custom-bumper-table">
-          <tr>
-            <td class="right-text">Top</td>
-            <td>
-              <select name="'.$this->get_field_name('bumper-top').'" id="'.$this->get_field_id('bumper-top').'" >'.$bumper_top_options.'</select>
-            </td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>
-              Left <select name="'.$this->get_field_name('bumper-left').'" id="'.$this->get_field_id('bumper-left').'" >'.$bumper_left_options.'</select>
-            </td>
-            <td class="right-text">Right</td>
-            <td>
-              <select name="'.$this->get_field_name('bumper-right').'" id="'.$this->get_field_id('bumper-right').'" >'.$bumper_right_options.'</select>
-            </td>
-          </tr>
-          <tr>
-            <td class="right-text">Bottom</td>
-            <td>
-              <select name="'.$this->get_field_name('bumper-bottom').'" id="'.$this->get_field_id('bumper-bottom').'" >'.$bumper_bottom_options.'</select>
-            </td>
-            <td></td>
-          </tr>
-        </table>
-			</div>
-    ';
+			';
 		return $html;
 	}
-	
+
 	public function admin_js() {
-		$js = '
-// Module Extra: Custom CSS			
-	// show/hide the pre-defined css list from toggle button
-	$(document).on("click", "#'.$this->get_field_id('class-list-toggle').'", function() {
-		var tgt = $(this).siblings("div.cfct-select-menu");
-		
-		// check to see if any pre-defined class names need toggling before opening the drawer
-		if (tgt.is(":hidden")) {
-			toggle_css_module_options_list_use();
-		}
-		
-		tgt.toggle();
-		return false;
-	});
-	
-	// show the pre-defined css list when input is focused
-	$(document).on("click", "#'.$this->get_field_id('custom-css').'", function(e) {
-		var tgt = $(this).siblings("div.cfct-select-menu");
-		if (tgt.is(":hidden")) {
-			toggle_css_module_options_list_use();
-			tgt.show();
-		}
-		return false;
-	});
-	
-	$(document).on("keyup", "#'.$this->get_field_id('custom-css').'", function() {
-		setTimeout(toggle_css_module_options_list_use, 200);
-	});
-	
-	// catch a click in the popup and close the flyout
-	$(document).on("click", "#cfct-popup", function(){
-		$("#'.$this->get_field_id('class-list-menu').':visible").hide();
-	});
-
-	var toggle_css_module_options_list_use = function() {
-		var classes = $("#'.$this->get_field_id('custom-css').'").val().split(" ");
-		$("#'.$this->get_field_id('class-list-menu').' a").each(function(){
-			var _this = $(this);
-			if ($.inArray(_this.text(),classes) == -1) {
-				_this.removeClass("inactive");
-			}
-			else {
-				_this.addClass("inactive");
-			}
-		});
+		return $this->load_view('view-admin-js.php');
 	}
 
-	// insert the clicked item in to the text-input
-	$(document).on("click", "#'.$this->get_field_id('class-list-menu').' a", function(e) {
-		_this = $(this);
-		if (!_this.hasClass("inactive")) {
-			_this.addClass("inactive");
-			var tgt = $("#'.$this->get_field_id('custom-css').'");
-			tgt.val(tgt.val() + " " +_this.text());
+	public function ajax_update($args) {
+		global $cfct_build;
+		$post_data = $cfct_build->get_postmeta($args['post_id']);
+
+		// Module may not exist yet at all.
+		if (!isset($post_data['module-options'][$args['module_id']])) {
+			$post_data['module-options'][$args['module_id']] = array($this->id_base => array('custom-css' => array()));
 		}
-		return false;
-	});
-	
-	$(document).on("click", "#'.$this->get_field_id('class-list-menu').'", function() {
-		return false;
-	});	
-			';
-		return $js;
-	}
-	
-	public function update($new_data, $old_data) {
-		$ret = array();
-		
-		$classes = explode(' ', $new_data['custom-css']);
-		if (is_array($classes)) {
-			foreach($classes as $class) {
-				$ret['custom-css'][] = sanitize_title_with_dashes(trim(strip_tags($class)));
+
+		if (!isset($post_data['module-options'][$args['module_id']][$this->id_base])) {
+			$post_data['module-options'][$args['module_id']][$this->id_base] = array('custom-css' => array());
+		}
+
+		$post_data['module-options'][$args['module_id']][$this->id_base]['custom-css'] = array();
+
+		if ($args['data']) {
+			foreach(explode(' ', $args['data']) as $class) {
+				$post_data['module-options'][$args['module_id']][$this->id_base]['custom-css'][] = sanitize_title_with_dashes(trim(strip_tags($class)));
 			}
 		}
-		
-		return $ret;
+		else {
+			$post_data['module-options'][$args['module_id']][$this->id_base]['custom-css'] = array();
+		}
+
+    $post_data['module-options'][$args['module_id']][$this->id_base] = apply_filters('tb_update_custom_module_options', $post_data['module-options'][$args['module_id']][$this->id_base], $args);
+
+		if (!$cfct_build->set_postmeta($args['post_id'], $post_data)) {
+			throw new cfct_row_exception(__('Could not save postmeta for post on custom css update','carrington-build').' (post_id: '.$args['post_id'].')');
+		}
+
+		$cfct_build->set_post_content($args['post_id']);
+
+		$ret = new cfct_message(array(
+			'success' => true,
+			'html' => __('CSS classes updated.', 'carrington-build'),
+			'message' => 'module_id '.$args['module_id'].' '.sprintf(__('CSS classes: %s', 'carrington-build'), implode(' ', $post_data['module-options'][$args['module_id']][$this->id_base]['custom-css'])),
+			'extra' => array(
+				'module_id' => $args['module_id'],
+				'data' => implode(' ', $post_data['module-options'][$args['module_id']][$this->id_base]['custom-css'])
+			)
+		));
+		return apply_filters('tb_append_return_message', $ret, $args);
 	}
 }
 
 cfct_module_register_extra('cfct_module_option_custom_classes');
-	
-?>
+

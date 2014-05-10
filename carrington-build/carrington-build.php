@@ -1,12 +1,12 @@
 <?php
 /**
 * @package carrington-build
-* @version 1.2.9
+* @version 1.3
 *
 * This file is part of Carrington Build for WordPress
 * http://crowdfavorite.com/wordpress/carrington-build/
 *
-* Copyright (c) 2009-2011 Crowd Favorite, Ltd. All rights reserved.
+* Copyright (c) 2009-2014 Crowd Favorite, Ltd. All rights reserved.
 * http://crowdfavorite.com
 *
 * **********************************************************************
@@ -17,7 +17,7 @@
 */
 
 // Constants
-define('CFCT_BUILD_VERSION', '1.2.8');
+define('CFCT_BUILD_VERSION', '1.3');
 define('CFCT_BUILD_POSTMETA', '_cfct_build_data');
 define('CFCT_BUILD_TEMPLATES', 'cfct_build_templates');
 define('CFCT_POST_DATA', 'cfct_build');
@@ -28,45 +28,43 @@ define('CFCT_POST_CONTENT_MARKER', '<!--CFCT-BD-->'); // intentionally obtuse to
 @define('CFCT_BUILD_DEBUG_ERROR_LOG', false);
 @define('CFCT_BUILD_DEBUG_DISPLAY_ERRORS', false);
 
-// Where am I?
-function cfct_where_am_i() {
-	$_path = dirname(__FILE__);
-	$loc = $url = $path = null;
+// Where are you?
+function cfct_where_are_you($file, $filter = null) {
+	$path = str_replace('\\', '/', dirname($file));
+	$loc = $url = null;
 
 	switch (true) {
-		case strpos($_path, DIRECTORY_SEPARATOR . 'mu-plugins') !== false:
+		case strpos($path, '/mu-plugins') !== false:
 			$loc = 'mu-plugins';
-			$url = WPMU_PLUGIN_URL;
-			$path = WPMU_PLUGIN_DIR;
 			break;
-		case strpos($_path, DIRECTORY_SEPARATOR . 'plugins') !== false:
+		case strpos($path, '/plugins') !== false:
 			$loc = 'plugins';
-			$url = WP_PLUGIN_URL;
-			$path = WP_PLUGIN_DIR;
 			break;
-		case strpos($_path, DIRECTORY_SEPARATOR . 'themes') !== false:
+		case strpos($path, '/themes') !== false:
 		default:
 			$loc = 'theme';
-			$theme_path = get_template_directory().'/carrington-build';
-			$child_theme_path = get_stylesheet_directory().'/carrington-build';
-// check for child theme
-			if (is_dir($child_theme_path)) {
-				$url = get_stylesheet_directory_uri();
-				$path = get_stylesheet_directory();
-			}
-			else if (is_dir($theme_path)) {
-				$url = get_template_directory_uri();
-				$path = get_template_directory();
-			}
 			break;
 	}
-	return apply_filters('cfct-build-loc', compact('loc','url','path'));
+
+	$wp_content_name = end(explode('/', str_replace('\\', '/', WP_CONTENT_DIR)));
+	$url = WP_CONTENT_URL . trailingslashit(end(explode($wp_content_name, $path)));
+	$url = set_url_scheme($url, is_ssl() ? 'https' : 'http');
+
+	$ret = compact('loc', 'url', 'path');
+
+	if ($filter) {
+		// backwards compatibility for cfct-build-loc filter
+		if ($filter != 'cfct-build-loc') {
+			$filter = "cfct-location-$filter";
+		}
+	}
+	return $ret;
 }
 
-$cfct_loc = cfct_where_am_i();
+$cfct_loc = cfct_where_are_you(__FILE__, 'cfct-build-loc');
 
-define('CFCT_BUILD_DIR', apply_filters('cfct-build-dir', trailingslashit($cfct_loc['path']).'carrington-build/'), $cfct_loc['loc']);
-define('CFCT_BUILD_URL', apply_filters('cfct-build-url', trailingslashit($cfct_loc['url']).'carrington-build/'), $cfct_loc['loc']);
+define('CFCT_BUILD_DIR', apply_filters('cfct-build-dir', trailingslashit($cfct_loc['path'])), $cfct_loc['loc']);
+define('CFCT_BUILD_URL', apply_filters('cfct-build-url', trailingslashit($cfct_loc['url'])), $cfct_loc['loc']);
 
 // template tag
 function cfct_build() {
@@ -100,7 +98,7 @@ function cfct_object_init() {
 		include('classes/default-rows.class.php');
 		include('classes/module-utility.class.php');
 		include('classes/module.class.php');
-		include('classes/module-options.php');
+		include('classes/options.php');
 		include('classes/module-multi-base.php');
 		include('classes/default-modules.class.php');
 		include('classes/admin.class.php');
@@ -256,13 +254,20 @@ function cfct_module_register_extra($classname) {
 		$args = array();
 		list(, $classname) = func_get_args();
 	}
-	$module_extras = cfct_module_options::get_instance();
-	return $module_extras->register($classname);
+	return cfct_module_options::register($classname);
+}
+
+// Custom Row Options Registration
+function cfct_row_register_extra($classname) {
+	return cfct_row_options::register($classname);
+}
+
+function cfct_row_deregister_extra($classname) {
+	return cfct_row_options::deregister($classname);
 }
 
 function cfct_module_deregister_extra($classname) {
-	$module_extras = cfct_module_options::get_instance();
-	return $module_extras->deregister($classname);
+	return cfct_module_options::deregister($classname);
 }
 
 // Common JS files/Libraries
@@ -444,11 +449,49 @@ function cfct_upgrade_postmeta() {
 	}
 
 	global $wpdb;
-	$query = "SELECT SQL_CALC_FOUND_ROWS * FROM {$wpdb->postmeta} WHERE meta_key='".CFCT_BUILD_POSTMETA."'";
+	$query = "SELECT SQL_CALC_FOUND_ROWS pm.*
+		FROM {$wpdb->postmeta} pm
+		INNER JOIN {$wpdb->posts} p ON pm.post_id = p.ID
+		WHERE
+			pm.meta_key='".CFCT_BUILD_POSTMETA."'
+			AND p.post_type != 'revision'";
 	$result = mysql_query($query, $wpdb->dbh);
+	if (mysql_query($query, $wpdb->dbh) == false) {
+		echo mysql_error($wpdb->dbh);
+		wp_die(__('Could not query for Build postmeta', 'carrington-build'));
+	}
+	$updated = 0;
+	$obsolete_row_ids = apply_filters('cfct-obsolete-row-ids', array(
+		'row-a' => 'cfct_row_a',
+		'row-ab' => 'cfct_row_ab',
+		'row-abc' => 'cfct_row_abc',
+		'row-ab-c' => 'cfct_row_ab_c',
+		'row-a-bc' => 'cfct_row_a_bc',
+		'two-col-float-left' => 'cfct_row_two_col_float_left',
+		'two-col-float-right' => 'cfct_row_two_col_float_right',
+		'cfct-row-stacked-example' => 'cfct_row_stacked_example'
+	));
+
+	$obsolete_module_ids = apply_filters('cfct-obsolete-module-ids', array(
+		'cfct-rich-text-module' => 'cfct_module_rich_text',
+		'cfct-module-loop' =>'cfct_module_loop',
+		'cfct-sidebar-module' => 'cfct_module_sidebar',
+		'cfct-pullquote' => 'cfct_module_pullquote',
+		'cfct-shortcode' => 'cfct_module_shortcode',
+		'cfct-module-hero' => 'cfct_module_hero',
+		'cfct-module-gallery' => 'cfct_module_gallery',
+		'cfct-heading' => 'cfct_module_heading',
+		'cfct-module-loop-subpages' => 'cfct_module_loop_subpages',
+		'cfct-notice' => 'cfct_module_notice',
+		'cfct-module-image' => 'cfct_module_image',
+		'cfct-callout' => 'cfct_module_callout',
+		'cfct-html' => 'cfct_module_html',
+		'cfct-plain-text' => 'cfct_module_plain_text',
+		'cfct-divider' => 'cfct_module_divider',
+		'cf-post-callout-module' => 'post_callout_module'
+	));
 
 	if ($result != false) {
-		$updated = 0;
 		while ($row = mysql_fetch_assoc($result)) {
 			$cfct_data = unserialize($row['meta_value']);
 			$update_row = false;
@@ -460,10 +503,12 @@ function cfct_upgrade_postmeta() {
 				$blocks = array();
 				foreach ($cfct_data['data'] as $b_key => $block) {
 					$blocks[$b_key] = array();
-					foreach ($block as $m_key => $module) {
-						unset($module['row_id']);
-						$blocks[$b_key][] = $m_key;
-						$modules[$m_key] = $module;
+					if (is_array($block)) {
+						foreach ($block as $m_key => $module) {
+							unset($module['row_id']);
+							$blocks[$b_key][] = $m_key;
+							$modules[$m_key] = $module;
+						}
 					}
 				}
 				$cfct_data['data'] = array(
@@ -475,43 +520,18 @@ function cfct_upgrade_postmeta() {
 			}
 
 			// rows upgrade, data obsoleted with 1.1 upgrade
-			$obsolete_row_ids = apply_filters('cfct-obsolete-row-ids', array(
-				'row-a' => 'cfct_row_a',
-				'row-ab' => 'cfct_row_ab',
-				'row-abc' => 'cfct_row_abc',
-				'row-ab-c' => 'cfct_row_ab_c',
-				'row-a-bc' => 'cfct_row_a_bc',
-				'two-col-float-left' => 'cfct_row_two_col_float_left',
-				'two-col-float-right' => 'cfct_row_two_col_float_right',
-				'cfct-row-stacked-example' => 'cfct_row_stacked_example'
-			));
-			foreach($cfct_data['template']['rows'] as &$_row) {
-				if (!empty($obsolete_row_ids[$_row['type']])) {
-					$_row['type'] = $obsolete_row_ids[$_row['type']];
-					$update_row = true;
+
+			if (is_array($cfct_data['template']['rows'])) {
+				foreach($cfct_data['template']['rows'] as &$_row) {
+					if (!empty($obsolete_row_ids[$_row['type']])) {
+						$_row['type'] = $obsolete_row_ids[$_row['type']];
+						$update_row = true;
+					}
 				}
 			}
-
 			// modules upgrade, data obsoleted with 1.1 upgrade
 			// widget modules require no upgrade
-			$obsolete_module_ids = apply_filters('cfct-obsolete-module-ids', array(
-				'cfct-rich-text-module' => 'cfct_module_rich_text',
-				'cfct-module-loop' =>'cfct_module_loop',
-				'cfct-sidebar-module' => 'cfct_module_sidebar',
-				'cfct-pullquote' => 'cfct_module_pullquote',
-				'cfct-shortcode' => 'cfct_module_shortcode',
-				'cfct-module-hero' => 'cfct_module_hero',
-				'cfct-module-gallery' => 'cfct_module_gallery',
-				'cfct-heading' => 'cfct_module_heading',
-				'cfct-module-loop-subpages' => 'cfct_module_loop_subpages',
-				'cfct-notice' => 'cfct_module_notice',
-				'cfct-module-image' => 'cfct_module_image',
-				'cfct-callout' => 'cfct_module_callout',
-				'cfct-html' => 'cfct_module_html',
-				'cfct-plain-text' => 'cfct_module_plain_text',
-				'cfct-divider' => 'cfct_module_divider',
-				'cf-post-callout-module' => 'post_callout_module'
-			));
+
 			foreach($cfct_data['data']['modules'] as &$_module) {
 				if (!empty($obsolete_module_ids[$_module['module_type']])) {
 					$_module['module_type'] = $obsolete_module_ids[$_module['module_type']];
@@ -522,7 +542,7 @@ function cfct_upgrade_postmeta() {
 			// save changes
 			if ($update_row === true) {
 				$query = 'UPDATE '.$wpdb->postmeta.'
-						SET meta_value="'.$wpdb->escape(serialize($cfct_data)).'"
+						SET meta_value="'.esc_sql(serialize($cfct_data)).'"
 						WHERE post_id="'.$row['post_id'].'"
 						AND meta_key="'.CFCT_BUILD_POSTMETA.'"';
 				if (mysql_query($query, $wpdb->dbh) == false) {
@@ -538,7 +558,7 @@ function cfct_upgrade_postmeta() {
 
 	$f = mysql_query("SELECT FOUND_ROWS() as rows", $wpdb->dbh);
 	$found = mysql_fetch_assoc($f);
-	echo 'updated '.$updated.' rows out of '.$found['rows'].' rows found';
+	echo sprintf(__('Upgraded %1$d Build pages (out of %2$d found)', 'carrington-build'), $updated, $found['rows']);
 	exit;
 }
 
@@ -563,6 +583,27 @@ function cfct_readme_menu() {
 	}
 }
 add_action('admin_menu', 'cfct_readme_menu', 99);
+
+function cfct_get_post_state($post_id) {
+	$post_state = get_post_meta($post_id, '_post_state', true);
+	if (!$post_state) {
+		$post = get_post($post_id);
+		if ($post) {
+			switch ($post->post_status) {
+				case 'publish':
+					$post_state = 'published';
+					break;
+				case 'draft':
+				case 'pending':
+				default:
+					$post_state = 'draft';
+					break;
+			}
+			update_post_meta($post_id, '_post_state', $post_state);
+		}
+	}
+	return $post_state;
+}
 
 function cfct_readme_content($content) {
 	if ($_GET['page'] == 'cfct-faq') {

@@ -317,10 +317,10 @@ if (!class_exists('cfct_module_callout')) {
 		protected $reference_fields = array('global_image', 'post_image', 'featured_image');
 
 		public function get_referenced_ids($data) {
-			$references = array();			
+			$references = array();
 			foreach ($this->reference_fields as $field) {
 				$id = $this->get_data($field, $data);
-				if (!is_null($id)) {
+				if ($id) {
 					$references[$field] = array(
 						'type' => 'post_type',
 						'type_name' => 'attachment',
@@ -335,7 +335,7 @@ if (!class_exists('cfct_module_callout')) {
 		public function merge_referenced_ids($data, $reference_data) {
 			if (!empty($reference_data) && !empty($data)) {
 				foreach ($this->reference_fields as $field) {
-					if (isset($data[$this->gfn($field)])) {
+					if (isset($data[$this->gfn($field)]) && isset($reference_data[$field])) {
 						$data[$this->gfn($field)] = $reference_data[$field]['value'];
 					}
 				}

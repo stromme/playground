@@ -45,7 +45,7 @@ function cftl_register_taxonomy_landing() {
 			'thumbnail',
 			'revisions',
 		),
-		'public' => true,
+		'public' => false,
 		'exclude_from_search' => true,
 		'show_in_nav_menus' => false,
 		'show_ui' => true,
@@ -84,9 +84,7 @@ add_action('admin_menu', 'cftl_remove_submenu_items');
 function cftl_register_taxonomies_to_tax_landing() {
 	global $wp_taxonomies;
 	foreach ($wp_taxonomies as $taxonomy) {
-    if($taxonomy->name=='category' || $taxonomy->name=='services' || $taxonomy->name=='locations'){
-		  register_taxonomy_for_object_type($taxonomy->name, 'cftl-tax-landing');
-    }
+		register_taxonomy_for_object_type($taxonomy->name, 'cftl-tax-landing');
 	}
 }
 
