@@ -108,15 +108,17 @@ if (!class_exists('cfct_module_rich_text')) {
 		}
 
 		public function admin_footer() {
-			$set = _WP_Editors::parse_settings($this->get_field_id('content'), array(
-				'dfw' => true,
-				'editor_height' => 300,
-				'tinymce' => array(
-					'resize' => false,
-					'add_unload_trigger' => false,
-				),
-			));
-			_WP_Editors::editor_settings($this->get_field_id('content'), $set);
+      if(!is_network_admin()){
+        $set = _WP_Editors::parse_settings($this->get_field_id('content'), array(
+          'dfw' => true,
+          'editor_height' => 300,
+          'tinymce' => array(
+            'resize' => false,
+            'add_unload_trigger' => false,
+          ),
+        ));
+        _WP_Editors::editor_settings($this->get_field_id('content'), $set);
+      }
 		}
 	}
 
