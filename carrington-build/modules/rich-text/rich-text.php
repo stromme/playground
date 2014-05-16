@@ -108,7 +108,7 @@ if (!class_exists('cfct_module_rich_text')) {
 		}
 
 		public function admin_footer() {
-      if(!is_network_admin()){
+      if(!is_network_admin() && isset($_GET['post'])){
         $set = _WP_Editors::parse_settings($this->get_field_id('content'), array(
           'dfw' => true,
           'editor_height' => 300,
