@@ -29,6 +29,8 @@ if (!class_exists('cfct_module_heading')) {
 		public function display($data) {
 			$h_tag = $this->h_tag($data);
 			$title = esc_html($data[$this->get_field_id('content')]);
+      $title = str_replace("\n", "<br />", $title);
+      $title = parse_shortclass($title);
 			return $this->load_view($data, compact('h_tag', 'title'));
 		}
 
