@@ -112,6 +112,7 @@ $blogs = array();
               <?php } ?>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing and Tracking</a></li>
               <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/apps">Add-on Apps</a></li>
+              <li><a tabindex="-1" href="" class="affiliate-box">Refer a Friend</a></li>
 							<li class="divider"></li>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account">Personal Profile</a></li>
               <?php
