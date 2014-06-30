@@ -729,3 +729,128 @@ div.img-polaroid {
     }
   }
 }
+
+
+.carrington-row-editable {
+  .transition(all 0.3s ease);
+}
+.carrington-editor {
+  position: absolute;
+  background: white;
+  #gradient > .vertical(lighten(@grayLighter, 5%), white);
+  left: 0;
+  right: 0;
+  border-top: 1px solid @grayLighter;
+  border-bottom: 1px solid @grayLighter;
+  padding: 3px 30px 0 30px;
+  .transition(all 0.3s ease);
+  &.disabled {
+    opacity: 0.8;
+  }
+  >span {
+    float: left;
+    font-size: 14px;
+    height: 28px;
+    line-height: 28px;
+    margin: 0 5px 3px 2px;
+  }
+  >a {
+    float: left;
+    margin: 0 5px 3px 0;
+    border: 1px solid lighten(@grayLight, 22%) !important;
+    border-radius: 4px;
+    font-size: 14px;
+    color: @gray;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    background: @grayLighter;
+    #gradient > .vertical(lighten(@grayLighter, 80%), @grayLighter);
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      color: @grayDark;
+      border-color: @grayLight !important;
+    }
+    &.selected {
+      background: @gray;
+      #gradient > .vertical(@gray, lighten(@gray, 50%));
+      color: darken(white, 3%);
+      text-shadow: 0 1px 5px @grayDark;
+      border-color: lighten(@grayDark, 15%) !important;
+      &:hover,
+      &:focus {
+        border-color: lighten(@grayDark, 15%);
+      }
+    }
+    &.carr-button-white,
+    &.carr-button-sea,
+    &.carr-button-seafoam,
+    &.carr-button-night,
+    &.carr-button-slate,
+    &.carr-button-slate-invert,
+    &.carr-button-sky,
+    &.carr-button-blue,
+    &.carr-button-warning,
+    &.carr-button-diagonal {
+      background: none;
+    }
+    &.carr-button-none {
+      overflow: hidden;
+      position: relative;
+      .stripe {
+        display: block;
+        width: 36px;
+        height: 4px;
+        background: red;
+        .rotate(45deg);
+        position: absolute;
+        top: 10px;
+        left: -6px;
+      }
+      &.selected {
+        #gradient > .vertical(@grayLight, lighten(@grayLight, 50%));
+      }
+    }
+    &.carr-button-white {
+      .bg-white;
+    }
+    &.carr-button-sea {
+      overflow: hidden;
+      .bg-sea;
+    }
+    &.carr-button-seafoam {
+      overflow: hidden;
+      .bg-seafoam;
+    }
+    &.carr-button-night {
+      overflow: hidden;
+      .bg-night;
+    }
+    &.carr-button-slate {
+      overflow: hidden;
+      .bg-slate;
+    }
+    &.carr-button-slate-invert {
+      overflow: hidden;
+      .bg-slate-invert;
+    }
+    &.carr-button-sky {
+      overflow: hidden;
+      .bg-sky;
+    }
+    &.carr-button-blue {
+      overflow: hidden;
+      .bg-blue;
+    }
+    &.carr-button-warning {
+      overflow: hidden;
+      .bg-warning;
+    }
+    &.carr-button-diagonal {
+      overflow: hidden;
+      .bg-blue-diagnal;
+    }
+  }
+}
