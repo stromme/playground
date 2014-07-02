@@ -66,7 +66,7 @@
           $li_found = false;
           for($li=0;$li<count($blog_seo_list) && !$li_found;$li++){
             $blog_seo = $blog_seo_list[$li];
-            if($blog_seo->slug==$location->slug){
+            if($blog_seo->slug==$location->slug || $blog_seo->name==$location->name){
               $loc_link = $blog_seo->link;
               $li_found = true;
             }
