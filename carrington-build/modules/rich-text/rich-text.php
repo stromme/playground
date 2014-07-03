@@ -137,7 +137,10 @@ if (!class_exists('cfct_module_rich_text')) {
               buttons:"strong,em,link,block,del,ins,img,ul,ol,li,code,more,close,fullscreen"
             });
           } catch(e){};
-					setTimeout(function() {tinyMCE.execCommand("mceFocus", true, "'.$this->get_field_id('content').'");}, 10);
+					setTimeout(function() {
+					  tinyMCE.execCommand("mceFocus", true, "'.$this->get_field_id('content').'");
+					  $("#wp-'.$this->get_field_id('content').'-wrap").removeClass("html-active").addClass("tmce-active");
+          }, 10);
 
 					// properly destroy the editor on cancel
 					$("#cfct-edit-module-cancel").click(function() {
@@ -149,9 +152,19 @@ if (!class_exists('cfct_module_rich_text')) {
 				// we have to register a save callback so that tinyMCE pushes the data
 				// back to the original textarea before the submit script gathers its content
 				cfct_builder.addModuleSaveCallback("'.$this->id_base.'",function(form) {
+				  var textarea_elm = $("#'.$this->get_field_id('content').'");
+			    var textarea_content = textarea_elm.val();
 					var _ed = tinyMCE.get("'.$this->get_field_id('content').'");
 					_ed.save();
 					tinyMCE.remove(_ed);
+					var wrap = $("#wp-'.$this->get_field_id('content').'-wrap");
+					if(wrap.hasClass("html-active")){
+            textarea_elm.val(textarea_content);
+          }
+          else {
+            textarea_elm.css({color:"#333"});
+            wrap.removeClass("tmce-active").addClass("html-active");
+          }
 				});
 			';
 			return $js;
