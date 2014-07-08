@@ -8,7 +8,7 @@ $company_street = isset($company['street'])?$company['street']:'';
 $company_city = isset($company['city'])?$company['city']:'';
 $company_state = isset($company['state'])?$company['state']:'';
 $company_zip = isset($company['zip'])?$company['zip']:'';
-$company_phone = get_phone_number();
+$company_phone = tb_format_us_phone_number(isset($company['phone'])?$company['phone']:'', false);
 $users = get_users();
 $owner_name = '';
 $owner_role = '';
@@ -37,9 +37,9 @@ if(count($users)>0){
     <h3 class="light-weight"><?=parse_shortclass($title)?></h3>
     <address itemprop="location" itemscope="http://schema.org/PostalAddress">
       <strong><?=$company_name?></strong><br>
-      <span itemprop="streetAddress"><?=$company_street?></span><br>
-      <span itemprop="addressLocality"><?=$company_city?></span>, <?=$company_state?> <?=$company_zip?><br>
-      <abbr title="Phone">P:</abbr> <span itemprop="telephone"><?=$company_phone?></span>
+      <span itemprop="streetAddress"><?=$company_street?></span><br />
+      <span itemprop="addressLocality"><?=$company_city?></span>, <?=$company_state?> <?=$company_zip?><br />
+      <?php if($company_phone!=''){ ?><abbr title="Phone">P:</abbr> <span itemprop="telephone"><?=$company_phone?></span><?php } ?>
     </address>
 
     <?php if($owner_name!='' || $owner_role!='' || $owner_email!=''){ ?>
