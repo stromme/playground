@@ -6903,6 +6903,8 @@ div.img-polaroid div {
 .cfct-mod-content iframe {
   max-width: 100%;
   display: block;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 10px;
 }
 /* Alerts */
