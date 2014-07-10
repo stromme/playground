@@ -6900,6 +6900,11 @@ div.img-polaroid div {
   max-height: 400px;
   overflow: hidden;
 }
+.cfct-mod-content iframe {
+  max-width: 100%;
+  display: block;
+  margin-bottom: 10px;
+}
 /* Alerts */
 #alert {
   display: none;
