@@ -154,12 +154,13 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
               <label>Select accolades</label>
             </div>';
             foreach($this->accolades as $key=>$current_accolade){
-            $select_all = (!empty($data[$this->get_field_name('select_all_'.$key)]) ? esc_html($data[$this->get_field_name('select_all_'.$key)]) : '');
-            $selected_all = ($select_all==1);
+            //$select_all = (!empty($data[$this->get_field_name('select_all')][$key]) ? esc_html($data[$this->get_field_name('select_all')][$key]) : (!empty($data[$this->get_field_name('select_all_'.$key)])?$data[$this->get_field_name('select_all_'.$key)]:''));
+            $selected_all = (isset($this->accolades[$key]['content']) && isset($accolade_id[$key]) && count($this->accolades[$key]['content'])==count($accolade_id[$key]));
+            if(!isset($data[$this->get_field_id('accolade_id')][$key]) || count($data[$this->get_field_id('accolade_id')][$key])<=0) $selected_all = false;
             $html .= '
             <div class="cfct-accolade-container accolade-'.$key.'" style="'.(($key==$type)?'display:block;':'display:none;').'">
               <div class="cfct-field no-space">
-                <input type="checkbox" value="1" class="cfct-check-all" id="'.$this->get_field_id('select_all_'.$key).'" name="'.$this->get_field_name('select_all_'.$key).'" '.(($selected_all)?'checked="checked"':'').'/> <label for="'.$this->get_field_id('select_all_'.$key).'">Select all '.strtolower($this->accolades[$key]['name']).'</span> accolades</label>
+                <input type="checkbox" value="1" class="cfct-check-all" id="'.$this->get_field_id('select_all_'.$key).'" name="'.$this->get_field_name('select_all').'['.$key.']" '.(($selected_all)?'checked="checked"':'').'/> <label for="'.$this->get_field_id('select_all_'.$key).'">Select all '.strtolower($this->accolades[$key]['name']).'</span> accolades</label>
               </div>
               <div class="cfct-field">
                 <ul class="cfct-accolade-list">';
@@ -189,6 +190,8 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
               <input type="text" name="'.$this->get_field_name('interval').'" id="'.$this->get_field_id('interval').'" value="'.(!empty($data[$this->get_field_name('interval')]) ? esc_html($data[$this->get_field_name('interval')]) : '4000').'" class="width-small" />
             </div>
           </div>
+          <input type="hidden" value="-" id="'.$this->get_field_name('select_all').'_filler" name="'.$this->get_field_name('select_all').'[filler]" />
+          <input type="hidden" value="-" id="'.$this->get_field_name('accolade_id').'_filler" name="'.$this->get_field_name('accolade_id').'[filler]" />
 				</div>
 				<div class="clear" />
 				';
@@ -218,6 +221,12 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
 		 * @return array
 		 */
 		public function update($new_data, $old_data) {
+      // Clean old variables (that not works)
+      $type = $new_data[$this->get_field_id('type')];
+      if($type) unset($new_data[$this->get_field_id('select_all_'.$type)]);
+      // Cleanup
+      unset($new_data[$this->get_field_id('select_all_')]);
+      unset($new_data[$this->get_field_id('accolade_id_')]);
 			return $new_data;
 		}
 		
