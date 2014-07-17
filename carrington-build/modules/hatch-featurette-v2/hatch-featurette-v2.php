@@ -54,7 +54,7 @@ if (!class_exists('cfct_module_hatch_featurette_v2') && class_exists('cfct_build
 
 		public function __construct() {
 			$opts = array(
-				'description' => __('Display a headline, (optional) image and brief text with a link.', 'carrington-build'),
+				'description' => __('Display image featurette.', 'carrington-build'),
 				'icon' => 'hatch-featurette-v2/icon.png'
 			);
 			parent::__construct('cfct-module-hatch-featurette-v2', __('.: Featurette v2 :.', 'carrington-build'), $opts);
