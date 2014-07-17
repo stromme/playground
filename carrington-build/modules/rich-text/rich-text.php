@@ -31,8 +31,9 @@ if (!class_exists('cfct_module_rich_text')) {
 			$content = (isset($data[$this->get_field_name('content')]) ? $data[$this->get_field_name('content')] : '');
 			ob_start();
 			wp_editor($content, $this->get_field_id('content'), array(
+        'first_init' => false,
 				'media_buttons' => true,
-				'textarea_name' => $this->get_field_name('content'),
+				'textarea_name' => $this->get_field_name('content')
 			));
 			$ret = ob_get_clean();
 			return $ret;
@@ -83,6 +84,9 @@ if (!class_exists('cfct_module_rich_text')) {
 					overflow: visible !important;
 					max-height: none !important;
 				}
+				i.mce-i-checkedlist:before {
+				  content: \'✔\';
+				}
 			';
 		}
 
@@ -90,73 +94,79 @@ if (!class_exists('cfct_module_rich_text')) {
 			$js = '
 				// automatically set focus on the rich text editor
 				cfct_builder.addModuleLoadCallback("'.$this->id_base.'",function(form) {
-					tinymce.init({
-						selector: "#'.$this->get_field_id('content').'",
-						menubar: false,
-            theme:"modern",
-            skin:"lightgray",
-            language:"en",
-            formats:{
-              alignleft: [
-                {selector: "p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li", styles: {textAlign:"left"}},
-                {selector: "img,table,dl.wp-caption", classes: "alignleft"}
-              ],
-              aligncenter: [
-                {selector: "p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li", styles: {textAlign:"center"}},
-                {selector: "img,table,dl.wp-caption", classes: "aligncenter"}
-              ],
-              alignright: [
-                {selector: "p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li", styles: {textAlign:"right"}},
-                {selector: "img,table,dl.wp-caption", classes: "alignright"}
-              ],
-              strikethrough: {inline: "del"}
-            },
-            relative_urls:false,
-            remove_script_host:false,
-            convert_urls:false,
-            browser_spellcheck:true,
-            fix_list_elements:true,
-            entities:"38,amp,60,lt,62,gt",
-            entity_encoding:"raw",
-            keep_styles:false,paste_webkit_styles:"font-weight font-style color",
-            preview_styles:"font-family font-size font-weight font-style text-decoration text-transform",
-            wpeditimage_disable_captions:false,
-            wpeditimage_html5_captions:false,
-            plugins:"charmap,hr,media,paste,tabfocus,textcolor,fullscreen,wordpress,wpeditimage,wpgallery,wplink,wpdialogs,wpview,wpfullscreen",
-            content_css:"'.get_home_url().'/wp-includes/css/dashicons.min.css?ver=3.9.1,'.get_home_url().'/wp-includes/js/mediaelement/mediaelementplayer.min.css?ver=3.9.1,'.get_home_url().'/wp-includes/js/mediaelement/wp-mediaelement.css?ver=3.9.1,'.get_home_url().'/wp-includes/js/tinymce/skins/wordpress/wp-content.css?ver=3.9.1",
-            wpautop:true,indent:false,
-            toolbar1:"bold,italic,strikethrough,bullist,numlist,blockquote,hr,alignleft,aligncenter,alignright,link,unlink,spellchecker,wp_fullscreen,wp_adv,code",
-            toolbar2:"formatselect,underline,alignjustify,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo",
-            toolbar3:"",toolbar4:"",
-            tabfocus_elements:"cfct-rich-text-content-tmce",
-            body_class:"content post-type-page post-status-auto-draft",add_unload_trigger:false
-					});
-					try {
-            quicktags({
-              id:"'.$this->get_field_id('content').'",
-              buttons:"strong,em,link,block,del,ins,img,ul,ol,li,code,more,close,fullscreen"
-            });
-          } catch(e){};
-					setTimeout(function() {
-					  tinyMCE.execCommand("mceFocus", true, "'.$this->get_field_id('content').'");
+          (function() {
+            var init, edId, qtId, firstInit, wrapper;
+            if ( typeof tinymce !== "undefined" ) {
+              edId = "'.$this->get_field_id('content').'";
+              if ( firstInit ) {
+                init = tinyMCEPreInit.mceInit[edId] = tinymce.extend( {}, firstInit, tinyMCEPreInit.mceInit[edId] );
+              } else {
+                init = firstInit = tinyMCEPreInit.mceInit[edId];
+              }
+
+              wrapper = tinymce.DOM.select( "#wp-" + edId + "-wrap" )[0];
+
+              if ( ( tinymce.DOM.hasClass( wrapper, "tmce-active" ) || ! tinyMCEPreInit.qtInit.hasOwnProperty( edId ) ) &&
+                ! init.wp_skip_init ) {
+
+                try {
+                  init["plugins"]+=",checkedlist";
+                  init["formats"]["p_lead"] = {block : \'p\', attributes: { class: \'lead\'}};
+                  init["formats"]["p_small"] = {block : \'p\', attributes: { class: \'small\'}};
+                  init["block_formats"] = "Paragraph=p;P Lead=p_lead;P Small=p_small;Pre=pre;Heading 1=h1;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 5=h5";
+                  tinymce.init( init );
+
+                  if ( ! window.wpActiveEditor ) {
+                    window.wpActiveEditor = edId;
+                  }
+                } catch(e){}
+              }
+            }
+
+            var qtId = "'.$this->get_field_id('content').'";
+            if ( typeof quicktags !== "undefined" ) {
+              try {
+                var qtInit = {id: qtId, buttons: "strong,em,link,block,del,ins,img,ul,ol,li,code,close,fullscreen"}
+                if(typeof(QTags.instances)=="object" && QTags.instances[0]!==undefined){
+                  delete(QTags.instances[0]);
+                }
+                var qt = quicktags(qtInit);
+              } catch(e){};
+            }
+
+            if ( typeof jQuery !== "undefined" ) {
+              jQuery(".wp-editor-wrap").on( "click.wp-editor", function() {
+                if ( this.id ) {
+                  window.wpActiveEditor = this.id.slice( 3, -5 );
+                }
+              });
+            } else {
+              document.getElementById( "wp-" + qtId + "-wrap" ).onclick = function() {
+                window.wpActiveEditor = this.id.slice( 3, -5 );
+              }
+            }
+          }());
+
+					/*setTimeout(function() {
+					  tinymce.execCommand("mceFocus", true, "'.$this->get_field_id('content').'");
 					  $("#wp-'.$this->get_field_id('content').'-wrap").removeClass("html-active").addClass("tmce-active");
-          }, 10);
+          }, 10);*/
 
 					// properly destroy the editor on cancel
 					$("#cfct-edit-module-cancel").click(function() {
-						var _ed = tinyMCE.get("'.$this->get_field_id('content').'");
-						tinyMCE.remove(_ed);
+						var _ed = tinymce.get("'.$this->get_field_id('content').'");
+						tinymce.remove(_ed);
 					});
 				});
 
-				// we have to register a save callback so that tinyMCE pushes the data
+				// we have to register a save callback so that tinymce pushes the data
 				// back to the original textarea before the submit script gathers its content
 				cfct_builder.addModuleSaveCallback("'.$this->id_base.'",function(form) {
 				  var textarea_elm = $("#'.$this->get_field_id('content').'");
 			    var textarea_content = textarea_elm.val();
-					var _ed = tinyMCE.get("'.$this->get_field_id('content').'");
+					var _ed = tinymce.get("'.$this->get_field_id('content').'");
 					_ed.save();
-					tinyMCE.remove(_ed);
+					tinymce.remove(_ed);
 					var wrap = $("#wp-'.$this->get_field_id('content').'-wrap");
 					if(wrap.hasClass("html-active")){
             textarea_elm.val(textarea_content);
@@ -179,9 +189,15 @@ if (!class_exists('cfct_module_rich_text')) {
           'tinymce' => array(
             'resize' => false,
             'add_unload_trigger' => false,
-          )
+            'toolbar1' => "bold,italic,strikethrough,bullist,numlist,checkedlist,blockquote,hr,alignleft,aligncenter,alignright,link,unlink,code,spellchecker,wp_adv,wp_fullscreen",
+            'toolbar2' => "formatselect,underline,alignjustify,forecolor,removeformat,charmap,outdent,indent,undo,redo,wp_help",
+            'toolbar3' => "",
+            'toolbar4' => ""
+          ),
+          'quicktags' => false
         ));
         _WP_Editors::editor_settings($this->get_field_id('content'), $set);
+        wp_enqueue_script( 'tinymce-checklist', trailingslashit( TOOLBOX_JS ).'tinymce-checklist.js', array(), false, true);
       }
 		}
 	}

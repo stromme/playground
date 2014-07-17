@@ -5369,6 +5369,14 @@ blockquote {
 .lowercase {
   text-transform: lowercase;
 }
+ul.checked-list li {
+  list-style: none;
+}
+ul.checked-list li:before {
+  content: '✔';
+  margin-left: -1em;
+  margin-right: 8px;
+}
 [class^="icon-full-"],
 [class*=" icon-full-"] {
   display: inline-block;
