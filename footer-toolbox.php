@@ -15,7 +15,7 @@
 	</section-->
 <div class="modal fade in" id="toolbox-lock" aria-hidden="false">
   <div class="modal-body">
-    <p>We're doing server upgrade right now. This will be scheduled to be done not longer than 24 hours or faster. Please be patient and check a gain in a few hours.</p>
+    <p>We're doing server upgrade right now. This will be scheduled to be done not longer than 24 hours. Please be patient and check again in a few hours.</p>
     <p>Thank you.</p>
   </div>
 </div>
