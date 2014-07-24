@@ -5,6 +5,7 @@
 <?php
 $company_name = stripslashes(isset($company['name'])?$company['name']:'');
 $company_street = isset($company['street'])?$company['street']:'';
+$company_country = isset($company['country'])?$company['country']:'';
 $company_city = isset($company['city'])?$company['city']:'';
 $company_state = isset($company['state'])?$company['state']:'';
 $company_zip = isset($company['zip'])?$company['zip']:'';
@@ -39,6 +40,7 @@ if(count($users)>0){
       <strong><?=$company_name?></strong><br>
       <span itemprop="streetAddress"><?=$company_street?></span><br />
       <span itemprop="addressLocality"><?=$company_city?></span>, <?=$company_state?> <?=$company_zip?><br />
+      <?php if($company_country!='' && $company_country!='US'){ ?><span class="hide" itemprop="addressCountry"><?=$company_country?></span><?=tb_get_countries($company_country)?><?php } ?><br />
       <?php if($company_phone!=''){ ?><abbr title="Phone">P:</abbr> <span itemprop="telephone"><?=$company_phone?></span><?php } ?>
     </address>
 
