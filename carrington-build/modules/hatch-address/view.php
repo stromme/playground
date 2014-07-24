@@ -40,7 +40,7 @@ if(count($users)>0){
       <strong><?=$company_name?></strong><br>
       <span itemprop="streetAddress"><?=$company_street?></span><br />
       <span itemprop="addressLocality"><?=$company_city?></span>, <?=$company_state?> <?=$company_zip?><br />
-      <?php if($company_country!='' && $company_country!='US'){ ?><span class="hide" itemprop="addressCountry"><?=$company_country?></span><?=tb_get_countries($company_country)?><?php } ?><br />
+      <span class="hide" itemprop="addressCountry"><?=$company_country?></span><?php if($company_country!='' && $company_country!='US'){ ?><?=tb_get_countries($company_country)?><br /><?php } ?>
       <?php if($company_phone!=''){ ?><abbr title="Phone">P:</abbr> <span itemprop="telephone"><?=$company_phone?></span><?php } ?>
     </address>
 
