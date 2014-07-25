@@ -100,7 +100,7 @@ if ( ( 'cftl-tax-landing' == get_post_type() ) || ( 'page' == get_post_type() ) 
 			</li>
       <?php } ?>
 			<li class="headline-link hidden-phone hidden-tablet">
-				<h2><a href="javascript:void(0);" class="quick-estimate <?=apply_filters('apply_responsibid', false);?>">Quick Estimate</a></h2>
+				<h2><a href="javascript:void(0);" class="quick-estimate <?=apply_filters('apply_responsibid', false);?>"><?=get_theme_mod('hs_cta_text', 'Quick Estimate')?></a></h2>
 			</li>
 		</ul>
 	</div>
