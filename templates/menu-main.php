@@ -141,7 +141,7 @@ $comments = get_comments($args);
       <? } if(count($comments)>0) { ?>
 			<li class="nav-callout nav-callout-border"><a href="<?=get_home_url()."/reviews"?>" class="clear-pills">Reviews</a><b class="nav-callout-border-notch notch"></b><b class="notch"></b></li>
       <? } ?>
-			<li class="hidden-desktop"><button href="" class="btn btn-success btn-large quick-estimate <?=apply_filters('apply_responsibid', false);?>">Estimate</button></li>
+			<li class="hidden-desktop"><button href="" class="btn btn-success btn-large quick-estimate <?=apply_filters('apply_responsibid', false);?>"><?=get_theme_mod('hs_cta_mobile_text', 'Estimate')?></button></li>
 		</ul>
 		<!-- /Main Navigation Menu Bar -->
 		
