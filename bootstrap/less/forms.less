@@ -551,6 +551,9 @@ input.search-query {
 }
 
 /* Allow for input prepend/append in search forms */
+.form-search {
+  margin-bottom: 10px;
+}
 .form-search .input-append .search-query,
 .form-search .input-prepend .search-query {
   .border-radius(0); // Override due to specificity
@@ -560,6 +563,7 @@ input.search-query {
 }
 .form-search .input-append .btn {
   .border-radius(0 14px 14px 0);
+  margin-bottom: 0;
 }
 .form-search .input-prepend .search-query {
   .border-radius(0 14px 14px 0);

@@ -1558,6 +1558,9 @@ input.search-query {
   border-radius: 15px;
 }
 /* Allow for input prepend/append in search forms */
+.form-search {
+  margin-bottom: 10px;
+}
 .form-search .input-append .search-query,
 .form-search .input-prepend .search-query {
   -webkit-border-radius: 0;
@@ -1573,6 +1576,7 @@ input.search-query {
   -webkit-border-radius: 0 14px 14px 0;
   -moz-border-radius: 0 14px 14px 0;
   border-radius: 0 14px 14px 0;
+  margin-bottom: 0;
 }
 .form-search .input-prepend .search-query {
   -webkit-border-radius: 0 14px 14px 0;
