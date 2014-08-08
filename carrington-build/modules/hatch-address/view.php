@@ -22,7 +22,7 @@ if(count($users)>0){
     $roles = $user->roles;
     if(count($roles)>0){
       if((in_array('manager', $roles) && $owner_role=='') || in_array('owner', $roles)){
-        $owner_name = $user->first_name.' '.$user->last_name;
+        $owner_name = trim($user->first_name.(($user->last_name!='')?' '.$user->last_name:''));
         $owner_role = ucfirst($roles[0]);
         $owner_email = $user->user_email;
         $user_position = get_user_meta($user->ID, 'job_title', true);
