@@ -2,6 +2,7 @@
 
 if (!class_exists('cfct_module_hatch_featurette_v2') && class_exists('cfct_build_module')) {
 	class cfct_module_hatch_featurette_v2 extends cfct_build_module {
+    protected $available = false;
     private $image_styles = array(
       'left' => 'Image Left',
       'right' => 'Image Right',

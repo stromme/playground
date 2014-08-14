@@ -16,6 +16,8 @@
       <?php
         $i = 0;
         foreach($banner_data as $d){
+          //var_dump($d);
+          //exit;
           if(count($banner_data)>1){
       ?>
       <div class="<?=($i==0)?'active ':''?>item">
@@ -24,7 +26,7 @@
           <?php if($d->video!=''){?>
             <?=parse_embed_video_link($d->video)?>
           <?php } else { ?>
-            <img id="image-<?=$id?>" src="<?=$d->images[0]?>" itemprop="image" />
+            <img id="<?=$d->images[0]['id']?>" src="<?=$d->images[0]['src']?>" itemprop="image" />
           <?php } ?>
         </div>
         <div class="banner-review">

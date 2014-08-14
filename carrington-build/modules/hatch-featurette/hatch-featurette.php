@@ -24,7 +24,7 @@ if (!class_exists('cfct_module_hatch_featurette') && class_exists('cfct_build_mo
       'none' => 'No border',
       'img-polaroid' => 'Polaroid'
     );
-    protected $available = false;
+    //protected $available = false;
 
 		public function __construct() {
 			$opts = array(
