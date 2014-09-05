@@ -90,3 +90,10 @@
 	<img src="<?php echo THEME_IMAGES; ?>backgrounds/bottom-shadow.png" />
 </div>
 <?php if(count($banner_data)>0){ ?><?=$js_init?><?php } ?>
+<?php if(isset($_GET['reviewme'])){ ?>
+<script type="text/javascript">
+$(document).ready(function(){
+  if($('#new-review').is(':hidden') && $('.write-review').length>0) $('.write-review').click();
+});
+</script>
+<?php } ?>
