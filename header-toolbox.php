@@ -62,6 +62,9 @@ $blogs = array();
 					<li class="has-nav-icon">
 						<a href="<?=TOOLBOX_URL?>insight"><i class="icon-nav-compass"></i>Insight</a>
 					</li>
+					<li class="has-nav-icon hidden-phone">
+						<a href="<?=TOOLBOX_URL?>ad-media"><i class="icon-nav-bullhorn"></i>Ad Media</a>
+					</li>
 					<li class="dropdown has-nav-icon control-panel-expanded">
 						<a id="control-panel" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-nav-cog"></i> <b class="caret"></b></a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="control-panel">
@@ -98,27 +101,27 @@ $blogs = array();
                   echo '<li class="divider"></li>';
                 }
               ?>
-							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
+							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile/">Company Profile</a></li>
               <?php
                 $net = get_site_option('tb_network_setting');
                 if(isset($net['name']) && $net['name']!='WindowCleaning.com'){
               ?>
-              <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/domain">Custom Domain Name</a></li>
+              <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/domain/">Custom Domain Name</a></li>
               <?php } ?>
               <?php
               $user = wp_get_current_user();
               if($user && !in_array('manager', $user->roles) && !in_array('owner', $user->roles)){ ?>
-							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
+							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media/">Photos and Videos</a></li>
               <?php } ?>
-							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing and Tracking</a></li>
-              <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/apps">Add-on Apps</a></li>
+							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing/">Sharing and Tracking</a></li>
+              <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/apps/">Add-on Apps</a></li>
 							<li class="divider"></li>
-							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account">Personal Profile</a></li>
+							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account/">Personal Profile</a></li>
               <?php
                 $owner = get_site_owner();
                 if(is_super_admin() || ($owner && isset($owner->ID) && $owner->ID==get_current_user_id())){
               ?>
-              <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account-notifications">Account Notifications</a></li>
+              <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account-notifications/">Account Notifications</a></li>
               <?php } ?>
               <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account/?logout=1&nonce=<?=wp_create_nonce('logout-'.date('Ymd'))?>">Log out</a></li>
 						</ul>
@@ -161,16 +164,17 @@ $blogs = array();
             $net = get_site_option('tb_network_setting');
             if(isset($net['name']) && $net['name']!='WindowCleaning.com'){
           ?>
-          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/domain">Custom Domain Name</a></li>
+          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/domain/">Custom Domain Name</a></li>
           <?php } ?>
           <?php if($user && !in_array('manager', $user->roles) && !in_array('owner', $user->roles)){ ?>
-          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media">Photos and Videos</a></li>
+          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/media/">Photos and Videos</a></li>
           <?php } ?>
-          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing">Sharing and Tracking</a></li>
-          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/apps">Add-on Apps</a></li>
+          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing/">Sharing and Tracking</a></li>
+          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/apps/">Add-on Apps</a></li>
+          <li class="visible-phone"><a tabindex="-1" href="<?=TOOLBOX_URL?>ad-media/">Ad Media</a></li>
           <li class="divider"></li>
-          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account">Personal Profile</a></li><?php if(strstr($_SERVER['HTTP_HOST'], 'localhost') || strstr($_SERVER['HTTP_HOST'], 'uzbuz.com')){ ?>
-          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account-notifications">Account Notifications</a></li><?php } ?>
+          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account/">Personal Profile</a></li><?php if(strstr($_SERVER['HTTP_HOST'], 'localhost') || strstr($_SERVER['HTTP_HOST'], 'uzbuz.com')){ ?>
+          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account-notifications/">Account Notifications</a></li><?php } ?>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account/?logout=1&nonce=<?=wp_create_nonce('logout-'.date('Ymd'))?>">Log out</a></li>
         </ul>
       </div>
