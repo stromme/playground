@@ -48,8 +48,6 @@ get_header(); ?>
 				get_template_part( 'content', get_post_format() );
 
 			endwhile;
-
-			twentytwelve_content_nav( 'nav-below' );
 			?>
 
 		<?php else : ?>
