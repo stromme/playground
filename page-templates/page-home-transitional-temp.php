@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Home Transitional
+ * Template Name: Home Transitional Custom Guarantee
  * Description: The Template for displaying home page that have been transitioned from the old toolbox.
  *
  *
@@ -52,7 +52,7 @@ $seo = get_location_seo();
         </div>
       </div>
       <div class="span7">
-        <?=apply_filters('cbtb_load_home_featurette', true)?>
+        <?=apply_filters('cbtb_load_home_featurette_temp', true)?>
       </div>
     </div>
   </section>
