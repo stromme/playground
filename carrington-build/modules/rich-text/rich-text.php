@@ -120,11 +120,11 @@ if (!class_exists('cfct_module_rich_text')) {
                     window.wpActiveEditor = edId;
                   }
                 } catch(e){}
-
-                setTimeout(function(){
-                  jQuery("#cfct-rich-text-content-tmce").click();
-                }, 1000);
               }
+
+              setTimeout(function(){
+                jQuery("#cfct-rich-text-content-tmce").click();
+              }, 1000);
             }
 
             var qtId = "'.$this->get_field_id('content').'";
