@@ -24,8 +24,10 @@ $blogs = array();
 	<?php wp_head(); ?>
 	<?=get_google_analytics_code();?>
   <?php
+  if(class_exists('Social')){
     $social = new Social();
     $social->process_pending_sharing();
+  }
   ?>
 </head>
 
