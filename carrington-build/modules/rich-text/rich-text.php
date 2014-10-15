@@ -23,7 +23,7 @@ if (!class_exists('cfct_module_rich_text')) {
 		}
 
 		public function display($data) {
-			$text = do_shortcode($data[$this->get_field_id('content')]);
+			$text = do_shortcode(wpautop($data[$this->get_field_id('content')]));
 			return $this->load_view($data, compact('text'));
 		}
 
