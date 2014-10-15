@@ -122,7 +122,7 @@ if (!class_exists('cfct_module_rich_text')) {
                 } catch(e){}
 
                 setTimeout(function(){
-                  $("#cfct-rich-text-content-tmce").click();
+                  jQuery("#cfct-rich-text-content-tmce").click();
                 }, 1000);
               }
             }
