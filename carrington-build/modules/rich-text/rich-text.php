@@ -121,6 +121,7 @@ if (!class_exists('cfct_module_rich_text')) {
                   }
                 } catch(e){}
               }
+
               setTimeout(function(){
                 switchEditors.switchto(document.getElementById("cfct-rich-text-content-html"));
               }, 300);
