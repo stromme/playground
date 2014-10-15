@@ -110,7 +110,7 @@ if (!class_exists('cfct_module_rich_text')) {
                 ! init.wp_skip_init ) {
 
                 try {
-                  init["plugins"]+=",checkedlist,shortcodes";
+                  init["plugins"]+=",checkedlist";
                   init["formats"]["p_normal"] = {block : \'p\', attributes: { class: \'\'}};
                   init["formats"]["p_lead"] = {block : \'p\', attributes: { class: \'lead\'}};
                   init["formats"]["p_small"] = {block : \'p\', attributes: { class: \'small\'}};
