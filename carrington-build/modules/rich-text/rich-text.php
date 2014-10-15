@@ -124,7 +124,7 @@ if (!class_exists('cfct_module_rich_text')) {
 
               setTimeout(function(){
                 jQuery("#cfct-rich-text-content-tmce").click();
-              }, 1000);
+              }, 300);
             }
 
             var qtId = "'.$this->get_field_id('content').'";
