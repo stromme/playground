@@ -111,11 +111,9 @@ if (!class_exists('cfct_module_rich_text')) {
 
                 try {
                   init["plugins"]+=",checkedlist";
-                  init["formats"]["p_default"] = {block : \'p\'};
-                  init["formats"]["p_normal"] = {block : \'p\'};
                   init["formats"]["p_lead"] = {block : \'p\', attributes: { class: \'lead\'}};
                   init["formats"]["p_small"] = {block : \'p\', attributes: { class: \'small\'}};
-                  init["block_formats"] = "P=p_default;Paragraph=p_normal;P Lead=p_lead;P Small=p_small;Pre=pre;Heading 1=h1;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 5=h5";
+                  init["block_formats"] = "P Lead=p_lead;P Small=p_small;Pre=pre;Heading 1=h1;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 5=h5";
                   tinymce.init( init );
 
                   if ( ! window.wpActiveEditor ) {
