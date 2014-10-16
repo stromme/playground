@@ -83,6 +83,7 @@ $blogs = array();
                 }
                 if(count($blogs)>1){
                   usort($blogs, "compare_blogname");
+                  echo "<li><ul>";
                   foreach($blogs as $blog){
                     if($blog->userblog_id!=get_current_blog_id()){
                       $blog_seo = get_blog_option($blog->userblog_id, 'tb_seo');
@@ -100,7 +101,7 @@ $blogs = array();
               <?php
                     }
                   }
-                  echo '<li class="divider"></li>';
+                  echo '</ul></li><li class="divider"></li>';
                 }
               ?>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile/">Company Profile</a></li>
