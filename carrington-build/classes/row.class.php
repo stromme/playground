@@ -360,7 +360,7 @@ class cfct_build_row {
 							$this->current_module = $template->get_module($module_key);
 							$module_html = $template->get_module($module_key)->html($module);
 							global $post;
-							if (current_user_can('edit_post', $post->ID)) {
+							if (current_user_can('manage_option', $post->ID)) {
 								// add an Edit link for the module
 
 								$module_html = '
