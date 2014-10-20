@@ -33,16 +33,18 @@ $insured = array(
   'img' => TOOLBOX_IMAGES."/accolades/insured.png",
   'content' => "Protect your home and family. Only work with fully insured WindowCleaning.com professionals."
 );
+$custom_insured_exist = true;
 if(count($chosen_accolade)>0){
   foreach($chosen_accolade['guarantees']['content'] as $guarantee){
     if($guarantee['term']=='streak-free-guarantee'){
       $streak_free['title'] = $guarantee['title'];
       $streak_free['img'] = $guarantee['image'];
     }
-    if($guarantee['term']=='insured'){
+    if($guarantee['term']=='insured' && $insured['title']==$guarantee['title']){
       $insured['title'] = $guarantee['title'];
       $insured['img'] = $guarantee['image'];
       $insured['content'] = $guarantee['description'];
+      $custom_insured_exist = false;
     }
   }
 }
@@ -57,18 +59,21 @@ if(count($chosen_accolade)>0){
       <p><?=$streak_free['content']?></p>
     </div>
   </div>
-  <div class="row-middle">
-    <div class="middle-fixed-small">
-      <img src="<?=$insured['img']?>" width="130">
+  <?php if(!$custom_insured_exist) { ?>
+    <div class="row-middle">
+      <div class="middle-fixed-small">
+        <img src="<?= $insured['img'] ?>" width="130">
+      </div>
+      <div class="middle">
+        <h4><?= $insured['title'] ?></h4>
+
+        <p><?= $insured['content'] ?></p>
+      </div>
     </div>
-    <div class="middle">
-      <h4><?=$insured['title']?></h4>
-      <p><?=$insured['content']?></p>
-    </div>
-  </div>
   <?php
-    if(isset($chosen_accolade) && count($chosen_accolade)>0){
-      foreach($chosen_accolade as $accolade){
+  }
+  if(isset($chosen_accolade) && count($chosen_accolade)>0){
+    foreach($chosen_accolade as $accolade){
   ?>
   <div class="row-middle">
   	<div class="middle-fixed-small">
@@ -80,8 +85,8 @@ if(count($chosen_accolade)>0){
   	</div>
   </div>
   <?php
-      }
     }
+  }
   ?>
   <!-- / Accolades -->
 </div>
