@@ -28,11 +28,11 @@ $streak_free = array(
   'img' => TOOLBOX_IMAGES."/accolades/streak-free-guarantee.png",
   'content' => "We’re proud to offer the only $1000 Streak Free Guarantee in ".$seo['city'].", ".$seo['state'].". If you don’t love our work, we’ll refund up to $1000"
 );
-$insured = array(
+/*$insured = array(
   'title' => "We carry $1 million in liability insurance.",
   'img' => TOOLBOX_IMAGES."/accolades/insured.png",
   'content' => "Protect your home and family. Only work with fully insured WindowCleaning.com professionals."
-);
+);*/
 $custom_insured_exist = true;
 if(count($chosen_accolade)>0){
   foreach($chosen_accolade['guarantees']['content'] as $guarantee){
@@ -40,12 +40,12 @@ if(count($chosen_accolade)>0){
       $streak_free['title'] = $guarantee['title'];
       $streak_free['img'] = $guarantee['image'];
     }
-    if($guarantee['term']=='insured' && $insured['title']==$guarantee['title']){
+    /*if($guarantee['term']=='insured' && $insured['title']==$guarantee['title']){
       $insured['title'] = $guarantee['title'];
       $insured['img'] = $guarantee['image'];
       $insured['content'] = $guarantee['description'];
       $custom_insured_exist = false;
-    }
+    }*/
   }
 }
 ?>
@@ -59,7 +59,7 @@ if(count($chosen_accolade)>0){
       <p><?=$streak_free['content']?></p>
     </div>
   </div>
-  <?php if(!$custom_insured_exist) { ?>
+  <?php /*if(!$custom_insured_exist) { ?>
     <div class="row-middle">
       <div class="middle-fixed-small">
         <img src="<?= $insured['img'] ?>" width="130">
@@ -71,7 +71,7 @@ if(count($chosen_accolade)>0){
       </div>
     </div>
   <?php
-  }
+  }*/
   if(isset($chosen_accolade) && count($chosen_accolade)>0){
     foreach($chosen_accolade as $accolade){
   ?>
