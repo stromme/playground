@@ -36,10 +36,10 @@
             <?php if(($d->author!='' || $d->company!='' || $d->author_location!='') && !$d->is_private){ ?>
               <p class="banner-author">
               <?php if($d->author!='' && $d->company!=''){ ?>
-                <cite<?=(strlen($d->company)>16)?" class=\"smaller\"":""?>><?=$d->author?></cite><span class="author-location<?=(strlen($d->author_location)>25)?" smaller":""?>"> - <?=$d->company?></span>
+                <cite<?=(strlen($d->author)>16)?" class=\"smaller\"":""?>><?=$d->author?></cite><span class="author-location<?=(strlen($d->company)>25)?" smaller":""?>"> - <?=$d->company?></span>
               <?php } else { ?>
                 <?php if($d->author!=''){ ?>
-                <cite<?=(strlen($d->company)>16)?" class=\"smaller\"":""?>><?=$d->author?></cite>
+                <cite<?=(strlen($d->author)>16)?" class=\"smaller\"":""?>><?=$d->author?></cite>
                 <?php } else if($d->company!='') { ?>
                 <cite<?=(strlen($d->company)>16)?" class=\"smaller\"":""?>><?=$d->company?></cite>
                 <?php } ?>
