@@ -32,19 +32,19 @@
         <div class="banner-review">
           <blockquote>
             <?php $description = substr($d->description, 0, 180)."..."; ?>
-            <p>"<span><?=(strlen($d->description)<=185)?$d->description:$description?></span>"</p>
+            <p>"<span<?=(strlen($description)>160)?" class=\"smaller\"":""?>><?=(strlen($d->description)<=185)?$d->description:$description?></span>"</p>
             <?php if(($d->author!='' || $d->company!='' || $d->author_location!='') && !$d->is_private){ ?>
               <p class="banner-author">
               <?php if($d->author!='' && $d->company!=''){ ?>
-                <cite><?=$d->author?></cite><span class="author-location"> - <?=$d->company?></span>
+                <cite<?=(strlen($d->company)>16)?" class=\"smaller\"":""?>><?=$d->author?></cite><span class="author-location<?=(strlen($d->author_location)>25)?" smaller":""?>"> - <?=$d->company?></span>
               <?php } else { ?>
                 <?php if($d->author!=''){ ?>
-                <cite><?=$d->author?></cite>
+                <cite<?=(strlen($d->company)>16)?" class=\"smaller\"":""?>><?=$d->author?></cite>
                 <?php } else if($d->company!='') { ?>
-                <cite><?=$d->company?></cite>
+                <cite<?=(strlen($d->company)>16)?" class=\"smaller\"":""?>><?=$d->company?></cite>
                 <?php } ?>
                 <?php if($d->author_location!=''){ ?>
-                <span class="author-location"> - <?=$d->author_location?></span>
+                <span class="author-location<?=(strlen($d->author_location)>25)?" smaller":""?>"> - <?=$d->author_location?></span>
                 <?php } ?>
               <?php } ?>
               </p>

@@ -6076,6 +6076,9 @@ nav-callout .notch {
   line-height: 35px;
   font-weight: 100;
 }
+.banner-review blockquote p span.smaller {
+  font-size: 24px;
+}
 .banner-review blockquote p.banner-author {
   margin-top: 10px;
   color: #999999;
@@ -6090,8 +6093,14 @@ nav-callout .notch {
   color: #999999;
   font-size: 20px;
 }
+.banner-review blockquote p.banner-author .author-location.smaller {
+  font-size: 17px;
+}
 .banner-review blockquote cite {
   color: #333333;
+}
+.banner-review blockquote cite.smaller {
+  font-size: 27px;
 }
 .banner .share-it {
   padding-left: 40px;
