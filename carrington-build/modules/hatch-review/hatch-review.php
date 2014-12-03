@@ -5,7 +5,8 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
     private $types = array(
       'featured' => 'Show all featured reviews',
       'select' => 'Select reviews to display',
-      'manual' => 'Manually enter review'
+      'manual' => 'Manually enter review',
+      'pinned' => 'Pinned review'
     );
     private $default_type = 'featured';
     private $pinned_reviews = array();
@@ -19,7 +20,7 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
       if(!wp_script_is('toolbox-rating')){
         wp_enqueue_script('toolbox-rating', TOOLBOX_JS . '/jquery.raty.min.js', array('jquery'));
       }
-			parent::__construct('cfct-module-hatch-review', __('.: Hatch Review :.', 'carrington-build'), $opts);
+			parent::__construct('cfct-module-hatch-review', __('.: Review :.', 'carrington-build'), $opts);
       $this->image_path = TOOLBOX_IMAGES.'/raty/';
       // Get all featured reviews
       $args = array(
@@ -87,6 +88,17 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
 
 // Display
 		public function display($data) {
+      $type = (!empty($data[$this->get_field_name('type')]) ? esc_html($data[$this->get_field_name('type')]) : $this->default_type);
+      $image_id = (isset($data[$this->get_field_name('post_image')]) && $data[$this->get_field_name('post_image')]!='')?$data[$this->get_field_name('post_image')]:((isset($data[$this->get_field_name('global_image')]) && $data[$this->get_field_name('global_image')]!='')?$data[$this->get_field_name('global_image')]:'');
+
+      $this->view = 'view.php';
+      if($type=='pinned'){
+        $this->view = 'view-pinned-review.php';
+      }
+      if($type=='manual' && !empty($image_id) && $image_id!='') {
+        $this->view = 'view-image-review.php';
+      }
+
 			return $this->load_view($data, apply_filters('cbtb_query_reviews', array(
         'data' => $data,
         'obj' => $this,
@@ -99,6 +111,7 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
 		public function admin_form($data) {
 			// basic info
       $type = (!empty($data[$this->get_field_name('type')]) ? esc_html($data[$this->get_field_name('type')]) : '');
+
       if($type=='') $type = $this->default_type;
 
       $rating = (!empty($data[$this->get_field_name('rating')]) ? esc_html($data[$this->get_field_name('rating')]) : '');
@@ -266,6 +279,11 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
                 $("#'.$this->get_field_id('interval').'_selector").slideUp("fast");
                 $("#'.$this->get_field_id('review_id').'_selector").slideUp("fast");
                 $("#'.$this->get_field_id('manual').'_selector").slideDown("fast");
+                break;
+              case "pinned":
+                $("#'.$this->get_field_id('interval').'_selector").slideUp("fast");
+                $("#'.$this->get_field_id('review_id').'_selector").slideUp("fast");
+                $("#'.$this->get_field_id('manual').'_selector").slideUp("fast");
                 break;
             }
           });
