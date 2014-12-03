@@ -19,7 +19,7 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
 				'description' => __('Display a headline, (optional) image and brief text with a link.', 'carrington-build'),
 				'icon' => 'hatch-accolade/icon.png'
 			);
-			parent::__construct('cfct-module-hatch-accolade', __('.: Hatch Accolade :.', 'carrington-build'), $opts);
+			parent::__construct('cfct-module-hatch-accolade', __('.: Accolade :.', 'carrington-build'), $opts);
 
       $args = array(
         'post_type' => array('accolades'),
@@ -154,20 +154,15 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
               <label>Select accolades</label>
             </div>';
             foreach($this->accolades as $key=>$current_accolade){
-            //$select_all = (!empty($data[$this->get_field_name('select_all')][$key]) ? esc_html($data[$this->get_field_name('select_all')][$key]) : (!empty($data[$this->get_field_name('select_all_'.$key)])?$data[$this->get_field_name('select_all_'.$key)]:''));
-            $selected_all = (isset($this->accolades[$key]['content']) && isset($accolade_id[$key]) && count($this->accolades[$key]['content'])==count($accolade_id[$key]));
             if(!isset($data[$this->get_field_id('accolade_id')][$key]) || count($data[$this->get_field_id('accolade_id')][$key])<=0) $selected_all = false;
             $html .= '
             <div class="cfct-accolade-container accolade-'.$key.'" style="'.(($key==$type)?'display:block;':'display:none;').'">
-              <div class="cfct-field no-space">
-                <input type="checkbox" value="1" class="cfct-check-all" id="'.$this->get_field_id('select_all_'.$key).'" name="'.$this->get_field_name('select_all').'['.$key.']" '.(($selected_all)?'checked="checked"':'').'/> <label for="'.$this->get_field_id('select_all_'.$key).'">Select all '.strtolower($this->accolades[$key]['name']).'</span> accolades</label>
-              </div>
               <div class="cfct-field">
                 <ul class="cfct-accolade-list">';
                 foreach($this->accolades[$key]['content'] as $accolade){
                 $selected = false;
                 if(isset($accolade_id[$key]) && count($accolade_id[$key]>0)){
-                  $selected = (in_array($accolade['id'], $accolade_id[$key]) || $selected_all);
+                  $selected = in_array($accolade['id'], $accolade_id[$key]);
                 }
                 $html .= '
                   <li'.(($selected)?' class="selected"':'').'>
@@ -190,7 +185,6 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
               <input type="text" name="'.$this->get_field_name('interval').'" id="'.$this->get_field_id('interval').'" value="'.(!empty($data[$this->get_field_name('interval')]) ? esc_html($data[$this->get_field_name('interval')]) : '4000').'" class="width-small" />
             </div>
           </div>
-          <input type="hidden" value="-" id="'.$this->get_field_name('select_all').'_filler" name="'.$this->get_field_name('select_all').'[filler]" />
           <input type="hidden" value="-" id="'.$this->get_field_name('accolade_id').'_filler" name="'.$this->get_field_name('accolade_id').'[filler]" />
 				</div>
 				<div class="clear" />
@@ -234,22 +228,9 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
 			$js = preg_replace('/^(\t){4}/m', '', '
         cfct_builder.addModuleLoadCallback("'.$this->id_base.'", function() {
           var container = $("#'.$this->id_base.'-content-fields");
-          var check_all = $(".cfct-check-all", container);
           var ul;
           var li;
           $("label", container).mousedown(function(){return false;});
-          container.on("change", ".cfct-check-all", function(){
-            ul = $(".cfct-accolade-list", $(this).closest(".cfct-accolade-container", container));
-            li = $("li", ul);
-            if($(this).is(":checked")){
-              $("input[type=\'checkbox\']", ul).attr("checked","checked");
-              li.addClass("selected");
-            }
-            else {
-              $("input[type=\'checkbox\']", ul).removeAttr("checked");
-              li.removeClass("selected");
-            }
-          });
           container.on("mousedown", ".cfct-accolade-list li", function(){return false;});
           container.on("change", "li input[type=\'checkbox\']", function(){
             if($(this).is(":checked")){
@@ -257,16 +238,6 @@ if (!class_exists('cfct_module_hatch_accolade') && class_exists('cfct_build_modu
             }
             else {
               $(this).closest("li").removeClass("selected");
-            }
-            var accolade_container = $(this).closest(".cfct-accolade-container", container);
-            ul = $(".cfct-accolade-list", accolade_container);
-            li = $("li", ul);
-            accolade_check_all = $(".cfct-check-all", accolade_container);
-            if(li.length==$("input[type=\'checkbox\']", ul).filter(function(){return $(this).is(":checked");}).length){
-              accolade_check_all.attr("checked", "checked");
-            }
-            else {
-              accolade_check_all.removeAttr("checked");
             }
           });
           container.on("change", "#'.$this->get_field_id('type').'", function(){

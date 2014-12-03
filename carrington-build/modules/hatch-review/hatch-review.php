@@ -3,12 +3,12 @@
 if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module')) {
 	class cfct_module_hatch_review extends cfct_build_module {
     private $types = array(
-      'featured' => 'Show all reviews',
+      'all' => 'Latest reviews',
       'select' => 'Select reviews to display',
       'manual' => 'Manually enter review',
       'pinned' => 'Pinned review'
     );
-    private $default_type = 'featured';
+    private $default_type = 'all';
     private $pinned_reviews = array();
     //private $featured_reviews = array();
 
@@ -260,7 +260,7 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
           container.on("change", "#'.$this->get_field_id('type').'", function(){
             var value = $(this).val();
             switch(value){
-              case "featured":
+              case "all":
                 $("#'.$this->get_field_id('review_id').'_selector").slideUp("fast");
                 $("#'.$this->get_field_id('manual').'_selector").slideUp("fast");
                 $("#'.$this->get_field_id('interval').'_selector").slideDown("fast");
