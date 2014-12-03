@@ -8,7 +8,7 @@
  * @since
  */
 ?>
-<div class="pinned-reviews">
+<div class="reviews-list">
   <?php
     $featurette_reviews = apply_filters('cbtb_load_featurette_reviews', false);
     echo $featurette_reviews['display'];
