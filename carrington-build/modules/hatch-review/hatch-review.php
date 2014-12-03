@@ -3,14 +3,14 @@
 if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module')) {
 	class cfct_module_hatch_review extends cfct_build_module {
     private $types = array(
-      'featured' => 'Show all featured reviews',
+      'featured' => 'Show all reviews',
       'select' => 'Select reviews to display',
       'manual' => 'Manually enter review',
       'pinned' => 'Pinned review'
     );
     private $default_type = 'featured';
     private $pinned_reviews = array();
-    private $featured_reviews = array();
+    //private $featured_reviews = array();
 
 		public function __construct() {
 			$opts = array(
@@ -23,7 +23,7 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
 			parent::__construct('cfct-module-hatch-review', __('.: Review :.', 'carrington-build'), $opts);
       $this->image_path = TOOLBOX_IMAGES.'/raty/';
       // Get all featured reviews
-      $args = array(
+      /*$args = array(
         'number'  => 3,
         'post_id' => 0,
         'meta_query' => array(
@@ -52,7 +52,7 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
       // Sort by featured
       if(count($this->featured_reviews)>1){
         uasort($this->featured_reviews, "compare_featured");
-      }
+      }*/
 
       // Get all pinned reviews
       $args = array(
@@ -89,21 +89,16 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
 // Display
 		public function display($data) {
       $type = (!empty($data[$this->get_field_name('type')]) ? esc_html($data[$this->get_field_name('type')]) : $this->default_type);
-      $image_id = (isset($data[$this->get_field_name('post_image')]) && $data[$this->get_field_name('post_image')]!='')?$data[$this->get_field_name('post_image')]:((isset($data[$this->get_field_name('global_image')]) && $data[$this->get_field_name('global_image')]!='')?$data[$this->get_field_name('global_image')]:'');
 
       $this->view = 'view.php';
       if($type=='pinned'){
         $this->view = 'view-pinned-review.php';
-      }
-      if($type=='manual' && !empty($image_id) && $image_id!='') {
-        $this->view = 'view-image-review.php';
       }
 
 			return $this->load_view($data, apply_filters('cbtb_query_reviews', array(
         'data' => $data,
         'obj' => $this,
         'default_type' => $this->default_type,
-        'featured' => $this->featured_reviews,
         'pinned' => $this->pinned_reviews
       )));
 		}
@@ -141,7 +136,7 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
               </div>
               <div class="cfct-field">
                 <ul class="cfct-review-list">';
-                $featured_review_keys = array();
+                /*$featured_review_keys = array();
                 foreach($this->featured_reviews as $review){
                   array_push($featured_review_keys, $review->id);
                   $selected = false;
@@ -156,9 +151,9 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
                       <div class="cfct-review-description">'.substr($review->content, 0, 120).'</div>
                     </label>
                   </li>';
-                }
+                }*/
                 foreach($this->pinned_reviews as $review){
-                  if(!in_array($review->id, $featured_review_keys)){
+                  //if(!in_array($review->id, $featured_review_keys)){
                     $selected = false;
                     if(isset($review_id) && count($review_id>0)){
                       $selected = in_array($review->id, $review_id);
@@ -171,7 +166,7 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
                         <div class="cfct-review-description">'.substr($review->content, 0, 120).'</div>
                       </label>
                     </li>';
-                  }
+                  //}
                 }
                 $html .= '
                 </ul>
@@ -300,9 +295,6 @@ if (!class_exists('cfct_module_hatch_review') && class_exists('cfct_build_module
         }
         #'.$this->id_base.'-content-fields {
           width: auto;
-        }
-        #'.$this->id_base.'-image-selectors div#'.$this->id_base.'-image-selector-tabs {
-          margin-top: 0;
         }
         textarea#'.$this->id_base.'-content {
           height: 150px;
