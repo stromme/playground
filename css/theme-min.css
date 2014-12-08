@@ -6542,8 +6542,7 @@ section:first-of-type {
   overflow: hidden;
 }
 .thumbnail .thumbnail-placeholder img {
-  height: 200px;
-  min-width: 252px;
+  min-width: 100%;
   max-width: inherit;
 }
 .thumbnail.recent-projects {
