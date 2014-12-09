@@ -32,10 +32,7 @@
         <div class="banner-review">
           <blockquote>
             <?php $description = substr($d->description, 0, 180)."..."; ?>
-            <!-- <?php var_dump($d->description); ?> -->
-            <?php if($d->description!=""){ ?>
-            <p>"<span<?=(strlen($description)>160)?" class=\"smaller\"":""?>><?=(strlen($d->description)<=185)?$d->description:$description?></span>"</p>
-            <?php } ?>
+            <p><?php if($d->description!=""){ ?>"<span<?=(strlen($description)>160)?" class=\"smaller\"":""?>><?=(strlen($d->description)<=185)?$d->description:$description?></span>"<?php } ?></p>
             <?php if(($d->author!='' || $d->company!='' || $d->author_location!='') && !$d->is_private){ ?>
               <p class="banner-author">
               <?php if($d->author!='' && $d->company!=''){ ?>
