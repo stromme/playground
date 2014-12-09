@@ -1216,6 +1216,7 @@
     line-height: 35px;
   }
   .banner-review blockquote {
+    display: block;
     height: auto;
     padding: 20px;
   }
