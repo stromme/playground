@@ -6361,7 +6361,8 @@ section:first-of-type {
 }
 .brand a {
   display: inline-block;
-  max-width: 360px;
+  max-width: 300px;
+  height: 145px;
 }
 .brand a span {
   display: inline-block;
@@ -6372,7 +6373,6 @@ section:first-of-type {
 .brand img {
   display: inline-block;
   max-width: 100%;
-  margin-top: 55px;
   max-height: 85px;
   vertical-align: bottom;
 }
