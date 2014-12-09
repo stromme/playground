@@ -963,6 +963,7 @@
     width: auto;
   }
   .brand a {
+    margin-top: 10px;
     max-width: 260px;
     height: 125px;
   }
