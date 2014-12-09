@@ -150,7 +150,7 @@ $comments = get_comments($args);
 	<!-- Brand -->
 	<div class="brand fixed-brand">
     <span class="hide" itemprop="brand"><?php bloginfo( 'title' ); ?></span>
-		<a href="<?=get_home_url()?>/"><img src="<?php echo get_header_image(); ?>" itemprop="logo"></a>
+		<a href="<?=get_home_url()?>/"><span></span><img src="<?php echo get_header_image(); ?>" itemprop="logo"></a>
 	</div>
 	<!-- /Brand -->
 	

@@ -6359,9 +6359,22 @@ section:first-of-type {
   -moz-border-radius-topleft: 6px;
   border-top-left-radius: 6px;
 }
+.brand a {
+  display: inline-block;
+  max-width: 360px;
+}
+.brand a span {
+  display: inline-block;
+  height: 100%;
+  width: 0;
+  vertical-align: bottom;
+}
 .brand img {
-  padding: 55px 6px 10px 0px;
-  max-height: 120px;
+  display: inline-block;
+  max-width: 100%;
+  margin-top: 55px;
+  max-height: 85px;
+  vertical-align: bottom;
 }
 .headline {
   text-align: right;
