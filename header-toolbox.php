@@ -113,6 +113,7 @@ $blogs = array();
               <?php } ?>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing/">Sharing and Tracking</a></li>
               <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/apps/">Add-on Apps</a></li>
+              <li><a tabindex="-1" href="" class="request-edit-site">Request Update to Site</a></li>
 							<li class="divider"></li>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account/">Personal Profile</a></li>
               <?php
@@ -167,6 +168,7 @@ $blogs = array();
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing/">Sharing and Tracking</a></li>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/apps/">Add-on Apps</a></li>
           <li class="visible-phone"><a tabindex="-1" href="<?=TOOLBOX_URL?>ad-media/">Ad Media</a></li>
+          <li><a tabindex="-1" href="" class="request-edit-site">Request Update to Site</a></li>
           <li class="divider"></li>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account/">Personal Profile</a></li><?php if(strstr($_SERVER['HTTP_HOST'], 'localhost') || strstr($_SERVER['HTTP_HOST'], 'uzbuz.com')){ ?>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/account-notifications/">Account Notifications</a></li><?php } ?>
