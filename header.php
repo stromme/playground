@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="google-site-verification" content="vuD5_PYb8q4nhXzMY_ErXvMEYHVaxaetVijPCLWytFA" />
 	<title><?php wp_title(); ?></title>
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
