@@ -19,10 +19,30 @@ $seo = get_location_seo();
 <div class="container gentle-shadow">
 
   <!-- Banner -->
+  <section class="bg-white">
   <?php
-  the_post();
-  the_content();
+  $carrington_meta = get_post_meta(get_the_ID(), '_cfct_build_data', true);
+  $rich_text_content = "";
+  $banner_data = false;
+  if(isset($carrington_meta["data"]["modules"]) && count($carrington_meta["data"]["modules"])>0){
+    $modules = $carrington_meta["data"]["modules"];
+    foreach($modules as $idx => $module){
+      if(isset($module['module_type']) && $module['module_type']=='cfct_module_hatch_banner'){
+        $banner_data = $module;
+      }
+      else if(isset($module['module_type']) && $module['module_type']=='cfct_module_rich_text'){
+        $rich_text_content = isset($module['cfct-rich-text-content'])?$module['cfct-rich-text-content']:'';
+      }
+    }
+  }
+  if($banner_data){
+      if(class_exists('cfct_module_hatch_banner')){
+      $obj = new cfct_module_hatch_banner();
+      echo $obj->display($banner_data);
+    }
+  }
   ?>
+  </section>
 
   <!-- Awards accolades -->
   <?php
@@ -73,7 +93,7 @@ $seo = get_location_seo();
     <?php } else { echo '<div class="migrate">'; } ?>
           <div class="cfct-mod-content">
             <h2>Why <?=stripslashes(isset($tb_company['name'])?$tb_company['name']:'this company')?> was awarded <strong class="green">Best in <?=($seo['city']!='')?$seo['city'].', ':''?><?=$seo['state']?>.</strong></h2>
-            <?php echo get_post_meta(get_the_ID(), 'content', true); ?>
+            <?=$rich_text_content?>
           </div>
         </div>
     <?php if($featurette_reviews['count']>0){ ?>
