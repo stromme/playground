@@ -29,7 +29,7 @@ if (!is_front_page())
 	$keyword = ucwords(get_the_title());
 	
 // Award
-$award = '<span class="hidden-phone-portrait">Awarded '.date('Y').'</span> ';
+$award = '<span class="hidden-phone-portrait">Awarded '.((intval(date('m'))>5)?date('Y'):intval(date('Y'))-1).'</span> ';
 	
 // Default title
 if (strlen($location) > 14) {
