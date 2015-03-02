@@ -105,12 +105,6 @@ $blogs = array();
                 }
               ?>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile/">Company Profile</a></li>
-              <?php
-                $net = get_site_option('tb_network_setting');
-                if(isset($net['name']) && $net['name']!='WindowCleaning.com'){
-              ?>
-              <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/domain/">Custom Domain Name</a></li>
-              <?php } ?>
 							<li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing/">Sharing and Tracking</a></li>
               <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/apps/">Add-on Apps</a></li>
               <li><a tabindex="-1" href="" class="request-edit-site">Request Update to Site</a></li>
@@ -159,12 +153,6 @@ $blogs = array();
             }
           ?>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/profile">Company Profile</a></li>
-          <?php
-            $net = get_site_option('tb_network_setting');
-            if(isset($net['name']) && $net['name']!='WindowCleaning.com'){
-          ?>
-          <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/domain/">Custom Domain Name</a></li>
-          <?php } ?>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/sharing/">Sharing and Tracking</a></li>
           <li><a tabindex="-1" href="<?=TOOLBOX_URL?>manage/apps/">Add-on Apps</a></li>
           <li class="visible-phone"><a tabindex="-1" href="<?=TOOLBOX_URL?>ad-media/">Ad Media</a></li>
