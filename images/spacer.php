@@ -1,6 +1,8 @@
 <?php
 $o_w = intval($_GET['w']);
 $o_h = intval($_GET['h']);
+if(!$o_w) $o_w = 1;
+if(!$o_h) $o_h = 1;
 $w = $h = 1;
 if($o_w>$o_h){
   $w = round($o_w/$o_h, 3);
