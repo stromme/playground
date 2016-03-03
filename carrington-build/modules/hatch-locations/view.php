@@ -73,7 +73,7 @@
               $li_found = true;
             }
           }
-          if(!$li_found) $loc_link = get_site_url($user_blog);
+          if(!$li_found && $user_blog!=$current_blog_id) $loc_link = get_site_url($user_blog);
         }
         $new_blog_location = new stdClass();
         $new_blog_location->slug = $location->slug;
