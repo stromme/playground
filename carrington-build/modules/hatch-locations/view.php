@@ -55,6 +55,8 @@
 
     // Process those locations
     if(count($locations)>0){
+      $current_blog_seo = get_option('tb_seo');
+      $current_blog_seo_slug = (isset($current_blog_seo['seo_target_city']) && isset($current_blog_seo['seo_target_state']))?strtolower(preg_replace("/[^A-Za-z0-9\_\-]/", '-', $current_blog_seo['seo_target_city'])).'-'.strtolower($current_blog_seo['seo_target_state']):'';
       foreach($locations as $location) {
         $args = array('post_type' => 'cftl-tax-landing', 'taxonomy' => 'locations', 'term' => $location->slug, 'post_status' => 'publish');
         $is_location_promoted = TB_Promote::is_promoted($args);
@@ -67,10 +69,11 @@
           for($li=0;$li<count($blog_seo_list) && !$li_found;$li++){
             $blog_seo = $blog_seo_list[$li];
             if($blog_seo->slug==$location->slug || $blog_seo->name==$location->name){
-              $loc_link = $blog_seo->link;
+              if($current_blog_seo_slug!=$location->slug) $loc_link = $blog_seo->link;
               $li_found = true;
             }
           }
+          if(!$li_found) $loc_link = get_site_url($user_blog);
         }
         $new_blog_location = new stdClass();
         $new_blog_location->slug = $location->slug;
