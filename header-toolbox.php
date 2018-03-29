@@ -29,6 +29,9 @@ $blogs = array();
     $social->process_pending_sharing();
   }
   ?>
+  <script type="text/javascript">
+    var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
+  </script>
 </head>
 
 <body>
