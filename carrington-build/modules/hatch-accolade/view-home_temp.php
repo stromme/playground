@@ -8,6 +8,7 @@
  * @since
  */
 
+if(!$tb_company) $tb_company = get_option('tb_company');
 $seo = get_location_seo();
 ?>
 <div class="bumper-bottom">

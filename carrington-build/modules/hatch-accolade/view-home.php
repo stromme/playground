@@ -8,11 +8,11 @@
  * @since
  */
 
+if(!$tb_company) $tb_company = get_option('tb_company');
 $seo = get_location_seo();
 ?>
 <div class="bumper-bottom">
   <?php
-  if(!$tb_company) $tb_company = get_option('tb_company');
   $award_best = array(
     'img' => TOOLBOX_IMAGES."/accolades/window-cleaning-award.png"
   );
